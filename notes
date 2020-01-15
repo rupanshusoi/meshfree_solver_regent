@@ -1,0 +1,60 @@
+1. io.input(filename)	io.write()	io.read("*number")	io.read("*all")
+for line in io.lines() do ..
+
+2. fspace int_field {
+	num : int;
+}
+
+var idx_space = ispace(int1d, size)
+var num_region = region(idx_space, int_field)
+
+access specific element: num_region[i].num
+
+3. file = C.fopen(filename, mode)
+C.fscanf("%d", &num)
+
+4. How to import regent files: require(filename [without extension])
+Remove 'local' before structs/functions to import
+
+5. format for grid:
+x, y, left, right, flag1, flag2 (which object it belongs to), nx, ny, qt depth,
+min_dist, nbhs, (indices of connectivity set)
+
+6. temp = Point(int(itmdata[0]), float(itmdata[1]), float(itmdata[2]), 1, 1, int(itmdata[5]), int(itmdata[6]), int(itmdata[8]), list(map(int,itmdata[9:])), float(itmdata[3]), float(itmdata[4]), defprimal, None, None, None, None, None, None, None, None, None, None, None, None, None, float(itmdata[7]), None, None)
+
+7. Point(self, localID, x, y, left, right, flag_1, flag_2, nbhs, conn, nx, ny, prim, flux_res, q, dq, entropy, xpos_nbhs, xneg_nbhs, ypos_nbhs, yneg_nbhs, xpos_conn, xneg_conn, ypos_conn, yneg_conn, delta, min_dist, minq, maxq)
+
+8. struct Point
+{
+	localID : int;
+	x : double;
+	y : double;
+	left : int;
+	right : int;
+	flag_1 : int;
+	flag_2 : int;
+	nbhs : int;
+	conn : region(ispace(int1d, 20), int_arr); 
+	nx : double;
+	ny : double;
+	prim : region(ispace(int1d, 4), double_arr);
+	flux_res : region(ispace(int1d, 4), double_arr);
+	q : region(ispace(int1d, 4), double_arr);
+	dq : region(ispace(int2d, {2,4}), double_arr);
+	entropy : double;
+	xpos_nbhs : int;
+	xneg_nbhs : int;
+	ypos_nbhs : int;
+	yneg_nbhs : int;
+	xpos_conn : region(ispace(int1d, 20), int_arr);
+	xneg_conn : region(ispace(int1d, 20), int_arr);
+	ypos_conn : region(ispace(int1d, 20), int_arr);
+	yneg_conn : region(ispace(int1d, 20), int_arr);
+	delta : double;
+	min_dist : double;
+	minq : region(ispace(int1d, 4), double_arr);
+	maxq : region(ispace(int1d, 4), double_arr);
+}
+
+9. regions can be passed to funtions without specifying the size r like so:
+task t(r : region(ispace(int1d), int)

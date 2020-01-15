@@ -1,7 +1,6 @@
 import "regent"
-require "arr"
 
-local C = terralib.includec("stdio.h")
+local C = regentlib.c
 
 struct Point
 {
@@ -13,26 +12,26 @@ struct Point
 	flag_1 : int;
 	flag_2 : int;
 	nbhs : int;
-	conn : region(ispace(int1d, 20), int_arr); 
+	conn : int[20];
 	nx : double;
 	ny : double;
-	prim : region(ispace(int1d, 4), double_arr);
-	flux_res : region(ispace(int1d, 4), double_arr);
-	q : region(ispace(int1d, 4), double_arr);
-	dq : region(ispace(int2d, {2,4}), double_arr);
+	prim : double[4];
+	flux_res : double[4];
+	q : double[4];
+	dq : double[2][4];
 	entropy : double;
 	xpos_nbhs : int;
 	xneg_nbhs : int;
 	ypos_nbhs : int;
 	yneg_nbhs : int;
-	xpos_conn : region(ispace(int1d, 20), int_arr);
-	xneg_conn : region(ispace(int1d, 20), int_arr);
-	ypos_conn : region(ispace(int1d, 20), int_arr);
-	yneg_conn : region(ispace(int1d, 20), int_arr);
+	xpos_conn : int[20];
+	xneg_conn : int[20];
+	ypos_conn : int[20];
+	yneg_conn : int[20];
 	delta : double;
 	min_dist : double;
-	minq : region(ispace(int1d, 4), double_arr);
-	maxq : region(ispace(int1d, 4), double_arr);
+	minq : double[4];
+	maxq : double[4];
 }
 
 terra Point : setNormals(x : double, y : double)
