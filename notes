@@ -58,3 +58,6 @@ min_dist, nbhs, (indices of connectivity set)
 
 9. regions can be passed to funtions without specifying the size r like so:
 task t(r : region(ispace(int1d), int)
+
+10. regions passed by ref; structs, arrays and ints by value
+can pass pointers to structs, arrays to functions (use (@arr)[idx] = num)
