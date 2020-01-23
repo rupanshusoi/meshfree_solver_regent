@@ -126,7 +126,7 @@ end
 
 task outer_dGx_neg(globaldata : region(ispace(int1d), Point), idx : int)
 where 
-	reads(globaldata.{x, y, nx, ny, xpos_conn, q, dq, minq, maxq, min_dist})
+	reads(globaldata.{x, y, nx, ny, xneg_conn, q, dq, minq, maxq, min_dist})
 do
 	var power : int = 0
 	var limiter_flag : int = 1
@@ -193,9 +193,9 @@ do
 			end
 			
 			var result : double[4] = qtilde_to_primitive(qtilde_i)
-			--var G_i : double[4] = flux_quad_GxIV(nx, ny, result[0], result[1], result[2], result[3])
+			var G_i : double[4] = flux_quad_GxIV(nx, ny, result[0], result[1], result[2], result[3])
 			result = qtilde_to_primitive(qtilde_k)
-			--var G_k : double[4] = flux_quad_GxIV(nx, ny, result[0], result[1], result[2], result[3])
+			var G_k : double[4] = flux_quad_GxIV(nx, ny, result[0], result[1], result[2], result[3])
 			for i = 0, 4 do
 				sum_delx_delf[i] = sum_delx_delf[i] + (G_k[i] - G_i[i]) * dels_weights
 				sum_dely_delf[i] = sum_dely_delf[i] + (G_k[i] - G_i[i]) * deln_weights
@@ -216,7 +216,7 @@ end
 
 task outer_dGy_pos(globaldata : region(ispace(int1d), Point), idx : int)
 where 
-	reads(globaldata.{x, y, nx, ny, xpos_conn, q, dq, minq, maxq, min_dist})
+	reads(globaldata.{x, y, nx, ny, ypos_conn, q, dq, minq, maxq, min_dist})
 do
 	var power : int = 0
 	var limiter_flag : int = 1
