@@ -45,13 +45,16 @@ end
 task setNormals(globaldata : region(ispace(int1d), Point), 
 			idx : int, arr : double[2])
 where 
-	reads writes(globaldata.nx, globaldata.ny)
+	writes(globaldata.{nx, ny})
 do
 	globaldata[idx].nx = arr[0]
 	globaldata[idx].ny = arr[1]
 end
 
-terra Point : setConnectivity(bigarr : int[80])
+task setConnectivity(globaldata : region(ispace(int1d), Point), idx : int, bigarr : int[80])
+where
+	reads(globaldata.{localID, xpos_conn}), writes(globaldata.{xpos_conn, xneg_conn, ypos_conn, yneg_conn, xpos_nbhs, xneg_nbhs, ypos_nbhs, yneg_nbhs})
+do
 
 	var xpos : int[20]
 	var xneg : int[20]
@@ -102,13 +105,21 @@ terra Point : setConnectivity(bigarr : int[80])
 		end
 	end
 
-	self.xpos_conn = xpos
-	self.xneg_conn = xneg
-	self.ypos_conn = ypos
-	self.yneg_conn = yneg
+	globaldata[idx].xpos_conn = xpos
+	globaldata[idx].xneg_conn = xneg
+	globaldata[idx].ypos_conn = ypos
+	globaldata[idx].yneg_conn = yneg
 
-	self.xpos_nbhs = xpos_count
-	self.xneg_nbhs = xneg_count
-	self.ypos_nbhs = ypos_count
-	self.yneg_nbhs = yneg_count
+	globaldata[idx].xpos_nbhs = xpos_count
+	globaldata[idx].xneg_nbhs = xneg_count
+	globaldata[idx].ypos_nbhs = ypos_count
+	globaldata[idx].yneg_nbhs = yneg_count
+
+
+	if (globaldata[idx].localID == 1357) then
+		for i = 0, 20 do
+			C.printf("%d ", globaldata[idx].xpos_conn[i])
+		end
+		C.printf("\n")
+	end	
 end

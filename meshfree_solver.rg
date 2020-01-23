@@ -1,16 +1,17 @@
 import "regent"
 require "point"
 require "core"
-
+require "test"
 local C = regentlib.c
 
 task main()
 	var file = C.fopen("partGrid40K", "r")
-	
 	var size : int
 	C.fscanf(file, "%d", &size)
 	
 	var globaldata = region(ispace(int1d, size + 1), Point)	
+	
+	var defprimal = getInitialPrimitive()
 	
 	var x : double
 	var y : double
@@ -31,16 +32,15 @@ task main()
 	var outerpts = 0
 	var interiorpts = 0
 	
-	var wallptsidx : int[48738]
-	var outerptsidx : int[48738]
-	var interiorptsidx : int[48738]
-	
-	for i = 0, 48738 do
-		wallptsidx[i] = 0
-		outerptsidx[i] = 0
-		interiorptsidx[i] = 0
-	end	
-	
+	var wallptsidx = region(ispace(int1d, 48738), int)
+	var outerptsidx = region(ispace(int1d, 48738), int)
+	var interiorptsidx = region(ispace(int1d, 48738), int)
+
+	fill(wallptsidx, 0)
+	fill(outerptsidx, 0)
+	fill(interiorptsidx, 0)
+
+	C.printf("Populating globaldata\n")	
 	for count = 0, size do
 		C.fscanf(file, "%lf %lf %d %d %d %d %lf %lf %d %lf %d", 
 			&x, &y, &left, &right, &flag1, &flag2, &nx, &ny, 
@@ -57,7 +57,7 @@ task main()
 			nbhs_arr[j] = temp
 		end
 		var p = Point {count + 1, x, y, left, right, flag1, flag2, nbhs, 
-				nbhs_arr, nx, ny, dummy_double, dummy_double, 
+				nbhs_arr, nx, ny, defprimal, dummy_double, 
 				dummy_double, dummy_double, dummy_double2, 0, 0, 
 				0, 0, 0, dummy_int, dummy_int, dummy_int, dummy_int, 
 				0, min_dist, dummy_double, dummy_double}
@@ -82,6 +82,8 @@ task main()
 	var leftpt : double[2]
 	var rightpt : double[2]
 	var normals : double[2]
+
+	C.printf("Setting normals\n")
 	for count = 0, 48738 do
 		idx = count 
 		idx = wallptsidx[idx]
@@ -109,12 +111,18 @@ task main()
 		end
 	end
 
+	C.printf("Calculating connectivity\n")
 	var connectivity : int[80]
 	for count = 0, size do
 		idx = count + 1
 		connectivity = calculateConnectivity(globaldata, idx)
-		globaldata[idx]:setConnectivity(connectivity)
+		setConnectivity(globaldata, idx, connectivity)
 	end
+
+	var res_old = 0
+
+	C.printf("Starting FPI solver\n")
+	fpi_solver(20000 + 1, globaldata, wallptsidx, outerptsidx, interiorptsidx, 0)
 
 end
 regentlib.start(main)
