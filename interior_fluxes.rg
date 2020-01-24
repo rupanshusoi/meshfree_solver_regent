@@ -7,7 +7,7 @@ local Cmath = terralib.includec("math.h")
 
 task interior_dGx_pos(globaldata : region(ispace(int1d), Point), idx : int)
 where 
-	reads(globaldata.{x, y, nx, ny, xpos_conn, q, dq})
+	reads(globaldata.{x, y, nx, ny, xpos_conn, q, dq, minq, maxq, min_dist})
 do
 	var power : int = 0
 	var limiter_flag : int = 1
@@ -89,15 +89,13 @@ do
 	var G : double[4]
 	for i = 0, 4 do
 		G[i] = (sum_delx_delf[i] * sum_dely_sqr - sum_dely_delf[i] * sum_delx_dely) * (1 / det)
-		C.printf("sums = %lf %lf\n", sum_delx_delf[i], sum_dely_delf[i])
-		C.printf("G = %0.15lf ", G[i])
 	end
 	return G
 end
 
 task interior_dGx_neg(globaldata : region(ispace(int1d), Point), idx : int)
 where 
-	reads(globaldata.{x, y, nx, ny, xpos_conn, q, dq})
+	reads(globaldata.{x, y, nx, ny, xpos_conn, q, dq, minq, maxq, min_dist, xneg_conn})
 do
 	var power : int = 0
 	var limiter_flag : int = 1
@@ -179,15 +177,13 @@ do
 	var G : double[4]
 	for i = 0, 4 do
 		G[i] = (sum_delx_delf[i] * sum_dely_sqr - sum_dely_delf[i] * sum_delx_dely) * (1 / det)
-		C.printf("sums = %lf %lf\n", sum_delx_delf[i], sum_dely_delf[i])
-		C.printf("G = %0.15lf ", G[i])
 	end
 	return G
 end
 
 task interior_dGy_pos(globaldata : region(ispace(int1d), Point), idx : int)
 where 
-	reads(globaldata.{x, y, nx, ny, xpos_conn, q, dq})
+	reads(globaldata.{x, y, nx, ny, ypos_conn, q, dq, minq, maxq, min_dist})
 do
 	var power : int = 0
 	var limiter_flag : int = 1
@@ -269,15 +265,13 @@ do
 	var G : double[4]
 	for i = 0, 4 do
 		G[i] = (sum_dely_delf[i] * sum_delx_sqr - sum_delx_delf[i] * sum_delx_dely) * (1 / det)
-		C.printf("sums = %lf %lf\n", sum_delx_delf[i], sum_dely_delf[i])
-		C.printf("G = %0.15lf ", G[i])
 	end
 	return G
 end
 
 task interior_dGy_neg(globaldata : region(ispace(int1d), Point), idx : int)
 where 
-	reads(globaldata.{x, y, nx, ny, xpos_conn, q, dq})
+	reads(globaldata.{x, y, nx, ny, yneg_conn, q, dq, minq, maxq, min_dist})
 do
 	var power : int = 0
 	var limiter_flag : int = 1
@@ -359,8 +353,6 @@ do
 	var G : double[4]
 	for i = 0, 4 do
 		G[i] = (sum_dely_delf[i] * sum_delx_sqr - sum_delx_delf[i] * sum_delx_dely) * (1 / det)
-		C.printf("sums = %lf %lf\n", sum_delx_delf[i], sum_dely_delf[i])
-		C.printf("G = %0.15lf ", G[i])
 	end
 	return G
 end

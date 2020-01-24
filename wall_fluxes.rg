@@ -3,6 +3,7 @@ require "point"
 require "outer_fluxes" -- for qtilde_to_primitive
 require "limiters"
 require "quadrant_fluxes"
+require "split_fluxes"
 
 local C = regentlib.c
 local Cmath = terralib.includec("math.h")
@@ -252,9 +253,9 @@ do
 			end
 			
 			var result : double[4] = qtilde_to_primitive(qtilde_i)
-			var G_i : double[4] = flux_quad_Gyn(nx, ny, result[0], result[1], result[2], result[3])
+			var G_i : double[4] = flux_Gyn(nx, ny, result[0], result[1], result[2], result[3])
 			result = qtilde_to_primitive(qtilde_k)
-			var G_k : double[4] = flux_quad_Gyn(nx, ny, result[0], result[1], result[2], result[3])
+			var G_k : double[4] = flux_Gyn(nx, ny, result[0], result[1], result[2], result[3])
 			for i = 0, 4 do
 				sum_delx_delf[i] = sum_delx_delf[i] + (G_k[i] - G_i[i]) * dels_weights
 				sum_dely_delf[i] = sum_dely_delf[i] + (G_k[i] - G_i[i]) * deln_weights

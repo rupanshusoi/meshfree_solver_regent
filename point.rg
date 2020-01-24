@@ -115,11 +115,4 @@ do
 	globaldata[idx].ypos_nbhs = ypos_count
 	globaldata[idx].yneg_nbhs = yneg_count
 
-
-	if (globaldata[idx].localID == 1357) then
-		for i = 0, 20 do
-			C.printf("%d ", globaldata[idx].xpos_conn[i])
-		end
-		C.printf("\n")
-	end	
 end

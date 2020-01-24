@@ -275,8 +275,7 @@ end
 
 task fpi_solver(iter : int, globaldata : region(ispace(int1d), Point), wallindices : region(ispace(int1d), int), outerindices : region(ispace(int1d), int), interiorindices : region(ispace(int1d), int), res_old : int)
 where
-	reads writes(globaldata, outerindices)
-	--reads (globaldata), writes(globaldata.{delta, prim_old, q, dq, minq, maxq})
+	reads (outerindices, interiorindices, wallindices, globaldata), writes(globaldata)
 do
 	var rks : int = 5
 	var eu : int = 1
@@ -286,8 +285,9 @@ do
 		for rk = 1, rks do
 			q_var_derivatives(globaldata, 48738)
 			cal_flux_residual(globaldata, wallindices, outerindices, interiorindices)
-			return
-			--res_old = state_update(globaldata, wallindices, outerindices, interiorindices)
+			var res_old = state_update(globaldata, wallindices, outerindices, interiorindices, i, rk, eu, res_old)
+			--todo: file writing here
+			return res_old
 		end
 	end	
 

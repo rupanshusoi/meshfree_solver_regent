@@ -118,8 +118,6 @@ do
 	var G : double[4]
 	for i = 0, 4 do
 		G[i] = (sum_delx_delf[i] * sum_dely_sqr - sum_dely_delf[i] * sum_delx_dely) * (1 / det)
-		C.printf("sums = %lf %lf\n", sum_delx_delf[i], sum_dely_delf[i])
-		C.printf("G = %0.15lf ", G[i])
 	end
 	return G
 end
@@ -208,8 +206,6 @@ do
 	var G : double[4]
 	for i = 0, 4 do
 		G[i] = (sum_delx_delf[i] * sum_dely_sqr - sum_dely_delf[i] * sum_delx_dely) * (1 / det)
-		C.printf("sums = %lf %lf\n", sum_delx_delf[i], sum_dely_delf[i])
-		C.printf("G = %0.15lf ", G[i])
 	end
 	return G
 end
