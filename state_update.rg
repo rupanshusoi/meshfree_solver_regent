@@ -51,21 +51,16 @@ task primitive_to_conserved(globaldata : region(ispace(int1d), Point), itm : int
 	var U : double[4]
 
 	var rho = prim[0]
-	var count : int
-	U[count] = rho
-	count += 1
+	U[0] = rho
 
 	var temp1 = rho * prim[1]
 	var temp2 = rho * prim[2]
 
-	U[count] = temp1 * ny - temp2 * nx
-	count += 1
+	U[1] = temp1 * ny - temp2 * nx
 
-	U[count] = temp1 * nx + temp2 * ny
-	count += 1
+	U[2] = temp1 * nx + temp2 * ny
 
-	U[count] = 2.5 * prim[3] + 0.5 * (temp1 * temp1 + temp2 * temp2) / rho
-	count += 1
+	U[3] = 2.5 * prim[3] + 0.5 * (temp1 * temp1 + temp2 * temp2) / rho
 
 	return U
 end
@@ -113,24 +108,19 @@ task conserved_vector_Ubar(globaldata : region(ispace(int1d), Point), itm : int,
 	var B2 = Cmath.exp(-S2*S2)/(2 * Cmath.sqrt(Cmath.M_PI * beta))
 	var A2p = 0.5 * (1 + Cmath.erf(S2))	
 
-	var count : int
-	Ubar[count] = (rho_inf * A2n_inf) + (rho * A2p)
-	count += 1
+	Ubar[0] = (rho_inf * A2n_inf) + (rho * A2p)
 
-	Ubar[count] = (rho_inf*u1_inf_rot*A2n_inf) + (rho*u1_rot*A2p)
-	count += 1
+	Ubar[1] = (rho_inf*u1_inf_rot*A2n_inf) + (rho*u1_rot*A2p)
 
 	temp1 = rho_inf * (u2_inf_rot * A2n_inf - B2_inf)
 	var temp2 = rho*(u2_rot*A2p + B2)
 
-	Ubar[count] = temp1 + temp2
-	count += 1
+	Ubar[2] = temp1 + temp2
 
 	temp1 = (rho_inf * A2n_inf * e_inf - 0.5 * rho_inf * u2_inf_rot * B2_inf)
 	temp2 = rho * A2p * e + 0.5 * rho * u2_rot * B2
 
-	Ubar[count] = temp1 + temp2
-	count += 1
+	Ubar[3] = temp1 + temp2
 
 	return Ubar
 end

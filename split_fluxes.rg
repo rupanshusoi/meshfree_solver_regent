@@ -20,25 +20,20 @@ task flux_Gxp(nx : double, ny : double, u1 : double, u2 : double, rho : double, 
 	var pr_by_rho = pr / rho
 	var u_sqr = ut * ut + un * un
 
-	var count : int = 0
-	Gxp[count] = rho * (ut * A1pos + B1)
-	count += 1	
+	Gxp[0] = rho * (ut * A1pos + B1)
 
 	var temp1 = pr_by_rho + ut * ut
 	var temp2 = temp1 * A1pos + ut * B1
 
-	Gxp[count] = rho * temp2
-	count += 1
+	Gxp[1] = rho * temp2
 
 	temp1 = ut * un * A1pos + un * B1
-	Gxp[count]= rho * temp1
-	count += 1
+	Gxp[2]= rho * temp1
 
 	temp1 = 7 * pr_by_rho + u_sqr
 	temp2 = 0.5 * ut * temp1 * A1pos
 	temp1 = 6 * pr_by_rho + u_sqr
-	Gxp[count] = rho * (temp2 + 0.5 * temp1 * B1)
-	count += 1
+	Gxp[3] = rho * (temp2 + 0.5 * temp1 * B1)
 
 	return Gxp
 end
@@ -60,25 +55,20 @@ task flux_Gxn(nx : double, ny : double, u1 : double, u2 : double, rho : double, 
 	var pr_by_rho = pr / rho
 	var u_sqr = ut * ut + un * un
 
-	var count : int = 0
-	Gxn[count] = rho * (ut * A1neg - B1)
-	count += 1	
+	Gxn[0] = rho * (ut * A1neg - B1)
 
 	var temp1 = pr_by_rho + ut * ut
 	var temp2 = temp1 * A1neg - ut * B1
 
-	Gxn[count] = rho * temp2
-	count += 1
+	Gxn[1] = rho * temp2
 
 	temp1 = ut * un * A1neg - un * B1
-	Gxn[count]= rho * temp1
-	count += 1
+	Gxn[2]= rho * temp1
 
 	temp1 = 7 * pr_by_rho + u_sqr
 	temp2 = 0.5 * ut * temp1 * A1neg
 	temp1 = 6 * pr_by_rho + u_sqr
-	Gxn[count] = rho * (temp2 - 0.5 * temp1 * B1)
-	count += 1
+	Gxn[3] = rho * (temp2 - 0.5 * temp1 * B1)
 
 	return Gxn
 end
@@ -100,25 +90,20 @@ task flux_Gyp(nx : double, ny : double, u1 : double, u2 : double, rho : double, 
 	var pr_by_rho = pr / rho
 	var u_sqr = ut * ut + un * un
 
-	var count : int = 0
-	Gyp[count] = rho * (un * A2pos + B2)
-	count += 1	
+	Gyp[0] = rho * (un * A2pos + B2)
 
 	var temp1 = pr_by_rho + un * un
 	var temp2 = temp1 * A2pos + un * B2
 
-	Gyp[count] = rho * temp2
-	count += 1
+	Gyp[1] = rho * temp2
 
 	temp1 = ut * un * A2pos + ut * B2
-	Gyp[count]= rho * temp1
-	count += 1
+	Gyp[2]= rho * temp1
 
 	temp1 = 7 * pr_by_rho + u_sqr
 	temp2 = 0.5 * un * temp1 * A2pos
 	temp1 = 6 * pr_by_rho + u_sqr
-	Gyp[count] = rho * (temp2 + 0.5 * temp1 * B2)
-	count += 1
+	Gyp[3] = rho * (temp2 + 0.5 * temp1 * B2)
 
 	return Gyp
 end
@@ -140,25 +125,20 @@ task flux_Gyn(nx : double, ny : double, u1 : double, u2 : double, rho : double, 
 	var pr_by_rho = pr / rho
 	var u_sqr = ut * ut + un * un
 
-	var count : int = 0
-	Gyn[count] = rho * (un * A2neg - B2)
-	count += 1	
+	Gyn[0] = rho * (un * A2neg - B2)
 
 	var temp1 = pr_by_rho + un * un
 	var temp2 = temp1 * A2neg - un * B2
 
 	temp1 = ut * un * A2neg - ut * B2
-	Gyn[count] = rho * temp1
-	count += 1
+	Gyn[1] = rho * temp1
 
-	Gyn[count]= rho * temp2
-	count += 1
+	Gyn[2]= rho * temp2
 
 	temp1 = 7 * pr_by_rho + u_sqr
 	temp2 = 0.5 * un * temp1 * A2neg
 	temp1 = 6 * pr_by_rho + u_sqr
-	Gyn[count] = rho * (temp2 - 0.5 * temp1 * B2)
-	count += 1
+	Gyn[3] = rho * (temp2 - 0.5 * temp1 * B2)
 
 	return Gyn
 end

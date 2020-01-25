@@ -22,6 +22,7 @@ do
 			var GTemp : double[4]
 			for j = 0, 4 do
 				GTemp[j] = Gxp[j] + Gxn[j] + Gyn[j]	
+				GTemp[j] = 2 * GTemp[j]
 			end
 			globaldata[itm].flux_res = GTemp
 		end

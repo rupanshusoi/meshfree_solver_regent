@@ -286,9 +286,12 @@ do
 			q_var_derivatives(globaldata, 48738)
 			cal_flux_residual(globaldata, wallindices, outerindices, interiorindices)
 			var res_old = state_update(globaldata, wallindices, outerindices, interiorindices, i, rk, eu, res_old)
+			for j = 0, 4 do
+				C.printf("flux_res = %0.15lf prim = %0.15lf\n", globaldata[1].flux_res[j], globaldata[1].prim[j])
+			end
+			C.printf("\n")
 			--todo: file writing here
-			return res_old
 		end
 	end	
-
+	return res_old
 end

@@ -23,19 +23,15 @@ task flux_quad_GxI(nx : double, ny : double, u1 : double, u2 : double, rho : dou
 	var pr_by_rho = pr / rho
 	var u_sqr = ut * ut + un * un
 
-	var count : int = 0
 
-	G[count] = rho * A2neg * (ut * A1neg - B1)
-	count += 1
+	G[0] = rho * A2neg * (ut * A1neg - B1)
 
 	var temp1 = pr_by_rho + ut * ut
 	var temp2 = temp1 * A1neg - ut * B1
-	G[count] = rho * A2neg * temp2
-	count += 1
+	G[1] = rho * A2neg * temp2
 	temp1 = ut * A1neg - B1
 	temp2 = un * A2neg - B2
-	G[count] = rho * temp1 * temp2
-	count += 1
+	G[2] = rho * temp1 * temp2
 
 	temp1 = (7 * pr_by_rho) + u_sqr
 	temp2 = 0.5 * ut * temp1 * A1neg
@@ -44,8 +40,7 @@ task flux_quad_GxI(nx : double, ny : double, u1 : double, u2 : double, rho : dou
 
 	temp1 = ut * A1neg - B1
 	var temp4 = 0.5 * rho * un * B2 * temp1
-	G[count] = rho * A2neg * (temp2 - temp3) - temp4
-	count += 1
+	G[3] = rho * A2neg * (temp2 - temp3) - temp4
 
 	return G
 
@@ -72,20 +67,16 @@ task flux_quad_GxII(nx : double, ny : double, u1 : double, u2 : double, rho : do
 	var pr_by_rho = pr / rho
 	var u_sqr = ut * ut + un * un
 
-	var count : int = 0
 
-	G[count] = rho * A2neg * (ut * A1pos + B1)
-	count += 1
+	G[0] = rho * A2neg * (ut * A1pos + B1)
 
 	var temp1 = pr_by_rho + ut * ut
 	var temp2 = temp1 * A1pos + ut * B1
-	G[count] = rho * A2neg * temp2
-	count += 1
+	G[1] = rho * A2neg * temp2
 
 	temp1 = ut * A1pos + B1
 	temp2 = un * A2neg - B2
-	G[count] = rho * temp1 * temp2
-	count += 1
+	G[2] = rho * temp1 * temp2
 
 	temp1 = (7 * pr_by_rho) + u_sqr
 	temp2 = 0.5 * ut * temp1 * A1pos
@@ -96,8 +87,7 @@ task flux_quad_GxII(nx : double, ny : double, u1 : double, u2 : double, rho : do
 	temp1 = ut * A1pos + B1
 	var temp4 = 0.5 * rho * un * B2 * temp1
 
-	G[count] = rho * A2neg * (temp2 + temp3) - temp4
-	count += 1
+	G[3] = rho * A2neg * (temp2 + temp3) - temp4
 
 	return G
 
@@ -123,20 +113,16 @@ task flux_quad_GxIII(nx : double, ny : double, u1 : double, u2 : double, rho : d
 	var pr_by_rho = pr / rho
 	var u_sqr = ut * ut + un * un
 
-	var count : int = 0
 
-	G[count] = rho * A2pos * (ut * A1pos + B1)
-	count += 1
+	G[0] = rho * A2pos * (ut * A1pos + B1)
 
 	var temp1 = pr_by_rho + ut * ut
 	var temp2 = temp1 * A1pos + ut * B1
-	G[count] = rho * A2pos * temp2
-	count += 1
+	G[1] = rho * A2pos * temp2
 
 	temp1 = ut * A1pos + B1
 	temp2 = un * A2pos + B2
-	G[count] = rho * temp1 * temp2
-	count += 1
+	G[2] = rho * temp1 * temp2
 
 	temp1 = (7 * pr_by_rho) + u_sqr
 	temp2 = 0.5 * ut * temp1 * A1pos
@@ -147,8 +133,7 @@ task flux_quad_GxIII(nx : double, ny : double, u1 : double, u2 : double, rho : d
 	temp1 = ut * A1pos + B1
 	var temp4 = 0.5 * rho * un * B2 * temp1
 
-	G[count] = rho * A2pos * (temp2 + temp3) + temp4
-	count += 1
+	G[3] = rho * A2pos * (temp2 + temp3) + temp4
 
 	return G
 
@@ -175,20 +160,16 @@ task flux_quad_GxIV(nx : double, ny : double, u1 : double, u2 : double, rho : do
 	var pr_by_rho = pr / rho
 	var u_sqr = ut * ut + un * un
 
-	var count : int = 0
 
-	G[count] = rho * A2pos * (ut * A1neg - B1)
-	count += 1
+	G[0] = rho * A2pos * (ut * A1neg - B1)
 
 	var temp1 = pr_by_rho + ut * ut
 	var temp2 = temp1 * A1neg - ut * B1
-	G[count] = rho * A2pos * temp2
-	count += 1
+	G[1] = rho * A2pos * temp2
 
 	temp1 = ut * A1neg - B1
 	temp2 = un * A2pos + B2
-	G[count] = rho * temp1 * temp2
-	count += 1
+	G[2] = rho * temp1 * temp2
 
 	temp1 = (7 * pr_by_rho) + u_sqr
 	temp2 = 0.5 * ut * temp1 * A1neg
@@ -199,8 +180,7 @@ task flux_quad_GxIV(nx : double, ny : double, u1 : double, u2 : double, rho : do
 	temp1 = ut * A1neg - B1
 	var temp4 = 0.5 * rho * un * B2 * temp1
 
-	G[count] = rho * A2pos * (temp2 - temp3) + temp4
-	count += 1
+	G[3] = rho * A2pos * (temp2 - temp3) + temp4
 
 	return G
 

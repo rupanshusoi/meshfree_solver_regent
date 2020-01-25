@@ -121,7 +121,7 @@ task main()
 	var res_old = 0
 
 	C.printf("Starting FPI solver\n")
-	fpi_solver(1 + 1, globaldata, wallptsidx, outerptsidx, interiorptsidx, 0)
+	fpi_solver(5 + 1, globaldata, wallptsidx, outerptsidx, interiorptsidx, 0)
 
 end
 regentlib.start(main)
