@@ -43,7 +43,6 @@ do
 			end
 		end
 		globaldata[idx].delta = min_delt
-		--C.printf("min_delt = %0.16lf\n", min_delt)
 	end
 end
 

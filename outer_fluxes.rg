@@ -298,3 +298,16 @@ do
 
 	return G
 end
+
+task main()
+	var a : double[4]
+	a[0] = 0.1
+	a[1] = 0.2
+	a[2] = 0.3
+	a[3] = -0.4
+	var b = qtilde_to_primitive(a)
+	for i = 0, 4 do
+		C.printf("%lf, ", b[i])
+	end
+end
+regentlib.start(main)

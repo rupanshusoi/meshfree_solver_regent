@@ -8,7 +8,7 @@ local C = regentlib.c
 
 task cal_flux_residual(globaldata : region(ispace(int1d), Point), wallindices : region(ispace(int1d), int), outerindices : region(ispace(int1d), int), interiorindices : region(ispace(int1d), int))
 where
-	reads(wallindices, outerindices, interiorindices, globaldata), writes(globaldata) -- MINIMISE THESE PRIVILEGES
+	reads(wallindices, outerindices, interiorindices, globaldata), writes(globaldata)
 do
 	var itm : int
 	for i = 0, 48738 do
@@ -25,6 +25,12 @@ do
 				GTemp[j] = 2 * GTemp[j]
 			end
 			globaldata[itm].flux_res = GTemp
+			if itm == 1 then
+				for j = 0, 4 do
+					C.printf("Wall Gxp = %0.15lf\n", Gxp[j])
+				end
+				C.printf('\n')
+			end
 		end
 	end	
 
@@ -41,6 +47,12 @@ do
 				GTemp[j] = Gxp[j] + Gxn[j] + Gyp[j]	
 			end
 			globaldata[itm].flux_res = GTemp
+			if itm == 48738 then
+				for j = 0, 4 do
+					C.printf("Outer Gxp = %0.15lf\n", Gxp[j])
+				end
+				C.printf('\n')
+			end
 		end
 	end	
 

@@ -31,7 +31,7 @@ task flux_Gxp(nx : double, ny : double, u1 : double, u2 : double, rho : double, 
 	Gxp[2]= rho * temp1
 
 	temp1 = 7 * pr_by_rho + u_sqr
-	temp2 = 0.5 * ut * temp1 * A1pos
+	temp2 = 0.5 * ut * (7 * pr_by_rho + u_sqr)  * A1pos
 	temp1 = 6 * pr_by_rho + u_sqr
 	Gxp[3] = rho * (temp2 + 0.5 * temp1 * B1)
 
@@ -66,7 +66,7 @@ task flux_Gxn(nx : double, ny : double, u1 : double, u2 : double, rho : double, 
 	Gxn[2]= rho * temp1
 
 	temp1 = 7 * pr_by_rho + u_sqr
-	temp2 = 0.5 * ut * temp1 * A1neg
+	temp2 = 0.5 * ut * (7 * pr_by_rho + u_sqr)  * A1neg
 	temp1 = 6 * pr_by_rho + u_sqr
 	Gxn[3] = rho * (temp2 - 0.5 * temp1 * B1)
 
@@ -101,7 +101,7 @@ task flux_Gyp(nx : double, ny : double, u1 : double, u2 : double, rho : double, 
 	Gyp[2]= rho * temp1
 
 	temp1 = 7 * pr_by_rho + u_sqr
-	temp2 = 0.5 * un * temp1 * A2pos
+	temp2 = 0.5 * un * (7 * pr_by_rho + u_sqr)  * A2pos
 	temp1 = 6 * pr_by_rho + u_sqr
 	Gyp[3] = rho * (temp2 + 0.5 * temp1 * B2)
 
@@ -136,7 +136,7 @@ task flux_Gyn(nx : double, ny : double, u1 : double, u2 : double, rho : double, 
 	Gyn[2]= rho * temp2
 
 	temp1 = 7 * pr_by_rho + u_sqr
-	temp2 = 0.5 * un * temp1 * A2neg
+	temp2 = 0.5 * un * (7 * pr_by_rho + u_sqr)  * A2neg
 	temp1 = 6 * pr_by_rho + u_sqr
 	Gyn[3] = rho * (temp2 - 0.5 * temp1 * B2)
 
