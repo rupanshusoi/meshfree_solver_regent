@@ -4,6 +4,10 @@ require "point"
 local C = regentlib.c
 local Cmath = terralib.includec("math.h")
 
+terra printArr(a : double[4])
+        C.printf("[%0.15lf, %0.15lf, %0.15lf, %0.15lf]\n", a[0], a[1], a[2], a[3])
+end
+
 task func_delta(globaldata : region(ispace(int1d), Point), size : int)
 where
 	reads(globaldata.{x, y, prim, conn}), writes(globaldata.{delta, prim_old})
@@ -142,7 +146,137 @@ do
 		else
 			var nx = globaldata[itm].nx
 			var ny = globaldata[itm].ny
-			var U : double[4] = primitive_to_conserved(globaldata, itm, nx, ny, globaldata[itm].prim)
+			var Utemp : double[4] = primitive_to_conserved(globaldata, itm, nx, ny, globaldata[itm].prim)
+				
+			-- making some ugly changes as a workaround to an unfixed
+			-- Regent bug
+
+			var U : double[4]
+			for i = 0, 4 do
+				U[i] = Utemp[i]
+			end
+
+			var U_old : double[4] = primitive_to_conserved(globaldata, itm, nx, ny, globaldata[itm].prim_old)
+			var temp = U[0]
+
+			if rk == 1 or rk == 2 or rk == 4 then
+				for j = 0, 4 do
+					U[j] = U[j] - 0.5 * eu * globaldata[itm].delta * globaldata[itm].flux_res[j]
+				end
+			else
+				for j = 0, 4 do
+					U[j] = tbt * U_old[j] + obt * (U[j] - (0.5 * globaldata[itm].delta * globaldata[itm].flux_res[j]))
+				end	
+			end
+
+			U[2] = 0	
+			var U2_rot = U[1]
+			var U3_rot = U[2]
+			
+			var Unew : double[4]
+			for i = 0, 4 do
+				Unew[i] = U[i]
+			end
+			U[1] = U2_rot * ny + U3_rot * nx
+			U[2] = U3_rot*ny - U2_rot*nx
+			
+			var res_sqr = (U[0] - temp) * (U[0] - temp)
+
+			if res_sqr > max_res then
+
+				max_res = res_sqr
+				var max_res_point = itm
+			end
+
+			sum_res_sqr = sum_res_sqr + res_sqr
+			
+			var tempU : double[4]
+			tempU[0] = U[0]
+			temp = 1 / U[0]
+			tempU[1] = U[1] * temp
+			tempU[2] = U[2] * temp
+	
+			tempU[3] = 0.4 * U[3] - ((0.2 * temp) * (U[1] * U[1] + U[2] * U[2]))
+
+			globaldata[itm].prim = tempU
+
+			if itm == 1 then
+				C.printf("printing prim for idx = 1\n")
+				printArr(tempU)
+				C.printf("\n")
+			end
+		end
+	end
+
+	for i = 0, 48738 do
+		itm = outerindices[i]
+		if itm == 0 then
+			break
+		else
+			var nx = globaldata[itm].nx
+			var ny = globaldata[itm].ny
+			var Utemp : double[4] = conserved_vector_Ubar(globaldata, itm, nx, ny, globaldata[itm].prim)
+			
+			-- making some ugly changes as a workaround to an unfixed
+			-- Regent bug
+
+			var U: double[4]
+			for i = 0, 4 do
+				U[i] = Utemp[i]
+			end
+
+			var U_old : double[4] = conserved_vector_Ubar(globaldata, itm, nx, ny, globaldata[itm].prim_old)
+			var temp = U[0]
+
+			if rk == 1 or rk == 2 or rk == 4 then
+				for j = 0, 4 do
+					U[j] = U[j] - 0.5 * eu * globaldata[itm].delta * globaldata[itm].flux_res[j]
+				end
+			else
+				for j = 0, 4 do
+					U[j] = tbt * U_old[j] + obt * (U[j] - (0.5 * globaldata[itm].delta * globaldata[itm].flux_res[j]))
+				end	
+			end
+			
+			var U2_rot = U[1]
+			var U3_rot = U[2]
+			U[1] = U2_rot * ny + U3_rot * nx
+			U[2] = U3_rot * ny - U2_rot * nx
+
+			var tempU : double[4]
+			tempU[0] = U[0]
+			temp = 1 / U[0]
+			tempU[1] = U[1] * temp
+			tempU[2] = U[2] * temp
+
+			tempU[3] = 0.4 * U[3] - ((0.2 * temp) * (U[1] * U[1] + U[2] * U[2]))
+
+			globaldata[itm].prim = tempU
+			if itm == 48738 then
+				C.printf("printing prim for idx = 48738\n")
+				printArr(tempU)
+				C.printf("\n")
+			end
+		end
+	end
+
+	for i = 0, 48738 do
+		itm = interiorindices[i]
+		if itm == 0 then
+			break
+		else
+			var nx = globaldata[itm].nx
+			var ny = globaldata[itm].ny
+			var Utemp : double[4] = primitive_to_conserved(globaldata, itm, nx, ny, globaldata[itm].prim)
+
+			-- making some ugly changes as a workaround to an unfixed
+			-- Regent bug
+
+			var U : double[4]
+			for i = 0, 4 do
+				U[i] = Utemp[i]
+			end
+
 			var U_old : double[4] = primitive_to_conserved(globaldata, itm, nx, ny, globaldata[itm].prim_old)
 			var temp = U[0]
 
@@ -156,102 +290,6 @@ do
 				end	
 			end
 			
-			U[2] = 0
-
-			var U2_rot = U[1]
-			var U3_rot = U[2]
-			U[1] = U2_rot * ny + U3_rot * nx
-			U[2] = U3_rot*ny - U2_rot*nx
-
-			var res_sqr = (U[0] - temp) * (U[0] - temp)
-
-			if res_sqr > max_res then
-
-				max_res = res_sqr
-				var max_res_point = itm
-			end
-
-			sum_res_sqr = sum_res_sqr + res_sqr
-			
-			var tempU : double[4]
-			tempU[0] = U[0]
-			temp = 1 / U[0]
-			tempU[1] = U[1] * temp
-			tempU[2] = U[2] * temp
-
-			tempU[3] = 0.4 * U[3] - ((0.2 * temp) * (U[1] * U[1] + U[2] * U[2]))
-			globaldata[itm].prim = tempU
-		end
-	end
-
-	for i = 0, 48738 do
-		itm = outerindices[i]
-		if itm == 0 then
-			break
-		else
-			var nx = globaldata[itm].nx
-			var ny = globaldata[itm].ny
-			var U : double[4] = conserved_vector_Ubar(globaldata, itm, nx, ny, globaldata[itm].prim)
-			var U_old : double[4] = conserved_vector_Ubar(globaldata, itm, nx, ny, globaldata[itm].prim_old)
-			var temp = U[0]
-
-			if rk == 1 or rk == 2 or rk == 4 then
-				for j = 0, 4 do
-					U[j] = U[j] - 0.5 * eu * globaldata[itm].delta * globaldata[itm].flux_res[j]
-				end
-			else
-				for j = 0, 4 do
-					U[j] = tbt * U_old[j] + obt * (U[j] - (0.5 * globaldata[itm].delta * globaldata[itm].flux_res[j]))
-				end	
-			end
-			
-			var U2_rot = U[1]
-			var U3_rot = U[2]
-			U[1] = U2_rot * ny + U3_rot * nx
-			U[2] = U3_rot * ny - U2_rot * nx
-
-			var res_sqr = (U[0] - temp) * (U[0] - temp)
-
-			if res_sqr > max_res then
-
-				max_res = res_sqr
-				var max_res_point = itm
-			end
-
-			sum_res_sqr = sum_res_sqr + res_sqr
-			
-			var tempU : double[4]
-			tempU[0] = U[0]
-			temp = 1 / U[0]
-			tempU[1] = U[1] * temp
-			tempU[2] = U[2] * temp
-
-			tempU[3] = 0.4 * U[3] - ((0.2 * temp) * (U[1] * U[1] + U[2] * U[2]))
-			globaldata[itm].prim = tempU
-		end
-	end
-
-	for i = 0, 48738 do
-		itm = interiorindices[i]
-		if itm == 0 then
-			break
-		else
-			var nx = globaldata[itm].nx
-			var ny = globaldata[itm].ny
-			var U : double[4] = conserved_vector_Ubar(globaldata, itm, nx, ny, globaldata[itm].prim)
-			var U_old : double[4] = conserved_vector_Ubar(globaldata, itm, nx, ny, globaldata[itm].prim_old)
-			var temp = U[0]
-
-			if rk == 1 or rk == 2 or rk == 4 then
-				for j = 0, 4 do
-					U[j] = U[j] - 0.5 * eu * globaldata[itm].delta * globaldata[itm].flux_res[j]
-				end
-			else
-				for j = 0, 4 do
-					U[j] = tbt * U_old[j] + obt * (U[j] - (0.5 * globaldata[itm].delta * globaldata[itm].flux_res[j]))
-				end	
-			end
-			
 			var U2_rot = U[1]
 			var U3_rot = U[2]
 			U[1] = U2_rot * ny + U3_rot * nx
@@ -273,7 +311,13 @@ do
 			tempU[1] = U[1] * temp
 			tempU[2] = U[2] * temp
 			tempU[3] = 0.4 * U[3] - ((0.2 * temp) * (U[1] * U[1] + U[2] * U[2]))
+
 			globaldata[itm].prim = tempU
+			if itm == 1700 then
+				C.printf("printing prim for idx = 1700\n")
+				printArr(tempU)
+				C.printf("\n")
+			end
 		end
 	end
 
@@ -287,8 +331,8 @@ do
 	end
 	
 	-- todo : put file writing here
-	C.printf("Iteration number: %d\n", iter)
-	C.printf("Residue: %0.15lf\n", residue)
+	C.printf("\n\nIteration number: %d\n", iter)
+	C.printf("Residue: %0.15lf\n\n", residue)
 
 	return res_old
 end

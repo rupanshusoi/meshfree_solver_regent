@@ -64,16 +64,16 @@ do
 			var qtilde_i : double[4]
 			var qtilde_k : double[4]
 			for i = 0, 4 do
-				qtilde_i[i] = globaldata[idx].q[i] - 0.5 * delx * globaldata[idx].dq[0][i] + dely * globaldata[idx].dq[1][i]
-				qtilde_k[i] = globaldata[itm].q[i] - 0.5 * delx * globaldata[itm].dq[0][i] + dely * globaldata[itm].dq[1][i]
+				qtilde_i[i] = globaldata[idx].q[i] - 0.5 * (delx * globaldata[idx].dq[0][i] + dely * globaldata[idx].dq[1][i])
+				qtilde_k[i] = globaldata[itm].q[i] - 0.5 * (delx * globaldata[itm].dq[0][i] + dely * globaldata[itm].dq[1][i])
 			end
 						
 			var phi_i = venkat_limiter(qtilde_i, globaldata, idx)
-			var phi_k = venkat_limiter(qtilde_k, globaldata, idx)
+			var phi_k = venkat_limiter(qtilde_k, globaldata, itm)
 			
 			for i = 0, 4 do
-				qtilde_i[i] = globaldata[idx].q[i] - 0.5 * phi_i[i] * delx * globaldata[idx].dq[0][i] + dely * globaldata[idx].dq[1][i]
-				qtilde_k[i] = globaldata[itm].q[i] - 0.5 * phi_k[i] * delx * globaldata[itm].dq[0][i] + dely * globaldata[itm].dq[1][i]
+				qtilde_i[i] = globaldata[idx].q[i] - 0.5 * phi_i[i] * (delx * globaldata[idx].dq[0][i] + dely * globaldata[idx].dq[1][i])
+				qtilde_k[i] = globaldata[itm].q[i] - 0.5 * phi_k[i] * (delx * globaldata[itm].dq[0][i] + dely * globaldata[itm].dq[1][i])
 			end
 			
 			var result : double[4] = qtilde_to_primitive(qtilde_i)
@@ -152,16 +152,16 @@ do
 			var qtilde_i : double[4]
 			var qtilde_k : double[4]
 			for i = 0, 4 do
-				qtilde_i[i] = globaldata[idx].q[i] - 0.5 * delx * globaldata[idx].dq[0][i] + dely * globaldata[idx].dq[1][i]
-				qtilde_k[i] = globaldata[itm].q[i] - 0.5 * delx * globaldata[itm].dq[0][i] + dely * globaldata[itm].dq[1][i]
+				qtilde_i[i] = globaldata[idx].q[i] - 0.5 * (delx * globaldata[idx].dq[0][i] + dely * globaldata[idx].dq[1][i])
+				qtilde_k[i] = globaldata[itm].q[i] - 0.5 * (delx * globaldata[itm].dq[0][i] + dely * globaldata[itm].dq[1][i])
 			end
 						
 			var phi_i = venkat_limiter(qtilde_i, globaldata, idx)
-			var phi_k = venkat_limiter(qtilde_k, globaldata, idx)
+			var phi_k = venkat_limiter(qtilde_k, globaldata, itm)
 			
 			for i = 0, 4 do
-				qtilde_i[i] = globaldata[idx].q[i] - 0.5 * phi_i[i] * delx * globaldata[idx].dq[0][i] + dely * globaldata[idx].dq[1][i]
-				qtilde_k[i] = globaldata[itm].q[i] - 0.5 * phi_k[i] * delx * globaldata[itm].dq[0][i] + dely * globaldata[itm].dq[1][i]
+				qtilde_i[i] = globaldata[idx].q[i] - 0.5 * phi_i[i] * (delx * globaldata[idx].dq[0][i] + dely * globaldata[idx].dq[1][i])
+				qtilde_k[i] = globaldata[itm].q[i] - 0.5 * phi_k[i] * (delx * globaldata[itm].dq[0][i] + dely * globaldata[itm].dq[1][i])
 			end
 			
 			var result : double[4] = qtilde_to_primitive(qtilde_i)
@@ -240,16 +240,16 @@ do
 			var qtilde_i : double[4]
 			var qtilde_k : double[4]
 			for i = 0, 4 do
-				qtilde_i[i] = globaldata[idx].q[i] - 0.5 * delx * globaldata[idx].dq[0][i] + dely * globaldata[idx].dq[1][i]
-				qtilde_k[i] = globaldata[itm].q[i] - 0.5 * delx * globaldata[itm].dq[0][i] + dely * globaldata[itm].dq[1][i]
+				qtilde_i[i] = globaldata[idx].q[i] - 0.5 * (delx * globaldata[idx].dq[0][i] + dely * globaldata[idx].dq[1][i])
+				qtilde_k[i] = globaldata[itm].q[i] - 0.5 * (delx * globaldata[itm].dq[0][i] + dely * globaldata[itm].dq[1][i])
 			end
 						
 			var phi_i = venkat_limiter(qtilde_i, globaldata, idx)
-			var phi_k = venkat_limiter(qtilde_k, globaldata, idx)
+			var phi_k = venkat_limiter(qtilde_k, globaldata, itm)
 			
 			for i = 0, 4 do
-				qtilde_i[i] = globaldata[idx].q[i] - 0.5 * phi_i[i] * delx * globaldata[idx].dq[0][i] + dely * globaldata[idx].dq[1][i]
-				qtilde_k[i] = globaldata[itm].q[i] - 0.5 * phi_k[i] * delx * globaldata[itm].dq[0][i] + dely * globaldata[itm].dq[1][i]
+				qtilde_i[i] = globaldata[idx].q[i] - 0.5 * phi_i[i] * (delx * globaldata[idx].dq[0][i] + dely * globaldata[idx].dq[1][i])
+				qtilde_k[i] = globaldata[itm].q[i] - 0.5 * phi_k[i] * (delx * globaldata[itm].dq[0][i] + dely * globaldata[itm].dq[1][i])
 			end
 			
 			var result : double[4] = qtilde_to_primitive(qtilde_i)

@@ -6,6 +6,10 @@ require "quadrant_fluxes"
 local C = regentlib.c
 local Cmath = terralib.includec("math.h")
 
+terra printArr(a : double[4])
+        C.printf("[%0.15lf, %0.15lf, %0.15lf, %0.15lf]\n", a[0], a[1], a[2], a[3])
+end
+
 task qtilde_to_primitive(qtilde : double[4])
         var gamma : double = 1.4
 
@@ -90,22 +94,23 @@ do
 			var qtilde_i : double[4]
 			var qtilde_k : double[4]
 			for i = 0, 4 do
-				qtilde_i[i] = globaldata[idx].q[i] - 0.5 * delx * globaldata[idx].dq[0][i] + dely * globaldata[idx].dq[1][i]
-				qtilde_k[i] = globaldata[itm].q[i] - 0.5 * delx * globaldata[itm].dq[0][i] + dely * globaldata[itm].dq[1][i]
+				qtilde_i[i] = globaldata[idx].q[i] - 0.5 * (delx * globaldata[idx].dq[0][i] + dely * globaldata[idx].dq[1][i])
+				qtilde_k[i] = globaldata[itm].q[i] - 0.5 * (delx * globaldata[itm].dq[0][i] + dely * globaldata[itm].dq[1][i])
 			end
 						
 			var phi_i = venkat_limiter(qtilde_i, globaldata, idx)
-			var phi_k = venkat_limiter(qtilde_k, globaldata, idx)
+			var phi_k = venkat_limiter(qtilde_k, globaldata, itm)
 			
 			for i = 0, 4 do
-				qtilde_i[i] = globaldata[idx].q[i] - 0.5 * phi_i[i] * delx * globaldata[idx].dq[0][i] + dely * globaldata[idx].dq[1][i]
-				qtilde_k[i] = globaldata[itm].q[i] - 0.5 * phi_k[i] * delx * globaldata[itm].dq[0][i] + dely * globaldata[itm].dq[1][i]
+				qtilde_i[i] = globaldata[idx].q[i] - 0.5 * phi_i[i] * (delx * globaldata[idx].dq[0][i] + dely * globaldata[idx].dq[1][i])
+				qtilde_k[i] = globaldata[itm].q[i] - 0.5 * phi_k[i] * (delx * globaldata[itm].dq[0][i] + dely * globaldata[itm].dq[1][i])
 			end
 			
 			var result : double[4] = qtilde_to_primitive(qtilde_i)
 			var G_i : double[4] = flux_quad_GxIII(nx, ny, result[0], result[1], result[2], result[3])
 			result = qtilde_to_primitive(qtilde_k)
 			var G_k : double[4] = flux_quad_GxIII(nx, ny, result[0], result[1], result[2], result[3])
+
 			for i = 0, 4 do
 				sum_delx_delf[i] = sum_delx_delf[i] + (G_k[i] - G_i[i]) * dels_weights
 				sum_dely_delf[i] = sum_dely_delf[i] + (G_k[i] - G_i[i]) * deln_weights
@@ -178,16 +183,16 @@ do
 			var qtilde_i : double[4]
 			var qtilde_k : double[4]
 			for i = 0, 4 do
-				qtilde_i[i] = globaldata[idx].q[i] - 0.5 * delx * globaldata[idx].dq[0][i] + dely * globaldata[idx].dq[1][i]
-				qtilde_k[i] = globaldata[itm].q[i] - 0.5 * delx * globaldata[itm].dq[0][i] + dely * globaldata[itm].dq[1][i]
+				qtilde_i[i] = globaldata[idx].q[i] - 0.5 * (delx * globaldata[idx].dq[0][i] + dely * globaldata[idx].dq[1][i])
+				qtilde_k[i] = globaldata[itm].q[i] - 0.5 * (delx * globaldata[itm].dq[0][i] + dely * globaldata[itm].dq[1][i])
 			end
 						
 			var phi_i = venkat_limiter(qtilde_i, globaldata, idx)
-			var phi_k = venkat_limiter(qtilde_k, globaldata, idx)
+			var phi_k = venkat_limiter(qtilde_k, globaldata, itm)
 			
 			for i = 0, 4 do
-				qtilde_i[i] = globaldata[idx].q[i] - 0.5 * phi_i[i] * delx * globaldata[idx].dq[0][i] + dely * globaldata[idx].dq[1][i]
-				qtilde_k[i] = globaldata[itm].q[i] - 0.5 * phi_k[i] * delx * globaldata[itm].dq[0][i] + dely * globaldata[itm].dq[1][i]
+				qtilde_i[i] = globaldata[idx].q[i] - 0.5 * phi_i[i] * (delx * globaldata[idx].dq[0][i] + dely * globaldata[idx].dq[1][i])
+				qtilde_k[i] = globaldata[itm].q[i] - 0.5 * phi_k[i] * (delx * globaldata[itm].dq[0][i] + dely * globaldata[itm].dq[1][i])
 			end
 			
 			var result : double[4] = qtilde_to_primitive(qtilde_i)
@@ -266,16 +271,16 @@ do
 			var qtilde_i : double[4]
 			var qtilde_k : double[4]
 			for i = 0, 4 do
-				qtilde_i[i] = globaldata[idx].q[i] - 0.5 * delx * globaldata[idx].dq[0][i] + dely * globaldata[idx].dq[1][i]
-				qtilde_k[i] = globaldata[itm].q[i] - 0.5 * delx * globaldata[itm].dq[0][i] + dely * globaldata[itm].dq[1][i]
+				qtilde_i[i] = globaldata[idx].q[i] - 0.5 * (delx * globaldata[idx].dq[0][i] + dely * globaldata[idx].dq[1][i])
+				qtilde_k[i] = globaldata[itm].q[i] - 0.5 * (delx * globaldata[itm].dq[0][i] + dely * globaldata[itm].dq[1][i])
 			end
 						
 			var phi_i = venkat_limiter(qtilde_i, globaldata, idx)
-			var phi_k = venkat_limiter(qtilde_k, globaldata, idx)
+			var phi_k = venkat_limiter(qtilde_k, globaldata, itm)
 			
 			for i = 0, 4 do
-				qtilde_i[i] = globaldata[idx].q[i] - 0.5 * phi_i[i] * delx * globaldata[idx].dq[0][i] + dely * globaldata[idx].dq[1][i]
-				qtilde_k[i] = globaldata[itm].q[i] - 0.5 * phi_k[i] * delx * globaldata[itm].dq[0][i] + dely * globaldata[itm].dq[1][i]
+				qtilde_i[i] = globaldata[idx].q[i] - 0.5 * phi_i[i] * (delx * globaldata[idx].dq[0][i] + dely * globaldata[idx].dq[1][i])
+				qtilde_k[i] = globaldata[itm].q[i] - 0.5 * phi_k[i] * (delx * globaldata[itm].dq[0][i] + dely * globaldata[itm].dq[1][i])
 			end
 			
 			var result : double[4] = qtilde_to_primitive(qtilde_i)
@@ -298,16 +303,3 @@ do
 
 	return G
 end
-
-task main()
-	var a : double[4]
-	a[0] = 0.1
-	a[1] = 0.2
-	a[2] = 0.3
-	a[3] = -0.4
-	var b = qtilde_to_primitive(a)
-	for i = 0, 4 do
-		C.printf("%lf, ", b[i])
-	end
-end
-regentlib.start(main)

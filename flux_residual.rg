@@ -6,6 +6,10 @@ require "interior_fluxes"
 
 local C = regentlib.c
 
+terra printArr(a : double[4])
+	C.printf("[%lf, %lf, %lf, %lf]\n", a[0], a[1], a[2], a[3])
+end
+
 task cal_flux_residual(globaldata : region(ispace(int1d), Point), wallindices : region(ispace(int1d), int), outerindices : region(ispace(int1d), int), interiorindices : region(ispace(int1d), int))
 where
 	reads(wallindices, outerindices, interiorindices, globaldata), writes(globaldata)
@@ -21,16 +25,16 @@ do
 			var Gyn = wall_dGy_neg(globaldata, itm)
 			var GTemp : double[4]
 			for j = 0, 4 do
-				GTemp[j] = Gxp[j] + Gxn[j] + Gyn[j]	
-				GTemp[j] = 2 * GTemp[j]
+				GTemp[j] = 2 * (Gxp[j] + Gxn[j] + Gyn[j])
+			end
+			if itm == 1 then
+				C.printf("printing fluxes for wall\n")
+				printArr(Gxp)
+				printArr(Gxn)
+				printArr(Gyn)
+				C.printf("\n")
 			end
 			globaldata[itm].flux_res = GTemp
-			if itm == 1 then
-				for j = 0, 4 do
-					C.printf("Wall Gxp = %0.15lf\n", Gxp[j])
-				end
-				C.printf('\n')
-			end
 		end
 	end	
 
@@ -46,13 +50,14 @@ do
 			for j = 0, 4 do
 				GTemp[j] = Gxp[j] + Gxn[j] + Gyp[j]	
 			end
-			globaldata[itm].flux_res = GTemp
 			if itm == 48738 then
-				for j = 0, 4 do
-					C.printf("Outer Gxp = %0.15lf\n", Gxp[j])
-				end
-				C.printf('\n')
+				C.printf("printing fluxes for outer\n")
+				printArr(Gxp)
+				printArr(Gxn)
+				printArr(Gyp)
+				C.printf("\n")
 			end
+			globaldata[itm].flux_res = GTemp
 		end
 	end	
 
@@ -68,6 +73,14 @@ do
 			var GTemp : double[4]
 			for j = 0, 4 do
 				GTemp[j] = Gxp[j] + Gxn[j] + Gyp[j] + Gyn[j]	
+			end
+			if itm == 1700 then
+				C.printf("printing fluxes for interior\n")
+				printArr(Gxp)
+				printArr(Gxn)
+				printArr(Gyp)
+				printArr(Gyn)
+				C.printf("\n")
 			end
 			globaldata[itm].flux_res = GTemp
 		end

@@ -6,6 +6,9 @@ require "flux_residual"
 local C = regentlib.c
 local Cmath = terralib.includec("math.h")
 
+terra printArr(a : double[4])
+	C.printf("[%0.15lf, %0.15lf, %0.15lf, %0.15lf]\n", a[0], a[1], a[2], a[3])
+end
 
 terra getInitialPrimitive()
 	var rho_inf : double = 1
@@ -141,6 +144,21 @@ do
 		tempq[3] = -2 * beta
 
 		globaldata[idx].q = tempq	
+		if idx == 1 then
+			C.printf("printing q for itm = 1\n")
+			printArr(tempq)
+			C.printf("\n")
+		end
+		if idx == 1700 then
+			C.printf("printing q for itm = 1700\n")
+			printArr(tempq)
+			C.printf("\n")
+		end
+		if idx == 48738 then
+			C.printf("printing q for itm = 48738\n")
+			printArr(tempq)
+			C.printf("\n")
+		end
 	end
 		
 	for idx = 1, size + 1 do
@@ -192,7 +210,7 @@ do
 				sum_dely_sqr = sum_dely_sqr + ((dely * dely) * weights)
 				sum_delx_dely = sum_delx_dely + ((delx * dely) * weights)
 				
-				for j = 0, 4 do -- CHECK THIS
+				for j = 0, 4 do
 					sum_delx_delq[j] = sum_delx_delq[j] + (weights * delx * (globaldata[conn].q[j] - globaldata[idx].q[j]))
 					sum_dely_delq[j] = sum_dely_delq[j] + (weights * dely * (globaldata[conn].q[j] - globaldata[idx].q[j]))
 				end
@@ -200,6 +218,10 @@ do
 		end
 		
 		var det : double = (sum_delx_sqr * sum_dely_sqr) - (sum_delx_dely * sum_delx_dely)
+		if idx == 1 or idx == 1700 or idx == 48738 then
+			C.printf("printing sum_dels for %d\n", idx)
+			C.printf("%0.15lf %0.15lf %0.15lf\n", sum_delx_sqr, sum_dely_sqr, sum_delx_dely)
+		end
 		var tempdq : double[2][4]
 
 		var sum_delx_delq1 : double[4]
@@ -222,7 +244,7 @@ do
 	
 		var sum_delx_delq2 : double[4]
 		for i = 0, 4 do
-			sum_delx_delq2[i] = sum_delx_delq[i] * sum_delx_sqr
+			sum_delx_delq2[i] = sum_delx_delq[i] * sum_delx_dely
 		end
 
 		var tempsumy : double[4]
@@ -230,48 +252,57 @@ do
 			tempsumy[i] = (1 / det) * (sum_dely_delq2[i] - sum_delx_delq2[i])
 		end
 
+		if idx == 1 then
+			C.printf("printing values that make tempsumy for itm = 1\n")
+			printArr(sum_dely_delq2)
+			printArr(sum_delx_delq2)
+			C.printf("\n")
+		end
+		if idx == 1700 then
+			C.printf("printing values that make tempsumy for itm = 1700\n")
+			printArr(sum_dely_delq2)
+			printArr(sum_delx_delq2)
+			C.printf("\n")
+		end
+		if idx == 48738 then
+			C.printf("printing values that make tempsumy for itm = 48738\n")
+			printArr(sum_dely_delq2)
+			printArr(sum_delx_delq2)
+			C.printf("\n")
+		end
+
 		for i = 0, 4 do
 			tempdq[0][i] = tempsumx[i]
-		end
-		for i = 0, 4 do
 			tempdq[1][i]  = tempsumy[i]
 		end
 
 		globaldata[idx].dq = tempdq
-			
 		globaldata[idx].minq = minq
 		globaldata[idx].maxq = maxq				
+
+		if idx == 1 then
+			C.printf("printing dq for itm = 1\n")
+			printArr(tempsumx)
+			printArr(tempsumy)
+			C.printf("\n")
+		end
+		if idx == 1700 then
+			C.printf("printing dq for itm = 1700\n")
+			printArr(tempsumx)
+			printArr(tempsumy)
+			C.printf("\n")
+		end
+		if idx == 48738 then
+			C.printf("printing dq for itm = 48738\n")
+			printArr(tempsumx)
+			printArr(tempsumy)
+			C.printf("\n")
+		end
 
 	end
 end
 
-task qtilde_to_primitive(qtilde : double[4]) -- MOVED TO OUTER FLUXES DUE TO
-	var gamma : double = 1.4	     -- DUE TO CIRCULAR IMPORT ERROR	
-	
-	var q1 = qtilde[0]
-    	var q2 = qtilde[1]
-    	var q3 = qtilde[2]
-	var q4 = qtilde[3]
-	
-	var beta = -q4 * 0.5
-	var temp = 0.5 / beta
-	
-	var u1 = q2 * temp
-	var u2 = q3 * temp
-
-	var temp1 = q1 + beta * (u1*u1 + u2*u2)
-	var temp2 = temp1 - (Cmath.log(beta)/(gamma - 1))
-	var rho = Cmath.exp(temp2)
-	var pr = rho * temp
-
-	var arr : double[4]
-	arr[0] = u1
-	arr[1] = u2
-	arr[2] = rho
-	arr[3] = pr
-
-	return arr
-end
+-- qtilde_to_primitive moved to outer_fluxes due to circular import error
 
 task fpi_solver(iter : int, globaldata : region(ispace(int1d), Point), wallindices : region(ispace(int1d), int), outerindices : region(ispace(int1d), int), interiorindices : region(ispace(int1d), int), res_old : int)
 where
