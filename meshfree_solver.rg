@@ -25,7 +25,6 @@ task main()
 	var nbhs : int
 	var dummy_int : int[20]
 	var dummy_double : double[4]
-	var dummy_double2 : double[2][4]
 	
 	var wallpts = 0
 	var outerpts = 0
@@ -57,9 +56,10 @@ task main()
 		end
 		var p = Point {count + 1, x, y, left, right, flag1, flag2, nbhs, 
 				nbhs_arr, nx, ny, defprimal, dummy_double, 
-				dummy_double, dummy_double, dummy_double2, 0, 0, 
-				0, 0, 0, dummy_int, dummy_int, dummy_int, dummy_int, 
-				0, min_dist, dummy_double, dummy_double}
+				dummy_double, dummy_double, dummy_double, 
+				dummy_double, 0, 0, 0, 0, 0, dummy_int, 
+				dummy_int, dummy_int, dummy_int, 0, min_dist, 
+				dummy_double, dummy_double}
 
 		globaldata[count + 1] = p
 
@@ -121,7 +121,7 @@ task main()
 	var res_old = 0
 
 	C.printf("Starting FPI solver\n")
-	fpi_solver(5 + 1, globaldata, wallptsidx, outerptsidx, interiorptsidx, 0)
+	fpi_solver(3 + 1, globaldata, wallptsidx, outerptsidx, interiorptsidx, 0)
 
 end
 regentlib.start(main)

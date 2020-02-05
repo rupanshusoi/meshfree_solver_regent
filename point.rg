@@ -19,7 +19,8 @@ struct Point
 	prim_old : double[4];
 	flux_res : double[4];
 	q : double[4];
-	dq : double[2][4];
+	dq0 : double[4];
+	dq1 : double[4];
 	entropy : double;
 	xpos_nbhs : int;
 	xneg_nbhs : int;

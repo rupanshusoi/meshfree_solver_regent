@@ -7,7 +7,7 @@ local C = regentlib.c
 local Cmath = terralib.includec("math.h")
 
 terra printArr(a : double[4])
-	C.printf("[%0.15lf, %0.15lf, %0.15lf, %0.15lf]\n", a[0], a[1], a[2], a[3])
+	C.printf("[\x1b[33m %0.15lf, %0.15lf, %0.15lf, %0.15lf]\n \x1b[0m", a[0], a[1], a[2], a[3])
 end
 
 terra getInitialPrimitive()
@@ -123,7 +123,7 @@ end
 
 task q_var_derivatives(globaldata : region(ispace(int1d), Point), size : int)
 where 
-	reads(globaldata), writes(globaldata.{q, dq, minq, maxq})
+	reads(globaldata), writes(globaldata.{q, dq0, dq1, minq, maxq})
 do
 	var power : double = 0
 	for idx = 1, size + 1 do
@@ -144,21 +144,7 @@ do
 		tempq[3] = -2 * beta
 
 		globaldata[idx].q = tempq	
-		if idx == 1 then
-			C.printf("printing q for itm = 1\n")
-			printArr(tempq)
-			C.printf("\n")
-		end
-		if idx == 1700 then
-			C.printf("printing q for itm = 1700\n")
-			printArr(tempq)
-			C.printf("\n")
-		end
-		if idx == 48738 then
-			C.printf("printing q for itm = 48738\n")
-			printArr(tempq)
-			C.printf("\n")
-		end
+
 	end
 		
 	for idx = 1, size + 1 do
@@ -203,8 +189,8 @@ do
 				var delx = x_k - x_i
 				var dely = y_k - y_i
 
-				var dist = Cmath.sqrt(delx*delx + dely*dely)
-				var weights = Cmath.pow(dist, power)
+				var dist : double = Cmath.sqrt(delx*delx + dely*dely)
+				var weights : double = Cmath.pow(dist, power)
 
 				sum_delx_sqr = sum_delx_sqr + ((delx * delx) * weights)
 				sum_dely_sqr = sum_dely_sqr + ((dely * dely) * weights)
@@ -216,13 +202,10 @@ do
 				end
 			end	
 		end
-		
+
 		var det : double = (sum_delx_sqr * sum_dely_sqr) - (sum_delx_dely * sum_delx_dely)
-		if idx == 1 or idx == 1700 or idx == 48738 then
-			C.printf("printing sum_dels for %d\n", idx)
-			C.printf("%0.15lf %0.15lf %0.15lf\n", sum_delx_sqr, sum_dely_sqr, sum_delx_dely)
-		end
-		var tempdq : double[2][4]
+		var tempdq0 : double[4]
+		var tempdq1 : double[4]
 
 		var sum_delx_delq1 : double[4]
 		var sum_dely_delq1 : double[4]
@@ -252,52 +235,15 @@ do
 			tempsumy[i] = (1 / det) * (sum_dely_delq2[i] - sum_delx_delq2[i])
 		end
 
-		if idx == 1 then
-			C.printf("printing values that make tempsumy for itm = 1\n")
-			printArr(sum_dely_delq2)
-			printArr(sum_delx_delq2)
-			C.printf("\n")
-		end
-		if idx == 1700 then
-			C.printf("printing values that make tempsumy for itm = 1700\n")
-			printArr(sum_dely_delq2)
-			printArr(sum_delx_delq2)
-			C.printf("\n")
-		end
-		if idx == 48738 then
-			C.printf("printing values that make tempsumy for itm = 48738\n")
-			printArr(sum_dely_delq2)
-			printArr(sum_delx_delq2)
-			C.printf("\n")
-		end
-
 		for i = 0, 4 do
-			tempdq[0][i] = tempsumx[i]
-			tempdq[1][i]  = tempsumy[i]
+			tempdq0[i] = tempsumx[i]
+			tempdq1[i]  = tempsumy[i]
 		end
 
-		globaldata[idx].dq = tempdq
+		globaldata[idx].dq0 = tempdq0
+		globaldata[idx].dq1 = tempdq1
 		globaldata[idx].minq = minq
 		globaldata[idx].maxq = maxq				
-
-		if idx == 1 then
-			C.printf("printing dq for itm = 1\n")
-			printArr(tempsumx)
-			printArr(tempsumy)
-			C.printf("\n")
-		end
-		if idx == 1700 then
-			C.printf("printing dq for itm = 1700\n")
-			printArr(tempsumx)
-			printArr(tempsumy)
-			C.printf("\n")
-		end
-		if idx == 48738 then
-			C.printf("printing dq for itm = 48738\n")
-			printArr(tempsumx)
-			printArr(tempsumy)
-			C.printf("\n")
-		end
 
 	end
 end
@@ -318,6 +264,59 @@ do
 			cal_flux_residual(globaldata, wallindices, outerindices, interiorindices)
 			var res_old = state_update(globaldata, wallindices, outerindices, interiorindices, i, rk, eu, res_old)
 			--todo: file writing here
+			-- creating dump files
+
+			if rk == 1 then
+				for idx = 1, 48738 + 1 do
+					var file = C.fopen("prim_1_1.txt", "a")
+					C.fprintf(file, "idx =  %d, %d\n", idx, globaldata[idx].flag_1)
+					C.fprintf(file, "%0.15lf %0.15lf %0.15lf %0.15lf\n\n", globaldata[idx].prim[0], globaldata[idx].prim[1], globaldata[idx].prim[2], globaldata[idx].prim[3]) 
+					C.fclose(file)
+					file = C.fopen("q_1_1.txt", "a")
+					C.fprintf(file, "idx =  %d, %d\n", idx, globaldata[idx].flag_1)
+					C.fprintf(file, "%0.15lf %0.15lf %0.15lf %0.15lf\n\n", globaldata[idx].q[0], globaldata[idx].q[1], globaldata[idx].q[2], globaldata[idx].q[3]) 
+					C.fclose(file)
+					file = C.fopen("dq_1_1.txt", "a")
+					C.fprintf(file, "idx =  %d, %d\n", idx, globaldata[idx].flag_1)
+					C.fprintf(file, "%0.15lf %0.15lf %0.15lf %0.15lf\n\n", globaldata[idx].dq0[0], globaldata[idx].dq0[1], globaldata[idx].dq0[2], globaldata[idx].dq0[3]) 
+					C.fprintf(file, "%0.15lf %0.15lf %0.15lf %0.15lf\n\n", globaldata[idx].dq1[0], globaldata[idx].dq1[1], globaldata[idx].dq1[2], globaldata[idx].dq1[3]) 
+					C.fclose(file)
+				end
+			end
+			if rk == 2 then
+				for idx = 1, 48738 + 1 do
+					var file = C.fopen("prim_1_2.txt", "a")
+					C.fprintf(file, "idx =  %d, %d\n", idx, globaldata[idx].flag_1)
+					C.fprintf(file, "%0.15lf %0.15lf %0.15lf %0.15lf\n\n", globaldata[idx].prim[0], globaldata[idx].prim[1], globaldata[idx].prim[2], globaldata[idx].prim[3]) 
+					C.fclose(file)
+					file = C.fopen("q_1_2.txt", "a")
+					C.fprintf(file, "idx =  %d, %d\n", idx, globaldata[idx].flag_1)
+					C.fprintf(file, "%0.15lf %0.15lf %0.15lf %0.15lf\n\n", globaldata[idx].q[0], globaldata[idx].q[1], globaldata[idx].q[2], globaldata[idx].q[3]) 
+					C.fclose(file)
+					file = C.fopen("dq_1_2.txt", "a")
+					C.fprintf(file, "idx =  %d, %d\n", idx, globaldata[idx].flag_1)
+					C.fprintf(file, "%0.15lf %0.15lf %0.15lf %0.15lf\n\n", globaldata[idx].dq0[0], globaldata[idx].dq0[1], globaldata[idx].dq0[2], globaldata[idx].dq0[3]) 
+					C.fprintf(file, "%0.15lf %0.15lf %0.15lf %0.15lf\n\n", globaldata[idx].dq1[0], globaldata[idx].dq1[1], globaldata[idx].dq1[2], globaldata[idx].dq1[3]) 
+					C.fclose(file)
+				end
+			end
+			if rk == 3 then
+				for idx = 1, 48738 + 1 do
+					var file = C.fopen("prim_1_3.txt", "a")
+					C.fprintf(file, "idx =  %d, %d\n", idx, globaldata[idx].flag_1)
+					C.fprintf(file, "%0.15lf %0.15lf %0.15lf %0.15lf\n\n", globaldata[idx].prim[0], globaldata[idx].prim[1], globaldata[idx].prim[2], globaldata[idx].prim[3]) 
+					C.fclose(file)
+					file = C.fopen("q_1_3.txt", "a")
+					C.fprintf(file, "idx =  %d, %d\n", idx, globaldata[idx].flag_1)
+					C.fprintf(file, "%0.15lf %0.15lf %0.15lf %0.15lf\n\n", globaldata[idx].q[0], globaldata[idx].q[1], globaldata[idx].q[2], globaldata[idx].q[3]) 
+					C.fclose(file)
+					file = C.fopen("dq_1_3.txt", "a")
+					C.fprintf(file, "idx =  %d, %d\n", idx, globaldata[idx].flag_1)
+					C.fprintf(file, "%0.15lf %0.15lf %0.15lf %0.15lf\n\n", globaldata[idx].dq0[0], globaldata[idx].dq0[1], globaldata[idx].dq0[2], globaldata[idx].dq0[3]) 
+					C.fprintf(file, "%0.15lf %0.15lf %0.15lf %0.15lf\n\n", globaldata[idx].dq1[0], globaldata[idx].dq1[1], globaldata[idx].dq1[2], globaldata[idx].dq1[3]) 
+					C.fclose(file)
+				end
+			end
 		end
 	end	
 	return res_old

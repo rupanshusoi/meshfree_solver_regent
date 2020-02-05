@@ -3,6 +3,9 @@ import "regent"
 local C = regentlib.c
 local Cmath = terralib.includec("math.h")
 
+terra printArr(a : double[4])
+        C.printf("[%0.15lf, %0.15lf, %0.15lf, %0.15lf]\n", a[0], a[1], a[2], a[3])
+end
 
 task flux_quad_GxI(nx : double, ny : double, u1 : double, u2 : double, rho : double, pr : double)
 

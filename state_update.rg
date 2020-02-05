@@ -5,7 +5,7 @@ local C = regentlib.c
 local Cmath = terralib.includec("math.h")
 
 terra printArr(a : double[4])
-        C.printf("[%0.15lf, %0.15lf, %0.15lf, %0.15lf]\n", a[0], a[1], a[2], a[3])
+	C.printf("[\x1b[33m %0.15lf, %0.15lf, %0.15lf, %0.15lf]\n \x1b[0m", a[0], a[1], a[2], a[3])        
 end
 
 task func_delta(globaldata : region(ispace(int1d), Point), size : int)
@@ -87,7 +87,7 @@ task conserved_vector_Ubar(globaldata : region(ispace(int1d), Point), itm : int,
 	var u1_inf_rot = u1_inf * tx + u2_inf * ty
 	var u2_inf_rot = u1_inf * nx + u2_inf * ny
 
-	var temp1 = u1_inf_rot * u1_inf_rot + u2_inf_rot*u2_inf_rot
+	var temp1 = u1_inf_rot * u1_inf_rot + u2_inf_rot * u2_inf_rot
 	var e_inf = pr_inf / (rho_inf * (gamma - 1)) + 0.5 * temp1
 
 	var beta = (0.5 * rho_inf) / pr_inf
@@ -161,11 +161,11 @@ do
 
 			if rk == 1 or rk == 2 or rk == 4 then
 				for j = 0, 4 do
-					U[j] = U[j] - 0.5 * eu * globaldata[itm].delta * globaldata[itm].flux_res[j]
+					U[j] = U[j] - (0.5 * eu * globaldata[itm].delta * globaldata[itm].flux_res[j])
 				end
 			else
 				for j = 0, 4 do
-					U[j] = tbt * U_old[j] + obt * (U[j] - (0.5 * globaldata[itm].delta * globaldata[itm].flux_res[j]))
+					U[j] = (tbt * U_old[j]) + obt * (U[j] - (0.5 * globaldata[itm].delta * globaldata[itm].flux_res[j]))
 				end	
 			end
 
@@ -173,12 +173,8 @@ do
 			var U2_rot = U[1]
 			var U3_rot = U[2]
 			
-			var Unew : double[4]
-			for i = 0, 4 do
-				Unew[i] = U[i]
-			end
 			U[1] = U2_rot * ny + U3_rot * nx
-			U[2] = U3_rot*ny - U2_rot*nx
+			U[2] = U3_rot * ny - U2_rot * nx
 			
 			var res_sqr = (U[0] - temp) * (U[0] - temp)
 
@@ -200,11 +196,6 @@ do
 
 			globaldata[itm].prim = tempU
 
-			if itm == 1 then
-				C.printf("printing prim for idx = 1\n")
-				printArr(tempU)
-				C.printf("\n")
-			end
 		end
 	end
 
@@ -230,11 +221,11 @@ do
 
 			if rk == 1 or rk == 2 or rk == 4 then
 				for j = 0, 4 do
-					U[j] = U[j] - 0.5 * eu * globaldata[itm].delta * globaldata[itm].flux_res[j]
+					U[j] = U[j] - (0.5 * eu * globaldata[itm].delta * globaldata[itm].flux_res[j])
 				end
 			else
 				for j = 0, 4 do
-					U[j] = tbt * U_old[j] + obt * (U[j] - (0.5 * globaldata[itm].delta * globaldata[itm].flux_res[j]))
+					U[j] = (tbt * U_old[j]) + obt * (U[j] - (0.5 * globaldata[itm].delta * globaldata[itm].flux_res[j]))
 				end	
 			end
 			
@@ -252,11 +243,6 @@ do
 			tempU[3] = 0.4 * U[3] - ((0.2 * temp) * (U[1] * U[1] + U[2] * U[2]))
 
 			globaldata[itm].prim = tempU
-			if itm == 48738 then
-				C.printf("printing prim for idx = 48738\n")
-				printArr(tempU)
-				C.printf("\n")
-			end
 		end
 	end
 
@@ -282,11 +268,11 @@ do
 
 			if rk == 1 or rk == 2 or rk == 4 then
 				for j = 0, 4 do
-					U[j] = U[j] - 0.5 * eu * globaldata[itm].delta * globaldata[itm].flux_res[j]
+					U[j] = U[j] - (0.5 * eu * globaldata[itm].delta * globaldata[itm].flux_res[j])
 				end
 			else
 				for j = 0, 4 do
-					U[j] = tbt * U_old[j] + obt * (U[j] - (0.5 * globaldata[itm].delta * globaldata[itm].flux_res[j]))
+					U[j] = (tbt * U_old[j]) + obt * (U[j] - (0.5 * globaldata[itm].delta * globaldata[itm].flux_res[j]))
 				end	
 			end
 			
@@ -313,11 +299,6 @@ do
 			tempU[3] = 0.4 * U[3] - ((0.2 * temp) * (U[1] * U[1] + U[2] * U[2]))
 
 			globaldata[itm].prim = tempU
-			if itm == 1700 then
-				C.printf("printing prim for idx = 1700\n")
-				printArr(tempU)
-				C.printf("\n")
-			end
 		end
 	end
 
@@ -331,8 +312,8 @@ do
 	end
 	
 	-- todo : put file writing here
-	C.printf("\n\nIteration number: %d\n", iter)
-	C.printf("Residue: %0.15lf\n\n", residue)
+	C.printf("\x1b[32m \n\nIteration number: %d, %d\n", iter, rk)
+	C.printf("Residue: %0.15lf\n\n \x1b[0m", residue)
 
 	return res_old
 end

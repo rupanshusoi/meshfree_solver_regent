@@ -27,13 +27,6 @@ do
 			for j = 0, 4 do
 				GTemp[j] = 2 * (Gxp[j] + Gxn[j] + Gyn[j])
 			end
-			if itm == 1 then
-				C.printf("printing fluxes for wall\n")
-				printArr(Gxp)
-				printArr(Gxn)
-				printArr(Gyn)
-				C.printf("\n")
-			end
 			globaldata[itm].flux_res = GTemp
 		end
 	end	
@@ -50,13 +43,6 @@ do
 			for j = 0, 4 do
 				GTemp[j] = Gxp[j] + Gxn[j] + Gyp[j]	
 			end
-			if itm == 48738 then
-				C.printf("printing fluxes for outer\n")
-				printArr(Gxp)
-				printArr(Gxn)
-				printArr(Gyp)
-				C.printf("\n")
-			end
 			globaldata[itm].flux_res = GTemp
 		end
 	end	
@@ -71,16 +57,15 @@ do
 			var Gyp = interior_dGy_pos(globaldata, itm)
 			var Gyn = interior_dGy_neg(globaldata, itm)
 			var GTemp : double[4]
-			for j = 0, 4 do
-				GTemp[j] = Gxp[j] + Gxn[j] + Gyp[j] + Gyn[j]	
-			end
-			if itm == 1700 then
-				C.printf("printing fluxes for interior\n")
+			if itm == 46053 then
+				C.printf("printing Gxp etc for 46053\n")
 				printArr(Gxp)
 				printArr(Gxn)
 				printArr(Gyp)
 				printArr(Gyn)
-				C.printf("\n")
+			end
+			for j = 0, 4 do
+				GTemp[j] = Gxp[j] + Gxn[j] + Gyp[j] + Gyn[j]	
 			end
 			globaldata[itm].flux_res = GTemp
 		end
