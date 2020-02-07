@@ -250,7 +250,7 @@ end
 
 -- qtilde_to_primitive moved to outer_fluxes due to circular import error
 
-task fpi_solver(iter : int, globaldata : region(ispace(int1d), Point), wallindices : region(ispace(int1d), int), outerindices : region(ispace(int1d), int), interiorindices : region(ispace(int1d), int), res_old : int)
+task fpi_solver(iter : int, globaldata : region(ispace(int1d), Point), wallindices : region(ispace(int1d), int), outerindices : region(ispace(int1d), int), interiorindices : region(ispace(int1d), int), res_old : double)
 where
 	reads (outerindices, interiorindices, wallindices, globaldata), writes(globaldata)
 do
@@ -262,61 +262,9 @@ do
 		for rk = 1, rks do
 			q_var_derivatives(globaldata, 48738)
 			cal_flux_residual(globaldata, wallindices, outerindices, interiorindices)
-			var res_old = state_update(globaldata, wallindices, outerindices, interiorindices, i, rk, eu, res_old)
+			res_old = state_update(globaldata, wallindices, outerindices, interiorindices, i, rk, eu, res_old)
 			--todo: file writing here
 			-- creating dump files
-
-			if rk == 1 then
-				for idx = 1, 48738 + 1 do
-					var file = C.fopen("prim_1_1.txt", "a")
-					C.fprintf(file, "idx =  %d, %d\n", idx, globaldata[idx].flag_1)
-					C.fprintf(file, "%0.15lf %0.15lf %0.15lf %0.15lf\n\n", globaldata[idx].prim[0], globaldata[idx].prim[1], globaldata[idx].prim[2], globaldata[idx].prim[3]) 
-					C.fclose(file)
-					file = C.fopen("q_1_1.txt", "a")
-					C.fprintf(file, "idx =  %d, %d\n", idx, globaldata[idx].flag_1)
-					C.fprintf(file, "%0.15lf %0.15lf %0.15lf %0.15lf\n\n", globaldata[idx].q[0], globaldata[idx].q[1], globaldata[idx].q[2], globaldata[idx].q[3]) 
-					C.fclose(file)
-					file = C.fopen("dq_1_1.txt", "a")
-					C.fprintf(file, "idx =  %d, %d\n", idx, globaldata[idx].flag_1)
-					C.fprintf(file, "%0.15lf %0.15lf %0.15lf %0.15lf\n\n", globaldata[idx].dq0[0], globaldata[idx].dq0[1], globaldata[idx].dq0[2], globaldata[idx].dq0[3]) 
-					C.fprintf(file, "%0.15lf %0.15lf %0.15lf %0.15lf\n\n", globaldata[idx].dq1[0], globaldata[idx].dq1[1], globaldata[idx].dq1[2], globaldata[idx].dq1[3]) 
-					C.fclose(file)
-				end
-			end
-			if rk == 2 then
-				for idx = 1, 48738 + 1 do
-					var file = C.fopen("prim_1_2.txt", "a")
-					C.fprintf(file, "idx =  %d, %d\n", idx, globaldata[idx].flag_1)
-					C.fprintf(file, "%0.15lf %0.15lf %0.15lf %0.15lf\n\n", globaldata[idx].prim[0], globaldata[idx].prim[1], globaldata[idx].prim[2], globaldata[idx].prim[3]) 
-					C.fclose(file)
-					file = C.fopen("q_1_2.txt", "a")
-					C.fprintf(file, "idx =  %d, %d\n", idx, globaldata[idx].flag_1)
-					C.fprintf(file, "%0.15lf %0.15lf %0.15lf %0.15lf\n\n", globaldata[idx].q[0], globaldata[idx].q[1], globaldata[idx].q[2], globaldata[idx].q[3]) 
-					C.fclose(file)
-					file = C.fopen("dq_1_2.txt", "a")
-					C.fprintf(file, "idx =  %d, %d\n", idx, globaldata[idx].flag_1)
-					C.fprintf(file, "%0.15lf %0.15lf %0.15lf %0.15lf\n\n", globaldata[idx].dq0[0], globaldata[idx].dq0[1], globaldata[idx].dq0[2], globaldata[idx].dq0[3]) 
-					C.fprintf(file, "%0.15lf %0.15lf %0.15lf %0.15lf\n\n", globaldata[idx].dq1[0], globaldata[idx].dq1[1], globaldata[idx].dq1[2], globaldata[idx].dq1[3]) 
-					C.fclose(file)
-				end
-			end
-			if rk == 3 then
-				for idx = 1, 48738 + 1 do
-					var file = C.fopen("prim_1_3.txt", "a")
-					C.fprintf(file, "idx =  %d, %d\n", idx, globaldata[idx].flag_1)
-					C.fprintf(file, "%0.15lf %0.15lf %0.15lf %0.15lf\n\n", globaldata[idx].prim[0], globaldata[idx].prim[1], globaldata[idx].prim[2], globaldata[idx].prim[3]) 
-					C.fclose(file)
-					file = C.fopen("q_1_3.txt", "a")
-					C.fprintf(file, "idx =  %d, %d\n", idx, globaldata[idx].flag_1)
-					C.fprintf(file, "%0.15lf %0.15lf %0.15lf %0.15lf\n\n", globaldata[idx].q[0], globaldata[idx].q[1], globaldata[idx].q[2], globaldata[idx].q[3]) 
-					C.fclose(file)
-					file = C.fopen("dq_1_3.txt", "a")
-					C.fprintf(file, "idx =  %d, %d\n", idx, globaldata[idx].flag_1)
-					C.fprintf(file, "%0.15lf %0.15lf %0.15lf %0.15lf\n\n", globaldata[idx].dq0[0], globaldata[idx].dq0[1], globaldata[idx].dq0[2], globaldata[idx].dq0[3]) 
-					C.fprintf(file, "%0.15lf %0.15lf %0.15lf %0.15lf\n\n", globaldata[idx].dq1[0], globaldata[idx].dq1[1], globaldata[idx].dq1[2], globaldata[idx].dq1[3]) 
-					C.fclose(file)
-				end
-			end
 		end
 	end	
 	return res_old

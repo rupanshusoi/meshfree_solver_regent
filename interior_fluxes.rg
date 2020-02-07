@@ -88,11 +88,6 @@ do
 
 	var det = (sum_delx_sqr * sum_dely_sqr - sum_delx_dely * sum_delx_dely)
 	var G : double[4]
-	if idx == 46053 then
-		C.printf("printing from interior_dGx_pos\n")
-		printArr(sum_delx_delf)
-		printArr(sum_dely_delf)
-	end
 	for i = 0, 4 do
 		G[i] = (sum_delx_delf[i] * sum_dely_sqr - sum_dely_delf[i] * sum_delx_dely) * (1 / det)
 	end
