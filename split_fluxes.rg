@@ -95,10 +95,10 @@ task flux_Gyp(nx : double, ny : double, u1 : double, u2 : double, rho : double, 
 	var temp1 = pr_by_rho + un * un
 	var temp2 = temp1 * A2pos + un * B2
 
-	Gyp[1] = rho * temp2
-
 	temp1 = ut * un * A2pos + ut * B2
-	Gyp[2]= rho * temp1
+	Gyp[1] = rho * temp1
+
+	Gyp[2] = rho * temp2
 
 	temp1 = 7 * pr_by_rho + u_sqr
 	temp2 = 0.5 * un * (7 * pr_by_rho + u_sqr)  * A2pos

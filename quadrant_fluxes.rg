@@ -83,7 +83,7 @@ task flux_quad_GxII(nx : double, ny : double, u1 : double, u2 : double, rho : do
 	G[2] = rho * temp1 * temp2
 
 	temp1 = (7 * pr_by_rho) + u_sqr
-	temp2 = 0.5 * ut * ((7 * pr_by_rho) + u_sqr)  * A1pos
+	temp2 = 0.5 * ut * ((7 * pr_by_rho) + u_sqr) * A1pos
 
 	temp1 = (6 * pr_by_rho) + u_sqr
 	var temp3 = 0.5 * B1 * temp1
@@ -176,8 +176,7 @@ task flux_quad_GxIV(nx : double, ny : double, u1 : double, u2 : double, rho : do
 	G[2] = rho * temp1 * temp2
 
 	temp1 = ((7 * pr_by_rho) + u_sqr)
-	temp2 = 0.5 * ut * ((7 * pr_by_rho) + u_sqr)
-* A1neg
+	temp2 = 0.5 * ut * ((7 * pr_by_rho) + u_sqr) * A1neg
 	temp1 = (6 * pr_by_rho) + u_sqr
 	var temp3 = 0.5 * B1 * temp1
 	temp1 = ut * A1neg - B1

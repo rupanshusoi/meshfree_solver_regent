@@ -135,8 +135,8 @@ do
 	var max_res : double = 0
 	var sum_res_sqr : double = 0
 
-	var obt : double = 1 / 3
-	var tbt : double = 2 / 3
+	var obt : double = 1.0 / 3.0
+	var tbt : double = 2.0 / 3.0
 	
 	var itm : int
 	for i = 0, 48738 do
@@ -302,7 +302,7 @@ do
 		end
 	end
 
-	var res_new = Cmath.sqrt(sum_res_sqr) / 48738
+	var res_new : double = Cmath.sqrt(sum_res_sqr) / 48738.0
 	var residue : double	
 	if iter <= 2 then
 		res_old = res_new
@@ -313,7 +313,7 @@ do
 	
 	-- todo : put file writing here
 	C.printf("\x1b[32m \n\nIteration number: %d, %d\n", iter, rk)
-	C.printf("Residue: %0.15lf\n\n \x1b[0m", residue)
+	C.printf("Residue: %0.15lf\n \x1b[0m", residue)
 
 	return res_old
 end

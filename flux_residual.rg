@@ -7,7 +7,7 @@ require "interior_fluxes"
 local C = regentlib.c
 
 terra printArr(a : double[4])
-	C.printf("[%lf, %lf, %lf, %lf]\n", a[0], a[1], a[2], a[3])
+	C.printf("[%0.13lf, %0.13lf, %0.13lf, %0.13lf]\n", a[0], a[1], a[2], a[3])
 end
 
 task cal_flux_residual(globaldata : region(ispace(int1d), Point), wallindices : region(ispace(int1d), int), outerindices : region(ispace(int1d), int), interiorindices : region(ispace(int1d), int))
@@ -57,13 +57,6 @@ do
 			var Gyp = interior_dGy_pos(globaldata, itm)
 			var Gyn = interior_dGy_neg(globaldata, itm)
 			var GTemp : double[4]
-			if itm == 46053 then
-				C.printf("printing Gxp etc for 46053\n")
-				printArr(Gxp)
-				printArr(Gxn)
-				printArr(Gyp)
-				printArr(Gyn)
-			end
 			for j = 0, 4 do
 				GTemp[j] = Gxp[j] + Gxn[j] + Gyp[j] + Gyn[j]	
 			end

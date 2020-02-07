@@ -117,11 +117,10 @@ task main()
 		connectivity = calculateConnectivity(globaldata, idx)
 		setConnectivity(globaldata, idx, connectivity)
 	end
-
-	var res_old = 0
+	var res_old : double = 0.0
 
 	C.printf("Starting FPI solver\n")
-	fpi_solver(3 + 1, globaldata, wallptsidx, outerptsidx, interiorptsidx, 0)
+	fpi_solver(5 + 1, globaldata, wallptsidx, outerptsidx, interiorptsidx, res_old)
 
 end
 regentlib.start(main)
