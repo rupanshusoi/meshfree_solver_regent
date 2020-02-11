@@ -30,9 +30,9 @@ task main()
 	var outerpts = 0
 	var interiorpts = 0
 	
-	var wallptsidx = region(ispace(int1d, 48738), int)
-	var outerptsidx = region(ispace(int1d, 48738), int)
-	var interiorptsidx = region(ispace(int1d, 48738), int)
+	var wallptsidx = region(ispace(int1d, size), int)
+	var outerptsidx = region(ispace(int1d, size), int)
+	var interiorptsidx = region(ispace(int1d, size), int)
 
 	fill(wallptsidx, 0)
 	fill(outerptsidx, 0)
@@ -83,7 +83,7 @@ task main()
 	var normals : double[2]
 
 	C.printf("Setting normals\n")
-	for count = 0, 48738 do
+	for count = 0, size do
 		idx = count 
 		idx = wallptsidx[idx]
 		if idx == 0 then
@@ -96,7 +96,7 @@ task main()
 			setNormals(globaldata, idx, normals)
 		end
 	end
-	for count = 0, 48738 do
+	for count = 0, size do
 		idx = count
 		idx = outerptsidx[idx]
 		if idx == 0 then
@@ -120,7 +120,7 @@ task main()
 	var res_old : double = 0.0
 
 	C.printf("Starting FPI solver\n")
-	fpi_solver(5 + 1, globaldata, wallptsidx, outerptsidx, interiorptsidx, res_old)
+	fpi_solver(5 + 1, globaldata, wallptsidx, outerptsidx, interiorptsidx, res_old, size)
 
 end
 regentlib.start(main)

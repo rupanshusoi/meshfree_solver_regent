@@ -128,7 +128,7 @@ task conserved_vector_Ubar(globaldata : region(ispace(int1d), Point), itm : int,
 	return Ubar
 end
 
-task state_update(globaldata : region(ispace(int1d), Point), wallindices : region(ispace(int1d), int), outerindices : region(ispace(int1d), int), interiorindices : region(ispace(int1d), int), iter : int, rk : int, eu : int, res_old : double)
+task state_update(globaldata : region(ispace(int1d), Point), wallindices : region(ispace(int1d), int), outerindices : region(ispace(int1d), int), interiorindices : region(ispace(int1d), int), iter : int, rk : int, eu : int, res_old : double, size : int)
 where
 	reads(wallindices, outerindices, interiorindices, globaldata.{nx, ny, prim, prim_old, delta, flux_res}), writes(globaldata.prim)
 do
@@ -139,7 +139,7 @@ do
 	var tbt : double = 2.0 / 3.0
 	
 	var itm : int
-	for i = 0, 48738 do
+	for i = 0, size do
 		itm = wallindices[i]
 		if itm == 0 then
 			break
@@ -199,7 +199,7 @@ do
 		end
 	end
 
-	for i = 0, 48738 do
+	for i = 0, size do
 		itm = outerindices[i]
 		if itm == 0 then
 			break
@@ -246,7 +246,7 @@ do
 		end
 	end
 
-	for i = 0, 48738 do
+	for i = 0, size do
 		itm = interiorindices[i]
 		if itm == 0 then
 			break
@@ -302,7 +302,7 @@ do
 		end
 	end
 
-	var res_new : double = Cmath.sqrt(sum_res_sqr) / 48738.0
+	var res_new : double = Cmath.sqrt(sum_res_sqr) / 9600.0
 	var residue : double	
 	if iter <= 2 then
 		res_old = res_new

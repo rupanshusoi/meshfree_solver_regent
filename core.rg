@@ -250,7 +250,7 @@ end
 
 -- qtilde_to_primitive moved to outer_fluxes due to circular import error
 
-task fpi_solver(iter : int, globaldata : region(ispace(int1d), Point), wallindices : region(ispace(int1d), int), outerindices : region(ispace(int1d), int), interiorindices : region(ispace(int1d), int), res_old : double)
+task fpi_solver(iter : int, globaldata : region(ispace(int1d), Point), wallindices : region(ispace(int1d), int), outerindices : region(ispace(int1d), int), interiorindices : region(ispace(int1d), int), res_old : double, size : int)
 where
 	reads (outerindices, interiorindices, wallindices, globaldata), writes(globaldata)
 do
@@ -258,11 +258,11 @@ do
 	var eu : int = 1
 
 	for i = 1, iter do
-		func_delta(globaldata, 48738)
+		func_delta(globaldata, size)
 		for rk = 1, rks do
-			q_var_derivatives(globaldata, 48738)
-			cal_flux_residual(globaldata, wallindices, outerindices, interiorindices)
-			res_old = state_update(globaldata, wallindices, outerindices, interiorindices, i, rk, eu, res_old)
+			q_var_derivatives(globaldata, size)
+			cal_flux_residual(globaldata, wallindices, outerindices, interiorindices, size)
+			res_old = state_update(globaldata, wallindices, outerindices, interiorindices, i, rk, eu, res_old, size)
 			--todo: file writing here
 			-- creating dump files
 		end

@@ -10,12 +10,12 @@ terra printArr(a : double[4])
 	C.printf("[%0.13lf, %0.13lf, %0.13lf, %0.13lf]\n", a[0], a[1], a[2], a[3])
 end
 
-task cal_flux_residual(globaldata : region(ispace(int1d), Point), wallindices : region(ispace(int1d), int), outerindices : region(ispace(int1d), int), interiorindices : region(ispace(int1d), int))
+task cal_flux_residual(globaldata : region(ispace(int1d), Point), wallindices : region(ispace(int1d), int), outerindices : region(ispace(int1d), int), interiorindices : region(ispace(int1d), int), size : int)
 where
 	reads(wallindices, outerindices, interiorindices, globaldata), writes(globaldata)
 do
 	var itm : int
-	for i = 0, 48738 do
+	for i = 0, size do
 		itm = wallindices[i]
 		if itm == 0 then
 			break
@@ -31,7 +31,7 @@ do
 		end
 	end	
 
-	for i = 0, 48738 do
+	for i = 0, size do
 		itm = outerindices[i]
 		if itm == 0 then
 			break
@@ -47,7 +47,7 @@ do
 		end
 	end	
 
-	for i = 0, 48738 do
+	for i = 0, size do
 		itm = interiorindices[i]
 		if itm == 0 then
 			break
