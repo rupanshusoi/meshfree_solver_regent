@@ -7,6 +7,7 @@ terra printArr(a : double[4])
         C.printf("[%0.15lf, %0.15lf, %0.15lf, %0.15lf]\n", a[0], a[1], a[2], a[3])
 end
 
+__demand(__inline)
 task flux_quad_GxI(nx : double, ny : double, u1 : double, u2 : double, rho : double, pr : double)
 
 	var G : double[4]
@@ -50,6 +51,7 @@ task flux_quad_GxI(nx : double, ny : double, u1 : double, u2 : double, rho : dou
 
 end
 
+__demand(__inline)
 task flux_quad_GxII(nx : double, ny : double, u1 : double, u2 : double, rho : double, pr : double)
 
 	var G : double[4]
@@ -96,6 +98,8 @@ task flux_quad_GxII(nx : double, ny : double, u1 : double, u2 : double, rho : do
 	return G
 
 end
+
+__demand(__inline)
 task flux_quad_GxIII(nx : double, ny : double, u1 : double, u2 : double, rho : double, pr : double)
 
 	var G : double[4]
@@ -143,6 +147,7 @@ task flux_quad_GxIII(nx : double, ny : double, u1 : double, u2 : double, rho : d
 
 end
 	
+__demand(__inline)
 task flux_quad_GxIV(nx : double, ny : double, u1 : double, u2 : double, rho : double, pr : double)
 
 	var G : double[4]

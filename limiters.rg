@@ -3,15 +3,16 @@ require "point"
 
 local Cmath = terralib.includec("math.h")
 
-task venkat_limiter(qtilde : double[4], globaldata : region(ispace(int1d), Point), idx : int)
+__demand(__inline)
+task venkat_limiter(qtilde : double[4], pgp : region(ispace(int1d), Point), idx : int)
 where
-	reads(globaldata.{q, maxq, minq, min_dist})
+	reads(pgp.{q, min_dist, minq, maxq})
 do
 	var VL_CONST : int = 150
 	var phi : double[4]
 	var count : int = 0
 	for i = 0, 4 do
-		var q = globaldata[idx].q[i]
+		var q = pgp[idx].q[i]
 		var del_neg = qtilde[i] - q
 		var del_pos : double
 		if Cmath.fabs(del_neg) <= 1e-5 then
@@ -19,14 +20,14 @@ do
 			count += 1
 		else
 			if del_neg > 0 then
-				var max_q = globaldata[idx].maxq[i]
+				var max_q = pgp[idx].maxq[i]
 				del_pos = max_q - q
 			elseif del_neg < 0 then
-				var min_q = globaldata[idx].minq[i]
+				var min_q = pgp[idx].minq[i]
 				del_pos = min_q - q
 			end			
 		
-			var ds = globaldata[idx].min_dist
+			var ds = pgp[idx].min_dist
 			var epsi = VL_CONST * ds
 			epsi = Cmath.pow(epsi, 3)
 		

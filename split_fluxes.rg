@@ -3,6 +3,7 @@ import "regent"
 local C = regentlib.c
 local Cmath = terralib.includec("math.h")
 
+__demand(__inline)
 task flux_Gxp(nx : double, ny : double, u1 : double, u2 : double, rho : double, pr : double)
 	var Gxp : double[4]
 
@@ -38,6 +39,7 @@ task flux_Gxp(nx : double, ny : double, u1 : double, u2 : double, rho : double, 
 	return Gxp
 end
 
+__demand(__inline)
 task flux_Gxn(nx : double, ny : double, u1 : double, u2 : double, rho : double, pr : double)
 	var Gxn : double[4]
 
@@ -73,6 +75,7 @@ task flux_Gxn(nx : double, ny : double, u1 : double, u2 : double, rho : double, 
 	return Gxn
 end
 
+__demand(__inline)
 task flux_Gyp(nx : double, ny : double, u1 : double, u2 : double, rho : double, pr : double)
 	var Gyp : double[4]
 
@@ -108,6 +111,7 @@ task flux_Gyp(nx : double, ny : double, u1 : double, u2 : double, rho : double, 
 	return Gyp
 end
 
+__demand(__inline)
 task flux_Gyn(nx : double, ny : double, u1 : double, u2 : double, rho : double, pr : double)
 	var Gyn : double[4]
 

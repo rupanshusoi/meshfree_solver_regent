@@ -2,6 +2,12 @@ import "regent"
 
 local C = regentlib.c
 
+fspace Edge
+{
+	in_ptr : int1d;
+	out_ptr : int1d;
+}
+
 struct Point
 {
 	localID : int;
@@ -54,7 +60,8 @@ end
 
 task setConnectivity(globaldata : region(ispace(int1d), Point), idx : int, bigarr : int[80])
 where
-	reads(globaldata.{localID, xpos_conn}), writes(globaldata.{xpos_conn, xneg_conn, ypos_conn, yneg_conn, xpos_nbhs, xneg_nbhs, ypos_nbhs, yneg_nbhs})
+	writes(globaldata.{xpos_conn, xneg_conn, ypos_conn, yneg_conn, 
+			   xpos_nbhs, xneg_nbhs, ypos_nbhs, yneg_nbhs})
 do
 
 	var xpos : int[20]
