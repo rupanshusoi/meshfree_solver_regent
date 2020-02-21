@@ -7,7 +7,7 @@ local C = regentlib.c
 local Cmath = terralib.includec("math.h")
 
 __demand(__inline)
-task interior_dGx_pos(pgp : region(ispace(int1d), Point), idx : int)
+task interior_dGx_pos(pgp : region(ispace(int1d), Point), idx : int, config : Config)
 where 
 	reads(pgp.{x, y, nx, ny, xpos_conn, q, dq0, dq1, min_dist, minq, maxq})
 do
@@ -67,8 +67,8 @@ do
 				qtilde_k[i] = pgp[itm].q[i] - 0.5 * (delx * pgp[itm].dq0[i] + dely * pgp[itm].dq1[i])
 			end
 						
-			var phi_i = venkat_limiter(qtilde_i, pgp, idx)
-			var phi_k = venkat_limiter(qtilde_k, pgp, itm)
+			var phi_i = venkat_limiter(qtilde_i, pgp, idx, config)
+			var phi_k = venkat_limiter(qtilde_k, pgp, itm, config)
 			
 			for i = 0, 4 do
 				qtilde_i[i] = pgp[idx].q[i] - 0.5 * phi_i[i] * (delx * pgp[idx].dq0[i] + dely * pgp[idx].dq1[i])
@@ -96,7 +96,7 @@ do
 end
 
 __demand(__inline)
-task interior_dGx_neg(pgp : region(ispace(int1d), Point), idx : int)
+task interior_dGx_neg(pgp : region(ispace(int1d), Point), idx : int, config : Config)
 where 
 	reads(pgp.{x, y, nx, ny, xneg_conn, q, dq0, dq1, min_dist, minq, maxq})
 do
@@ -156,8 +156,8 @@ do
 				qtilde_k[i] = pgp[itm].q[i] - 0.5 * (delx * pgp[itm].dq0[i] + dely * pgp[itm].dq1[i])
 			end
 						
-			var phi_i = venkat_limiter(qtilde_i, pgp, idx)
-			var phi_k = venkat_limiter(qtilde_k, pgp, itm)
+			var phi_i = venkat_limiter(qtilde_i, pgp, idx, config)
+			var phi_k = venkat_limiter(qtilde_k, pgp, itm, config)
 			
 			for i = 0, 4 do
 				qtilde_i[i] = pgp[idx].q[i] - 0.5 * phi_i[i] * (delx * pgp[idx].dq0[i] + dely * pgp[idx].dq1[i])
@@ -185,7 +185,7 @@ do
 end
 
 __demand(__inline)
-task interior_dGy_pos(pgp : region(ispace(int1d), Point), idx : int)
+task interior_dGy_pos(pgp : region(ispace(int1d), Point), idx : int, config : Config)
 where 
 	reads(pgp.{x, y, nx, ny, ypos_conn, q, dq0, dq1, min_dist, minq, maxq})
 do
@@ -245,8 +245,8 @@ do
 				qtilde_k[i] = pgp[itm].q[i] - 0.5 * (delx * pgp[itm].dq0[i] + dely * pgp[itm].dq1[i])
 			end
 						
-			var phi_i = venkat_limiter(qtilde_i, pgp, idx)
-			var phi_k = venkat_limiter(qtilde_k, pgp, itm)
+			var phi_i = venkat_limiter(qtilde_i, pgp, idx, config)
+			var phi_k = venkat_limiter(qtilde_k, pgp, itm, config)
 			
 			for i = 0, 4 do
 				qtilde_i[i] = pgp[idx].q[i] - 0.5 * phi_i[i] * (delx * pgp[idx].dq0[i] + dely * pgp[idx].dq1[i])
@@ -274,7 +274,7 @@ do
 end
 
 __demand(__inline)
-task interior_dGy_neg(pgp : region(ispace(int1d), Point), idx : int)
+task interior_dGy_neg(pgp : region(ispace(int1d), Point), idx : int, config : Config)
 where 
 	reads(pgp.{x, y, nx, ny, yneg_conn, q, dq0, dq1, min_dist, minq, maxq})
 do
@@ -334,8 +334,8 @@ do
 				qtilde_k[i] = pgp[itm].q[i] - 0.5 * (delx * pgp[itm].dq0[i] + dely * pgp[itm].dq1[i])
 			end
 						
-			var phi_i = venkat_limiter(qtilde_i, pgp, idx)
-			var phi_k = venkat_limiter(qtilde_k, pgp, itm)
+			var phi_i = venkat_limiter(qtilde_i, pgp, idx, config)
+			var phi_k = venkat_limiter(qtilde_k, pgp, itm, config)
 			
 			for i = 0, 4 do
 				qtilde_i[i] = pgp[idx].q[i] - 0.5 * phi_i[i] * (delx * pgp[idx].dq0[i] + dely * pgp[idx].dq1[i])

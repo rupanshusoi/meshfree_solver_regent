@@ -1,14 +1,15 @@
 import "regent"
+require "config"
 require "point"
 
 local Cmath = terralib.includec("math.h")
 
 __demand(__inline)
-task venkat_limiter(qtilde : double[4], pgp : region(ispace(int1d), Point), idx : int)
+task venkat_limiter(qtilde : double[4], pgp : region(ispace(int1d), Point), idx : int, config : Config)
 where
 	reads(pgp.{q, min_dist, minq, maxq})
 do
-	var VL_CONST : int = 150
+	var VL_CONST = config.vl_const
 	var phi : double[4]
 	var count : int = 0
 	for i = 0, 4 do

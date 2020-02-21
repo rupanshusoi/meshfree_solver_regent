@@ -1,4 +1,5 @@
 import "regent"
+require "config"
 require "point"
 require "core"
 
@@ -9,17 +10,17 @@ terra pprint(a : double[4])
 	C.printf("[\x1b[33m %0.15lf, %0.15lf, %0.15lf, %0.15lf]\n \x1b[0m", a[0], a[1], a[2], a[3])
 end
 
-task blocker(r : region(ispace(int1d), Point))
-where reads writes(r) do
-end
-
 task main()
 	var file = C.fopen("partGrid40K", "r")
+
 	var size : int
 	C.fscanf(file, "%d", &size)
 	
+	var config : Config
+	config : initConfig(size)
+
 	var globaldata = region(ispace(int1d, size + 1), Point)	
-	var edges = region(ispace(int1d, 393993 + 1), Edge)
+	var edges = region(ispace(int1d, config.totalnbhs + 1), Edge)
 	
 	var defprimal = getInitialPrimitive()
 	
@@ -79,7 +80,7 @@ task main()
 	
 	-- making partitions
 
-	var points_equal = partition(equal, globaldata, ispace(int1d, 15))
+	var points_equal = partition(equal, globaldata, ispace(int1d, config.partitions))
 	var edges_out = preimage(edges, points_equal, edges.in_ptr)
 	var points_out = image(globaldata, edges_out, edges.out_ptr)
 	var points_ghost = points_out - points_equal
@@ -119,8 +120,8 @@ task main()
 
 	var res_old : double = 0.0
 	var eu : int = 1
-	var rks : int = 5
-	var iter : int = 4
+	var rks : int = config.rks
+	var iter : int = config.iter
 
 	C.printf("Starting FPI solver\n")
 	
@@ -129,7 +130,8 @@ task main()
 	for i = 1, iter do	
 		__demand(__index_launch)
 		for color in points_equal.colors do
-			func_delta(points_equal[color], points_allnbhs[color])
+			func_delta(points_equal[color], points_allnbhs[color],
+				   config)
 		end
 		for rk = 1, rks do
 			__demand(__index_launch)
@@ -139,16 +141,23 @@ task main()
 
 			__demand(__index_launch)
 			for color in points_equal.colors do
-				setdq(points_equal[color], points_allnbhs[color])
+				setdq(points_equal[color], points_allnbhs[color],
+				      config)
 			end
 			
 			__demand(__index_launch)
 			for color in points_equal.colors do
-				cal_flux_residual(points_equal[color], points_allnbhs[color])
+				cal_flux_residual(points_equal[color], points_allnbhs[color], config)
 			end
 
-			var sum_res_sqr = state_update(globaldata, i, rk, eu, res_old)
-			var res_new : double = Cmath.sqrt(sum_res_sqr) / 48738.0
+			var sum_res_sqr : double = 0.0
+
+			__demand(__index_launch)
+			for color in points_equal.colors do
+				sum_res_sqr += state_update(points_equal[color], i, rk, eu, res_old)
+			end
+
+			var res_new : double = Cmath.sqrt(sum_res_sqr)/config.size
 			var residue : double
 			if i <= 2 then
 				res_old = res_new

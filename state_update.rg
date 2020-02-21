@@ -1,5 +1,6 @@
 import "regent"
 require "point"
+require "config"
 
 local C = regentlib.c
 local Cmath = terralib.includec("math.h")
@@ -9,12 +10,13 @@ terra pprint(a : double[4])
 end
 
 task func_delta(ppr : region(ispace(int1d), Point), 
-		pgp : region(ispace(int1d), Point))
+		pgp : region(ispace(int1d), Point),
+		config : Config)
 where
 	reads(pgp.{x, y, prim, conn}, ppr.{x, y, prim, conn}), 
 	writes(ppr.{delta, prim_old})
 do
-	var cfl : double = 0.2
+	var cfl = config.cfl
 	for point in ppr do
 		var min_delt : double = 1
 		point.prim_old = point.prim
@@ -132,9 +134,11 @@ task conserved_vector_Ubar(nx : double, ny : double, prim : double[4])
 	return Ubar
 end
 
-task state_update(pe : region(ispace(int1d), Point), iter : int, rk : int, eu : int, res_old : double)
+task state_update(pe : region(ispace(int1d), Point), iter : int, rk : int, 
+		  eu : int, res_old : double)
 where
-	reads(pe.{localID, flag_1, nx, ny, prim, prim_old, delta, flux_res}), writes(pe.prim)
+	reads(pe.{localID, flag_1, nx, ny, prim, prim_old, delta, flux_res}), 
+	writes(pe.prim)
 do
 	var max_res : double = 0.0
 	var sum_res_sqr : double = 0.0
@@ -291,21 +295,4 @@ do
 	end
 
 	return sum_res_sqr
-	--[[
-	var res_new : double = Cmath.sqrt(sum_res_sqr) / 48738.0
-	var residue : double	
-	if iter <= 2 then
-		res_old = res_new
-		residue = 0
-	else
-		residue = Cmath.log10(res_new / res_old)
-	end
-	
-	C.printf("Sum %0.13lf\n", sum_res_sqr)
-	-- todo : put file writing here
-	C.printf("\x1b[32m\nIteration number: %d, %d\n", iter, rk)
-	C.printf("Residue: %0.15lf\n \x1b[0m", residue)
-
-	return res_old
-	--]]
 end

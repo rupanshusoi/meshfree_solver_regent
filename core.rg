@@ -1,4 +1,5 @@
 import "regent"
+require "config"
 require "point"
 require "state_update"
 require "flux_residual"
@@ -151,12 +152,13 @@ do
 end
 
 task setdq(ppr : region(ispace(int1d), Point), 
-	   pgp : region(ispace(int1d), Point))
+	   pgp : region(ispace(int1d), Point),
+	   config : Config)
 where
 	reads(ppr.{x, y, q, localID, conn}, pgp.{x, y, q}), 
 	writes(ppr.{dq0, dq1, minq, maxq})
 do
-	var power : double = 0.0
+	var power = config.power
 
 	for itm in ppr do
 		if itm.localID > 0 then

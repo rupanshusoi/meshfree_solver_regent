@@ -1,24 +1,19 @@
 import "regent"
+require "config"
 require "point"
-require "outer_fluxes" -- for qtilde_to_primitive
-require "limiters"
+require "outer_fluxes"
 require "quadrant_fluxes"
 require "split_fluxes"
+require "limiters"
 
-local C = regentlib.c
 local Cmath = terralib.includec("math.h")
 
-terra pprint(a : double[4])
-        C.printf("[%0.15lf, %0.15lf, %0.15lf, %0.15lf]\n", a[0], a[1], a[2], a[3])
-end
-
 __demand(__inline)
-task wall_dGx_pos(pnbh : region(ispace(int1d), Point), idx : int)
+task wall_dGx_pos(pnbh : region(ispace(int1d), Point), idx : int, config : Config)
 where 
 	reads(pnbh.{x, y, nx, ny, xpos_conn, q, dq0, dq1, min_dist, minq, maxq})
 do
-	var power : int = 0
-	var limiter_flag : int = 1
+	var power = config.power
 
 	var sum_delx_sqr : double = 0.0
     	var sum_dely_sqr : double = 0.0
@@ -75,8 +70,8 @@ do
 				qtilde_k[i] = pnbh[itm].q[i] - 0.5 * (delx * pnbh[itm].dq0[i] + dely * pnbh[itm].dq1[i])
 			end
 
-			var phi_i = venkat_limiter(qtilde_i, pnbh, idx)
-			var phi_k = venkat_limiter(qtilde_k, pnbh, itm)
+			var phi_i = venkat_limiter(qtilde_i, pnbh, idx, config)
+			var phi_k = venkat_limiter(qtilde_k, pnbh, itm, config)
 
 			for i = 0, 4 do
 				qtilde_i[i] = pnbh[idx].q[i] - 0.5 * phi_i[i] * (delx * pnbh[idx].dq0[i] + dely * pnbh[idx].dq1[i])
@@ -106,12 +101,11 @@ do
 end
 
 __demand(__inline)
-task wall_dGx_neg(pnbh : region(ispace(int1d), Point), idx : int)
+task wall_dGx_neg(pnbh : region(ispace(int1d), Point), idx : int, config : Config)
 where 
 	reads(pnbh.{x, y, nx, ny, xneg_conn, q, dq0, dq1, min_dist, minq, maxq})
 do
-	var power : int = 0
-	var limiter_flag : int = 1
+	var power = config.power
 
 	var sum_delx_sqr : double = 0.0
     	var sum_dely_sqr : double = 0.0
@@ -166,8 +160,8 @@ do
 				qtilde_k[i] = pnbh[itm].q[i] - 0.5 * (delx * pnbh[itm].dq0[i] + dely * pnbh[itm].dq1[i])
 			end
 						
-			var phi_i = venkat_limiter(qtilde_i, pnbh, idx)
-			var phi_k = venkat_limiter(qtilde_k, pnbh, itm)
+			var phi_i = venkat_limiter(qtilde_i, pnbh, idx, config)
+			var phi_k = venkat_limiter(qtilde_k, pnbh, itm, config)
 			
 			for i = 0, 4 do
 				qtilde_i[i] = pnbh[idx].q[i] - 0.5 * phi_i[i] * (delx * pnbh[idx].dq0[i] + dely * pnbh[idx].dq1[i])
@@ -195,12 +189,11 @@ do
 end
 
 __demand(__inline)
-task wall_dGy_neg(pnbh : region(ispace(int1d), Point), idx : int)
+task wall_dGy_neg(pnbh : region(ispace(int1d), Point), idx : int, config : Config)
 where 
 	reads(pnbh.{x, y, nx, ny, yneg_conn, q, dq0, dq1, min_dist, minq, maxq})
 do
-	var power : int = 0
-	var limiter_flag : int = 1
+	var power = config.power
 
 	var sum_delx_sqr : double = 0.0
     	var sum_dely_sqr : double = 0.0
@@ -255,8 +248,8 @@ do
 				qtilde_k[i] = pnbh[itm].q[i] - 0.5 * (delx * pnbh[itm].dq0[i] + dely * pnbh[itm].dq1[i])
 			end
 						
-			var phi_i = venkat_limiter(qtilde_i, pnbh, idx)
-			var phi_k = venkat_limiter(qtilde_k, pnbh, itm)
+			var phi_i = venkat_limiter(qtilde_i, pnbh, idx, config)
+			var phi_k = venkat_limiter(qtilde_k, pnbh, itm, config)
 			
 			for i = 0, 4 do
 				qtilde_i[i] = pnbh[idx].q[i] - 0.5 * phi_i[i] * (delx * pnbh[idx].dq0[i] + dely * pnbh[idx].dq1[i])
