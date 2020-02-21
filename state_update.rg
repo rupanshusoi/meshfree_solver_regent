@@ -144,163 +144,156 @@ do
 	
 	var itm : int
 
+	C.printf("First Sum %lf\n", sum_res_sqr)
+
 	for point in pe do
-		if point.flag_1 == 0 then
-			var nx = point.nx
-			var ny = point.ny
-			var Utemp : double[4] = primitive_to_conserved(nx, ny, point.prim)
+		if point.localID > 0 then
+			if point.flag_1 == 0 then
+
+				if point.localID == 1 then
+					C.printf("Sum %lf\n", sum_res_sqr)
+				end
+
+				var nx = point.nx
+				var ny = point.ny
+				var Utemp : double[4] = primitive_to_conserved(nx, ny, point.prim)
+					
+				-- making some ugly changes as a workaround to an unfixed
+				-- Regent bug
+
+				var U : double[4]
+				for i = 0, 4 do
+					U[i] = Utemp[i]
+				end
+
+				var U_old : double[4] = primitive_to_conserved(nx, ny, point.prim_old)
+				var temp = U[0]
+
+				if rk == 1 or rk == 2 or rk == 4 then
+					for j = 0, 4 do
+						U[j] = U[j] - (0.5 * eu * point.delta * point.flux_res[j])
+					end
+				else
+					for j = 0, 4 do
+						U[j] = (tbt * U_old[j]) + obt * (U[j] - (0.5 * point.delta * point.flux_res[j]))
+					end	
+				end
+
+				U[2] = 0	
+				var U2_rot = U[1]
+				var U3_rot = U[2]
 				
-			-- making some ugly changes as a workaround to an unfixed
-			-- Regent bug
+				U[1] = U2_rot * ny + U3_rot * nx
+				U[2] = U3_rot * ny - U2_rot * nx
+				
+				var res_sqr = (U[0] - temp) * (U[0] - temp)
+	--[[
+				if res_sqr > max_res then
 
-			var U : double[4]
-			for i = 0, 4 do
-				U[i] = Utemp[i]
-			end
-
-			var U_old : double[4] = primitive_to_conserved(nx, ny, point.prim_old)
-			var temp = U[0]
-
-			if rk == 1 or rk == 2 or rk == 4 then
-				for j = 0, 4 do
-					U[j] = U[j] - (0.5 * eu * point.delta * point.flux_res[j])
+					max_res = res_sqr
+					var max_res_point = itm
 				end
-			else
-				for j = 0, 4 do
-					U[j] = (tbt * U_old[j]) + obt * (U[j] - (0.5 * point.delta * point.flux_res[j]))
-				end	
+	--]]
+				sum_res_sqr = sum_res_sqr + res_sqr
+				
+				var tempU : double[4]
+				tempU[0] = U[0]
+				temp = 1 / U[0]
+				tempU[1] = U[1] * temp
+				tempU[2] = U[2] * temp
+		
+				tempU[3] = 0.4 * U[3] - ((0.2 * temp) * (U[1] * U[1] + U[2] * U[2]))
+				point.prim = tempU
 			end
+			if point.flag_1 == 1 then
+				var nx = point.nx
+				var ny = point.ny
+				var Utemp : double[4] = primitive_to_conserved(nx, ny, point.prim)
 
-			U[2] = 0	
-			var U2_rot = U[1]
-			var U3_rot = U[2]
-			
-			U[1] = U2_rot * ny + U3_rot * nx
-			U[2] = U3_rot * ny - U2_rot * nx
-			
-			var res_sqr = (U[0] - temp) * (U[0] - temp)
+				-- making some ugly changes as a workaround to an unfixed
+				-- Regent bug
 
-			if point.localID == 1 then
-				C.printf("res_sqr %lf\n", res_sqr)
-			end
-
-			if res_sqr > max_res then
-
-				max_res = res_sqr
-				var max_res_point = itm
-			end
-
-			sum_res_sqr = sum_res_sqr + res_sqr
-
-			if point.localID == 1 then
-				C.printf("Sum %lf\n", sum_res_sqr)
-			end
-			
-			var tempU : double[4]
-			tempU[0] = U[0]
-			temp = 1 / U[0]
-			tempU[1] = U[1] * temp
-			tempU[2] = U[2] * temp
-	
-			tempU[3] = 0.4 * U[3] - ((0.2 * temp) * (U[1] * U[1] + U[2] * U[2]))
-			point.prim = tempU
-		end
-		if point.flag_1 == 1 then
-			var nx = point.nx
-			var ny = point.ny
-			var Utemp : double[4] = primitive_to_conserved(nx, ny, point.prim)
-
-			-- making some ugly changes as a workaround to an unfixed
-			-- Regent bug
-
-			var U : double[4]
-			for i = 0, 4 do
-				U[i] = Utemp[i]
-			end
-
-			var U_old : double[4] = primitive_to_conserved(nx, ny, point.prim_old)
-			var temp = U[0]
-
-			if rk == 1 or rk == 2 or rk == 4 then
-				for j = 0, 4 do
-					U[j] = U[j] - (0.5 * eu * point.delta * point.flux_res[j])
+				var U : double[4]
+				for i = 0, 4 do
+					U[i] = Utemp[i]
 				end
-			else
-				for j = 0, 4 do
-					U[j] = (tbt * U_old[j]) + obt * (U[j] - (0.5 * point.delta * point.flux_res[j]))
-				end	
-			end
-			
-			var U2_rot = U[1]
-			var U3_rot = U[2]
-			U[1] = U2_rot * ny + U3_rot * nx
-			U[2] = U3_rot * ny - U2_rot * nx
 
-			var res_sqr = (U[0] - temp) * (U[0] - temp)
+				var U_old : double[4] = primitive_to_conserved(nx, ny, point.prim_old)
+				var temp = U[0]
 
-			if point.localID == 1700 then
-				C.printf("res_sqr %lf\n", res_sqr)
-			end
-
-			if res_sqr > max_res then
-
-				max_res = res_sqr
-				var max_res_point = itm
-			end
-
-			sum_res_sqr = sum_res_sqr + res_sqr
-
-			if point.localID == 1700 then
-				C.printf("Sum %lf\n", sum_res_sqr)
-			end
-			
-			var tempU : double[4]
-			tempU[0] = U[0]
-			temp = 1 / U[0]
-			tempU[1] = U[1] * temp
-			tempU[2] = U[2] * temp
-			tempU[3] = 0.4 * U[3] - ((0.2 * temp) * (U[1] * U[1] + U[2] * U[2]))
-			point.prim = tempU
-		end
-		if point.flag_1 == 2 then
-			var nx = point.nx
-			var ny = point.ny
-			var Utemp : double[4] = conserved_vector_Ubar(nx, ny, point.prim)
-			
-			-- making some ugly changes as a workaround to an unfixed
-			-- Regent bug
-
-			var U: double[4]
-			for i = 0, 4 do
-				U[i] = Utemp[i]
-			end
-
-			var U_old : double[4] = conserved_vector_Ubar(nx, ny, point.prim_old)
-			var temp = U[0]
-
-			if rk == 1 or rk == 2 or rk == 4 then
-				for j = 0, 4 do
-					U[j] = U[j] - (0.5 * eu * point.delta * point.flux_res[j])
+				if rk == 1 or rk == 2 or rk == 4 then
+					for j = 0, 4 do
+						U[j] = U[j] - (0.5 * eu * point.delta * point.flux_res[j])
+					end
+				else
+					for j = 0, 4 do
+						U[j] = (tbt * U_old[j]) + obt * (U[j] - (0.5 * point.delta * point.flux_res[j]))
+					end	
 				end
-			else
-				for j = 0, 4 do
-					U[j] = (tbt * U_old[j]) + obt * (U[j] - (0.5 * point.delta * point.flux_res[j]))
-				end	
+				
+				var U2_rot = U[1]
+				var U3_rot = U[2]
+				U[1] = U2_rot * ny + U3_rot * nx
+				U[2] = U3_rot * ny - U2_rot * nx
+
+				var res_sqr = (U[0] - temp) * (U[0] - temp)
+
+				if res_sqr > max_res then
+
+					max_res = res_sqr
+					var max_res_point = itm
+				end
+
+				sum_res_sqr = sum_res_sqr + res_sqr
+				
+				var tempU : double[4]
+				tempU[0] = U[0]
+				temp = 1 / U[0]
+				tempU[1] = U[1] * temp
+				tempU[2] = U[2] * temp
+				tempU[3] = 0.4 * U[3] - ((0.2 * temp) * (U[1] * U[1] + U[2] * U[2]))
+				point.prim = tempU
 			end
-			
-			var U2_rot = U[1]
-			var U3_rot = U[2]
-			U[1] = U2_rot * ny + U3_rot * nx
-			U[2] = U3_rot * ny - U2_rot * nx
+			if point.flag_1 == 2 then
+				var nx = point.nx
+				var ny = point.ny
+				var Utemp : double[4] = conserved_vector_Ubar(nx, ny, point.prim)
+				
+				-- making some ugly changes as a workaround to an unfixed
+				-- Regent bug
 
-			var tempU : double[4]
-			tempU[0] = U[0]
-			temp = 1 / U[0]
-			tempU[1] = U[1] * temp
-			tempU[2] = U[2] * temp
+				var U: double[4]
+				for i = 0, 4 do
+					U[i] = Utemp[i]
+				end
 
-			tempU[3] = 0.4 * U[3] - ((0.2 * temp) * (U[1] * U[1] + U[2] * U[2]))
-			point.prim = tempU
+				var U_old : double[4] = conserved_vector_Ubar(nx, ny, point.prim_old)
+				var temp = U[0]
+
+				if rk == 1 or rk == 2 or rk == 4 then
+					for j = 0, 4 do
+						U[j] = U[j] - (0.5 * eu * point.delta * point.flux_res[j])
+					end
+				else
+					for j = 0, 4 do
+						U[j] = (tbt * U_old[j]) + obt * (U[j] - (0.5 * point.delta * point.flux_res[j]))
+					end	
+				end
+				
+				var U2_rot = U[1]
+				var U3_rot = U[2]
+				U[1] = U2_rot * ny + U3_rot * nx
+				U[2] = U3_rot * ny - U2_rot * nx
+
+				var tempU : double[4]
+				tempU[0] = U[0]
+				temp = 1 / U[0]
+				tempU[1] = U[1] * temp
+				tempU[2] = U[2] * temp
+
+				tempU[3] = 0.4 * U[3] - ((0.2 * temp) * (U[1] * U[1] + U[2] * U[2]))
+				point.prim = tempU
+			end
 		end
 	end
 

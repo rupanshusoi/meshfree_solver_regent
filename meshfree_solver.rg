@@ -118,7 +118,7 @@ task main()
 	var res_old : double = 0.0
 	var eu : int = 1
 	var rks : int = 5
-	var iter : int = 4
+	var iter : int = 200
 
 	C.printf("Starting FPI solver\n")
 	
