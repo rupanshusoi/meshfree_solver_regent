@@ -144,16 +144,9 @@ do
 	
 	var itm : int
 
-	C.printf("First Sum %lf\n", sum_res_sqr)
-
 	for point in pe do
 		if point.localID > 0 then
 			if point.flag_1 == 0 then
-
-				if point.localID == 1 then
-					C.printf("Sum %lf\n", sum_res_sqr)
-				end
-
 				var nx = point.nx
 				var ny = point.ny
 				var Utemp : double[4] = primitive_to_conserved(nx, ny, point.prim)
@@ -297,6 +290,8 @@ do
 		end
 	end
 
+	return sum_res_sqr
+	--[[
 	var res_new : double = Cmath.sqrt(sum_res_sqr) / 48738.0
 	var residue : double	
 	if iter <= 2 then
@@ -306,9 +301,11 @@ do
 		residue = Cmath.log10(res_new / res_old)
 	end
 	
+	C.printf("Sum %0.13lf\n", sum_res_sqr)
 	-- todo : put file writing here
 	C.printf("\x1b[32m\nIteration number: %d, %d\n", iter, rk)
 	C.printf("Residue: %0.15lf\n \x1b[0m", residue)
 
 	return res_old
+	--]]
 end

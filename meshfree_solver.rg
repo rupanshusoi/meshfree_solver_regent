@@ -1,7 +1,9 @@
 import "regent"
 require "point"
 require "core"
+
 local C = regentlib.c
+local Cmath = terralib.includec("math.h")
 
 terra pprint(a : double[4])
 	C.printf("[\x1b[33m %0.15lf, %0.15lf, %0.15lf, %0.15lf]\n \x1b[0m", a[0], a[1], a[2], a[3])
@@ -118,7 +120,7 @@ task main()
 	var res_old : double = 0.0
 	var eu : int = 1
 	var rks : int = 5
-	var iter : int = 200
+	var iter : int = 4
 
 	C.printf("Starting FPI solver\n")
 	
@@ -144,7 +146,18 @@ task main()
 			for color in points_equal.colors do
 				cal_flux_residual(points_equal[color], points_allnbhs[color])
 			end
-			res_old = state_update(globaldata, i, rk, eu, res_old)
+
+			var sum_res_sqr = state_update(globaldata, i, rk, eu, res_old)
+			var res_new : double = Cmath.sqrt(sum_res_sqr) / 48738.0
+			var residue : double
+			if i <= 2 then
+				res_old = res_new
+				residue = 0
+			else
+				residue = Cmath.log10(res_new / res_old)
+			end
+			C.printf("Iteration Number %d, %d\n", i, rk)
+			C.printf("Residue %0.13lf\n", residue)
 		end
 	end
 end
