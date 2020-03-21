@@ -1,7 +1,10 @@
 import "regent"
 
 local C = regentlib.c
-local Cmath = terralib.includec("math.h")
+local sqrt = regentlib.sqrt(double)
+local exp = regentlib.exp(double)
+local erf = regentlib.erf(double)
+local PI = 3.1415926535898
 
 terra printArr(a : double[4])
         C.printf("[%0.15lf, %0.15lf, %0.15lf, %0.15lf]\n", a[0], a[1], a[2], a[3])
@@ -19,12 +22,12 @@ task flux_quad_GxI(nx : double, ny : double, u1 : double, u2 : double, rho : dou
 	var un = u1*nx + u2*ny
 
 	var beta = 0.5 * rho / pr
-	var S1 = ut * Cmath.sqrt(beta)
-	var S2 = un * Cmath.sqrt(beta)
-	var B1 = 0.5 * Cmath.exp(-S1 * S1)/Cmath.sqrt(Cmath.M_PI * beta)
-	var B2 = 0.5 * Cmath.exp(-S2 * S2)/Cmath.sqrt(Cmath.M_PI * beta)
-	var A1neg = 0.5*(1 - Cmath.erf(S1))
-	var A2neg = 0.5*(1 - Cmath.erf(S2))
+	var S1 = ut * sqrt(beta)
+	var S2 = un * sqrt(beta)
+	var B1 = 0.5 * exp(-S1 * S1)/sqrt(PI * beta)
+	var B2 = 0.5 * exp(-S2 * S2)/sqrt(PI * beta)
+	var A1neg = 0.5*(1 - erf(S1))
+	var A2neg = 0.5*(1 - erf(S2))
 	var pr_by_rho = pr / rho
 	var u_sqr = ut * ut + un * un
 
@@ -63,12 +66,12 @@ task flux_quad_GxII(nx : double, ny : double, u1 : double, u2 : double, rho : do
 	var un = u1*nx + u2*ny
 
 	var beta = 0.5 * rho / pr
-	var S1 = ut * Cmath.sqrt(beta)
-	var S2 = un * Cmath.sqrt(beta)
-	var B1 = 0.5 * Cmath.exp(-S1 * S1)/Cmath.sqrt(Cmath.M_PI * beta)
-	var B2 = 0.5 * Cmath.exp(-S2 * S2)/Cmath.sqrt(Cmath.M_PI * beta)
-	var A1pos = 0.5*(1 + Cmath.erf(S1))
-	var A2neg = 0.5*(1 - Cmath.erf(S2))
+	var S1 = ut * sqrt(beta)
+	var S2 = un * sqrt(beta)
+	var B1 = 0.5 * exp(-S1 * S1)/sqrt(PI * beta)
+	var B2 = 0.5 * exp(-S2 * S2)/sqrt(PI * beta)
+	var A1pos = 0.5*(1 + erf(S1))
+	var A2neg = 0.5*(1 - erf(S2))
 
 	var pr_by_rho = pr / rho
 	var u_sqr = ut * ut + un * un
@@ -111,12 +114,12 @@ task flux_quad_GxIII(nx : double, ny : double, u1 : double, u2 : double, rho : d
 	var un = u1*nx + u2*ny
 
 	var beta = 0.5 * rho / pr
-	var S1 = ut * Cmath.sqrt(beta)
-	var S2 = un * Cmath.sqrt(beta)
-	var B1 = 0.5 * Cmath.exp(-S1 * S1)/Cmath.sqrt(Cmath.M_PI * beta)
-	var B2 = 0.5 * Cmath.exp(-S2 * S2)/Cmath.sqrt(Cmath.M_PI * beta)
-	var A1pos = 0.5*(1 + Cmath.erf(S1))
-	var A2pos = 0.5*(1 + Cmath.erf(S2))
+	var S1 = ut * sqrt(beta)
+	var S2 = un * sqrt(beta)
+	var B1 = 0.5 * exp(-S1 * S1)/sqrt(PI * beta)
+	var B2 = 0.5 * exp(-S2 * S2)/sqrt(PI * beta)
+	var A1pos = 0.5*(1 + erf(S1))
+	var A2pos = 0.5*(1 + erf(S2))
 
 	var pr_by_rho = pr / rho
 	var u_sqr = ut * ut + un * un
@@ -159,12 +162,12 @@ task flux_quad_GxIV(nx : double, ny : double, u1 : double, u2 : double, rho : do
 	var un = u1*nx + u2*ny
 
 	var beta = 0.5 * rho / pr
-	var S1 = ut * Cmath.sqrt(beta)
-	var S2 = un * Cmath.sqrt(beta)
-	var B1 = 0.5 * Cmath.exp(-S1 * S1)/Cmath.sqrt(Cmath.M_PI * beta)
-	var B2 = 0.5 * Cmath.exp(-S2 * S2)/Cmath.sqrt(Cmath.M_PI * beta)
-	var A1neg = 0.5*(1 - Cmath.erf(S1))
-	var A2pos = 0.5*(1 + Cmath.erf(S2))
+	var S1 = ut * sqrt(beta)
+	var S2 = un * sqrt(beta)
+	var B1 = 0.5 * exp(-S1 * S1)/sqrt(PI * beta)
+	var B2 = 0.5 * exp(-S2 * S2)/sqrt(PI * beta)
+	var A1neg = 0.5*(1 - erf(S1))
+	var A2pos = 0.5*(1 + erf(S2))
 
 	var pr_by_rho = pr / rho
 	var u_sqr = ut * ut + un * un

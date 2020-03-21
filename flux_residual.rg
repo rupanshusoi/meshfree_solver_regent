@@ -11,6 +11,7 @@ terra pprint(a : double[4])
 	C.printf("[\x1b[33m %0.15lf, %0.15lf, %0.15lf, %0.15lf]\n \x1b[0m", a[0], a[1], a[2], a[3])
 end
 
+__demand(__cuda)
 task cal_flux_residual(pe : region(ispace(int1d), Point),
 		       pnbh : region(ispace(int1d), Point),
 		       config : Config)

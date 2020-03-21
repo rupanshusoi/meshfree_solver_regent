@@ -4,13 +4,16 @@ require "limiters"
 require "quadrant_fluxes"
 
 local C = regentlib.c
-local Cmath = terralib.includec("math.h")
+local sqrt = regentlib.sqrt(double)
+local pow = regentlib.pow(double)
+local exp = regentlib.exp(double)
+local log = regentlib.log(double)
 
 terra printArr(a : double[4])
         C.printf("[%0.15lf, %0.15lf, %0.15lf, %0.15lf]\n", a[0], a[1], a[2], a[3])
 end
 
-__demand(__inline)
+__demand(__inline, __cuda)
 task qtilde_to_primitive(qtilde : double[4])
         var gamma : double = 1.4
 
@@ -26,8 +29,8 @@ task qtilde_to_primitive(qtilde : double[4])
         var u2 = q3 * temp
 
         var temp1 = q1 + beta * (u1*u1 + u2*u2)
-        var temp2 = temp1 - (Cmath.log(beta)/(gamma - 1))
-        var rho = Cmath.exp(temp2)
+        var temp2 = temp1 - (log(beta)/(gamma - 1))
+        var rho = exp(temp2)
         var pr = rho * temp
 
         var arr : double[4]
@@ -39,7 +42,7 @@ task qtilde_to_primitive(qtilde : double[4])
         return arr
 end
 
-__demand(__inline)
+__demand(__inline, __cuda)
 task outer_dGx_pos(pgp : region(ispace(int1d), Point), idx : int, config : Config)
 where 
 	reads(pgp.{x, y, nx,ny, xpos_conn, q, dq0, dq1, minq, maxq, min_dist})
@@ -82,8 +85,8 @@ do
         		var dels = delx*tx + dely*ty
         		var deln = delx*nx + dely*ny
 
-			var dist = Cmath.sqrt(dels*dels + deln*deln)
-        		var weights = Cmath.pow(dist, power)
+			var dist = sqrt(dels*dels + deln*deln)
+        		var weights = pow(dist, power)
 		
 			var dels_weights = dels*weights
         		var deln_weights = deln*weights
@@ -129,7 +132,7 @@ do
 	return G
 end
 
-__demand(__inline)
+__demand(__inline, __cuda)
 task outer_dGx_neg(pgp : region(ispace(int1d), Point), idx : int, config : Config)
 where 
 	reads(pgp.{x, y, nx,ny, xneg_conn, q, dq0, dq1, minq, maxq, min_dist})
@@ -172,8 +175,8 @@ do
         		var dels = delx*tx + dely*ty
         		var deln = delx*nx + dely*ny
 
-			var dist = Cmath.sqrt(dels*dels + deln*deln)
-        		var weights = Cmath.pow(dist, power)
+			var dist = sqrt(dels*dels + deln*deln)
+        		var weights = pow(dist, power)
 		
 			var dels_weights = dels * weights
         		var deln_weights = deln * weights
@@ -218,7 +221,7 @@ do
 	return G
 end
 
-__demand(__inline)
+__demand(__inline, __cuda)
 task outer_dGy_pos(pgp : region(ispace(int1d), Point), idx : int, config : Config)
 where 
 	reads(pgp.{x, y, nx,ny, ypos_conn, q, dq0, dq1, minq, maxq, min_dist})
@@ -261,8 +264,8 @@ do
         		var dels = delx*tx + dely*ty
         		var deln = delx*nx + dely*ny
 
-			var dist = Cmath.sqrt(dels*dels + deln*deln)
-        		var weights = Cmath.pow(dist, power)
+			var dist = sqrt(dels*dels + deln*deln)
+        		var weights = pow(dist, power)
 		
 			var dels_weights = dels*weights
         		var deln_weights = deln*weights

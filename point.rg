@@ -10,6 +10,7 @@ fspace Edge
 
 struct Point
 {
+        part_number : int1d;
 	localID : int;
 	x : double;
 	y : double;
@@ -27,6 +28,8 @@ struct Point
 	q : double[4];
 	dq0 : double[4];
 	dq1 : double[4];
+	inner0 : double[4];
+	inner1 : double[4];
 	entropy : double;
 	xpos_nbhs : int;
 	xneg_nbhs : int;
@@ -42,13 +45,6 @@ struct Point
 	maxq : double[4];
 }
 
-terra Point : getxy()
-	var a : double[2]
-	a[0] = self.x
-	a[1] = self.y
-	return a
-end
-
 task setNormals(globaldata : region(ispace(int1d), Point), 
 			idx : int, arr : double[2])
 where 
@@ -58,6 +54,7 @@ do
 	globaldata[idx].ny = arr[1]
 end
 
+__demand(__inline)
 task setConnectivity(globaldata : region(ispace(int1d), Point), idx : int, bigarr : int[80])
 where
 	writes(globaldata.{xpos_conn, xneg_conn, ypos_conn, yneg_conn, 

@@ -6,9 +6,10 @@ require "quadrant_fluxes"
 require "split_fluxes"
 require "limiters"
 
-local Cmath = terralib.includec("math.h")
+local sqrt = regentlib.sqrt(double)
+local pow = regentlib.pow(double)
 
-__demand(__inline)
+__demand(__inline, __cuda)
 task wall_dGx_pos(pnbh : region(ispace(int1d), Point), idx : int, config : Config)
 where 
 	reads(pnbh.{x, y, nx, ny, xpos_conn, q, dq0, dq1, min_dist, minq, maxq})
@@ -51,8 +52,8 @@ do
         		var dels = delx*tx + dely*ty
         		var deln = delx*nx + dely*ny
 
-			var dist = Cmath.sqrt(dels*dels + deln*deln)
-        		var weights = Cmath.pow(dist, power)
+			var dist = sqrt(dels*dels + deln*deln)
+        		var weights = pow(dist, power)
 		
 			var dels_weights = dels*weights
         		var deln_weights = deln*weights
@@ -100,7 +101,7 @@ do
 	return G
 end
 
-__demand(__inline)
+__demand(__inline, __cuda)
 task wall_dGx_neg(pnbh : region(ispace(int1d), Point), idx : int, config : Config)
 where 
 	reads(pnbh.{x, y, nx, ny, xneg_conn, q, dq0, dq1, min_dist, minq, maxq})
@@ -142,8 +143,8 @@ do
         		var dels = delx*tx + dely*ty
         		var deln = delx*nx + dely*ny
 
-			var dist = Cmath.sqrt(dels*dels + deln*deln)
-        		var weights = Cmath.pow(dist, power)
+			var dist = sqrt(dels*dels + deln*deln)
+        		var weights = pow(dist, power)
 		
 			var dels_weights = dels*weights
         		var deln_weights = deln*weights
@@ -188,7 +189,7 @@ do
 	return G
 end
 
-__demand(__inline)
+__demand(__inline, __cuda)
 task wall_dGy_neg(pnbh : region(ispace(int1d), Point), idx : int, config : Config)
 where 
 	reads(pnbh.{x, y, nx, ny, yneg_conn, q, dq0, dq1, min_dist, minq, maxq})
@@ -230,8 +231,8 @@ do
         		var dels = delx*tx + dely*ty
         		var deln = delx*nx + dely*ny
 
-			var dist = Cmath.sqrt(dels*dels + deln*deln)
-        		var weights = Cmath.pow(dist, power)
+			var dist = sqrt(dels*dels + deln*deln)
+        		var weights = pow(dist, power)
 		
 			var dels_weights = dels*weights
         		var deln_weights = deln*weights

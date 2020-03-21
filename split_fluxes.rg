@@ -1,7 +1,10 @@
 import "regent"
 
 local C = regentlib.c
-local Cmath = terralib.includec("math.h")
+local sqrt = regentlib.sqrt(double)
+local exp = regentlib.exp(double)
+local erf = regentlib.erf(double)
+local PI = 3.1415926535898
 
 __demand(__inline)
 task flux_Gxp(nx : double, ny : double, u1 : double, u2 : double, rho : double, pr : double)
@@ -14,9 +17,9 @@ task flux_Gxp(nx : double, ny : double, u1 : double, u2 : double, rho : double, 
 	var un = u1 * nx + u2*ny
 
 	var beta = 0.5 * rho / pr
-	var S1 = ut * Cmath.sqrt(beta)
-	var B1 = 0.5 * Cmath.exp(-S1 * S1) / Cmath.sqrt(Cmath.M_PI * beta)
-	var A1pos = 0.5 * (1 + Cmath.erf(S1))
+	var S1 = ut * sqrt(beta)
+	var B1 = 0.5 * exp(-S1 * S1) / sqrt(PI * beta)
+	var A1pos = 0.5 * (1 + erf(S1))
 
 	var pr_by_rho = pr / rho
 	var u_sqr = ut * ut + un * un
@@ -50,9 +53,9 @@ task flux_Gxn(nx : double, ny : double, u1 : double, u2 : double, rho : double, 
 	var un = u1 * nx + u2*ny
 
 	var beta = 0.5 * rho / pr
-	var S1 = ut * Cmath.sqrt(beta)
-	var B1 = 0.5 * Cmath.exp(-S1 * S1) / Cmath.sqrt(Cmath.M_PI * beta)
-	var A1neg = 0.5 * (1 - Cmath.erf(S1))
+	var S1 = ut * sqrt(beta)
+	var B1 = 0.5 * exp(-S1 * S1) / sqrt(PI * beta)
+	var A1neg = 0.5 * (1 - erf(S1))
 
 	var pr_by_rho = pr / rho
 	var u_sqr = ut * ut + un * un
@@ -86,9 +89,9 @@ task flux_Gyp(nx : double, ny : double, u1 : double, u2 : double, rho : double, 
 	var un = u1 * nx + u2 * ny
 
 	var beta = 0.5 * rho / pr
-	var S2 = un * Cmath.sqrt(beta)
-	var B2 = 0.5 * Cmath.exp(-S2 * S2) / Cmath.sqrt(Cmath.M_PI * beta)
-	var A2pos = 0.5 * (1 + Cmath.erf(S2))
+	var S2 = un * sqrt(beta)
+	var B2 = 0.5 * exp(-S2 * S2) / sqrt(PI * beta)
+	var A2pos = 0.5 * (1 + erf(S2))
 
 	var pr_by_rho = pr / rho
 	var u_sqr = ut * ut + un * un
@@ -122,9 +125,9 @@ task flux_Gyn(nx : double, ny : double, u1 : double, u2 : double, rho : double, 
 	var un = u1 * nx + u2 * ny
 
 	var beta = 0.5 * rho / pr
-	var S2 = un * Cmath.sqrt(beta)
-	var B2 = 0.5 * Cmath.exp(-S2 * S2) / Cmath.sqrt(Cmath.M_PI * beta)
-	var A2neg = 0.5 * (1 - Cmath.erf(S2))
+	var S2 = un * sqrt(beta)
+	var B2 = 0.5 * exp(-S2 * S2) / sqrt(PI * beta)
+	var A2neg = 0.5 * (1 - erf(S2))
 
 	var pr_by_rho = pr / rho
 	var u_sqr = ut * ut + un * un

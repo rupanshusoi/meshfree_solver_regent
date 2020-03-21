@@ -2,7 +2,8 @@ import "regent"
 require "config"
 require "point"
 
-local Cmath = terralib.includec("math.h")
+local pow = regentlib.pow(double)
+local fabs = regentlib.fabs(double)
 
 __demand(__inline)
 task venkat_limiter(qtilde : double[4], pgp : region(ispace(int1d), Point), idx : int, config : Config)
@@ -16,7 +17,7 @@ do
 		var q = pgp[idx].q[i]
 		var del_neg = qtilde[i] - q
 		var del_pos : double
-		if Cmath.fabs(del_neg) <= 1e-5 then
+		if fabs(del_neg) <= 1e-5 then
 			phi[count] = 1;
 			count += 1
 		else
@@ -30,7 +31,7 @@ do
 		
 			var ds = pgp[idx].min_dist
 			var epsi = VL_CONST * ds
-			epsi = Cmath.pow(epsi, 3)
+			epsi = pow(epsi, 3)
 		
 			var num = (del_pos * del_pos) + (epsi * epsi)
 			num = num * del_neg + 2.0 * del_neg * del_neg * del_pos

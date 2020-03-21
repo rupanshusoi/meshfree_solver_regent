@@ -4,14 +4,25 @@ require "point"
 require "core"
 
 local C = regentlib.c
-local Cmath = terralib.includec("math.h")
+local sqrt = regentlib.sqrt(double)
+local log10 = regentlib.log10(double)
 
 terra pprint(a : double[4])
 	C.printf("[\x1b[33m %0.15lf, %0.15lf, %0.15lf, %0.15lf]\n \x1b[0m", a[0], a[1], a[2], a[3])
+end	
+
+task run_setq(p : region(ispace(int1d), Point), part : partition(disjoint, p, ispace(int1d)))
+where
+	reads(p.{localID, prim}), writes(p.q)
+do
+	__demand(__index_launch)
+	for color in part.colors do
+		setq(part[color])
+	end
 end
 
 task main()
-	var file = C.fopen("partGrid40K", "r")
+	var file = C.fopen("grids/partGrid48738", "r")
 
 	var size : int
 	C.fscanf(file, "%d", &size)
@@ -24,6 +35,8 @@ task main()
 	
 	var defprimal = getInitialPrimitive()
 	
+	var localID : int
+	var part_number : int
 	var x : double
 	var y : double
 	var left : int
@@ -45,12 +58,15 @@ task main()
 	C.printf("Populating globaldata\n")	
 
 	globaldata[0].localID = 0
+	globaldata[0].part_number = 0
 
 	var edgecount = 0
 	for count = 0, size do
-		C.fscanf(file, "%lf %lf %d %d %d %d %lf %lf %d %lf %d", 
-			&x, &y, &left, &right, &flag1, &flag2, &nx, &ny, 
-			&qt_depth, &min_dist, &nbhs)
+		if not config.isMETIS then
+			C.fscanf(file, "%lf %lf %d %d %d %d %lf %lf %d %lf %d", &x, &y, &left, &right, &flag1, &flag2, &nx, &ny, &qt_depth, &min_dist, &nbhs)
+		else
+			C.fscanf(file, "%d %d %lf %lf %d %d %d %d %lf %lf %d %lf %d", &part_number, &localID, &x, &y, &left, &right, &flag1, &flag2, &nx, &ny, &qt_depth, &min_dist, &nbhs)
+		end
 		
 		var nbhs_arr : int[20]
 		for i = 0, 20 do
@@ -66,12 +82,12 @@ task main()
 			edgecount += 1
 		end
 
-		var p = Point {count + 1, x, y, left, right, flag1, flag2, nbhs, 
-				nbhs_arr, nx, ny, defprimal, dummy_double, 
-				dummy_double, dummy_double, dummy_double, 
-				dummy_double, 0, 0, 0, 0, 0, dummy_int, 
-				dummy_int, dummy_int, dummy_int, 0, min_dist, 
-				dummy_double, dummy_double}
+		var p : Point
+		if not config.isMETIS then
+			p = Point {0, count + 1, x, y, left, right, flag1, flag2, nbhs, nbhs_arr, nx, ny, defprimal, dummy_double, dummy_double, dummy_double, dummy_double, dummy_double, dummy_double, dummy_double, 0, 0, 0, 0, 0, dummy_int, dummy_int, dummy_int, dummy_int, 0, min_dist, dummy_double, dummy_double}
+		else
+			p = Point {part_number, localID, x, y, left, right, flag1, flag2, nbhs, nbhs_arr, nx, ny, defprimal, dummy_double, dummy_double, dummy_double, dummy_double, dummy_double, dummy_double, dummy_double, 0, 0, 0, 0, 0, dummy_int, dummy_int, dummy_int, dummy_int, 0, min_dist, dummy_double, dummy_double}
+		end
 
 		globaldata[count + 1] = p
 	end
@@ -80,18 +96,19 @@ task main()
 	
 	-- making partitions
 
-	var points_equal = partition(equal, globaldata, ispace(int1d, config.partitions))
+	var points_equal = partition(globaldata.part_number, ispace(int1d, 8))
+	--var points_equal = partition(equal, globaldata, ispace(int1d, config.partitions))
 	var edges_out = preimage(edges, points_equal, edges.in_ptr)
 	var points_out = image(globaldata, edges_out, edges.out_ptr)
 	var points_ghost = points_out - points_equal
 	var points_allnbhs = points_equal | points_ghost
-	
+
 	var idx : int
 	var curr : double[2]
 	var leftpt : double[2]
 	var rightpt : double[2]
 	var normals : double[2]
-	
+
 	C.printf("Setting normals\n")
 	for point in globaldata do
 		if point.flag_1 == 0 or point.flag_1 == 2 then
@@ -127,24 +144,36 @@ task main()
 	
 	-- refactoring to make FPI solver run from here
 
-	for i = 1, iter do	
+	for i = 1, iter + 1 do	
 		__demand(__index_launch)
 		for color in points_equal.colors do
 			func_delta(points_equal[color], points_allnbhs[color],
 				   config)
 		end
 		for rk = 1, rks do
-			__demand(__index_launch)
-			for color in points_equal.colors do
-				setq(points_equal[color])
-			end
+
+			run_setq(globaldata, points_equal)
 
 			__demand(__index_launch)
 			for color in points_equal.colors do
 				setdq(points_equal[color], points_allnbhs[color],
 				      config)
 			end
-			
+
+			for j = 0, config.inner_iter do
+				C.printf("inner\n")
+				__demand(__index_launch)
+				for color in points_equal.colors do
+					setqinner(points_equal[color], points_allnbhs[color], config)
+				end
+
+				__demand(__index_launch)
+				for color in points_equal.colors do
+					updateqinner(points_equal[color])
+				end
+			end
+
+
 			__demand(__index_launch)
 			for color in points_equal.colors do
 				cal_flux_residual(points_equal[color], points_allnbhs[color], config)
@@ -157,15 +186,15 @@ task main()
 				sum_res_sqr += state_update(points_equal[color], i, rk, eu, res_old)
 			end
 
-			var res_new : double = Cmath.sqrt(sum_res_sqr)/config.size
+			var res_new : double = sqrt(sum_res_sqr)/config.size
 			var residue : double
 			if i <= 2 then
 				res_old = res_new
 				residue = 0
 			else
-				residue = Cmath.log10(res_new / res_old)
+				residue = log10(res_new / res_old)
 			end
-			C.printf("Iteration Number %d, %d\n", i, rk)
+			C.printf("Iteration Number %d, %d ends.\n", i, rk)
 			C.printf("Residue %0.13lf\n", residue)
 		end
 	end
