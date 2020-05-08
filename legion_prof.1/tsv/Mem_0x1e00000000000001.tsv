@@ -1,7 +1,0 @@
-level	level_ready	ready	start	end	color	opacity	title	initiation	in	out	children	parents	prof_uid
-6			4527500.569	6202712.603	#00fff6	1.0	Region:ispace:1[24370:48738] x Point[localID$,flag_1]$Layout Order:[Struct-of-arrays (SOA)] $Inst: 0x6000000000010000 $Size: 190.383 KiB	1419					7510
-5			4527621.075	6202729.101	#00fff6	1.0	Region:ispace:1[24370:48738] x Point[flux_res]$Layout Order:[Struct-of-arrays (SOA)] $Inst: 0x6000000000010001 $Size: 761.531 KiB	1419					7511
-4			4527668.754	6202761.539	#00fff6	1.0	Region:ispace:1[1:680] x Point[x,y,nx,ny,q$,dq0,dq1,xpos_conn,xneg_conn,ypos_conn,yneg_conn$,min_dist,minq,maxq]$Layout Order:[Struct-of-arrays (SOA)] $Inst: 0x6000000000010002 $Size: 24.170 MiB	1419					7513
-3			4528455.503	6202656.056	#00fff6	1.0	Region:ispace:1[0:24369] x Point[localID,flag_1$]$Layout Order:[Struct-of-arrays (SOA)] $Inst: 0x6000000000010003 $Size: 190.391 KiB	1418					7508
-2			4528586.707	6202696.512	#00fff6	1.0	Region:ispace:1[0:24369] x Point[flux_res]$Layout Order:[Struct-of-arrays (SOA)] $Inst: 0x6000000000010004 $Size: 761.562 KiB	1418					7509
-1			4528634.024	6202745.619	#00fff6	1.0	Region:ispace:1[0:24374] x Point[x,y,nx,ny$,q,dq0,dq1,xpos_conn,xneg_conn,ypos_conn,yneg_conn$,min_dist,minq,maxq]$Layout Order:[Struct-of-arrays (SOA)] $Inst: 0x6000000000010005 $Size: 22.840 MiB	1418					7512

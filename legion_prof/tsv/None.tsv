@@ -1,8 +1,0 @@
-level	level_ready	ready	start	end	color	opacity	title	initiation	in	out	children	parents	prof_uid
-3			184435.394	184575.903	#76ff00	1.0	Partition By Field	5					7351
-3			184590.544	196738.39	#76ff00	1.0	Partition by Preimage	6					7352
-3			196748.019	207554.079	#76ff00	1.0	Partition by Image	7					7353
-3			207684.576	207687.263	#00edff	1.0	Differences	8					7354
-3			207767.929	207768.809	#00edff	1.0	Unions	9					7355
-3			321996.186	321997.604	#00ffed	1.0	Difference	1404					7357
-3			322009.052	322009.732	#00ffed	1.0	Difference	1404					7358

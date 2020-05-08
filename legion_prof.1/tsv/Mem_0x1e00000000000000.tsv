@@ -1,3 +1,0 @@
-level	level_ready	ready	start	end	color	opacity	title	initiation	in	out	children	parents	prof_uid
-3			2476196.029	6203255.812	#00ff0f	1.0	Region:ispace:1[0:48738] x Point[part_number$,localID,x,y,left,right,flag_1,flag_2,nbhs$,conn,nx,ny,prim,prim_old,flux_res,q,dq0,dq1$,inner0,inner1,entropy,xpos_nbhs,xneg_nbhs$,ypos_nbhs,yneg_nbhs,xpos_conn,xneg_conn,ypos_conn$,yneg_conn,delta,min_dist,minq,maxq]$Layout Order:[Struct-of-arrays (SOA)] $Inst: 0x6000000000000000 $Size: 38.300 MiB	3					7506
-2			2476706.491	6203264.288	#00ff0f	1.0	Region:ispace:2[0:393993] x Edge()[in_ptr$,out_ptr]$Layout Order:[Struct-of-arrays (SOA)] $Inst: 0x6000000000000001 $Size: 6.012 MiB	4					7507
