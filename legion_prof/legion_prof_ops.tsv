@@ -1,0 +1,1660 @@
+op_id	desc	proc	level
+1	main [primary] <1>	CPU Processor 0x1d00000000000001	2
+3	Mapping Operation <3>		
+4	Mapping Operation <4>		
+5	Dependent Partition Operation <5>		
+6	Dependent Partition Operation <6>		
+7	Dependent Partition Operation <7>		
+8	Pending Partition Operation <8>		
+9	Pending Partition Operation <9>		
+10	Mapping Operation <10>		
+11	calculateNormals [primary] <11>	CPU Processor 0x1d00000000000001	3
+12	calculateNormals [primary] <12>	CPU Processor 0x1d00000000000001	3
+13	calculateNormals [primary] <13>	CPU Processor 0x1d00000000000001	3
+14	calculateNormals [primary] <14>	CPU Processor 0x1d00000000000001	3
+15	calculateNormals [primary] <15>	CPU Processor 0x1d00000000000001	3
+16	calculateNormals [primary] <16>	CPU Processor 0x1d00000000000001	3
+17	calculateNormals [primary] <17>	CPU Processor 0x1d00000000000001	3
+18	calculateNormals [primary] <18>	CPU Processor 0x1d00000000000001	3
+19	calculateNormals [primary] <19>	CPU Processor 0x1d00000000000001	3
+20	calculateNormals [primary] <20>	CPU Processor 0x1d00000000000001	3
+21	calculateNormals [primary] <21>	CPU Processor 0x1d00000000000001	3
+22	calculateNormals [primary] <22>	CPU Processor 0x1d00000000000001	3
+23	calculateNormals [primary] <23>	CPU Processor 0x1d00000000000001	3
+24	calculateNormals [primary] <24>	CPU Processor 0x1d00000000000001	3
+25	calculateNormals [primary] <25>	CPU Processor 0x1d00000000000001	3
+26	calculateNormals [primary] <26>	CPU Processor 0x1d00000000000001	3
+27	calculateNormals [primary] <27>	CPU Processor 0x1d00000000000001	3
+28	calculateNormals [primary] <28>	CPU Processor 0x1d00000000000001	3
+29	calculateNormals [primary] <29>	CPU Processor 0x1d00000000000001	3
+30	calculateNormals [primary] <30>	CPU Processor 0x1d00000000000001	3
+31	calculateNormals [primary] <31>	CPU Processor 0x1d00000000000001	3
+32	calculateNormals [primary] <32>	CPU Processor 0x1d00000000000001	3
+33	calculateNormals [primary] <33>	CPU Processor 0x1d00000000000001	3
+34	calculateNormals [primary] <34>	CPU Processor 0x1d00000000000001	3
+35	calculateNormals [primary] <35>	CPU Processor 0x1d00000000000001	3
+36	calculateNormals [primary] <36>	CPU Processor 0x1d00000000000001	3
+37	calculateNormals [primary] <37>	CPU Processor 0x1d00000000000001	3
+38	calculateNormals [primary] <38>	CPU Processor 0x1d00000000000001	3
+39	calculateNormals [primary] <39>	CPU Processor 0x1d00000000000001	3
+40	calculateNormals [primary] <40>	CPU Processor 0x1d00000000000001	3
+41	calculateNormals [primary] <41>	CPU Processor 0x1d00000000000001	3
+42	calculateNormals [primary] <42>	CPU Processor 0x1d00000000000001	3
+43	calculateNormals [primary] <43>	CPU Processor 0x1d00000000000001	3
+44	calculateNormals [primary] <44>	CPU Processor 0x1d00000000000001	3
+45	calculateNormals [primary] <45>	CPU Processor 0x1d00000000000001	3
+46	calculateNormals [primary] <46>	CPU Processor 0x1d00000000000001	3
+47	calculateNormals [primary] <47>	CPU Processor 0x1d00000000000001	3
+48	calculateNormals [primary] <48>	CPU Processor 0x1d00000000000001	3
+49	calculateNormals [primary] <49>	CPU Processor 0x1d00000000000001	3
+50	calculateNormals [primary] <50>	CPU Processor 0x1d00000000000001	3
+51	calculateNormals [primary] <51>	CPU Processor 0x1d00000000000001	3
+52	calculateNormals [primary] <52>	CPU Processor 0x1d00000000000001	3
+53	calculateNormals [primary] <53>	CPU Processor 0x1d00000000000001	3
+54	calculateNormals [primary] <54>	CPU Processor 0x1d00000000000001	3
+55	calculateNormals [primary] <55>	CPU Processor 0x1d00000000000001	3
+56	calculateNormals [primary] <56>	CPU Processor 0x1d00000000000001	3
+57	calculateNormals [primary] <57>	CPU Processor 0x1d00000000000001	3
+58	calculateNormals [primary] <58>	CPU Processor 0x1d00000000000001	3
+59	calculateNormals [primary] <59>	CPU Processor 0x1d00000000000001	3
+60	calculateNormals [primary] <60>	CPU Processor 0x1d00000000000001	3
+61	calculateNormals [primary] <61>	CPU Processor 0x1d00000000000001	3
+62	calculateNormals [primary] <62>	CPU Processor 0x1d00000000000001	3
+63	calculateNormals [primary] <63>	CPU Processor 0x1d00000000000001	3
+64	calculateNormals [primary] <64>	CPU Processor 0x1d00000000000001	3
+65	calculateNormals [primary] <65>	CPU Processor 0x1d00000000000001	3
+66	calculateNormals [primary] <66>	CPU Processor 0x1d00000000000001	3
+67	calculateNormals [primary] <67>	CPU Processor 0x1d00000000000001	3
+68	calculateNormals [primary] <68>	CPU Processor 0x1d00000000000001	3
+69	calculateNormals [primary] <69>	CPU Processor 0x1d00000000000001	3
+70	calculateNormals [primary] <70>	CPU Processor 0x1d00000000000001	3
+71	calculateNormals [primary] <71>	CPU Processor 0x1d00000000000001	3
+72	calculateNormals [primary] <72>	CPU Processor 0x1d00000000000001	3
+73	calculateNormals [primary] <73>	CPU Processor 0x1d00000000000001	3
+74	calculateNormals [primary] <74>	CPU Processor 0x1d00000000000001	3
+75	calculateNormals [primary] <75>	CPU Processor 0x1d00000000000001	3
+76	calculateNormals [primary] <76>	CPU Processor 0x1d00000000000001	3
+77	calculateNormals [primary] <77>	CPU Processor 0x1d00000000000001	3
+78	calculateNormals [primary] <78>	CPU Processor 0x1d00000000000001	3
+79	calculateNormals [primary] <79>	CPU Processor 0x1d00000000000001	3
+80	calculateNormals [primary] <80>	CPU Processor 0x1d00000000000001	3
+81	calculateNormals [primary] <81>	CPU Processor 0x1d00000000000001	3
+82	calculateNormals [primary] <82>	CPU Processor 0x1d00000000000001	3
+83	calculateNormals [primary] <83>	CPU Processor 0x1d00000000000001	3
+84	calculateNormals [primary] <84>	CPU Processor 0x1d00000000000001	3
+85	calculateNormals [primary] <85>	CPU Processor 0x1d00000000000001	3
+86	calculateNormals [primary] <86>	CPU Processor 0x1d00000000000001	3
+87	calculateNormals [primary] <87>	CPU Processor 0x1d00000000000001	3
+88	calculateNormals [primary] <88>	CPU Processor 0x1d00000000000001	3
+89	calculateNormals [primary] <89>	CPU Processor 0x1d00000000000001	3
+90	calculateNormals [primary] <90>	CPU Processor 0x1d00000000000001	3
+91	calculateNormals [primary] <91>	CPU Processor 0x1d00000000000001	3
+92	calculateNormals [primary] <92>	CPU Processor 0x1d00000000000001	3
+93	calculateNormals [primary] <93>	CPU Processor 0x1d00000000000001	3
+94	calculateNormals [primary] <94>	CPU Processor 0x1d00000000000001	3
+95	calculateNormals [primary] <95>	CPU Processor 0x1d00000000000001	3
+96	calculateNormals [primary] <96>	CPU Processor 0x1d00000000000001	3
+97	calculateNormals [primary] <97>	CPU Processor 0x1d00000000000001	3
+98	calculateNormals [primary] <98>	CPU Processor 0x1d00000000000001	3
+99	calculateNormals [primary] <99>	CPU Processor 0x1d00000000000001	3
+100	calculateNormals [primary] <100>	CPU Processor 0x1d00000000000001	3
+101	calculateNormals [primary] <101>	CPU Processor 0x1d00000000000001	3
+102	calculateNormals [primary] <102>	CPU Processor 0x1d00000000000001	3
+103	calculateNormals [primary] <103>	CPU Processor 0x1d00000000000001	3
+104	calculateNormals [primary] <104>	CPU Processor 0x1d00000000000001	3
+105	calculateNormals [primary] <105>	CPU Processor 0x1d00000000000001	3
+106	calculateNormals [primary] <106>	CPU Processor 0x1d00000000000001	3
+107	calculateNormals [primary] <107>	CPU Processor 0x1d00000000000001	3
+108	calculateNormals [primary] <108>	CPU Processor 0x1d00000000000001	3
+109	calculateNormals [primary] <109>	CPU Processor 0x1d00000000000001	3
+110	calculateNormals [primary] <110>	CPU Processor 0x1d00000000000001	3
+111	calculateNormals [primary] <111>	CPU Processor 0x1d00000000000001	3
+112	calculateNormals [primary] <112>	CPU Processor 0x1d00000000000001	3
+113	calculateNormals [primary] <113>	CPU Processor 0x1d00000000000001	3
+114	calculateNormals [primary] <114>	CPU Processor 0x1d00000000000001	3
+115	calculateNormals [primary] <115>	CPU Processor 0x1d00000000000001	3
+116	calculateNormals [primary] <116>	CPU Processor 0x1d00000000000001	3
+117	calculateNormals [primary] <117>	CPU Processor 0x1d00000000000001	3
+118	calculateNormals [primary] <118>	CPU Processor 0x1d00000000000001	3
+119	calculateNormals [primary] <119>	CPU Processor 0x1d00000000000001	3
+120	calculateNormals [primary] <120>	CPU Processor 0x1d00000000000001	3
+121	calculateNormals [primary] <121>	CPU Processor 0x1d00000000000001	3
+122	calculateNormals [primary] <122>	CPU Processor 0x1d00000000000001	3
+123	calculateNormals [primary] <123>	CPU Processor 0x1d00000000000001	3
+124	calculateNormals [primary] <124>	CPU Processor 0x1d00000000000001	3
+125	calculateNormals [primary] <125>	CPU Processor 0x1d00000000000001	3
+126	calculateNormals [primary] <126>	CPU Processor 0x1d00000000000001	3
+127	calculateNormals [primary] <127>	CPU Processor 0x1d00000000000001	3
+128	calculateNormals [primary] <128>	CPU Processor 0x1d00000000000001	3
+129	calculateNormals [primary] <129>	CPU Processor 0x1d00000000000001	3
+130	calculateNormals [primary] <130>	CPU Processor 0x1d00000000000001	3
+131	calculateNormals [primary] <131>	CPU Processor 0x1d00000000000001	3
+132	calculateNormals [primary] <132>	CPU Processor 0x1d00000000000001	3
+133	calculateNormals [primary] <133>	CPU Processor 0x1d00000000000001	3
+134	calculateNormals [primary] <134>	CPU Processor 0x1d00000000000001	3
+135	calculateNormals [primary] <135>	CPU Processor 0x1d00000000000001	3
+136	calculateNormals [primary] <136>	CPU Processor 0x1d00000000000001	3
+137	calculateNormals [primary] <137>	CPU Processor 0x1d00000000000001	3
+138	calculateNormals [primary] <138>	CPU Processor 0x1d00000000000001	3
+139	calculateNormals [primary] <139>	CPU Processor 0x1d00000000000001	3
+140	calculateNormals [primary] <140>	CPU Processor 0x1d00000000000001	3
+141	calculateNormals [primary] <141>	CPU Processor 0x1d00000000000001	3
+142	calculateNormals [primary] <142>	CPU Processor 0x1d00000000000001	3
+143	calculateNormals [primary] <143>	CPU Processor 0x1d00000000000001	3
+144	calculateNormals [primary] <144>	CPU Processor 0x1d00000000000001	3
+145	calculateNormals [primary] <145>	CPU Processor 0x1d00000000000001	3
+146	calculateNormals [primary] <146>	CPU Processor 0x1d00000000000001	3
+147	calculateNormals [primary] <147>	CPU Processor 0x1d00000000000001	3
+148	calculateNormals [primary] <148>	CPU Processor 0x1d00000000000001	3
+149	calculateNormals [primary] <149>	CPU Processor 0x1d00000000000001	3
+150	calculateNormals [primary] <150>	CPU Processor 0x1d00000000000001	3
+151	calculateNormals [primary] <151>	CPU Processor 0x1d00000000000001	3
+152	calculateNormals [primary] <152>	CPU Processor 0x1d00000000000001	3
+153	calculateNormals [primary] <153>	CPU Processor 0x1d00000000000001	3
+154	calculateNormals [primary] <154>	CPU Processor 0x1d00000000000001	3
+155	calculateNormals [primary] <155>	CPU Processor 0x1d00000000000001	3
+156	calculateNormals [primary] <156>	CPU Processor 0x1d00000000000001	3
+157	calculateNormals [primary] <157>	CPU Processor 0x1d00000000000001	3
+158	calculateNormals [primary] <158>	CPU Processor 0x1d00000000000001	3
+159	calculateNormals [primary] <159>	CPU Processor 0x1d00000000000001	3
+160	calculateNormals [primary] <160>	CPU Processor 0x1d00000000000001	3
+161	calculateNormals [primary] <161>	CPU Processor 0x1d00000000000001	3
+162	calculateNormals [primary] <162>	CPU Processor 0x1d00000000000001	3
+163	calculateNormals [primary] <163>	CPU Processor 0x1d00000000000001	3
+164	calculateNormals [primary] <164>	CPU Processor 0x1d00000000000001	3
+165	calculateNormals [primary] <165>	CPU Processor 0x1d00000000000001	3
+166	calculateNormals [primary] <166>	CPU Processor 0x1d00000000000001	3
+167	calculateNormals [primary] <167>	CPU Processor 0x1d00000000000001	3
+168	calculateNormals [primary] <168>	CPU Processor 0x1d00000000000001	3
+169	calculateNormals [primary] <169>	CPU Processor 0x1d00000000000001	3
+170	calculateNormals [primary] <170>	CPU Processor 0x1d00000000000001	3
+171	calculateNormals [primary] <171>	CPU Processor 0x1d00000000000001	3
+172	calculateNormals [primary] <172>	CPU Processor 0x1d00000000000001	3
+173	calculateNormals [primary] <173>	CPU Processor 0x1d00000000000001	3
+174	calculateNormals [primary] <174>	CPU Processor 0x1d00000000000001	3
+175	calculateNormals [primary] <175>	CPU Processor 0x1d00000000000001	3
+176	calculateNormals [primary] <176>	CPU Processor 0x1d00000000000001	3
+177	calculateNormals [primary] <177>	CPU Processor 0x1d00000000000001	3
+178	calculateNormals [primary] <178>	CPU Processor 0x1d00000000000001	3
+179	calculateNormals [primary] <179>	CPU Processor 0x1d00000000000001	3
+180	calculateNormals [primary] <180>	CPU Processor 0x1d00000000000001	3
+181	calculateNormals [primary] <181>	CPU Processor 0x1d00000000000001	3
+182	calculateNormals [primary] <182>	CPU Processor 0x1d00000000000001	3
+183	calculateNormals [primary] <183>	CPU Processor 0x1d00000000000001	3
+184	calculateNormals [primary] <184>	CPU Processor 0x1d00000000000001	3
+185	calculateNormals [primary] <185>	CPU Processor 0x1d00000000000001	3
+186	calculateNormals [primary] <186>	CPU Processor 0x1d00000000000001	3
+187	calculateNormals [primary] <187>	CPU Processor 0x1d00000000000001	3
+188	calculateNormals [primary] <188>	CPU Processor 0x1d00000000000001	3
+189	calculateNormals [primary] <189>	CPU Processor 0x1d00000000000001	3
+190	calculateNormals [primary] <190>	CPU Processor 0x1d00000000000001	3
+191	calculateNormals [primary] <191>	CPU Processor 0x1d00000000000001	3
+192	calculateNormals [primary] <192>	CPU Processor 0x1d00000000000001	3
+193	calculateNormals [primary] <193>	CPU Processor 0x1d00000000000001	3
+194	calculateNormals [primary] <194>	CPU Processor 0x1d00000000000001	3
+195	calculateNormals [primary] <195>	CPU Processor 0x1d00000000000001	3
+196	calculateNormals [primary] <196>	CPU Processor 0x1d00000000000001	3
+197	calculateNormals [primary] <197>	CPU Processor 0x1d00000000000001	3
+198	calculateNormals [primary] <198>	CPU Processor 0x1d00000000000001	3
+199	calculateNormals [primary] <199>	CPU Processor 0x1d00000000000001	3
+200	calculateNormals [primary] <200>	CPU Processor 0x1d00000000000001	3
+201	calculateNormals [primary] <201>	CPU Processor 0x1d00000000000001	3
+202	calculateNormals [primary] <202>	CPU Processor 0x1d00000000000001	3
+203	calculateNormals [primary] <203>	CPU Processor 0x1d00000000000001	3
+204	calculateNormals [primary] <204>	CPU Processor 0x1d00000000000001	3
+205	calculateNormals [primary] <205>	CPU Processor 0x1d00000000000001	3
+206	calculateNormals [primary] <206>	CPU Processor 0x1d00000000000001	3
+207	calculateNormals [primary] <207>	CPU Processor 0x1d00000000000001	3
+208	calculateNormals [primary] <208>	CPU Processor 0x1d00000000000001	3
+209	calculateNormals [primary] <209>	CPU Processor 0x1d00000000000001	3
+210	calculateNormals [primary] <210>	CPU Processor 0x1d00000000000001	3
+211	calculateNormals [primary] <211>	CPU Processor 0x1d00000000000001	3
+212	calculateNormals [primary] <212>	CPU Processor 0x1d00000000000001	3
+213	calculateNormals [primary] <213>	CPU Processor 0x1d00000000000001	3
+214	calculateNormals [primary] <214>	CPU Processor 0x1d00000000000001	3
+215	calculateNormals [primary] <215>	CPU Processor 0x1d00000000000001	3
+216	calculateNormals [primary] <216>	CPU Processor 0x1d00000000000001	3
+217	calculateNormals [primary] <217>	CPU Processor 0x1d00000000000001	3
+218	calculateNormals [primary] <218>	CPU Processor 0x1d00000000000001	3
+219	calculateNormals [primary] <219>	CPU Processor 0x1d00000000000001	3
+220	calculateNormals [primary] <220>	CPU Processor 0x1d00000000000001	3
+221	calculateNormals [primary] <221>	CPU Processor 0x1d00000000000001	3
+222	calculateNormals [primary] <222>	CPU Processor 0x1d00000000000001	3
+223	calculateNormals [primary] <223>	CPU Processor 0x1d00000000000001	3
+224	calculateNormals [primary] <224>	CPU Processor 0x1d00000000000001	3
+225	calculateNormals [primary] <225>	CPU Processor 0x1d00000000000001	3
+226	calculateNormals [primary] <226>	CPU Processor 0x1d00000000000001	3
+227	calculateNormals [primary] <227>	CPU Processor 0x1d00000000000001	3
+228	calculateNormals [primary] <228>	CPU Processor 0x1d00000000000001	3
+229	calculateNormals [primary] <229>	CPU Processor 0x1d00000000000001	3
+230	calculateNormals [primary] <230>	CPU Processor 0x1d00000000000001	3
+231	calculateNormals [primary] <231>	CPU Processor 0x1d00000000000001	3
+232	calculateNormals [primary] <232>	CPU Processor 0x1d00000000000001	3
+233	calculateNormals [primary] <233>	CPU Processor 0x1d00000000000001	3
+234	calculateNormals [primary] <234>	CPU Processor 0x1d00000000000001	3
+235	calculateNormals [primary] <235>	CPU Processor 0x1d00000000000001	3
+236	calculateNormals [primary] <236>	CPU Processor 0x1d00000000000001	3
+237	calculateNormals [primary] <237>	CPU Processor 0x1d00000000000001	3
+238	calculateNormals [primary] <238>	CPU Processor 0x1d00000000000001	3
+239	calculateNormals [primary] <239>	CPU Processor 0x1d00000000000001	3
+240	calculateNormals [primary] <240>	CPU Processor 0x1d00000000000001	3
+241	calculateNormals [primary] <241>	CPU Processor 0x1d00000000000001	3
+242	calculateNormals [primary] <242>	CPU Processor 0x1d00000000000001	3
+243	calculateNormals [primary] <243>	CPU Processor 0x1d00000000000001	3
+244	calculateNormals [primary] <244>	CPU Processor 0x1d00000000000001	3
+245	calculateNormals [primary] <245>	CPU Processor 0x1d00000000000001	3
+246	calculateNormals [primary] <246>	CPU Processor 0x1d00000000000001	3
+247	calculateNormals [primary] <247>	CPU Processor 0x1d00000000000001	3
+248	calculateNormals [primary] <248>	CPU Processor 0x1d00000000000001	3
+249	calculateNormals [primary] <249>	CPU Processor 0x1d00000000000001	3
+250	calculateNormals [primary] <250>	CPU Processor 0x1d00000000000001	3
+251	calculateNormals [primary] <251>	CPU Processor 0x1d00000000000001	3
+252	calculateNormals [primary] <252>	CPU Processor 0x1d00000000000001	3
+253	calculateNormals [primary] <253>	CPU Processor 0x1d00000000000001	3
+254	calculateNormals [primary] <254>	CPU Processor 0x1d00000000000001	3
+255	calculateNormals [primary] <255>	CPU Processor 0x1d00000000000001	3
+256	calculateNormals [primary] <256>	CPU Processor 0x1d00000000000001	3
+257	calculateNormals [primary] <257>	CPU Processor 0x1d00000000000001	3
+258	calculateNormals [primary] <258>	CPU Processor 0x1d00000000000001	3
+259	calculateNormals [primary] <259>	CPU Processor 0x1d00000000000001	3
+260	calculateNormals [primary] <260>	CPU Processor 0x1d00000000000001	3
+261	calculateNormals [primary] <261>	CPU Processor 0x1d00000000000001	3
+262	calculateNormals [primary] <262>	CPU Processor 0x1d00000000000001	3
+263	calculateNormals [primary] <263>	CPU Processor 0x1d00000000000001	3
+264	calculateNormals [primary] <264>	CPU Processor 0x1d00000000000001	3
+265	calculateNormals [primary] <265>	CPU Processor 0x1d00000000000001	3
+266	calculateNormals [primary] <266>	CPU Processor 0x1d00000000000001	3
+267	calculateNormals [primary] <267>	CPU Processor 0x1d00000000000001	3
+268	calculateNormals [primary] <268>	CPU Processor 0x1d00000000000001	3
+269	calculateNormals [primary] <269>	CPU Processor 0x1d00000000000001	3
+270	calculateNormals [primary] <270>	CPU Processor 0x1d00000000000001	3
+271	calculateNormals [primary] <271>	CPU Processor 0x1d00000000000001	3
+272	calculateNormals [primary] <272>	CPU Processor 0x1d00000000000001	3
+273	calculateNormals [primary] <273>	CPU Processor 0x1d00000000000001	3
+274	calculateNormals [primary] <274>	CPU Processor 0x1d00000000000001	3
+275	calculateNormals [primary] <275>	CPU Processor 0x1d00000000000001	3
+276	calculateNormals [primary] <276>	CPU Processor 0x1d00000000000001	3
+277	calculateNormals [primary] <277>	CPU Processor 0x1d00000000000001	3
+278	calculateNormals [primary] <278>	CPU Processor 0x1d00000000000001	3
+279	calculateNormals [primary] <279>	CPU Processor 0x1d00000000000001	3
+280	calculateNormals [primary] <280>	CPU Processor 0x1d00000000000001	3
+281	calculateNormals [primary] <281>	CPU Processor 0x1d00000000000001	3
+282	calculateNormals [primary] <282>	CPU Processor 0x1d00000000000001	3
+283	calculateNormals [primary] <283>	CPU Processor 0x1d00000000000001	3
+284	calculateNormals [primary] <284>	CPU Processor 0x1d00000000000001	3
+285	calculateNormals [primary] <285>	CPU Processor 0x1d00000000000001	3
+286	calculateNormals [primary] <286>	CPU Processor 0x1d00000000000001	3
+287	calculateNormals [primary] <287>	CPU Processor 0x1d00000000000001	3
+288	calculateNormals [primary] <288>	CPU Processor 0x1d00000000000001	3
+289	calculateNormals [primary] <289>	CPU Processor 0x1d00000000000001	3
+290	calculateNormals [primary] <290>	CPU Processor 0x1d00000000000001	3
+291	calculateNormals [primary] <291>	CPU Processor 0x1d00000000000001	3
+292	calculateNormals [primary] <292>	CPU Processor 0x1d00000000000001	3
+293	calculateNormals [primary] <293>	CPU Processor 0x1d00000000000001	3
+294	calculateNormals [primary] <294>	CPU Processor 0x1d00000000000001	3
+295	calculateNormals [primary] <295>	CPU Processor 0x1d00000000000001	3
+296	calculateNormals [primary] <296>	CPU Processor 0x1d00000000000001	3
+297	calculateNormals [primary] <297>	CPU Processor 0x1d00000000000001	3
+298	calculateNormals [primary] <298>	CPU Processor 0x1d00000000000001	3
+299	calculateNormals [primary] <299>	CPU Processor 0x1d00000000000001	3
+300	calculateNormals [primary] <300>	CPU Processor 0x1d00000000000001	3
+301	calculateNormals [primary] <301>	CPU Processor 0x1d00000000000001	3
+302	calculateNormals [primary] <302>	CPU Processor 0x1d00000000000001	3
+303	calculateNormals [primary] <303>	CPU Processor 0x1d00000000000001	3
+304	calculateNormals [primary] <304>	CPU Processor 0x1d00000000000001	3
+305	calculateNormals [primary] <305>	CPU Processor 0x1d00000000000001	3
+306	calculateNormals [primary] <306>	CPU Processor 0x1d00000000000001	3
+307	calculateNormals [primary] <307>	CPU Processor 0x1d00000000000001	3
+308	calculateNormals [primary] <308>	CPU Processor 0x1d00000000000001	3
+309	calculateNormals [primary] <309>	CPU Processor 0x1d00000000000001	3
+310	calculateNormals [primary] <310>	CPU Processor 0x1d00000000000001	3
+311	calculateNormals [primary] <311>	CPU Processor 0x1d00000000000001	3
+312	calculateNormals [primary] <312>	CPU Processor 0x1d00000000000001	3
+313	calculateNormals [primary] <313>	CPU Processor 0x1d00000000000001	3
+314	calculateNormals [primary] <314>	CPU Processor 0x1d00000000000001	3
+315	calculateNormals [primary] <315>	CPU Processor 0x1d00000000000001	3
+316	calculateNormals [primary] <316>	CPU Processor 0x1d00000000000001	3
+317	calculateNormals [primary] <317>	CPU Processor 0x1d00000000000001	3
+318	calculateNormals [primary] <318>	CPU Processor 0x1d00000000000001	3
+319	calculateNormals [primary] <319>	CPU Processor 0x1d00000000000001	3
+320	calculateNormals [primary] <320>	CPU Processor 0x1d00000000000001	3
+321	calculateNormals [primary] <321>	CPU Processor 0x1d00000000000001	3
+322	calculateNormals [primary] <322>	CPU Processor 0x1d00000000000001	3
+323	calculateNormals [primary] <323>	CPU Processor 0x1d00000000000001	3
+324	calculateNormals [primary] <324>	CPU Processor 0x1d00000000000001	3
+325	calculateNormals [primary] <325>	CPU Processor 0x1d00000000000001	3
+326	calculateNormals [primary] <326>	CPU Processor 0x1d00000000000001	3
+327	calculateNormals [primary] <327>	CPU Processor 0x1d00000000000001	3
+328	calculateNormals [primary] <328>	CPU Processor 0x1d00000000000001	3
+329	calculateNormals [primary] <329>	CPU Processor 0x1d00000000000001	3
+330	calculateNormals [primary] <330>	CPU Processor 0x1d00000000000001	3
+331	calculateNormals [primary] <331>	CPU Processor 0x1d00000000000001	3
+332	calculateNormals [primary] <332>	CPU Processor 0x1d00000000000001	3
+333	calculateNormals [primary] <333>	CPU Processor 0x1d00000000000001	3
+334	calculateNormals [primary] <334>	CPU Processor 0x1d00000000000001	3
+335	calculateNormals [primary] <335>	CPU Processor 0x1d00000000000001	3
+336	calculateNormals [primary] <336>	CPU Processor 0x1d00000000000001	3
+337	calculateNormals [primary] <337>	CPU Processor 0x1d00000000000001	3
+338	calculateNormals [primary] <338>	CPU Processor 0x1d00000000000001	3
+339	calculateNormals [primary] <339>	CPU Processor 0x1d00000000000001	3
+340	calculateNormals [primary] <340>	CPU Processor 0x1d00000000000001	3
+341	calculateNormals [primary] <341>	CPU Processor 0x1d00000000000001	3
+342	calculateNormals [primary] <342>	CPU Processor 0x1d00000000000001	3
+343	calculateNormals [primary] <343>	CPU Processor 0x1d00000000000001	3
+344	calculateNormals [primary] <344>	CPU Processor 0x1d00000000000001	3
+345	calculateNormals [primary] <345>	CPU Processor 0x1d00000000000001	3
+346	calculateNormals [primary] <346>	CPU Processor 0x1d00000000000001	3
+347	calculateNormals [primary] <347>	CPU Processor 0x1d00000000000001	3
+348	calculateNormals [primary] <348>	CPU Processor 0x1d00000000000001	3
+349	calculateNormals [primary] <349>	CPU Processor 0x1d00000000000001	3
+350	calculateNormals [primary] <350>	CPU Processor 0x1d00000000000001	3
+351	calculateNormals [primary] <351>	CPU Processor 0x1d00000000000001	3
+352	calculateNormals [primary] <352>	CPU Processor 0x1d00000000000001	3
+353	calculateNormals [primary] <353>	CPU Processor 0x1d00000000000001	3
+354	calculateNormals [primary] <354>	CPU Processor 0x1d00000000000001	3
+355	calculateNormals [primary] <355>	CPU Processor 0x1d00000000000001	3
+356	calculateNormals [primary] <356>	CPU Processor 0x1d00000000000001	3
+357	calculateNormals [primary] <357>	CPU Processor 0x1d00000000000001	3
+358	calculateNormals [primary] <358>	CPU Processor 0x1d00000000000001	3
+359	calculateNormals [primary] <359>	CPU Processor 0x1d00000000000001	3
+360	calculateNormals [primary] <360>	CPU Processor 0x1d00000000000001	3
+361	calculateNormals [primary] <361>	CPU Processor 0x1d00000000000001	3
+362	calculateNormals [primary] <362>	CPU Processor 0x1d00000000000001	3
+363	calculateNormals [primary] <363>	CPU Processor 0x1d00000000000001	3
+364	calculateNormals [primary] <364>	CPU Processor 0x1d00000000000001	3
+365	calculateNormals [primary] <365>	CPU Processor 0x1d00000000000001	3
+366	calculateNormals [primary] <366>	CPU Processor 0x1d00000000000001	3
+367	calculateNormals [primary] <367>	CPU Processor 0x1d00000000000001	3
+368	calculateNormals [primary] <368>	CPU Processor 0x1d00000000000001	3
+369	calculateNormals [primary] <369>	CPU Processor 0x1d00000000000001	3
+370	calculateNormals [primary] <370>	CPU Processor 0x1d00000000000001	3
+371	calculateNormals [primary] <371>	CPU Processor 0x1d00000000000001	3
+372	calculateNormals [primary] <372>	CPU Processor 0x1d00000000000001	3
+373	calculateNormals [primary] <373>	CPU Processor 0x1d00000000000001	3
+374	calculateNormals [primary] <374>	CPU Processor 0x1d00000000000001	3
+375	calculateNormals [primary] <375>	CPU Processor 0x1d00000000000001	3
+376	calculateNormals [primary] <376>	CPU Processor 0x1d00000000000001	3
+377	calculateNormals [primary] <377>	CPU Processor 0x1d00000000000001	3
+378	calculateNormals [primary] <378>	CPU Processor 0x1d00000000000001	3
+379	calculateNormals [primary] <379>	CPU Processor 0x1d00000000000001	3
+380	calculateNormals [primary] <380>	CPU Processor 0x1d00000000000001	3
+381	calculateNormals [primary] <381>	CPU Processor 0x1d00000000000001	3
+382	calculateNormals [primary] <382>	CPU Processor 0x1d00000000000001	3
+383	calculateNormals [primary] <383>	CPU Processor 0x1d00000000000001	3
+384	calculateNormals [primary] <384>	CPU Processor 0x1d00000000000001	3
+385	calculateNormals [primary] <385>	CPU Processor 0x1d00000000000001	3
+386	calculateNormals [primary] <386>	CPU Processor 0x1d00000000000001	3
+387	calculateNormals [primary] <387>	CPU Processor 0x1d00000000000001	3
+388	calculateNormals [primary] <388>	CPU Processor 0x1d00000000000001	3
+389	calculateNormals [primary] <389>	CPU Processor 0x1d00000000000001	3
+390	calculateNormals [primary] <390>	CPU Processor 0x1d00000000000001	3
+391	calculateNormals [primary] <391>	CPU Processor 0x1d00000000000001	3
+392	calculateNormals [primary] <392>	CPU Processor 0x1d00000000000001	3
+393	calculateNormals [primary] <393>	CPU Processor 0x1d00000000000001	3
+394	calculateNormals [primary] <394>	CPU Processor 0x1d00000000000001	3
+395	calculateNormals [primary] <395>	CPU Processor 0x1d00000000000001	3
+396	calculateNormals [primary] <396>	CPU Processor 0x1d00000000000001	3
+397	calculateNormals [primary] <397>	CPU Processor 0x1d00000000000001	3
+398	calculateNormals [primary] <398>	CPU Processor 0x1d00000000000001	3
+399	calculateNormals [primary] <399>	CPU Processor 0x1d00000000000001	3
+400	calculateNormals [primary] <400>	CPU Processor 0x1d00000000000001	3
+401	calculateNormals [primary] <401>	CPU Processor 0x1d00000000000001	3
+402	calculateNormals [primary] <402>	CPU Processor 0x1d00000000000001	3
+403	calculateNormals [primary] <403>	CPU Processor 0x1d00000000000001	3
+404	calculateNormals [primary] <404>	CPU Processor 0x1d00000000000001	3
+405	calculateNormals [primary] <405>	CPU Processor 0x1d00000000000001	3
+406	calculateNormals [primary] <406>	CPU Processor 0x1d00000000000001	3
+407	calculateNormals [primary] <407>	CPU Processor 0x1d00000000000001	3
+408	calculateNormals [primary] <408>	CPU Processor 0x1d00000000000001	3
+409	calculateNormals [primary] <409>	CPU Processor 0x1d00000000000001	3
+410	calculateNormals [primary] <410>	CPU Processor 0x1d00000000000001	3
+411	calculateNormals [primary] <411>	CPU Processor 0x1d00000000000001	3
+412	calculateNormals [primary] <412>	CPU Processor 0x1d00000000000001	3
+413	calculateNormals [primary] <413>	CPU Processor 0x1d00000000000001	3
+414	calculateNormals [primary] <414>	CPU Processor 0x1d00000000000001	3
+415	calculateNormals [primary] <415>	CPU Processor 0x1d00000000000001	3
+416	calculateNormals [primary] <416>	CPU Processor 0x1d00000000000001	3
+417	calculateNormals [primary] <417>	CPU Processor 0x1d00000000000001	3
+418	calculateNormals [primary] <418>	CPU Processor 0x1d00000000000001	3
+419	calculateNormals [primary] <419>	CPU Processor 0x1d00000000000001	3
+420	calculateNormals [primary] <420>	CPU Processor 0x1d00000000000001	3
+421	calculateNormals [primary] <421>	CPU Processor 0x1d00000000000001	3
+422	calculateNormals [primary] <422>	CPU Processor 0x1d00000000000001	3
+423	calculateNormals [primary] <423>	CPU Processor 0x1d00000000000001	3
+424	calculateNormals [primary] <424>	CPU Processor 0x1d00000000000001	3
+425	calculateNormals [primary] <425>	CPU Processor 0x1d00000000000001	3
+426	calculateNormals [primary] <426>	CPU Processor 0x1d00000000000001	3
+427	calculateNormals [primary] <427>	CPU Processor 0x1d00000000000001	3
+428	calculateNormals [primary] <428>	CPU Processor 0x1d00000000000001	3
+429	calculateNormals [primary] <429>	CPU Processor 0x1d00000000000001	3
+430	calculateNormals [primary] <430>	CPU Processor 0x1d00000000000001	3
+431	calculateNormals [primary] <431>	CPU Processor 0x1d00000000000001	3
+432	calculateNormals [primary] <432>	CPU Processor 0x1d00000000000001	3
+433	calculateNormals [primary] <433>	CPU Processor 0x1d00000000000001	3
+434	calculateNormals [primary] <434>	CPU Processor 0x1d00000000000001	3
+435	calculateNormals [primary] <435>	CPU Processor 0x1d00000000000001	3
+436	calculateNormals [primary] <436>	CPU Processor 0x1d00000000000001	3
+437	calculateNormals [primary] <437>	CPU Processor 0x1d00000000000001	3
+438	calculateNormals [primary] <438>	CPU Processor 0x1d00000000000001	3
+439	calculateNormals [primary] <439>	CPU Processor 0x1d00000000000001	3
+440	calculateNormals [primary] <440>	CPU Processor 0x1d00000000000001	3
+441	calculateNormals [primary] <441>	CPU Processor 0x1d00000000000001	3
+442	calculateNormals [primary] <442>	CPU Processor 0x1d00000000000001	3
+443	calculateNormals [primary] <443>	CPU Processor 0x1d00000000000001	3
+444	calculateNormals [primary] <444>	CPU Processor 0x1d00000000000001	3
+445	calculateNormals [primary] <445>	CPU Processor 0x1d00000000000001	3
+446	calculateNormals [primary] <446>	CPU Processor 0x1d00000000000001	3
+447	calculateNormals [primary] <447>	CPU Processor 0x1d00000000000001	3
+448	calculateNormals [primary] <448>	CPU Processor 0x1d00000000000001	3
+449	calculateNormals [primary] <449>	CPU Processor 0x1d00000000000001	3
+450	calculateNormals [primary] <450>	CPU Processor 0x1d00000000000001	3
+451	calculateNormals [primary] <451>	CPU Processor 0x1d00000000000001	3
+452	calculateNormals [primary] <452>	CPU Processor 0x1d00000000000001	3
+453	calculateNormals [primary] <453>	CPU Processor 0x1d00000000000001	3
+454	calculateNormals [primary] <454>	CPU Processor 0x1d00000000000001	3
+455	calculateNormals [primary] <455>	CPU Processor 0x1d00000000000001	3
+456	calculateNormals [primary] <456>	CPU Processor 0x1d00000000000001	3
+457	calculateNormals [primary] <457>	CPU Processor 0x1d00000000000001	3
+458	calculateNormals [primary] <458>	CPU Processor 0x1d00000000000001	3
+459	calculateNormals [primary] <459>	CPU Processor 0x1d00000000000001	3
+460	calculateNormals [primary] <460>	CPU Processor 0x1d00000000000001	3
+461	calculateNormals [primary] <461>	CPU Processor 0x1d00000000000001	3
+462	calculateNormals [primary] <462>	CPU Processor 0x1d00000000000001	3
+463	calculateNormals [primary] <463>	CPU Processor 0x1d00000000000001	3
+464	calculateNormals [primary] <464>	CPU Processor 0x1d00000000000001	3
+465	calculateNormals [primary] <465>	CPU Processor 0x1d00000000000001	3
+466	calculateNormals [primary] <466>	CPU Processor 0x1d00000000000001	3
+467	calculateNormals [primary] <467>	CPU Processor 0x1d00000000000001	3
+468	calculateNormals [primary] <468>	CPU Processor 0x1d00000000000001	3
+469	calculateNormals [primary] <469>	CPU Processor 0x1d00000000000001	3
+470	calculateNormals [primary] <470>	CPU Processor 0x1d00000000000001	3
+471	calculateNormals [primary] <471>	CPU Processor 0x1d00000000000001	3
+472	calculateNormals [primary] <472>	CPU Processor 0x1d00000000000001	3
+473	calculateNormals [primary] <473>	CPU Processor 0x1d00000000000001	3
+474	calculateNormals [primary] <474>	CPU Processor 0x1d00000000000001	3
+475	calculateNormals [primary] <475>	CPU Processor 0x1d00000000000001	3
+476	calculateNormals [primary] <476>	CPU Processor 0x1d00000000000001	3
+477	calculateNormals [primary] <477>	CPU Processor 0x1d00000000000001	3
+478	calculateNormals [primary] <478>	CPU Processor 0x1d00000000000001	3
+479	calculateNormals [primary] <479>	CPU Processor 0x1d00000000000001	3
+480	calculateNormals [primary] <480>	CPU Processor 0x1d00000000000001	3
+481	calculateNormals [primary] <481>	CPU Processor 0x1d00000000000001	3
+482	calculateNormals [primary] <482>	CPU Processor 0x1d00000000000001	3
+483	calculateNormals [primary] <483>	CPU Processor 0x1d00000000000001	3
+484	calculateNormals [primary] <484>	CPU Processor 0x1d00000000000001	3
+485	calculateNormals [primary] <485>	CPU Processor 0x1d00000000000001	3
+486	calculateNormals [primary] <486>	CPU Processor 0x1d00000000000001	3
+487	calculateNormals [primary] <487>	CPU Processor 0x1d00000000000001	3
+488	calculateNormals [primary] <488>	CPU Processor 0x1d00000000000001	3
+489	calculateNormals [primary] <489>	CPU Processor 0x1d00000000000001	3
+490	calculateNormals [primary] <490>	CPU Processor 0x1d00000000000001	3
+491	calculateNormals [primary] <491>	CPU Processor 0x1d00000000000001	3
+492	calculateNormals [primary] <492>	CPU Processor 0x1d00000000000001	3
+493	calculateNormals [primary] <493>	CPU Processor 0x1d00000000000001	3
+494	calculateNormals [primary] <494>	CPU Processor 0x1d00000000000001	3
+495	calculateNormals [primary] <495>	CPU Processor 0x1d00000000000001	3
+496	calculateNormals [primary] <496>	CPU Processor 0x1d00000000000001	3
+497	calculateNormals [primary] <497>	CPU Processor 0x1d00000000000001	3
+498	calculateNormals [primary] <498>	CPU Processor 0x1d00000000000001	3
+499	calculateNormals [primary] <499>	CPU Processor 0x1d00000000000001	3
+500	calculateNormals [primary] <500>	CPU Processor 0x1d00000000000001	3
+501	calculateNormals [primary] <501>	CPU Processor 0x1d00000000000001	3
+502	calculateNormals [primary] <502>	CPU Processor 0x1d00000000000001	3
+503	calculateNormals [primary] <503>	CPU Processor 0x1d00000000000001	3
+504	calculateNormals [primary] <504>	CPU Processor 0x1d00000000000001	3
+505	calculateNormals [primary] <505>	CPU Processor 0x1d00000000000001	3
+506	calculateNormals [primary] <506>	CPU Processor 0x1d00000000000001	3
+507	calculateNormals [primary] <507>	CPU Processor 0x1d00000000000001	3
+508	calculateNormals [primary] <508>	CPU Processor 0x1d00000000000001	3
+509	calculateNormals [primary] <509>	CPU Processor 0x1d00000000000001	3
+510	calculateNormals [primary] <510>	CPU Processor 0x1d00000000000001	3
+511	calculateNormals [primary] <511>	CPU Processor 0x1d00000000000001	3
+512	calculateNormals [primary] <512>	CPU Processor 0x1d00000000000001	3
+513	calculateNormals [primary] <513>	CPU Processor 0x1d00000000000001	3
+514	calculateNormals [primary] <514>	CPU Processor 0x1d00000000000001	3
+515	calculateNormals [primary] <515>	CPU Processor 0x1d00000000000001	3
+516	calculateNormals [primary] <516>	CPU Processor 0x1d00000000000001	3
+517	calculateNormals [primary] <517>	CPU Processor 0x1d00000000000001	3
+518	calculateNormals [primary] <518>	CPU Processor 0x1d00000000000001	3
+519	calculateNormals [primary] <519>	CPU Processor 0x1d00000000000001	3
+520	calculateNormals [primary] <520>	CPU Processor 0x1d00000000000001	3
+521	calculateNormals [primary] <521>	CPU Processor 0x1d00000000000001	3
+522	calculateNormals [primary] <522>	CPU Processor 0x1d00000000000001	3
+523	calculateNormals [primary] <523>	CPU Processor 0x1d00000000000001	3
+524	calculateNormals [primary] <524>	CPU Processor 0x1d00000000000001	3
+525	calculateNormals [primary] <525>	CPU Processor 0x1d00000000000001	3
+526	calculateNormals [primary] <526>	CPU Processor 0x1d00000000000001	3
+527	calculateNormals [primary] <527>	CPU Processor 0x1d00000000000001	3
+528	calculateNormals [primary] <528>	CPU Processor 0x1d00000000000001	3
+529	calculateNormals [primary] <529>	CPU Processor 0x1d00000000000001	3
+530	calculateNormals [primary] <530>	CPU Processor 0x1d00000000000001	3
+531	calculateNormals [primary] <531>	CPU Processor 0x1d00000000000001	3
+532	calculateNormals [primary] <532>	CPU Processor 0x1d00000000000001	3
+533	calculateNormals [primary] <533>	CPU Processor 0x1d00000000000001	3
+534	calculateNormals [primary] <534>	CPU Processor 0x1d00000000000001	3
+535	calculateNormals [primary] <535>	CPU Processor 0x1d00000000000001	3
+536	calculateNormals [primary] <536>	CPU Processor 0x1d00000000000001	3
+537	calculateNormals [primary] <537>	CPU Processor 0x1d00000000000001	3
+538	calculateNormals [primary] <538>	CPU Processor 0x1d00000000000001	3
+539	calculateNormals [primary] <539>	CPU Processor 0x1d00000000000001	3
+540	calculateNormals [primary] <540>	CPU Processor 0x1d00000000000001	3
+541	calculateNormals [primary] <541>	CPU Processor 0x1d00000000000001	3
+542	calculateNormals [primary] <542>	CPU Processor 0x1d00000000000001	3
+543	calculateNormals [primary] <543>	CPU Processor 0x1d00000000000001	3
+544	calculateNormals [primary] <544>	CPU Processor 0x1d00000000000001	3
+545	calculateNormals [primary] <545>	CPU Processor 0x1d00000000000001	3
+546	calculateNormals [primary] <546>	CPU Processor 0x1d00000000000001	3
+547	calculateNormals [primary] <547>	CPU Processor 0x1d00000000000001	3
+548	calculateNormals [primary] <548>	CPU Processor 0x1d00000000000001	3
+549	calculateNormals [primary] <549>	CPU Processor 0x1d00000000000001	3
+550	calculateNormals [primary] <550>	CPU Processor 0x1d00000000000001	3
+551	calculateNormals [primary] <551>	CPU Processor 0x1d00000000000001	3
+552	calculateNormals [primary] <552>	CPU Processor 0x1d00000000000001	3
+553	calculateNormals [primary] <553>	CPU Processor 0x1d00000000000001	3
+554	calculateNormals [primary] <554>	CPU Processor 0x1d00000000000001	3
+555	calculateNormals [primary] <555>	CPU Processor 0x1d00000000000001	3
+556	calculateNormals [primary] <556>	CPU Processor 0x1d00000000000001	3
+557	calculateNormals [primary] <557>	CPU Processor 0x1d00000000000001	3
+558	calculateNormals [primary] <558>	CPU Processor 0x1d00000000000001	3
+559	calculateNormals [primary] <559>	CPU Processor 0x1d00000000000001	3
+560	calculateNormals [primary] <560>	CPU Processor 0x1d00000000000001	3
+561	calculateNormals [primary] <561>	CPU Processor 0x1d00000000000001	3
+562	calculateNormals [primary] <562>	CPU Processor 0x1d00000000000001	3
+563	calculateNormals [primary] <563>	CPU Processor 0x1d00000000000001	3
+564	calculateNormals [primary] <564>	CPU Processor 0x1d00000000000001	3
+565	calculateNormals [primary] <565>	CPU Processor 0x1d00000000000001	3
+566	calculateNormals [primary] <566>	CPU Processor 0x1d00000000000001	3
+567	calculateNormals [primary] <567>	CPU Processor 0x1d00000000000001	3
+568	calculateNormals [primary] <568>	CPU Processor 0x1d00000000000001	3
+569	calculateNormals [primary] <569>	CPU Processor 0x1d00000000000001	3
+570	calculateNormals [primary] <570>	CPU Processor 0x1d00000000000001	3
+571	calculateNormals [primary] <571>	CPU Processor 0x1d00000000000001	3
+572	calculateNormals [primary] <572>	CPU Processor 0x1d00000000000001	3
+573	calculateNormals [primary] <573>	CPU Processor 0x1d00000000000001	3
+574	calculateNormals [primary] <574>	CPU Processor 0x1d00000000000001	3
+575	calculateNormals [primary] <575>	CPU Processor 0x1d00000000000001	3
+576	calculateNormals [primary] <576>	CPU Processor 0x1d00000000000001	3
+577	calculateNormals [primary] <577>	CPU Processor 0x1d00000000000001	3
+578	calculateNormals [primary] <578>	CPU Processor 0x1d00000000000001	3
+579	calculateNormals [primary] <579>	CPU Processor 0x1d00000000000001	3
+580	calculateNormals [primary] <580>	CPU Processor 0x1d00000000000001	3
+581	calculateNormals [primary] <581>	CPU Processor 0x1d00000000000001	3
+582	calculateNormals [primary] <582>	CPU Processor 0x1d00000000000001	3
+583	calculateNormals [primary] <583>	CPU Processor 0x1d00000000000001	3
+584	calculateNormals [primary] <584>	CPU Processor 0x1d00000000000001	3
+585	calculateNormals [primary] <585>	CPU Processor 0x1d00000000000001	3
+586	calculateNormals [primary] <586>	CPU Processor 0x1d00000000000001	3
+587	calculateNormals [primary] <587>	CPU Processor 0x1d00000000000001	3
+588	calculateNormals [primary] <588>	CPU Processor 0x1d00000000000001	3
+589	calculateNormals [primary] <589>	CPU Processor 0x1d00000000000001	3
+590	calculateNormals [primary] <590>	CPU Processor 0x1d00000000000001	3
+591	calculateNormals [primary] <591>	CPU Processor 0x1d00000000000001	3
+592	calculateNormals [primary] <592>	CPU Processor 0x1d00000000000001	3
+593	calculateNormals [primary] <593>	CPU Processor 0x1d00000000000001	3
+594	calculateNormals [primary] <594>	CPU Processor 0x1d00000000000001	3
+595	calculateNormals [primary] <595>	CPU Processor 0x1d00000000000001	3
+596	calculateNormals [primary] <596>	CPU Processor 0x1d00000000000001	3
+597	calculateNormals [primary] <597>	CPU Processor 0x1d00000000000001	3
+598	calculateNormals [primary] <598>	CPU Processor 0x1d00000000000001	3
+599	calculateNormals [primary] <599>	CPU Processor 0x1d00000000000001	3
+600	calculateNormals [primary] <600>	CPU Processor 0x1d00000000000001	3
+601	calculateNormals [primary] <601>	CPU Processor 0x1d00000000000001	3
+602	calculateNormals [primary] <602>	CPU Processor 0x1d00000000000001	3
+603	calculateNormals [primary] <603>	CPU Processor 0x1d00000000000001	3
+604	calculateNormals [primary] <604>	CPU Processor 0x1d00000000000001	3
+605	calculateNormals [primary] <605>	CPU Processor 0x1d00000000000001	3
+606	calculateNormals [primary] <606>	CPU Processor 0x1d00000000000001	3
+607	calculateNormals [primary] <607>	CPU Processor 0x1d00000000000001	3
+608	calculateNormals [primary] <608>	CPU Processor 0x1d00000000000001	3
+609	calculateNormals [primary] <609>	CPU Processor 0x1d00000000000001	3
+610	calculateNormals [primary] <610>	CPU Processor 0x1d00000000000001	3
+611	calculateNormals [primary] <611>	CPU Processor 0x1d00000000000001	3
+612	calculateNormals [primary] <612>	CPU Processor 0x1d00000000000001	3
+613	calculateNormals [primary] <613>	CPU Processor 0x1d00000000000001	3
+614	calculateNormals [primary] <614>	CPU Processor 0x1d00000000000001	3
+615	calculateNormals [primary] <615>	CPU Processor 0x1d00000000000001	3
+616	calculateNormals [primary] <616>	CPU Processor 0x1d00000000000001	3
+617	calculateNormals [primary] <617>	CPU Processor 0x1d00000000000001	3
+618	calculateNormals [primary] <618>	CPU Processor 0x1d00000000000001	3
+619	calculateNormals [primary] <619>	CPU Processor 0x1d00000000000001	3
+620	calculateNormals [primary] <620>	CPU Processor 0x1d00000000000001	3
+621	calculateNormals [primary] <621>	CPU Processor 0x1d00000000000001	3
+622	calculateNormals [primary] <622>	CPU Processor 0x1d00000000000001	3
+623	calculateNormals [primary] <623>	CPU Processor 0x1d00000000000001	3
+624	calculateNormals [primary] <624>	CPU Processor 0x1d00000000000001	3
+625	calculateNormals [primary] <625>	CPU Processor 0x1d00000000000001	3
+626	calculateNormals [primary] <626>	CPU Processor 0x1d00000000000001	3
+627	calculateNormals [primary] <627>	CPU Processor 0x1d00000000000001	3
+628	calculateNormals [primary] <628>	CPU Processor 0x1d00000000000001	3
+629	calculateNormals [primary] <629>	CPU Processor 0x1d00000000000001	3
+630	calculateNormals [primary] <630>	CPU Processor 0x1d00000000000001	3
+631	calculateNormals [primary] <631>	CPU Processor 0x1d00000000000001	3
+632	calculateNormals [primary] <632>	CPU Processor 0x1d00000000000001	3
+633	calculateNormals [primary] <633>	CPU Processor 0x1d00000000000001	3
+634	calculateNormals [primary] <634>	CPU Processor 0x1d00000000000001	3
+635	calculateNormals [primary] <635>	CPU Processor 0x1d00000000000001	3
+636	calculateNormals [primary] <636>	CPU Processor 0x1d00000000000001	3
+637	calculateNormals [primary] <637>	CPU Processor 0x1d00000000000001	3
+638	calculateNormals [primary] <638>	CPU Processor 0x1d00000000000001	3
+639	calculateNormals [primary] <639>	CPU Processor 0x1d00000000000001	3
+640	calculateNormals [primary] <640>	CPU Processor 0x1d00000000000001	3
+641	calculateNormals [primary] <641>	CPU Processor 0x1d00000000000001	3
+642	calculateNormals [primary] <642>	CPU Processor 0x1d00000000000001	3
+643	calculateNormals [primary] <643>	CPU Processor 0x1d00000000000001	3
+644	calculateNormals [primary] <644>	CPU Processor 0x1d00000000000001	3
+645	calculateNormals [primary] <645>	CPU Processor 0x1d00000000000001	3
+646	calculateNormals [primary] <646>	CPU Processor 0x1d00000000000001	3
+647	calculateNormals [primary] <647>	CPU Processor 0x1d00000000000001	3
+648	calculateNormals [primary] <648>	CPU Processor 0x1d00000000000001	3
+649	calculateNormals [primary] <649>	CPU Processor 0x1d00000000000001	3
+650	calculateNormals [primary] <650>	CPU Processor 0x1d00000000000001	3
+651	calculateNormals [primary] <651>	CPU Processor 0x1d00000000000001	3
+652	calculateNormals [primary] <652>	CPU Processor 0x1d00000000000001	3
+653	calculateNormals [primary] <653>	CPU Processor 0x1d00000000000001	3
+654	calculateNormals [primary] <654>	CPU Processor 0x1d00000000000001	3
+655	calculateNormals [primary] <655>	CPU Processor 0x1d00000000000001	3
+656	calculateNormals [primary] <656>	CPU Processor 0x1d00000000000001	3
+657	calculateNormals [primary] <657>	CPU Processor 0x1d00000000000001	3
+658	calculateNormals [primary] <658>	CPU Processor 0x1d00000000000001	3
+659	calculateNormals [primary] <659>	CPU Processor 0x1d00000000000001	3
+660	calculateNormals [primary] <660>	CPU Processor 0x1d00000000000001	3
+661	calculateNormals [primary] <661>	CPU Processor 0x1d00000000000001	3
+662	calculateNormals [primary] <662>	CPU Processor 0x1d00000000000001	3
+663	calculateNormals [primary] <663>	CPU Processor 0x1d00000000000001	3
+664	calculateNormals [primary] <664>	CPU Processor 0x1d00000000000001	3
+665	calculateNormals [primary] <665>	CPU Processor 0x1d00000000000001	3
+666	calculateNormals [primary] <666>	CPU Processor 0x1d00000000000001	3
+667	calculateNormals [primary] <667>	CPU Processor 0x1d00000000000001	3
+668	calculateNormals [primary] <668>	CPU Processor 0x1d00000000000001	3
+669	calculateNormals [primary] <669>	CPU Processor 0x1d00000000000001	3
+670	calculateNormals [primary] <670>	CPU Processor 0x1d00000000000001	3
+671	calculateNormals [primary] <671>	CPU Processor 0x1d00000000000001	3
+672	calculateNormals [primary] <672>	CPU Processor 0x1d00000000000001	3
+673	calculateNormals [primary] <673>	CPU Processor 0x1d00000000000001	3
+674	calculateNormals [primary] <674>	CPU Processor 0x1d00000000000001	3
+675	calculateNormals [primary] <675>	CPU Processor 0x1d00000000000001	3
+676	calculateNormals [primary] <676>	CPU Processor 0x1d00000000000001	3
+677	calculateNormals [primary] <677>	CPU Processor 0x1d00000000000001	3
+678	calculateNormals [primary] <678>	CPU Processor 0x1d00000000000001	3
+679	calculateNormals [primary] <679>	CPU Processor 0x1d00000000000001	3
+680	calculateNormals [primary] <680>	CPU Processor 0x1d00000000000001	3
+681	calculateNormals [primary] <681>	CPU Processor 0x1d00000000000001	3
+682	calculateNormals [primary] <682>	CPU Processor 0x1d00000000000001	3
+683	calculateNormals [primary] <683>	CPU Processor 0x1d00000000000001	3
+684	calculateNormals [primary] <684>	CPU Processor 0x1d00000000000001	3
+685	calculateNormals [primary] <685>	CPU Processor 0x1d00000000000001	3
+686	calculateNormals [primary] <686>	CPU Processor 0x1d00000000000001	3
+687	calculateNormals [primary] <687>	CPU Processor 0x1d00000000000001	3
+688	calculateNormals [primary] <688>	CPU Processor 0x1d00000000000001	3
+689	calculateNormals [primary] <689>	CPU Processor 0x1d00000000000001	3
+690	calculateNormals [primary] <690>	CPU Processor 0x1d00000000000001	3
+691	calculateNormals [primary] <691>	CPU Processor 0x1d00000000000001	3
+692	calculateNormals [primary] <692>	CPU Processor 0x1d00000000000001	3
+693	calculateNormals [primary] <693>	CPU Processor 0x1d00000000000001	3
+694	calculateNormals [primary] <694>	CPU Processor 0x1d00000000000001	3
+695	calculateNormals [primary] <695>	CPU Processor 0x1d00000000000001	3
+696	calculateNormals [primary] <696>	CPU Processor 0x1d00000000000001	3
+697	calculateNormals [primary] <697>	CPU Processor 0x1d00000000000001	3
+698	calculateNormals [primary] <698>	CPU Processor 0x1d00000000000001	3
+699	calculateNormals [primary] <699>	CPU Processor 0x1d00000000000001	3
+700	calculateNormals [primary] <700>	CPU Processor 0x1d00000000000001	3
+701	calculateNormals [primary] <701>	CPU Processor 0x1d00000000000001	3
+702	calculateNormals [primary] <702>	CPU Processor 0x1d00000000000001	3
+703	calculateNormals [primary] <703>	CPU Processor 0x1d00000000000001	3
+704	calculateNormals [primary] <704>	CPU Processor 0x1d00000000000001	3
+705	calculateNormals [primary] <705>	CPU Processor 0x1d00000000000001	3
+706	calculateNormals [primary] <706>	CPU Processor 0x1d00000000000001	3
+707	calculateNormals [primary] <707>	CPU Processor 0x1d00000000000001	3
+708	calculateNormals [primary] <708>	CPU Processor 0x1d00000000000001	3
+709	calculateNormals [primary] <709>	CPU Processor 0x1d00000000000001	3
+710	calculateNormals [primary] <710>	CPU Processor 0x1d00000000000001	3
+711	calculateNormals [primary] <711>	CPU Processor 0x1d00000000000001	3
+712	calculateNormals [primary] <712>	CPU Processor 0x1d00000000000001	3
+713	calculateNormals [primary] <713>	CPU Processor 0x1d00000000000001	3
+714	calculateNormals [primary] <714>	CPU Processor 0x1d00000000000001	3
+715	calculateNormals [primary] <715>	CPU Processor 0x1d00000000000001	3
+716	calculateNormals [primary] <716>	CPU Processor 0x1d00000000000001	3
+717	calculateNormals [primary] <717>	CPU Processor 0x1d00000000000001	3
+718	calculateNormals [primary] <718>	CPU Processor 0x1d00000000000001	3
+719	calculateNormals [primary] <719>	CPU Processor 0x1d00000000000001	3
+720	calculateNormals [primary] <720>	CPU Processor 0x1d00000000000001	3
+721	calculateNormals [primary] <721>	CPU Processor 0x1d00000000000001	3
+722	calculateNormals [primary] <722>	CPU Processor 0x1d00000000000001	3
+723	calculateNormals [primary] <723>	CPU Processor 0x1d00000000000001	3
+724	calculateNormals [primary] <724>	CPU Processor 0x1d00000000000001	3
+725	calculateNormals [primary] <725>	CPU Processor 0x1d00000000000001	3
+726	calculateNormals [primary] <726>	CPU Processor 0x1d00000000000001	3
+727	calculateNormals [primary] <727>	CPU Processor 0x1d00000000000001	3
+728	calculateNormals [primary] <728>	CPU Processor 0x1d00000000000001	3
+729	calculateNormals [primary] <729>	CPU Processor 0x1d00000000000001	3
+730	calculateNormals [primary] <730>	CPU Processor 0x1d00000000000001	3
+731	calculateNormals [primary] <731>	CPU Processor 0x1d00000000000001	3
+732	calculateNormals [primary] <732>	CPU Processor 0x1d00000000000001	3
+733	calculateNormals [primary] <733>	CPU Processor 0x1d00000000000001	3
+734	calculateNormals [primary] <734>	CPU Processor 0x1d00000000000001	3
+735	calculateNormals [primary] <735>	CPU Processor 0x1d00000000000001	3
+736	calculateNormals [primary] <736>	CPU Processor 0x1d00000000000001	3
+737	calculateNormals [primary] <737>	CPU Processor 0x1d00000000000001	3
+738	calculateNormals [primary] <738>	CPU Processor 0x1d00000000000001	3
+739	calculateNormals [primary] <739>	CPU Processor 0x1d00000000000001	3
+740	calculateNormals [primary] <740>	CPU Processor 0x1d00000000000001	3
+741	calculateNormals [primary] <741>	CPU Processor 0x1d00000000000001	3
+742	calculateNormals [primary] <742>	CPU Processor 0x1d00000000000001	3
+743	calculateNormals [primary] <743>	CPU Processor 0x1d00000000000001	3
+744	calculateNormals [primary] <744>	CPU Processor 0x1d00000000000001	3
+745	calculateNormals [primary] <745>	CPU Processor 0x1d00000000000001	3
+746	calculateNormals [primary] <746>	CPU Processor 0x1d00000000000001	3
+747	calculateNormals [primary] <747>	CPU Processor 0x1d00000000000001	3
+748	calculateNormals [primary] <748>	CPU Processor 0x1d00000000000001	3
+749	calculateNormals [primary] <749>	CPU Processor 0x1d00000000000001	3
+750	calculateNormals [primary] <750>	CPU Processor 0x1d00000000000001	3
+751	calculateNormals [primary] <751>	CPU Processor 0x1d00000000000001	3
+752	calculateNormals [primary] <752>	CPU Processor 0x1d00000000000001	3
+753	calculateNormals [primary] <753>	CPU Processor 0x1d00000000000001	3
+754	calculateNormals [primary] <754>	CPU Processor 0x1d00000000000001	3
+755	calculateNormals [primary] <755>	CPU Processor 0x1d00000000000001	3
+756	calculateNormals [primary] <756>	CPU Processor 0x1d00000000000001	3
+757	calculateNormals [primary] <757>	CPU Processor 0x1d00000000000001	3
+758	calculateNormals [primary] <758>	CPU Processor 0x1d00000000000001	3
+759	calculateNormals [primary] <759>	CPU Processor 0x1d00000000000001	3
+760	calculateNormals [primary] <760>	CPU Processor 0x1d00000000000001	3
+761	calculateNormals [primary] <761>	CPU Processor 0x1d00000000000001	3
+762	calculateNormals [primary] <762>	CPU Processor 0x1d00000000000001	3
+763	calculateNormals [primary] <763>	CPU Processor 0x1d00000000000001	3
+764	calculateNormals [primary] <764>	CPU Processor 0x1d00000000000001	3
+765	calculateNormals [primary] <765>	CPU Processor 0x1d00000000000001	3
+766	calculateNormals [primary] <766>	CPU Processor 0x1d00000000000001	3
+767	calculateNormals [primary] <767>	CPU Processor 0x1d00000000000001	3
+768	calculateNormals [primary] <768>	CPU Processor 0x1d00000000000001	3
+769	calculateNormals [primary] <769>	CPU Processor 0x1d00000000000001	3
+770	calculateNormals [primary] <770>	CPU Processor 0x1d00000000000001	3
+771	calculateNormals [primary] <771>	CPU Processor 0x1d00000000000001	3
+772	calculateNormals [primary] <772>	CPU Processor 0x1d00000000000001	3
+773	calculateNormals [primary] <773>	CPU Processor 0x1d00000000000001	3
+774	calculateNormals [primary] <774>	CPU Processor 0x1d00000000000001	3
+775	calculateNormals [primary] <775>	CPU Processor 0x1d00000000000001	3
+776	calculateNormals [primary] <776>	CPU Processor 0x1d00000000000001	3
+777	calculateNormals [primary] <777>	CPU Processor 0x1d00000000000001	3
+778	calculateNormals [primary] <778>	CPU Processor 0x1d00000000000001	3
+779	calculateNormals [primary] <779>	CPU Processor 0x1d00000000000001	3
+780	calculateNormals [primary] <780>	CPU Processor 0x1d00000000000001	3
+781	calculateNormals [primary] <781>	CPU Processor 0x1d00000000000001	3
+782	calculateNormals [primary] <782>	CPU Processor 0x1d00000000000001	3
+783	calculateNormals [primary] <783>	CPU Processor 0x1d00000000000001	3
+784	calculateNormals [primary] <784>	CPU Processor 0x1d00000000000001	3
+785	calculateNormals [primary] <785>	CPU Processor 0x1d00000000000001	3
+786	calculateNormals [primary] <786>	CPU Processor 0x1d00000000000001	3
+787	calculateNormals [primary] <787>	CPU Processor 0x1d00000000000001	3
+788	calculateNormals [primary] <788>	CPU Processor 0x1d00000000000001	3
+789	calculateNormals [primary] <789>	CPU Processor 0x1d00000000000001	3
+790	calculateNormals [primary] <790>	CPU Processor 0x1d00000000000001	3
+791	calculateNormals [primary] <791>	CPU Processor 0x1d00000000000001	3
+792	calculateNormals [primary] <792>	CPU Processor 0x1d00000000000001	3
+793	calculateNormals [primary] <793>	CPU Processor 0x1d00000000000001	3
+794	calculateNormals [primary] <794>	CPU Processor 0x1d00000000000001	3
+795	calculateNormals [primary] <795>	CPU Processor 0x1d00000000000001	3
+796	calculateNormals [primary] <796>	CPU Processor 0x1d00000000000001	3
+797	calculateNormals [primary] <797>	CPU Processor 0x1d00000000000001	3
+798	calculateNormals [primary] <798>	CPU Processor 0x1d00000000000001	3
+799	calculateNormals [primary] <799>	CPU Processor 0x1d00000000000001	3
+800	calculateNormals [primary] <800>	CPU Processor 0x1d00000000000001	3
+801	calculateNormals [primary] <801>	CPU Processor 0x1d00000000000001	3
+802	calculateNormals [primary] <802>	CPU Processor 0x1d00000000000001	3
+803	calculateNormals [primary] <803>	CPU Processor 0x1d00000000000001	3
+804	calculateNormals [primary] <804>	CPU Processor 0x1d00000000000001	3
+805	calculateNormals [primary] <805>	CPU Processor 0x1d00000000000001	3
+806	calculateNormals [primary] <806>	CPU Processor 0x1d00000000000001	3
+807	calculateNormals [primary] <807>	CPU Processor 0x1d00000000000001	3
+808	calculateNormals [primary] <808>	CPU Processor 0x1d00000000000001	3
+809	calculateNormals [primary] <809>	CPU Processor 0x1d00000000000001	3
+810	calculateNormals [primary] <810>	CPU Processor 0x1d00000000000001	3
+811	calculateNormals [primary] <811>	CPU Processor 0x1d00000000000001	3
+812	calculateNormals [primary] <812>	CPU Processor 0x1d00000000000001	3
+813	calculateNormals [primary] <813>	CPU Processor 0x1d00000000000001	3
+814	calculateNormals [primary] <814>	CPU Processor 0x1d00000000000001	3
+815	calculateNormals [primary] <815>	CPU Processor 0x1d00000000000001	3
+816	calculateNormals [primary] <816>	CPU Processor 0x1d00000000000001	3
+817	calculateNormals [primary] <817>	CPU Processor 0x1d00000000000001	3
+818	calculateNormals [primary] <818>	CPU Processor 0x1d00000000000001	3
+819	calculateNormals [primary] <819>	CPU Processor 0x1d00000000000001	3
+820	calculateNormals [primary] <820>	CPU Processor 0x1d00000000000001	3
+821	calculateNormals [primary] <821>	CPU Processor 0x1d00000000000001	3
+822	calculateNormals [primary] <822>	CPU Processor 0x1d00000000000001	3
+823	calculateNormals [primary] <823>	CPU Processor 0x1d00000000000001	3
+824	calculateNormals [primary] <824>	CPU Processor 0x1d00000000000001	3
+825	calculateNormals [primary] <825>	CPU Processor 0x1d00000000000001	3
+826	calculateNormals [primary] <826>	CPU Processor 0x1d00000000000001	3
+827	calculateNormals [primary] <827>	CPU Processor 0x1d00000000000001	3
+828	calculateNormals [primary] <828>	CPU Processor 0x1d00000000000001	3
+829	calculateNormals [primary] <829>	CPU Processor 0x1d00000000000001	3
+830	calculateNormals [primary] <830>	CPU Processor 0x1d00000000000001	3
+831	calculateNormals [primary] <831>	CPU Processor 0x1d00000000000001	3
+832	calculateNormals [primary] <832>	CPU Processor 0x1d00000000000001	3
+833	calculateNormals [primary] <833>	CPU Processor 0x1d00000000000001	3
+834	calculateNormals [primary] <834>	CPU Processor 0x1d00000000000001	3
+835	calculateNormals [primary] <835>	CPU Processor 0x1d00000000000001	3
+836	calculateNormals [primary] <836>	CPU Processor 0x1d00000000000001	3
+837	calculateNormals [primary] <837>	CPU Processor 0x1d00000000000001	3
+838	calculateNormals [primary] <838>	CPU Processor 0x1d00000000000001	3
+839	calculateNormals [primary] <839>	CPU Processor 0x1d00000000000001	3
+840	calculateNormals [primary] <840>	CPU Processor 0x1d00000000000001	3
+841	calculateNormals [primary] <841>	CPU Processor 0x1d00000000000001	3
+842	calculateNormals [primary] <842>	CPU Processor 0x1d00000000000001	3
+843	calculateNormals [primary] <843>	CPU Processor 0x1d00000000000001	3
+844	calculateNormals [primary] <844>	CPU Processor 0x1d00000000000001	3
+845	calculateNormals [primary] <845>	CPU Processor 0x1d00000000000001	3
+846	calculateNormals [primary] <846>	CPU Processor 0x1d00000000000001	3
+847	calculateNormals [primary] <847>	CPU Processor 0x1d00000000000001	3
+848	calculateNormals [primary] <848>	CPU Processor 0x1d00000000000001	3
+849	calculateNormals [primary] <849>	CPU Processor 0x1d00000000000001	3
+850	calculateNormals [primary] <850>	CPU Processor 0x1d00000000000001	3
+851	calculateNormals [primary] <851>	CPU Processor 0x1d00000000000001	3
+852	calculateNormals [primary] <852>	CPU Processor 0x1d00000000000001	3
+853	calculateNormals [primary] <853>	CPU Processor 0x1d00000000000001	3
+854	calculateNormals [primary] <854>	CPU Processor 0x1d00000000000001	3
+855	calculateNormals [primary] <855>	CPU Processor 0x1d00000000000001	3
+856	calculateNormals [primary] <856>	CPU Processor 0x1d00000000000001	3
+857	calculateNormals [primary] <857>	CPU Processor 0x1d00000000000001	3
+858	calculateNormals [primary] <858>	CPU Processor 0x1d00000000000001	3
+859	calculateNormals [primary] <859>	CPU Processor 0x1d00000000000001	3
+860	calculateNormals [primary] <860>	CPU Processor 0x1d00000000000001	3
+861	calculateNormals [primary] <861>	CPU Processor 0x1d00000000000001	3
+862	calculateNormals [primary] <862>	CPU Processor 0x1d00000000000001	3
+863	calculateNormals [primary] <863>	CPU Processor 0x1d00000000000001	3
+864	calculateNormals [primary] <864>	CPU Processor 0x1d00000000000001	3
+865	calculateNormals [primary] <865>	CPU Processor 0x1d00000000000001	3
+866	calculateNormals [primary] <866>	CPU Processor 0x1d00000000000001	3
+867	calculateNormals [primary] <867>	CPU Processor 0x1d00000000000001	3
+868	calculateNormals [primary] <868>	CPU Processor 0x1d00000000000001	3
+869	calculateNormals [primary] <869>	CPU Processor 0x1d00000000000001	3
+870	calculateNormals [primary] <870>	CPU Processor 0x1d00000000000001	3
+871	calculateNormals [primary] <871>	CPU Processor 0x1d00000000000001	3
+872	calculateNormals [primary] <872>	CPU Processor 0x1d00000000000001	3
+873	calculateNormals [primary] <873>	CPU Processor 0x1d00000000000001	3
+874	calculateNormals [primary] <874>	CPU Processor 0x1d00000000000001	3
+875	calculateNormals [primary] <875>	CPU Processor 0x1d00000000000001	3
+876	calculateNormals [primary] <876>	CPU Processor 0x1d00000000000001	3
+877	calculateNormals [primary] <877>	CPU Processor 0x1d00000000000001	3
+878	calculateNormals [primary] <878>	CPU Processor 0x1d00000000000001	3
+879	calculateNormals [primary] <879>	CPU Processor 0x1d00000000000001	3
+880	calculateNormals [primary] <880>	CPU Processor 0x1d00000000000001	3
+881	calculateNormals [primary] <881>	CPU Processor 0x1d00000000000001	3
+882	calculateNormals [primary] <882>	CPU Processor 0x1d00000000000001	3
+883	calculateNormals [primary] <883>	CPU Processor 0x1d00000000000001	3
+884	calculateNormals [primary] <884>	CPU Processor 0x1d00000000000001	3
+885	calculateNormals [primary] <885>	CPU Processor 0x1d00000000000001	3
+886	calculateNormals [primary] <886>	CPU Processor 0x1d00000000000001	3
+887	calculateNormals [primary] <887>	CPU Processor 0x1d00000000000001	3
+888	calculateNormals [primary] <888>	CPU Processor 0x1d00000000000001	3
+889	calculateNormals [primary] <889>	CPU Processor 0x1d00000000000001	3
+890	calculateNormals [primary] <890>	CPU Processor 0x1d00000000000001	3
+891	calculateNormals [primary] <891>	CPU Processor 0x1d00000000000001	3
+892	calculateNormals [primary] <892>	CPU Processor 0x1d00000000000001	3
+893	calculateNormals [primary] <893>	CPU Processor 0x1d00000000000001	3
+894	calculateNormals [primary] <894>	CPU Processor 0x1d00000000000001	3
+895	calculateNormals [primary] <895>	CPU Processor 0x1d00000000000001	3
+896	calculateNormals [primary] <896>	CPU Processor 0x1d00000000000001	3
+897	calculateNormals [primary] <897>	CPU Processor 0x1d00000000000001	3
+898	calculateNormals [primary] <898>	CPU Processor 0x1d00000000000001	3
+899	calculateNormals [primary] <899>	CPU Processor 0x1d00000000000001	3
+900	calculateNormals [primary] <900>	CPU Processor 0x1d00000000000001	3
+901	calculateNormals [primary] <901>	CPU Processor 0x1d00000000000001	3
+902	calculateNormals [primary] <902>	CPU Processor 0x1d00000000000001	3
+903	calculateNormals [primary] <903>	CPU Processor 0x1d00000000000001	3
+904	calculateNormals [primary] <904>	CPU Processor 0x1d00000000000001	3
+905	calculateNormals [primary] <905>	CPU Processor 0x1d00000000000001	3
+906	calculateNormals [primary] <906>	CPU Processor 0x1d00000000000001	3
+907	calculateNormals [primary] <907>	CPU Processor 0x1d00000000000001	3
+908	calculateNormals [primary] <908>	CPU Processor 0x1d00000000000001	3
+909	calculateNormals [primary] <909>	CPU Processor 0x1d00000000000001	3
+910	calculateNormals [primary] <910>	CPU Processor 0x1d00000000000001	3
+911	calculateNormals [primary] <911>	CPU Processor 0x1d00000000000001	3
+912	calculateNormals [primary] <912>	CPU Processor 0x1d00000000000001	3
+913	calculateNormals [primary] <913>	CPU Processor 0x1d00000000000001	3
+914	calculateNormals [primary] <914>	CPU Processor 0x1d00000000000001	3
+915	calculateNormals [primary] <915>	CPU Processor 0x1d00000000000001	3
+916	calculateNormals [primary] <916>	CPU Processor 0x1d00000000000001	3
+917	calculateNormals [primary] <917>	CPU Processor 0x1d00000000000001	3
+918	calculateNormals [primary] <918>	CPU Processor 0x1d00000000000001	3
+919	calculateNormals [primary] <919>	CPU Processor 0x1d00000000000001	3
+920	calculateNormals [primary] <920>	CPU Processor 0x1d00000000000001	3
+921	calculateNormals [primary] <921>	CPU Processor 0x1d00000000000001	3
+922	calculateNormals [primary] <922>	CPU Processor 0x1d00000000000001	3
+923	calculateNormals [primary] <923>	CPU Processor 0x1d00000000000001	3
+924	calculateNormals [primary] <924>	CPU Processor 0x1d00000000000001	3
+925	calculateNormals [primary] <925>	CPU Processor 0x1d00000000000001	3
+926	calculateNormals [primary] <926>	CPU Processor 0x1d00000000000001	3
+927	calculateNormals [primary] <927>	CPU Processor 0x1d00000000000001	3
+928	calculateNormals [primary] <928>	CPU Processor 0x1d00000000000001	3
+929	calculateNormals [primary] <929>	CPU Processor 0x1d00000000000001	3
+930	calculateNormals [primary] <930>	CPU Processor 0x1d00000000000001	3
+931	calculateNormals [primary] <931>	CPU Processor 0x1d00000000000001	3
+932	calculateNormals [primary] <932>	CPU Processor 0x1d00000000000001	3
+933	calculateNormals [primary] <933>	CPU Processor 0x1d00000000000001	3
+934	calculateNormals [primary] <934>	CPU Processor 0x1d00000000000001	3
+935	calculateNormals [primary] <935>	CPU Processor 0x1d00000000000001	3
+936	calculateNormals [primary] <936>	CPU Processor 0x1d00000000000001	3
+937	calculateNormals [primary] <937>	CPU Processor 0x1d00000000000001	3
+938	calculateNormals [primary] <938>	CPU Processor 0x1d00000000000001	3
+939	calculateNormals [primary] <939>	CPU Processor 0x1d00000000000001	3
+940	calculateNormals [primary] <940>	CPU Processor 0x1d00000000000001	3
+941	calculateNormals [primary] <941>	CPU Processor 0x1d00000000000001	3
+942	calculateNormals [primary] <942>	CPU Processor 0x1d00000000000001	3
+943	calculateNormals [primary] <943>	CPU Processor 0x1d00000000000001	3
+944	calculateNormals [primary] <944>	CPU Processor 0x1d00000000000001	3
+945	calculateNormals [primary] <945>	CPU Processor 0x1d00000000000001	3
+946	calculateNormals [primary] <946>	CPU Processor 0x1d00000000000001	3
+947	calculateNormals [primary] <947>	CPU Processor 0x1d00000000000001	3
+948	calculateNormals [primary] <948>	CPU Processor 0x1d00000000000001	3
+949	calculateNormals [primary] <949>	CPU Processor 0x1d00000000000001	3
+950	calculateNormals [primary] <950>	CPU Processor 0x1d00000000000001	3
+951	calculateNormals [primary] <951>	CPU Processor 0x1d00000000000001	3
+952	calculateNormals [primary] <952>	CPU Processor 0x1d00000000000001	3
+953	calculateNormals [primary] <953>	CPU Processor 0x1d00000000000001	3
+954	calculateNormals [primary] <954>	CPU Processor 0x1d00000000000001	3
+955	calculateNormals [primary] <955>	CPU Processor 0x1d00000000000001	3
+956	calculateNormals [primary] <956>	CPU Processor 0x1d00000000000001	3
+957	calculateNormals [primary] <957>	CPU Processor 0x1d00000000000001	3
+958	calculateNormals [primary] <958>	CPU Processor 0x1d00000000000001	3
+959	calculateNormals [primary] <959>	CPU Processor 0x1d00000000000001	3
+960	calculateNormals [primary] <960>	CPU Processor 0x1d00000000000001	3
+961	calculateNormals [primary] <961>	CPU Processor 0x1d00000000000001	3
+962	calculateNormals [primary] <962>	CPU Processor 0x1d00000000000001	3
+963	calculateNormals [primary] <963>	CPU Processor 0x1d00000000000001	3
+964	calculateNormals [primary] <964>	CPU Processor 0x1d00000000000001	3
+965	calculateNormals [primary] <965>	CPU Processor 0x1d00000000000001	3
+966	calculateNormals [primary] <966>	CPU Processor 0x1d00000000000001	3
+967	calculateNormals [primary] <967>	CPU Processor 0x1d00000000000001	3
+968	calculateNormals [primary] <968>	CPU Processor 0x1d00000000000001	3
+969	calculateNormals [primary] <969>	CPU Processor 0x1d00000000000001	3
+970	calculateNormals [primary] <970>	CPU Processor 0x1d00000000000001	3
+971	calculateNormals [primary] <971>	CPU Processor 0x1d00000000000001	3
+972	calculateNormals [primary] <972>	CPU Processor 0x1d00000000000001	3
+973	calculateNormals [primary] <973>	CPU Processor 0x1d00000000000001	3
+974	calculateNormals [primary] <974>	CPU Processor 0x1d00000000000001	3
+975	calculateNormals [primary] <975>	CPU Processor 0x1d00000000000001	3
+976	calculateNormals [primary] <976>	CPU Processor 0x1d00000000000001	3
+977	calculateNormals [primary] <977>	CPU Processor 0x1d00000000000001	3
+978	calculateNormals [primary] <978>	CPU Processor 0x1d00000000000001	3
+979	calculateNormals [primary] <979>	CPU Processor 0x1d00000000000001	3
+980	calculateNormals [primary] <980>	CPU Processor 0x1d00000000000001	3
+981	calculateNormals [primary] <981>	CPU Processor 0x1d00000000000001	3
+982	calculateNormals [primary] <982>	CPU Processor 0x1d00000000000001	3
+983	calculateNormals [primary] <983>	CPU Processor 0x1d00000000000001	3
+984	calculateNormals [primary] <984>	CPU Processor 0x1d00000000000001	3
+985	calculateNormals [primary] <985>	CPU Processor 0x1d00000000000001	3
+986	calculateNormals [primary] <986>	CPU Processor 0x1d00000000000001	3
+987	calculateNormals [primary] <987>	CPU Processor 0x1d00000000000001	3
+988	calculateNormals [primary] <988>	CPU Processor 0x1d00000000000001	3
+989	calculateNormals [primary] <989>	CPU Processor 0x1d00000000000001	3
+990	calculateNormals [primary] <990>	CPU Processor 0x1d00000000000001	3
+991	calculateNormals [primary] <991>	CPU Processor 0x1d00000000000001	3
+992	calculateNormals [primary] <992>	CPU Processor 0x1d00000000000001	3
+993	calculateNormals [primary] <993>	CPU Processor 0x1d00000000000001	3
+994	calculateNormals [primary] <994>	CPU Processor 0x1d00000000000001	3
+995	calculateNormals [primary] <995>	CPU Processor 0x1d00000000000001	3
+996	calculateNormals [primary] <996>	CPU Processor 0x1d00000000000001	3
+997	calculateNormals [primary] <997>	CPU Processor 0x1d00000000000001	3
+998	calculateNormals [primary] <998>	CPU Processor 0x1d00000000000001	3
+999	calculateNormals [primary] <999>	CPU Processor 0x1d00000000000001	3
+1000	calculateNormals [primary] <1000>	CPU Processor 0x1d00000000000001	3
+1001	calculateNormals [primary] <1001>	CPU Processor 0x1d00000000000001	3
+1002	calculateNormals [primary] <1002>	CPU Processor 0x1d00000000000001	3
+1003	calculateNormals [primary] <1003>	CPU Processor 0x1d00000000000001	3
+1004	calculateNormals [primary] <1004>	CPU Processor 0x1d00000000000001	3
+1005	calculateNormals [primary] <1005>	CPU Processor 0x1d00000000000001	3
+1006	calculateNormals [primary] <1006>	CPU Processor 0x1d00000000000001	3
+1007	calculateNormals [primary] <1007>	CPU Processor 0x1d00000000000001	3
+1008	calculateNormals [primary] <1008>	CPU Processor 0x1d00000000000001	3
+1009	calculateNormals [primary] <1009>	CPU Processor 0x1d00000000000001	3
+1010	calculateNormals [primary] <1010>	CPU Processor 0x1d00000000000001	3
+1011	calculateNormals [primary] <1011>	CPU Processor 0x1d00000000000001	3
+1012	calculateNormals [primary] <1012>	CPU Processor 0x1d00000000000001	3
+1013	calculateNormals [primary] <1013>	CPU Processor 0x1d00000000000001	3
+1014	calculateNormals [primary] <1014>	CPU Processor 0x1d00000000000001	3
+1015	calculateNormals [primary] <1015>	CPU Processor 0x1d00000000000001	3
+1016	calculateNormals [primary] <1016>	CPU Processor 0x1d00000000000001	3
+1017	calculateNormals [primary] <1017>	CPU Processor 0x1d00000000000001	3
+1018	calculateNormals [primary] <1018>	CPU Processor 0x1d00000000000001	3
+1019	calculateNormals [primary] <1019>	CPU Processor 0x1d00000000000001	3
+1020	calculateNormals [primary] <1020>	CPU Processor 0x1d00000000000001	3
+1021	calculateNormals [primary] <1021>	CPU Processor 0x1d00000000000001	3
+1022	calculateNormals [primary] <1022>	CPU Processor 0x1d00000000000001	3
+1023	calculateNormals [primary] <1023>	CPU Processor 0x1d00000000000001	3
+1024	calculateNormals [primary] <1024>	CPU Processor 0x1d00000000000001	3
+1025	calculateNormals [primary] <1025>	CPU Processor 0x1d00000000000001	3
+1026	calculateNormals [primary] <1026>	CPU Processor 0x1d00000000000001	3
+1027	calculateNormals [primary] <1027>	CPU Processor 0x1d00000000000001	3
+1028	calculateNormals [primary] <1028>	CPU Processor 0x1d00000000000001	3
+1029	calculateNormals [primary] <1029>	CPU Processor 0x1d00000000000001	3
+1030	calculateNormals [primary] <1030>	CPU Processor 0x1d00000000000001	3
+1031	calculateNormals [primary] <1031>	CPU Processor 0x1d00000000000001	3
+1032	calculateNormals [primary] <1032>	CPU Processor 0x1d00000000000001	3
+1033	calculateNormals [primary] <1033>	CPU Processor 0x1d00000000000001	3
+1034	calculateNormals [primary] <1034>	CPU Processor 0x1d00000000000001	3
+1035	calculateNormals [primary] <1035>	CPU Processor 0x1d00000000000001	3
+1036	calculateNormals [primary] <1036>	CPU Processor 0x1d00000000000001	3
+1037	calculateNormals [primary] <1037>	CPU Processor 0x1d00000000000001	3
+1038	calculateNormals [primary] <1038>	CPU Processor 0x1d00000000000001	3
+1039	calculateNormals [primary] <1039>	CPU Processor 0x1d00000000000001	3
+1040	calculateNormals [primary] <1040>	CPU Processor 0x1d00000000000001	3
+1041	calculateNormals [primary] <1041>	CPU Processor 0x1d00000000000001	3
+1042	calculateNormals [primary] <1042>	CPU Processor 0x1d00000000000001	3
+1043	calculateNormals [primary] <1043>	CPU Processor 0x1d00000000000001	3
+1044	calculateNormals [primary] <1044>	CPU Processor 0x1d00000000000001	3
+1045	calculateNormals [primary] <1045>	CPU Processor 0x1d00000000000001	3
+1046	calculateNormals [primary] <1046>	CPU Processor 0x1d00000000000001	3
+1047	calculateNormals [primary] <1047>	CPU Processor 0x1d00000000000001	3
+1048	calculateNormals [primary] <1048>	CPU Processor 0x1d00000000000001	3
+1049	calculateNormals [primary] <1049>	CPU Processor 0x1d00000000000001	3
+1050	calculateNormals [primary] <1050>	CPU Processor 0x1d00000000000001	3
+1051	calculateNormals [primary] <1051>	CPU Processor 0x1d00000000000001	3
+1052	calculateNormals [primary] <1052>	CPU Processor 0x1d00000000000001	3
+1053	calculateNormals [primary] <1053>	CPU Processor 0x1d00000000000001	3
+1054	calculateNormals [primary] <1054>	CPU Processor 0x1d00000000000001	3
+1055	calculateNormals [primary] <1055>	CPU Processor 0x1d00000000000001	3
+1056	calculateNormals [primary] <1056>	CPU Processor 0x1d00000000000001	3
+1057	calculateNormals [primary] <1057>	CPU Processor 0x1d00000000000001	3
+1058	calculateNormals [primary] <1058>	CPU Processor 0x1d00000000000001	3
+1059	calculateNormals [primary] <1059>	CPU Processor 0x1d00000000000001	3
+1060	calculateNormals [primary] <1060>	CPU Processor 0x1d00000000000001	3
+1061	calculateNormals [primary] <1061>	CPU Processor 0x1d00000000000001	3
+1062	calculateNormals [primary] <1062>	CPU Processor 0x1d00000000000001	3
+1063	calculateNormals [primary] <1063>	CPU Processor 0x1d00000000000001	3
+1064	calculateNormals [primary] <1064>	CPU Processor 0x1d00000000000001	3
+1065	calculateNormals [primary] <1065>	CPU Processor 0x1d00000000000001	3
+1066	calculateNormals [primary] <1066>	CPU Processor 0x1d00000000000001	3
+1067	calculateNormals [primary] <1067>	CPU Processor 0x1d00000000000001	3
+1068	calculateNormals [primary] <1068>	CPU Processor 0x1d00000000000001	3
+1069	calculateNormals [primary] <1069>	CPU Processor 0x1d00000000000001	3
+1070	calculateNormals [primary] <1070>	CPU Processor 0x1d00000000000001	3
+1071	calculateNormals [primary] <1071>	CPU Processor 0x1d00000000000001	3
+1072	calculateNormals [primary] <1072>	CPU Processor 0x1d00000000000001	3
+1073	calculateNormals [primary] <1073>	CPU Processor 0x1d00000000000001	3
+1074	calculateNormals [primary] <1074>	CPU Processor 0x1d00000000000001	3
+1075	calculateNormals [primary] <1075>	CPU Processor 0x1d00000000000001	3
+1076	calculateNormals [primary] <1076>	CPU Processor 0x1d00000000000001	3
+1077	calculateNormals [primary] <1077>	CPU Processor 0x1d00000000000001	3
+1078	calculateNormals [primary] <1078>	CPU Processor 0x1d00000000000001	3
+1079	calculateNormals [primary] <1079>	CPU Processor 0x1d00000000000001	3
+1080	calculateNormals [primary] <1080>	CPU Processor 0x1d00000000000001	3
+1081	calculateNormals [primary] <1081>	CPU Processor 0x1d00000000000001	3
+1082	calculateNormals [primary] <1082>	CPU Processor 0x1d00000000000001	3
+1083	calculateNormals [primary] <1083>	CPU Processor 0x1d00000000000001	3
+1084	calculateNormals [primary] <1084>	CPU Processor 0x1d00000000000001	3
+1085	calculateNormals [primary] <1085>	CPU Processor 0x1d00000000000001	3
+1086	calculateNormals [primary] <1086>	CPU Processor 0x1d00000000000001	3
+1087	calculateNormals [primary] <1087>	CPU Processor 0x1d00000000000001	3
+1088	calculateNormals [primary] <1088>	CPU Processor 0x1d00000000000001	3
+1089	calculateNormals [primary] <1089>	CPU Processor 0x1d00000000000001	3
+1090	calculateNormals [primary] <1090>	CPU Processor 0x1d00000000000001	3
+1091	calculateNormals [primary] <1091>	CPU Processor 0x1d00000000000001	3
+1092	calculateNormals [primary] <1092>	CPU Processor 0x1d00000000000001	3
+1093	calculateNormals [primary] <1093>	CPU Processor 0x1d00000000000001	3
+1094	calculateNormals [primary] <1094>	CPU Processor 0x1d00000000000001	3
+1095	calculateNormals [primary] <1095>	CPU Processor 0x1d00000000000001	3
+1096	calculateNormals [primary] <1096>	CPU Processor 0x1d00000000000001	3
+1097	calculateNormals [primary] <1097>	CPU Processor 0x1d00000000000001	3
+1098	calculateNormals [primary] <1098>	CPU Processor 0x1d00000000000001	3
+1099	calculateNormals [primary] <1099>	CPU Processor 0x1d00000000000001	3
+1100	calculateNormals [primary] <1100>	CPU Processor 0x1d00000000000001	3
+1101	calculateNormals [primary] <1101>	CPU Processor 0x1d00000000000001	3
+1102	calculateNormals [primary] <1102>	CPU Processor 0x1d00000000000001	3
+1103	calculateNormals [primary] <1103>	CPU Processor 0x1d00000000000001	3
+1104	calculateNormals [primary] <1104>	CPU Processor 0x1d00000000000001	3
+1105	calculateNormals [primary] <1105>	CPU Processor 0x1d00000000000001	3
+1106	calculateNormals [primary] <1106>	CPU Processor 0x1d00000000000001	3
+1107	calculateNormals [primary] <1107>	CPU Processor 0x1d00000000000001	3
+1108	calculateNormals [primary] <1108>	CPU Processor 0x1d00000000000001	3
+1109	calculateNormals [primary] <1109>	CPU Processor 0x1d00000000000001	3
+1110	calculateNormals [primary] <1110>	CPU Processor 0x1d00000000000001	3
+1111	calculateNormals [primary] <1111>	CPU Processor 0x1d00000000000001	3
+1112	calculateNormals [primary] <1112>	CPU Processor 0x1d00000000000001	3
+1113	calculateNormals [primary] <1113>	CPU Processor 0x1d00000000000001	3
+1114	calculateNormals [primary] <1114>	CPU Processor 0x1d00000000000001	3
+1115	calculateNormals [primary] <1115>	CPU Processor 0x1d00000000000001	3
+1116	calculateNormals [primary] <1116>	CPU Processor 0x1d00000000000001	3
+1117	calculateNormals [primary] <1117>	CPU Processor 0x1d00000000000001	3
+1118	calculateNormals [primary] <1118>	CPU Processor 0x1d00000000000001	3
+1119	calculateNormals [primary] <1119>	CPU Processor 0x1d00000000000001	3
+1120	calculateNormals [primary] <1120>	CPU Processor 0x1d00000000000001	3
+1121	calculateNormals [primary] <1121>	CPU Processor 0x1d00000000000001	3
+1122	calculateNormals [primary] <1122>	CPU Processor 0x1d00000000000001	3
+1123	calculateNormals [primary] <1123>	CPU Processor 0x1d00000000000001	3
+1124	calculateNormals [primary] <1124>	CPU Processor 0x1d00000000000001	3
+1125	calculateNormals [primary] <1125>	CPU Processor 0x1d00000000000001	3
+1126	calculateNormals [primary] <1126>	CPU Processor 0x1d00000000000001	3
+1127	calculateNormals [primary] <1127>	CPU Processor 0x1d00000000000001	3
+1128	calculateNormals [primary] <1128>	CPU Processor 0x1d00000000000001	3
+1129	calculateNormals [primary] <1129>	CPU Processor 0x1d00000000000001	3
+1130	calculateNormals [primary] <1130>	CPU Processor 0x1d00000000000001	3
+1131	calculateNormals [primary] <1131>	CPU Processor 0x1d00000000000001	3
+1132	calculateNormals [primary] <1132>	CPU Processor 0x1d00000000000001	3
+1133	calculateNormals [primary] <1133>	CPU Processor 0x1d00000000000001	3
+1134	calculateNormals [primary] <1134>	CPU Processor 0x1d00000000000001	3
+1135	calculateNormals [primary] <1135>	CPU Processor 0x1d00000000000001	3
+1136	calculateNormals [primary] <1136>	CPU Processor 0x1d00000000000001	3
+1137	calculateNormals [primary] <1137>	CPU Processor 0x1d00000000000001	3
+1138	calculateNormals [primary] <1138>	CPU Processor 0x1d00000000000001	3
+1139	calculateNormals [primary] <1139>	CPU Processor 0x1d00000000000001	3
+1140	calculateNormals [primary] <1140>	CPU Processor 0x1d00000000000001	3
+1141	calculateNormals [primary] <1141>	CPU Processor 0x1d00000000000001	3
+1142	calculateNormals [primary] <1142>	CPU Processor 0x1d00000000000001	3
+1143	calculateNormals [primary] <1143>	CPU Processor 0x1d00000000000001	3
+1144	calculateNormals [primary] <1144>	CPU Processor 0x1d00000000000001	3
+1145	calculateNormals [primary] <1145>	CPU Processor 0x1d00000000000001	3
+1146	calculateNormals [primary] <1146>	CPU Processor 0x1d00000000000001	3
+1147	calculateNormals [primary] <1147>	CPU Processor 0x1d00000000000001	3
+1148	calculateNormals [primary] <1148>	CPU Processor 0x1d00000000000001	3
+1149	calculateNormals [primary] <1149>	CPU Processor 0x1d00000000000001	3
+1150	calculateNormals [primary] <1150>	CPU Processor 0x1d00000000000001	3
+1151	calculateNormals [primary] <1151>	CPU Processor 0x1d00000000000001	3
+1152	calculateNormals [primary] <1152>	CPU Processor 0x1d00000000000001	3
+1153	calculateNormals [primary] <1153>	CPU Processor 0x1d00000000000001	3
+1154	calculateNormals [primary] <1154>	CPU Processor 0x1d00000000000001	3
+1155	calculateNormals [primary] <1155>	CPU Processor 0x1d00000000000001	3
+1156	calculateNormals [primary] <1156>	CPU Processor 0x1d00000000000001	3
+1157	calculateNormals [primary] <1157>	CPU Processor 0x1d00000000000001	3
+1158	calculateNormals [primary] <1158>	CPU Processor 0x1d00000000000001	3
+1159	calculateNormals [primary] <1159>	CPU Processor 0x1d00000000000001	3
+1160	calculateNormals [primary] <1160>	CPU Processor 0x1d00000000000001	3
+1161	calculateNormals [primary] <1161>	CPU Processor 0x1d00000000000001	3
+1162	calculateNormals [primary] <1162>	CPU Processor 0x1d00000000000001	3
+1163	calculateNormals [primary] <1163>	CPU Processor 0x1d00000000000001	3
+1164	calculateNormals [primary] <1164>	CPU Processor 0x1d00000000000001	3
+1165	calculateNormals [primary] <1165>	CPU Processor 0x1d00000000000001	3
+1166	calculateNormals [primary] <1166>	CPU Processor 0x1d00000000000001	3
+1167	calculateNormals [primary] <1167>	CPU Processor 0x1d00000000000001	3
+1168	calculateNormals [primary] <1168>	CPU Processor 0x1d00000000000001	3
+1169	calculateNormals [primary] <1169>	CPU Processor 0x1d00000000000001	3
+1170	calculateNormals [primary] <1170>	CPU Processor 0x1d00000000000001	3
+1171	calculateNormals [primary] <1171>	CPU Processor 0x1d00000000000001	3
+1172	calculateNormals [primary] <1172>	CPU Processor 0x1d00000000000001	3
+1173	calculateNormals [primary] <1173>	CPU Processor 0x1d00000000000001	3
+1174	calculateNormals [primary] <1174>	CPU Processor 0x1d00000000000001	3
+1175	calculateNormals [primary] <1175>	CPU Processor 0x1d00000000000001	3
+1176	calculateNormals [primary] <1176>	CPU Processor 0x1d00000000000001	3
+1177	calculateNormals [primary] <1177>	CPU Processor 0x1d00000000000001	3
+1178	calculateNormals [primary] <1178>	CPU Processor 0x1d00000000000001	3
+1179	calculateNormals [primary] <1179>	CPU Processor 0x1d00000000000001	3
+1180	calculateNormals [primary] <1180>	CPU Processor 0x1d00000000000001	3
+1181	calculateNormals [primary] <1181>	CPU Processor 0x1d00000000000001	3
+1182	calculateNormals [primary] <1182>	CPU Processor 0x1d00000000000001	3
+1183	calculateNormals [primary] <1183>	CPU Processor 0x1d00000000000001	3
+1184	calculateNormals [primary] <1184>	CPU Processor 0x1d00000000000001	3
+1185	calculateNormals [primary] <1185>	CPU Processor 0x1d00000000000001	3
+1186	calculateNormals [primary] <1186>	CPU Processor 0x1d00000000000001	3
+1187	calculateNormals [primary] <1187>	CPU Processor 0x1d00000000000001	3
+1188	calculateNormals [primary] <1188>	CPU Processor 0x1d00000000000001	3
+1189	calculateNormals [primary] <1189>	CPU Processor 0x1d00000000000001	3
+1190	calculateNormals [primary] <1190>	CPU Processor 0x1d00000000000001	3
+1191	calculateNormals [primary] <1191>	CPU Processor 0x1d00000000000001	3
+1192	calculateNormals [primary] <1192>	CPU Processor 0x1d00000000000001	3
+1193	calculateNormals [primary] <1193>	CPU Processor 0x1d00000000000001	3
+1194	calculateNormals [primary] <1194>	CPU Processor 0x1d00000000000001	3
+1195	calculateNormals [primary] <1195>	CPU Processor 0x1d00000000000001	3
+1196	calculateNormals [primary] <1196>	CPU Processor 0x1d00000000000001	3
+1197	calculateNormals [primary] <1197>	CPU Processor 0x1d00000000000001	3
+1198	calculateNormals [primary] <1198>	CPU Processor 0x1d00000000000001	3
+1199	calculateNormals [primary] <1199>	CPU Processor 0x1d00000000000001	3
+1200	calculateNormals [primary] <1200>	CPU Processor 0x1d00000000000001	3
+1201	calculateNormals [primary] <1201>	CPU Processor 0x1d00000000000001	3
+1202	calculateNormals [primary] <1202>	CPU Processor 0x1d00000000000001	3
+1203	calculateNormals [primary] <1203>	CPU Processor 0x1d00000000000001	3
+1204	calculateNormals [primary] <1204>	CPU Processor 0x1d00000000000001	3
+1205	calculateNormals [primary] <1205>	CPU Processor 0x1d00000000000001	3
+1206	calculateNormals [primary] <1206>	CPU Processor 0x1d00000000000001	3
+1207	calculateNormals [primary] <1207>	CPU Processor 0x1d00000000000001	3
+1208	calculateNormals [primary] <1208>	CPU Processor 0x1d00000000000001	3
+1209	calculateNormals [primary] <1209>	CPU Processor 0x1d00000000000001	3
+1210	calculateNormals [primary] <1210>	CPU Processor 0x1d00000000000001	3
+1211	calculateNormals [primary] <1211>	CPU Processor 0x1d00000000000001	3
+1212	calculateNormals [primary] <1212>	CPU Processor 0x1d00000000000001	3
+1213	calculateNormals [primary] <1213>	CPU Processor 0x1d00000000000001	3
+1214	calculateNormals [primary] <1214>	CPU Processor 0x1d00000000000001	3
+1215	calculateNormals [primary] <1215>	CPU Processor 0x1d00000000000001	3
+1216	calculateNormals [primary] <1216>	CPU Processor 0x1d00000000000001	3
+1217	calculateNormals [primary] <1217>	CPU Processor 0x1d00000000000001	3
+1218	calculateNormals [primary] <1218>	CPU Processor 0x1d00000000000001	3
+1219	calculateNormals [primary] <1219>	CPU Processor 0x1d00000000000001	3
+1220	calculateNormals [primary] <1220>	CPU Processor 0x1d00000000000001	3
+1221	calculateNormals [primary] <1221>	CPU Processor 0x1d00000000000001	3
+1222	calculateNormals [primary] <1222>	CPU Processor 0x1d00000000000001	3
+1223	calculateNormals [primary] <1223>	CPU Processor 0x1d00000000000001	3
+1224	calculateNormals [primary] <1224>	CPU Processor 0x1d00000000000001	3
+1225	calculateNormals [primary] <1225>	CPU Processor 0x1d00000000000001	3
+1226	calculateNormals [primary] <1226>	CPU Processor 0x1d00000000000001	3
+1227	calculateNormals [primary] <1227>	CPU Processor 0x1d00000000000001	3
+1228	calculateNormals [primary] <1228>	CPU Processor 0x1d00000000000001	3
+1229	calculateNormals [primary] <1229>	CPU Processor 0x1d00000000000001	3
+1230	calculateNormals [primary] <1230>	CPU Processor 0x1d00000000000001	3
+1231	calculateNormals [primary] <1231>	CPU Processor 0x1d00000000000001	3
+1232	calculateNormals [primary] <1232>	CPU Processor 0x1d00000000000001	3
+1233	calculateNormals [primary] <1233>	CPU Processor 0x1d00000000000001	3
+1234	calculateNormals [primary] <1234>	CPU Processor 0x1d00000000000001	3
+1235	calculateNormals [primary] <1235>	CPU Processor 0x1d00000000000001	3
+1236	calculateNormals [primary] <1236>	CPU Processor 0x1d00000000000001	3
+1237	calculateNormals [primary] <1237>	CPU Processor 0x1d00000000000001	3
+1238	calculateNormals [primary] <1238>	CPU Processor 0x1d00000000000001	3
+1239	calculateNormals [primary] <1239>	CPU Processor 0x1d00000000000001	3
+1240	calculateNormals [primary] <1240>	CPU Processor 0x1d00000000000001	3
+1241	calculateNormals [primary] <1241>	CPU Processor 0x1d00000000000001	3
+1242	calculateNormals [primary] <1242>	CPU Processor 0x1d00000000000001	3
+1243	calculateNormals [primary] <1243>	CPU Processor 0x1d00000000000001	3
+1244	calculateNormals [primary] <1244>	CPU Processor 0x1d00000000000001	3
+1245	calculateNormals [primary] <1245>	CPU Processor 0x1d00000000000001	3
+1246	calculateNormals [primary] <1246>	CPU Processor 0x1d00000000000001	3
+1247	calculateNormals [primary] <1247>	CPU Processor 0x1d00000000000001	3
+1248	calculateNormals [primary] <1248>	CPU Processor 0x1d00000000000001	3
+1249	calculateNormals [primary] <1249>	CPU Processor 0x1d00000000000001	3
+1250	calculateNormals [primary] <1250>	CPU Processor 0x1d00000000000001	3
+1251	calculateNormals [primary] <1251>	CPU Processor 0x1d00000000000001	3
+1252	calculateNormals [primary] <1252>	CPU Processor 0x1d00000000000001	3
+1253	calculateNormals [primary] <1253>	CPU Processor 0x1d00000000000001	3
+1254	calculateNormals [primary] <1254>	CPU Processor 0x1d00000000000001	3
+1255	calculateNormals [primary] <1255>	CPU Processor 0x1d00000000000001	3
+1256	calculateNormals [primary] <1256>	CPU Processor 0x1d00000000000001	3
+1257	calculateNormals [primary] <1257>	CPU Processor 0x1d00000000000001	3
+1258	calculateNormals [primary] <1258>	CPU Processor 0x1d00000000000001	3
+1259	calculateNormals [primary] <1259>	CPU Processor 0x1d00000000000001	3
+1260	calculateNormals [primary] <1260>	CPU Processor 0x1d00000000000001	3
+1261	calculateNormals [primary] <1261>	CPU Processor 0x1d00000000000001	3
+1262	calculateNormals [primary] <1262>	CPU Processor 0x1d00000000000001	3
+1263	calculateNormals [primary] <1263>	CPU Processor 0x1d00000000000001	3
+1264	calculateNormals [primary] <1264>	CPU Processor 0x1d00000000000001	3
+1265	calculateNormals [primary] <1265>	CPU Processor 0x1d00000000000001	3
+1266	calculateNormals [primary] <1266>	CPU Processor 0x1d00000000000001	3
+1267	calculateNormals [primary] <1267>	CPU Processor 0x1d00000000000001	3
+1268	calculateNormals [primary] <1268>	CPU Processor 0x1d00000000000001	3
+1269	calculateNormals [primary] <1269>	CPU Processor 0x1d00000000000001	3
+1270	calculateNormals [primary] <1270>	CPU Processor 0x1d00000000000001	3
+1271	calculateNormals [primary] <1271>	CPU Processor 0x1d00000000000001	3
+1272	calculateNormals [primary] <1272>	CPU Processor 0x1d00000000000001	3
+1273	calculateNormals [primary] <1273>	CPU Processor 0x1d00000000000001	3
+1274	calculateNormals [primary] <1274>	CPU Processor 0x1d00000000000001	3
+1275	calculateNormals [primary] <1275>	CPU Processor 0x1d00000000000001	3
+1276	calculateNormals [primary] <1276>	CPU Processor 0x1d00000000000001	3
+1277	calculateNormals [primary] <1277>	CPU Processor 0x1d00000000000001	3
+1278	calculateNormals [primary] <1278>	CPU Processor 0x1d00000000000001	3
+1279	calculateNormals [primary] <1279>	CPU Processor 0x1d00000000000001	3
+1280	calculateNormals [primary] <1280>	CPU Processor 0x1d00000000000001	3
+1281	calculateNormals [primary] <1281>	CPU Processor 0x1d00000000000001	3
+1282	calculateNormals [primary] <1282>	CPU Processor 0x1d00000000000001	3
+1283	calculateNormals [primary] <1283>	CPU Processor 0x1d00000000000001	3
+1284	calculateNormals [primary] <1284>	CPU Processor 0x1d00000000000001	3
+1285	calculateNormals [primary] <1285>	CPU Processor 0x1d00000000000001	3
+1286	calculateNormals [primary] <1286>	CPU Processor 0x1d00000000000001	3
+1287	calculateNormals [primary] <1287>	CPU Processor 0x1d00000000000001	3
+1288	calculateNormals [primary] <1288>	CPU Processor 0x1d00000000000001	3
+1289	calculateNormals [primary] <1289>	CPU Processor 0x1d00000000000001	3
+1290	calculateNormals [primary] <1290>	CPU Processor 0x1d00000000000001	3
+1291	calculateNormals [primary] <1291>	CPU Processor 0x1d00000000000001	3
+1292	calculateNormals [primary] <1292>	CPU Processor 0x1d00000000000001	3
+1293	calculateNormals [primary] <1293>	CPU Processor 0x1d00000000000001	3
+1294	calculateNormals [primary] <1294>	CPU Processor 0x1d00000000000001	3
+1295	calculateNormals [primary] <1295>	CPU Processor 0x1d00000000000001	3
+1296	calculateNormals [primary] <1296>	CPU Processor 0x1d00000000000001	3
+1297	calculateNormals [primary] <1297>	CPU Processor 0x1d00000000000001	3
+1298	calculateNormals [primary] <1298>	CPU Processor 0x1d00000000000001	3
+1299	calculateNormals [primary] <1299>	CPU Processor 0x1d00000000000001	3
+1300	calculateNormals [primary] <1300>	CPU Processor 0x1d00000000000001	3
+1301	calculateNormals [primary] <1301>	CPU Processor 0x1d00000000000001	3
+1302	calculateNormals [primary] <1302>	CPU Processor 0x1d00000000000001	3
+1303	calculateNormals [primary] <1303>	CPU Processor 0x1d00000000000001	3
+1304	calculateNormals [primary] <1304>	CPU Processor 0x1d00000000000001	3
+1305	calculateNormals [primary] <1305>	CPU Processor 0x1d00000000000001	3
+1306	calculateNormals [primary] <1306>	CPU Processor 0x1d00000000000001	3
+1307	calculateNormals [primary] <1307>	CPU Processor 0x1d00000000000001	3
+1308	calculateNormals [primary] <1308>	CPU Processor 0x1d00000000000001	3
+1309	calculateNormals [primary] <1309>	CPU Processor 0x1d00000000000001	3
+1310	calculateNormals [primary] <1310>	CPU Processor 0x1d00000000000001	3
+1311	calculateNormals [primary] <1311>	CPU Processor 0x1d00000000000001	3
+1312	calculateNormals [primary] <1312>	CPU Processor 0x1d00000000000001	3
+1313	calculateNormals [primary] <1313>	CPU Processor 0x1d00000000000001	3
+1314	calculateNormals [primary] <1314>	CPU Processor 0x1d00000000000001	3
+1315	calculateNormals [primary] <1315>	CPU Processor 0x1d00000000000001	3
+1316	calculateNormals [primary] <1316>	CPU Processor 0x1d00000000000001	3
+1317	calculateNormals [primary] <1317>	CPU Processor 0x1d00000000000001	3
+1318	calculateNormals [primary] <1318>	CPU Processor 0x1d00000000000001	3
+1319	calculateNormals [primary] <1319>	CPU Processor 0x1d00000000000001	3
+1320	calculateNormals [primary] <1320>	CPU Processor 0x1d00000000000001	3
+1321	calculateNormals [primary] <1321>	CPU Processor 0x1d00000000000001	3
+1322	calculateNormals [primary] <1322>	CPU Processor 0x1d00000000000001	3
+1323	calculateNormals [primary] <1323>	CPU Processor 0x1d00000000000001	3
+1324	calculateNormals [primary] <1324>	CPU Processor 0x1d00000000000001	3
+1325	calculateNormals [primary] <1325>	CPU Processor 0x1d00000000000001	3
+1326	calculateNormals [primary] <1326>	CPU Processor 0x1d00000000000001	3
+1327	calculateNormals [primary] <1327>	CPU Processor 0x1d00000000000001	3
+1328	calculateNormals [primary] <1328>	CPU Processor 0x1d00000000000001	3
+1329	calculateNormals [primary] <1329>	CPU Processor 0x1d00000000000001	3
+1330	calculateNormals [primary] <1330>	CPU Processor 0x1d00000000000001	3
+1331	calculateNormals [primary] <1331>	CPU Processor 0x1d00000000000001	3
+1332	calculateNormals [primary] <1332>	CPU Processor 0x1d00000000000001	3
+1333	calculateNormals [primary] <1333>	CPU Processor 0x1d00000000000001	3
+1334	calculateNormals [primary] <1334>	CPU Processor 0x1d00000000000001	3
+1335	calculateNormals [primary] <1335>	CPU Processor 0x1d00000000000001	3
+1336	calculateNormals [primary] <1336>	CPU Processor 0x1d00000000000001	3
+1337	calculateNormals [primary] <1337>	CPU Processor 0x1d00000000000001	3
+1338	calculateNormals [primary] <1338>	CPU Processor 0x1d00000000000001	3
+1339	calculateNormals [primary] <1339>	CPU Processor 0x1d00000000000001	3
+1340	calculateNormals [primary] <1340>	CPU Processor 0x1d00000000000001	3
+1341	calculateNormals [primary] <1341>	CPU Processor 0x1d00000000000001	3
+1342	calculateNormals [primary] <1342>	CPU Processor 0x1d00000000000001	3
+1343	calculateNormals [primary] <1343>	CPU Processor 0x1d00000000000001	3
+1344	calculateNormals [primary] <1344>	CPU Processor 0x1d00000000000001	3
+1345	calculateNormals [primary] <1345>	CPU Processor 0x1d00000000000001	3
+1346	calculateNormals [primary] <1346>	CPU Processor 0x1d00000000000001	3
+1347	calculateNormals [primary] <1347>	CPU Processor 0x1d00000000000001	3
+1348	calculateNormals [primary] <1348>	CPU Processor 0x1d00000000000001	3
+1349	calculateNormals [primary] <1349>	CPU Processor 0x1d00000000000001	3
+1350	calculateNormals [primary] <1350>	CPU Processor 0x1d00000000000001	3
+1351	calculateNormals [primary] <1351>	CPU Processor 0x1d00000000000001	3
+1352	calculateNormals [primary] <1352>	CPU Processor 0x1d00000000000001	3
+1353	calculateNormals [primary] <1353>	CPU Processor 0x1d00000000000001	3
+1354	calculateNormals [primary] <1354>	CPU Processor 0x1d00000000000001	3
+1355	calculateNormals [primary] <1355>	CPU Processor 0x1d00000000000001	3
+1356	calculateNormals [primary] <1356>	CPU Processor 0x1d00000000000001	3
+1357	calculateNormals [primary] <1357>	CPU Processor 0x1d00000000000001	3
+1358	calculateNormals [primary] <1358>	CPU Processor 0x1d00000000000001	3
+1359	calculateNormals [primary] <1359>	CPU Processor 0x1d00000000000001	3
+1360	calculateNormals [primary] <1360>	CPU Processor 0x1d00000000000001	3
+1361	calculateNormals [primary] <1361>	CPU Processor 0x1d00000000000001	3
+1362	calculateNormals [primary] <1362>	CPU Processor 0x1d00000000000001	3
+1363	calculateNormals [primary] <1363>	CPU Processor 0x1d00000000000001	3
+1364	calculateNormals [primary] <1364>	CPU Processor 0x1d00000000000001	3
+1365	calculateNormals [primary] <1365>	CPU Processor 0x1d00000000000001	3
+1366	calculateNormals [primary] <1366>	CPU Processor 0x1d00000000000001	3
+1367	calculateNormals [primary] <1367>	CPU Processor 0x1d00000000000001	3
+1368	calculateNormals [primary] <1368>	CPU Processor 0x1d00000000000001	3
+1369	calculateNormals [primary] <1369>	CPU Processor 0x1d00000000000001	3
+1370	calculateNormals [primary] <1370>	CPU Processor 0x1d00000000000001	3
+1371	calculateNormals [primary] <1371>	CPU Processor 0x1d00000000000001	3
+1372	calculateNormals [primary] <1372>	CPU Processor 0x1d00000000000001	3
+1373	calculateNormals [primary] <1373>	CPU Processor 0x1d00000000000001	3
+1374	calculateNormals [primary] <1374>	CPU Processor 0x1d00000000000001	3
+1375	calculateNormals [primary] <1375>	CPU Processor 0x1d00000000000001	3
+1376	calculateNormals [primary] <1376>	CPU Processor 0x1d00000000000001	3
+1377	calculateNormals [primary] <1377>	CPU Processor 0x1d00000000000001	3
+1378	calculateNormals [primary] <1378>	CPU Processor 0x1d00000000000001	3
+1379	calculateNormals [primary] <1379>	CPU Processor 0x1d00000000000001	3
+1380	calculateNormals [primary] <1380>	CPU Processor 0x1d00000000000001	3
+1381	calculateNormals [primary] <1381>	CPU Processor 0x1d00000000000001	3
+1382	calculateNormals [primary] <1382>	CPU Processor 0x1d00000000000001	3
+1383	calculateNormals [primary] <1383>	CPU Processor 0x1d00000000000001	3
+1384	calculateNormals [primary] <1384>	CPU Processor 0x1d00000000000001	3
+1385	calculateNormals [primary] <1385>	CPU Processor 0x1d00000000000001	3
+1386	calculateNormals [primary] <1386>	CPU Processor 0x1d00000000000001	3
+1387	calculateNormals [primary] <1387>	CPU Processor 0x1d00000000000001	3
+1388	calculateNormals [primary] <1388>	CPU Processor 0x1d00000000000001	3
+1389	calculateNormals [primary] <1389>	CPU Processor 0x1d00000000000001	3
+1390	calculateNormals [primary] <1390>	CPU Processor 0x1d00000000000001	3
+1391	calculateNormals [primary] <1391>	CPU Processor 0x1d00000000000001	3
+1392	calculateNormals [primary] <1392>	CPU Processor 0x1d00000000000001	3
+1393	calculateNormals [primary] <1393>	CPU Processor 0x1d00000000000001	3
+1394	calculateNormals [primary] <1394>	CPU Processor 0x1d00000000000001	3
+1395	calculateNormals [primary] <1395>	CPU Processor 0x1d00000000000001	3
+1396	func_delta <1396>		
+1397	run_setq [primary] <1397>	CPU Processor 0x1d00000000000001	3
+1398	setdq <1398>		
+1399	cal_flux_residual <1399>		
+1400	state_update <1400>		
+1401	__binary_double_double_+ [primary] <1401>	CPU Processor 0x1d00000000000001	3
+1406	setq <1406>		
+1407	Deletion Operation <1407>		
+1408	Virtual Close Operation <1408>		
+1418	run_setq [primary] <1418>	CPU Processor 0x1d00000000000001	3
+1419	setdq <1419>		
+1420	cal_flux_residual <1420>		
+1422	state_update <1422>		
+1423	__binary_double_double_+ [primary] <1423>	CPU Processor 0x1d00000000000001	3
+1427	setq <1427>		
+1428	Deletion Operation <1428>		
+1429	Virtual Close Operation <1429>		
+1439	run_setq [primary] <1439>	CPU Processor 0x1d00000000000001	3
+1440	setdq <1440>		
+1442	cal_flux_residual <1442>		
+1444	state_update <1444>		
+1445	__binary_double_double_+ [primary] <1445>	CPU Processor 0x1d00000000000001	3
+1448	setq <1448>		
+1449	Deletion Operation <1449>		
+1450	Virtual Close Operation <1450>		
+1460	run_setq [primary] <1460>	CPU Processor 0x1d00000000000001	3
+1461	setdq <1461>		
+1463	cal_flux_residual <1463>		
+1465	state_update <1465>		
+1466	__binary_double_double_+ [primary] <1466>	CPU Processor 0x1d00000000000001	3
+1469	setq <1469>		
+1470	Deletion Operation <1470>		
+1471	Virtual Close Operation <1471>		
+1481	func_delta <1481>		
+1482	run_setq [primary] <1482>	CPU Processor 0x1d00000000000001	3
+1483	setdq <1483>		
+1484	cal_flux_residual <1484>		
+1486	state_update <1486>		
+1487	__binary_double_double_+ [primary] <1487>	CPU Processor 0x1d00000000000001	3
+1494	setq <1494>		
+1495	Deletion Operation <1495>		
+1496	Virtual Close Operation <1496>		
+1506	run_setq [primary] <1506>	CPU Processor 0x1d00000000000001	3
+1507	setdq <1507>		
+1509	cal_flux_residual <1509>		
+1510	state_update <1510>		
+1512	__binary_double_double_+ [primary] <1512>	CPU Processor 0x1d00000000000001	3
+1515	setq <1515>		
+1516	Deletion Operation <1516>		
+1517	Virtual Close Operation <1517>		
+1527	run_setq [primary] <1527>	CPU Processor 0x1d00000000000001	3
+1528	setdq <1528>		
+1529	cal_flux_residual <1529>		
+1531	state_update <1531>		
+1533	__binary_double_double_+ [primary] <1533>	CPU Processor 0x1d00000000000001	3
+1536	setq <1536>		
+1537	Deletion Operation <1537>		
+1538	Virtual Close Operation <1538>		
+1548	run_setq [primary] <1548>	CPU Processor 0x1d00000000000001	3
+1549	setdq <1549>		
+1551	cal_flux_residual <1551>		
+1552	state_update <1552>		
+1554	__binary_double_double_+ [primary] <1554>	CPU Processor 0x1d00000000000001	3
+1557	setq <1557>		
+1558	Deletion Operation <1558>		
+1559	Virtual Close Operation <1559>		
+1569	func_delta <1569>		
+1570	run_setq [primary] <1570>	CPU Processor 0x1d00000000000001	3
+1571	setdq <1571>		
+1572	cal_flux_residual <1572>		
+1574	state_update <1574>		
+1575	__binary_double_double_+ [primary] <1575>	CPU Processor 0x1d00000000000001	3
+1582	setq <1582>		
+1583	Deletion Operation <1583>		
+1584	Virtual Close Operation <1584>		
+1594	run_setq [primary] <1594>	CPU Processor 0x1d00000000000001	3
+1595	setdq <1595>		
+1596	cal_flux_residual <1596>		
+1597	state_update <1597>		
+1599	__binary_double_double_+ [primary] <1599>	CPU Processor 0x1d00000000000001	3
+1603	setq <1603>		
+1604	Deletion Operation <1604>		
+1605	Virtual Close Operation <1605>		
+1615	run_setq [primary] <1615>	CPU Processor 0x1d00000000000001	3
+1616	setdq <1616>		
+1617	cal_flux_residual <1617>		
+1619	state_update <1619>		
+1621	__binary_double_double_+ [primary] <1621>	CPU Processor 0x1d00000000000001	3
+1624	setq <1624>		
+1625	Deletion Operation <1625>		
+1626	Virtual Close Operation <1626>		
+1636	run_setq [primary] <1636>	CPU Processor 0x1d00000000000001	3
+1637	setdq <1637>		
+1639	cal_flux_residual <1639>		
+1640	state_update <1640>		
+1642	__binary_double_double_+ [primary] <1642>	CPU Processor 0x1d00000000000001	3
+1645	setq <1645>		
+1646	Deletion Operation <1646>		
+1647	Virtual Close Operation <1647>		
+1657	Deletion Operation <1657>		
+1658	Deletion Operation <1658>		
+1659	Deletion Operation <1659>		
+1417	state_update [primary] <1417>	CPU Processor 0x1d00000000000001	3
+1438	state_update [primary] <1438>	CPU Processor 0x1d00000000000001	3
+1459	state_update [primary] <1459>	CPU Processor 0x1d00000000000001	3
+1480	state_update [primary] <1480>	CPU Processor 0x1d00000000000001	3
+1505	state_update [primary] <1505>	CPU Processor 0x1d00000000000001	3
+1526	state_update [primary] <1526>	CPU Processor 0x1d00000000000001	3
+1547	state_update [primary] <1547>	CPU Processor 0x1d00000000000001	3
+1568	state_update [primary] <1568>	CPU Processor 0x1d00000000000001	3
+1593	state_update [primary] <1593>	CPU Processor 0x1d00000000000001	3
+1614	state_update [primary] <1614>	CPU Processor 0x1d00000000000001	3
+1635	state_update [primary] <1635>	CPU Processor 0x1d00000000000001	3
+1656	state_update [primary] <1656>	CPU Processor 0x1d00000000000001	3
+0	Operation <0>		
+1421	Merge Close Operation <1421>		
+1424	Merge Close Operation <1424>		
+1425	Merge Close Operation <1425>		
+1441	Merge Close Operation <1441>		
+1443	Merge Close Operation <1443>		
+1446	Merge Close Operation <1446>		
+1462	Merge Close Operation <1462>		
+1464	Merge Close Operation <1464>		
+1467	Merge Close Operation <1467>		
+1485	Merge Close Operation <1485>		
+1488	Merge Close Operation <1488>		
+1489	Merge Close Operation <1489>		
+1508	Merge Close Operation <1508>		
+1511	Merge Close Operation <1511>		
+1513	Merge Close Operation <1513>		
+1530	Merge Close Operation <1530>		
+1532	Merge Close Operation <1532>		
+1534	Merge Close Operation <1534>		
+1550	Merge Close Operation <1550>		
+1553	Merge Close Operation <1553>		
+1555	Merge Close Operation <1555>		
+1573	Merge Close Operation <1573>		
+1576	Merge Close Operation <1576>		
+1577	Merge Close Operation <1577>		
+1598	Merge Close Operation <1598>		
+1600	Merge Close Operation <1600>		
+1601	Merge Close Operation <1601>		
+1618	Merge Close Operation <1618>		
+1620	Merge Close Operation <1620>		
+1622	Merge Close Operation <1622>		
+1638	Merge Close Operation <1638>		
+1641	Merge Close Operation <1641>		
+1643	Merge Close Operation <1643>		
+1404	func_delta <1404>		
+1402	Merge Close Operation <1402>		
+1403	Merge Close Operation <1403>		
+1405	func_delta [primary] <1405>	CPU Processor 0x1d00000000000001	3
+1409	Merge Close Operation <1409>		
+1410	setq <1410>		
+1411	setq [primary] <1411>	CPU Processor 0x1d00000000000001	3
+1412	setdq <1412>		
+1413	setdq [primary] <1413>	CPU Processor 0x1d00000000000001	3
+1414	cal_flux_residual <1414>		
+1415	cal_flux_residual [primary] <1415>	CPU Processor 0x1d00000000000001	3
+1416	state_update <1416>		
+1426	Merge Close Operation <1426>		
+1430	Merge Close Operation <1430>		
+1431	setq <1431>		
+1432	setq [primary] <1432>	CPU Processor 0x1d00000000000001	3
+1433	setdq <1433>		
+1434	setdq [primary] <1434>	CPU Processor 0x1d00000000000001	3
+1435	cal_flux_residual <1435>		
+1436	cal_flux_residual [primary] <1436>	CPU Processor 0x1d00000000000001	3
+1437	state_update <1437>		
+1447	Merge Close Operation <1447>		
+1451	Merge Close Operation <1451>		
+1452	setq <1452>		
+1453	setq [primary] <1453>	CPU Processor 0x1d00000000000001	3
+1454	setdq <1454>		
+1455	setdq [primary] <1455>	CPU Processor 0x1d00000000000001	3
+1456	cal_flux_residual <1456>		
+1457	cal_flux_residual [primary] <1457>	CPU Processor 0x1d00000000000001	3
+1458	state_update <1458>		
+1468	Merge Close Operation <1468>		
+1472	Merge Close Operation <1472>		
+1473	setq <1473>		
+1474	setq [primary] <1474>	CPU Processor 0x1d00000000000001	3
+1475	setdq <1475>		
+1476	setdq [primary] <1476>	CPU Processor 0x1d00000000000001	3
+1477	cal_flux_residual <1477>		
+1478	cal_flux_residual [primary] <1478>	CPU Processor 0x1d00000000000001	3
+1479	state_update <1479>		
+1490	Merge Close Operation <1490>		
+1491	Merge Close Operation <1491>		
+1492	func_delta <1492>		
+1493	func_delta [primary] <1493>	CPU Processor 0x1d00000000000001	3
+1497	Merge Close Operation <1497>		
+1498	setq <1498>		
+1499	setq [primary] <1499>	CPU Processor 0x1d00000000000001	3
+1500	setdq <1500>		
+1501	setdq [primary] <1501>	CPU Processor 0x1d00000000000001	3
+1502	cal_flux_residual <1502>		
+1503	cal_flux_residual [primary] <1503>	CPU Processor 0x1d00000000000001	3
+1504	state_update <1504>		
+1514	Merge Close Operation <1514>		
+1518	Merge Close Operation <1518>		
+1519	setq <1519>		
+1520	setq [primary] <1520>	CPU Processor 0x1d00000000000001	3
+1521	setdq <1521>		
+1522	setdq [primary] <1522>	CPU Processor 0x1d00000000000001	3
+1523	cal_flux_residual <1523>		
+1524	cal_flux_residual [primary] <1524>	CPU Processor 0x1d00000000000001	3
+1525	state_update <1525>		
+1535	Merge Close Operation <1535>		
+1539	Merge Close Operation <1539>		
+1540	setq <1540>		
+1541	setq [primary] <1541>	CPU Processor 0x1d00000000000001	3
+1542	setdq <1542>		
+1543	setdq [primary] <1543>	CPU Processor 0x1d00000000000001	3
+1544	cal_flux_residual <1544>		
+1545	cal_flux_residual [primary] <1545>	CPU Processor 0x1d00000000000001	3
+1546	state_update <1546>		
+1556	Merge Close Operation <1556>		
+1560	Merge Close Operation <1560>		
+1561	setq <1561>		
+1562	setq [primary] <1562>	CPU Processor 0x1d00000000000001	3
+1563	setdq <1563>		
+1564	setdq [primary] <1564>	CPU Processor 0x1d00000000000001	3
+1565	cal_flux_residual <1565>		
+1566	cal_flux_residual [primary] <1566>	CPU Processor 0x1d00000000000001	3
+1567	state_update <1567>		
+1578	Merge Close Operation <1578>		
+1579	Merge Close Operation <1579>		
+1580	func_delta <1580>		
+1581	func_delta [primary] <1581>	CPU Processor 0x1d00000000000001	3
+1585	Merge Close Operation <1585>		
+1586	setq <1586>		
+1587	setq [primary] <1587>	CPU Processor 0x1d00000000000001	3
+1588	setdq <1588>		
+1589	setdq [primary] <1589>	CPU Processor 0x1d00000000000001	3
+1590	cal_flux_residual <1590>		
+1591	cal_flux_residual [primary] <1591>	CPU Processor 0x1d00000000000001	3
+1592	state_update <1592>		
+1602	Merge Close Operation <1602>		
+1606	Merge Close Operation <1606>		
+1607	setq <1607>		
+1608	setq [primary] <1608>	CPU Processor 0x1d00000000000001	3
+1609	setdq <1609>		
+1610	setdq [primary] <1610>	CPU Processor 0x1d00000000000001	3
+1611	cal_flux_residual <1611>		
+1612	cal_flux_residual [primary] <1612>	CPU Processor 0x1d00000000000001	3
+1613	state_update <1613>		
+1623	Merge Close Operation <1623>		
+1627	Merge Close Operation <1627>		
+1628	setq <1628>		
+1629	setq [primary] <1629>	CPU Processor 0x1d00000000000001	3
+1630	setdq <1630>		
+1631	setdq [primary] <1631>	CPU Processor 0x1d00000000000001	3
+1632	cal_flux_residual <1632>		
+1633	cal_flux_residual [primary] <1633>	CPU Processor 0x1d00000000000001	3
+1634	state_update <1634>		
+1644	Merge Close Operation <1644>		
+1648	Merge Close Operation <1648>		
+1649	setq <1649>		
+1650	setq [primary] <1650>	CPU Processor 0x1d00000000000001	3
+1651	setdq <1651>		
+1652	setdq [primary] <1652>	CPU Processor 0x1d00000000000001	3
+1653	cal_flux_residual <1653>		
+1654	cal_flux_residual [primary] <1654>	CPU Processor 0x1d00000000000001	3
+1655	state_update <1655>		

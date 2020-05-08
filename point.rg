@@ -4,45 +4,45 @@ local C = regentlib.c
 
 fspace Edge
 {
-  in_ptr : int1d;
-  out_ptr : int1d;
+  in_ptr : int1d,
+  out_ptr : int1d,
 }
 
 struct Point
 {
-        part_number : int1d;
-  localID : int;
-  x : double;
-  y : double;
-  left : int;
-  right : int;
-  flag_1 : int;
-  flag_2 : int;
-  nbhs : int;
-  conn : int[20];
-  nx : double;
-  ny : double;
-  prim : double[4];
-  prim_old : double[4];
-  flux_res : double[4];
-  q : double[4];
-  dq0 : double[4];
-  dq1 : double[4];
-  inner0 : double[4];
-  inner1 : double[4];
-  entropy : double;
-  xpos_nbhs : int;
-  xneg_nbhs : int;
-  ypos_nbhs : int;
-  yneg_nbhs : int;
-  xpos_conn : int[20];
-  xneg_conn : int[20];
-  ypos_conn : int[20];
-  yneg_conn : int[20];
-  delta : double;
-  min_dist : double;
-  minq : double[4];
-  maxq : double[4];
+  part_number : int1d,
+  localID : int,
+  x : double,
+  y : double,
+  left : int,
+  right : int,
+  flag_1 : int,
+  flag_2 : int,
+  nbhs : int,
+  conn : int[20],
+  nx : double,
+  ny : double,
+  prim : double[4],
+  prim_old : double[4],
+  flux_res : double[4],
+  q : double[4],
+  dq0 : double[4],
+  dq1 : double[4],
+  inner0 : double[4],
+  inner1 : double[4],
+  entropy : double,
+  xpos_nbhs : int,
+  xneg_nbhs : int,
+  ypos_nbhs : int,
+  yneg_nbhs : int,
+  xpos_conn : int[20],
+  xneg_conn : int[20],
+  ypos_conn : int[20],
+  yneg_conn : int[20],
+  delta : double,
+  min_dist : double,
+  minq : double[4],
+  maxq : double[4],
 }
 
 task setNormals(globaldata : region(ispace(int1d), Point), 

@@ -22,7 +22,7 @@ do
 end
 
 task main()
-  var file = C.fopen("grids/partGrid48738", "r")
+  var file = C.fopen("grids/partGrid40K", "r")
 
   var size : int
   C.fscanf(file, "%d", &size)
@@ -69,35 +69,37 @@ task main()
     end
     
     var nbhs_arr : int[20]
-    for i = 0, 20 do
-      nbhs_arr[i] = 0
-    end
+    for i = 0, 20 do nbhs_arr[i] = 0 end
 
-    var temp : int
+    var tmp : int
     for j = 0, nbhs do
-      C.fscanf(file, "%d", &temp)
-      nbhs_arr[j] = temp
+      C.fscanf(file, "%d", &tmp)
+      nbhs_arr[j] = tmp
       edges[edgecount].in_ptr = count + 1
-      edges[edgecount].out_ptr = temp
+      edges[edgecount].out_ptr = tmp
       edgecount += 1
     end
 
     var p : Point
     if not config.isMETIS then
       p = Point {0, count + 1, x, y, left, right, flag1, flag2, nbhs, nbhs_arr, nx, ny, defprimal, dummy_double, dummy_double, dummy_double, dummy_double, dummy_double, dummy_double, dummy_double, 0, 0, 0, 0, 0, dummy_int, dummy_int, dummy_int, dummy_int, 0, min_dist, dummy_double, dummy_double}
-    else
-      p = Point {part_number, localID, x, y, left, right, flag1, flag2, nbhs, nbhs_arr, nx, ny, defprimal, dummy_double, dummy_double, dummy_double, dummy_double, dummy_double, dummy_double, dummy_double, 0, 0, 0, 0, 0, dummy_int, dummy_int, dummy_int, dummy_int, 0, min_dist, dummy_double, dummy_double}
-    end
 
     globaldata[count + 1] = p
+    else
+      p = Point {part_number, localID, x, y, left, right, flag1, flag2, nbhs, nbhs_arr, nx, ny, defprimal, dummy_double, dummy_double, dummy_double, dummy_double, dummy_double, dummy_double, dummy_double, 0, 0, 0, 0, 0, dummy_int, dummy_int, dummy_int, dummy_int, 0, min_dist, dummy_double, dummy_double}
+
+    globaldata[localID] = p
+    end
   end
   
   C.fclose(file)
   
-  -- making partitions
+  ----------------------------------------------------------------------------
+  -- Making Partitions
+  ----------------------------------------------------------------------------
 
-  var points_equal = partition(globaldata.part_number, ispace(int1d, 8))
-  --var points_equal = partition(equal, globaldata, ispace(int1d, config.partitions))
+  --var points_equal = partition(globaldata.part_number, ispace(int1d, config.partitions))
+  var points_equal = partition(equal, globaldata, ispace(int1d, config.partitions))
   var edges_out = preimage(edges, points_equal, edges.in_ptr)
   var points_out = image(globaldata, edges_out, edges.out_ptr)
   var points_ghost = points_out - points_equal
@@ -142,7 +144,7 @@ task main()
 
   C.printf("Starting FPI solver\n")
   
-  -- refactoring to make FPI solver run from here
+  -- Refactoring to make FPI solver run from here
 
   for i = 1, iter + 1 do  
     __demand(__index_launch)
@@ -194,8 +196,7 @@ task main()
       else
         residue = log10(res_new / res_old)
       end
-      C.printf("Iteration Number %d, %d ends.\n", i, rk)
-      C.printf("Residue %0.13lf\n", residue)
+      C.printf("Residue = %0.13lf for iteration %d, %d\n", residue, i, rk)
     end
   end
 end

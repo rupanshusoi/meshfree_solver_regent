@@ -31,7 +31,6 @@ task getInitialPrimitive()
   return primal
 end
 
-__demand(__cuda)
 task calculateNormals(left : double[2], right : double[2], mx : double, my : double)
   var lx = left[0]
   var ly = left[1]

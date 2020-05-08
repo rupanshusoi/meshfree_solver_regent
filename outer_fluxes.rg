@@ -13,7 +13,7 @@ terra printArr(a : double[4])
         C.printf("[%0.15lf, %0.15lf, %0.15lf, %0.15lf]\n", a[0], a[1], a[2], a[3])
 end
 
-__demand(__inline, __cuda)
+__demand(__inline)
 task qtilde_to_primitive(qtilde : double[4])
         var gamma : double = 1.4
 
@@ -42,7 +42,7 @@ task qtilde_to_primitive(qtilde : double[4])
         return arr
 end
 
-__demand(__inline, __cuda)
+__demand(__inline)
 task outer_dGx_pos(pgp : region(ispace(int1d), Point), idx : int, config : Config)
 where 
   reads(pgp.{x, y, nx,ny, xpos_conn, q, dq0, dq1, minq, maxq, min_dist})
@@ -132,7 +132,7 @@ do
   return G
 end
 
-__demand(__inline, __cuda)
+__demand(__inline)
 task outer_dGx_neg(pgp : region(ispace(int1d), Point), idx : int, config : Config)
 where 
   reads(pgp.{x, y, nx,ny, xneg_conn, q, dq0, dq1, minq, maxq, min_dist})
@@ -221,7 +221,7 @@ do
   return G
 end
 
-__demand(__inline, __cuda)
+__demand(__inline)
 task outer_dGy_pos(pgp : region(ispace(int1d), Point), idx : int, config : Config)
 where 
   reads(pgp.{x, y, nx,ny, ypos_conn, q, dq0, dq1, minq, maxq, min_dist})

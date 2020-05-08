@@ -9,7 +9,7 @@ require "limiters"
 local sqrt = regentlib.sqrt(double)
 local pow = regentlib.pow(double)
 
-__demand(__inline, __cuda)
+__demand(__inline)
 task wall_dGx_pos(pnbh : region(ispace(int1d), Point), idx : int, config : Config)
 where 
   reads(pnbh.{x, y, nx, ny, xpos_conn, q, dq0, dq1, min_dist, minq, maxq})
@@ -101,7 +101,7 @@ do
   return G
 end
 
-__demand(__inline, __cuda)
+__demand(__inline)
 task wall_dGx_neg(pnbh : region(ispace(int1d), Point), idx : int, config : Config)
 where 
   reads(pnbh.{x, y, nx, ny, xneg_conn, q, dq0, dq1, min_dist, minq, maxq})
@@ -189,7 +189,7 @@ do
   return G
 end
 
-__demand(__inline, __cuda)
+__demand(__inline)
 task wall_dGy_neg(pnbh : region(ispace(int1d), Point), idx : int, config : Config)
 where 
   reads(pnbh.{x, y, nx, ny, yneg_conn, q, dq0, dq1, min_dist, minq, maxq})

@@ -22,7 +22,7 @@ struct Config
 terra Config : initConfig(size : int)
   self.size = size
   self.totalnbhs = 393993
-  self.partitions = 8
+  self.partitions = 3
   self.cfl = 0.01
   self.mach = 0.85
   self.aoa = 1
@@ -32,7 +32,7 @@ terra Config : initConfig(size : int)
   self.pr_inf = 0.7142857142857143
   self.gamma = 1.4
   self.rks = 5
-  self.iter = 5
+  self.iter = 4
   self.inner_iter = 0
   self.isMETIS = true
 end
