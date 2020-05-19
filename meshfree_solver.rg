@@ -96,8 +96,7 @@ task main()
   
   -- making partitions
 
-  var points_equal = partition(globaldata.part_number, ispace(int1d, 8))
-  --var points_equal = partition(equal, globaldata, ispace(int1d, config.partitions))
+  var points_equal = partition(equal, globaldata, ispace(int1d, config.partitions))
   var edges_out = preimage(edges, points_equal, edges.in_ptr)
   var points_out = image(globaldata, edges_out, edges.out_ptr)
   var points_ghost = points_out - points_equal
