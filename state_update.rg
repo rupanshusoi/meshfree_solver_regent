@@ -15,49 +15,38 @@ terra pprint(a : double[4])
 end
 
 task func_delta(pe : region(ispace(int1d), Point), 
-    panbh : region(ispace(int1d), Point),
-    config : Config)
+    pn : region(ispace(int1d), Point), config : Config)
 where
-  reads(panbh.{x, y, prim, conn}, pe.localID), 
-  writes(pe.{delta, prim_old})
+  reads(pn.{x, y, prim, conn}), writes(pe.{delta, prim_old})
 do
-  var cfl = config.cfl
   for point in pe do 
-    var conn = panbh[point.localID].conn
-    var prim = panbh[point.localID].prim
-    var x = panbh[point.localID].x
-    var y = panbh[point.localID].y
-    point.prim_old = panbh[point.localID].prim
+    point.prim_old = pn[point].prim
 
-    var min_delt : double = 1
+    var conn = pn[point].conn
+    var x = pn[point].x
+    var y = pn[point].y
+
+    var min_delt : double = 1.0
 
     for i = 0, 20 do
       var itm : int = conn[i]
-      if (itm == 0) then
-        break
+      if itm == 0 then break
       else
-        var rho = prim[0]
-        var u1 = prim[1]
-        var u2 = prim[2]
-        var pr = prim[3]
+        var rho = pn[itm].prim[0]
+        var u1 = pn[itm].prim[1]
+        var u2 = pn[itm].prim[2]
+        var pr = pn[itm].prim[3]
       
-        var x_i = x
-        var y_i = y
+        var x_k = pn[itm].x
+        var y_k = pn[itm].y
 
-        var x_k = panbh[itm].x
-        var y_k = panbh[itm].y
+        var dist = sqrt((x_k - x) * (x_k - x) + (y_k - y) * (y_k - y))
 
-        var dist = (x_k - x_i)*(x_k - x_i) + (y_k - y_i)*(y_k - y_i)
-                    dist = sqrt(dist)
-
-        var mod_u : double = sqrt(u1*u1 + u2*u2)
+        var mod_u : double = sqrt(u1 * u1 + u2 * u2)
     
-        var delta_t = dist/(mod_u + 3 * sqrt(pr/rho))
-        delta_t = cfl*delta_t
+        var delta_t = config.cfl * (dist / (mod_u + 3 * sqrt(pr / rho)))
 
-        if (min_delt > delta_t) then
-          min_delt = delta_t
-        end
+        if (min_delt > delta_t) then min_delt = delta_t end
       end
     end
     point.delta = min_delt
@@ -147,8 +136,7 @@ end
 task state_update(pe : region(ispace(int1d), Point), iter : int, rk : int, 
       eu : int, res_old : double)
 where
-  reads(pe.{localID, flag_1, nx, ny, prim, prim_old, delta, flux_res}), 
-  writes(pe.prim)
+  reads(pe.{localID, flag_1, nx, ny, prim, prim_old, delta, flux_res}), writes(pe.prim)
 do
   var max_res : double = 0.0
   var sum_res_sqr : double = 0.0
@@ -160,24 +148,15 @@ do
 
   for point in pe do
     if point.localID > 0 then
-      --C.printf("localID = %d, sum_res_sqr = %lf\n", point.localID, sum_res_sqr)
       if point.flag_1 == 0 then
         var nx = point.nx
         var ny = point.ny
-        var Utemp : double[4] = primitive_to_conserved(nx, ny, point.prim)
-          
-        -- making some ugly changes as a workaround to an unfixed
-        -- Regent bug
 
-        var U : double[4]
-        for i = 0, 4 do
-          U[i] = Utemp[i]
-        end
-
+        var U : double[4] = primitive_to_conserved(nx, ny, point.prim)
         var U_old : double[4] = primitive_to_conserved(nx, ny, point.prim_old)
         var temp = U[0]
 
-        if rk == 1 or rk == 2 or rk == 4 then
+        if rk ~= 3 then
           for j = 0, 4 do
             U[j] = U[j] - (0.5 * eu * point.delta * point.flux_res[j])
           end
@@ -209,20 +188,12 @@ do
       if point.flag_1 == 1 then
         var nx = point.nx
         var ny = point.ny
-        var Utemp : double[4] = primitive_to_conserved(nx, ny, point.prim)
 
-        -- making some ugly changes as a workaround to an unfixed
-        -- Regent bug
-
-        var U : double[4]
-        for i = 0, 4 do
-          U[i] = Utemp[i]
-        end
-
+        var U : double[4] = primitive_to_conserved(nx, ny, point.prim)
         var U_old : double[4] = primitive_to_conserved(nx, ny, point.prim_old)
         var temp = U[0]
 
-        if rk == 1 or rk == 2 or rk == 4 then
+        if rk ~= 3 then
           for j = 0, 4 do
             U[j] = U[j] - (0.5 * eu * point.delta * point.flux_res[j])
           end
@@ -239,13 +210,9 @@ do
 
         var res_sqr = (U[0] - temp) * (U[0] - temp)
 
-        if res_sqr > max_res then
+        if res_sqr > max_res then max_res = res_sqr end
 
-          max_res = res_sqr
-          var max_res_point = itm
-        end
-
-        sum_res_sqr = sum_res_sqr + res_sqr
+        sum_res_sqr += res_sqr
         
         var tempU : double[4]
         tempU[0] = U[0]
@@ -258,20 +225,12 @@ do
       if point.flag_1 == 2 then
         var nx = point.nx
         var ny = point.ny
-        var Utemp : double[4] = conserved_vector_Ubar(nx, ny, point.prim)
-        
-        -- making some ugly changes as a workaround to an unfixed
-        -- Regent bug
 
-        var U: double[4]
-        for i = 0, 4 do
-          U[i] = Utemp[i]
-        end
-
+        var U : double[4] = conserved_vector_Ubar(nx, ny, point.prim)
         var U_old : double[4] = conserved_vector_Ubar(nx, ny, point.prim_old)
         var temp = U[0]
 
-        if rk == 1 or rk == 2 or rk == 4 then
+        if rk ~= 3 then
           for j = 0, 4 do
             U[j] = U[j] - (0.5 * eu * point.delta * point.flux_res[j])
           end
