@@ -18,29 +18,34 @@ task func_delta(pe : region(ispace(int1d), Point),
     panbh : region(ispace(int1d), Point),
     config : Config)
 where
-  reads(panbh.{x, y, prim, conn}, pe.{x, y, prim, conn}), 
+  reads(panbh.{x, y, prim, conn}, pe.localID), 
   writes(pe.{delta, prim_old})
 do
   var cfl = config.cfl
-  for point in pe do
+  for point in pe do 
+    var conn = panbh[point.localID].conn
+    var prim = panbh[point.localID].prim
+    var x = panbh[point.localID].x
+    var y = panbh[point.localID].y
+    point.prim_old = panbh[point.localID].prim
+
     var min_delt : double = 1
-    point.prim_old = point.prim
 
     for i = 0, 20 do
-      var itm : int = point.conn[i]
+      var itm : int = conn[i]
       if (itm == 0) then
         break
       else
-        var rho = panbh[itm].prim[0]
-        var u1 = panbh[itm].prim[1]
-                    var u2 = panbh[itm].prim[2]
-                    var pr = panbh[itm].prim[3]
+        var rho = prim[0]
+        var u1 = prim[1]
+        var u2 = prim[2]
+        var pr = prim[3]
       
-        var x_i = point.x
-                    var y_i = point.y
+        var x_i = x
+        var y_i = y
 
-                     var x_k = panbh[itm].x
-                     var y_k = panbh[itm].y
+        var x_k = panbh[itm].x
+        var y_k = panbh[itm].y
 
         var dist = (x_k - x_i)*(x_k - x_i) + (y_k - y_i)*(y_k - y_i)
                     dist = sqrt(dist)

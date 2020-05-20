@@ -34,5 +34,5 @@ terra Config : initConfig(size : int)
   self.rks = 5
   self.iter = 5
   self.inner_iter = 0
-  self.isMETIS = true
+  self.isMETIS = false
 end

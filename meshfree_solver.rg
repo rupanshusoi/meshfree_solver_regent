@@ -22,7 +22,7 @@ do
 end
 
 task main()
-  var file = C.fopen("grids/partGrid48738", "r")
+  var file = C.fopen("grids/partGrid40K", "r")
 
   var size : int
   C.fscanf(file, "%d", &size)
