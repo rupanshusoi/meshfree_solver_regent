@@ -155,20 +155,13 @@ do
   end
 end
 
-task setdq(ppr : region(ispace(int1d), Point), 
-     pgp : region(ispace(int1d), Point),
-     config : Config)
+task setdq(pe : region(ispace(int1d), Point), 
+     pn : region(ispace(int1d), Point), config : Config)
 where
-  reads(ppr.{x, y, q, localID, conn}, pgp.{x, y, q}), 
-  writes(ppr.{dq0, dq1, minq, maxq})
+  reads(pe.{localID, conn}, pn.{x, y, q}), writes(pe.{dq0, dq1, minq, maxq})
 do
-  var power = config.power
-
-  for itm in ppr do
-    if itm.localID > 0 then
-      var x_i = itm.x
-      var y_i = itm.y
-      
+  for point in pe do
+    if point.localID > 0 then
       var sum_delx_sqr : double = 0
       var sum_dely_sqr : double = 0
       var sum_delx_dely : double = 0
@@ -186,36 +179,36 @@ do
         maxq[i] = 0
       end
 
+      var connectivity = point.conn
       for i = 0, 20 do
-        if itm.conn[i] == 0 then
-          break
+        if connectivity[i] == 0 then break
         else
-          var conn = itm.conn[i]
+          var nbh = connectivity[i]
           for j = 0, 4 do
-            if minq[j] > pgp[conn].q[j] then
-              minq[j] = pgp[conn].q[j]
+            if minq[j] > pn[nbh].q[j] then
+              minq[j] = pn[nbh].q[j]
             end
-            if maxq[j] < pgp[conn].q[j] then
-              maxq[j] = pgp[conn].q[j]
+            if maxq[j] < pn[nbh].q[j] then
+              maxq[j] = pn[nbh].q[j]
             end
           end
           
-          var x_k = pgp[conn].x
-          var y_k = pgp[conn].y
+          var x_k = pn[nbh].x
+          var y_k = pn[nbh].y
 
-          var delx = x_k - x_i
-          var dely = y_k - y_i
+          var delx = x_k - pn[point].x
+          var dely = y_k - pn[point].y
 
           var dist : double = sqrt(delx*delx + dely*dely)
-          var weights : double = pow(dist, power)
+          var weights : double = pow(dist, config.power)
 
           sum_delx_sqr = sum_delx_sqr + ((delx * delx) * weights)
           sum_dely_sqr = sum_dely_sqr + ((dely * dely) * weights)
           sum_delx_dely = sum_delx_dely + ((delx * dely) * weights)
           
           for j = 0, 4 do
-            sum_delx_delq[j] = sum_delx_delq[j] + (weights * delx * (pgp[conn].q[j] - pgp[itm].q[j]))
-            sum_dely_delq[j] = sum_dely_delq[j] + (weights * dely * (pgp[conn].q[j] - pgp[itm].q[j]))
+            sum_delx_delq[j] = sum_delx_delq[j] + (weights * delx * (pn[nbh].q[j] - pn[point].q[j]))
+            sum_dely_delq[j] = sum_dely_delq[j] + (weights * dely * (pn[nbh].q[j] - pn[point].q[j]))
           end
         end  
       end
@@ -255,26 +248,26 @@ do
       tempdq0 = tempsumx
       tempdq1 = tempsumy
 
-      itm.dq0 = tempdq0
-      itm.dq1 = tempdq1
-      itm.minq = minq
-      itm.maxq = maxq        
+      point.dq0 = tempdq0
+      point.dq1 = tempdq1
+      point.minq = minq
+      point.maxq = maxq        
     end
   end  
 
 end
 
-task setqinner(ppr : region(ispace(int1d), Point), 
-     pgp : region(ispace(int1d), Point),
+task setqinner(pe : region(ispace(int1d), Point), 
+     pn : region(ispace(int1d), Point),
      config : Config)
   
 where
-  reads(ppr.{localID, x, y, q, dq0, dq1, conn}, pgp.{x, y, q, dq0, dq1}), 
-  writes(ppr.{inner0, inner1})
+  reads(pe.{localID, x, y, q, dq0, dq1, conn}, pn.{x, y, q, dq0, dq1}), 
+  writes(pe.{inner0, inner1})
 do
   var power = config.power
 
-  for itm in ppr do
+  for itm in pe do
     if itm.localID > 0 then
       var x_i = itm.x
       var y_i = itm.y
@@ -306,8 +299,8 @@ do
           break
         else
           var conn = itm.conn[i]
-          var x_k = pgp[conn].x
-          var y_k = pgp[conn].y
+          var x_k = pn[conn].x
+          var y_k = pn[conn].y
 
           var delx = x_k - x_i
           var dely = y_k - y_i
@@ -320,25 +313,25 @@ do
           sum_delx_dely = sum_delx_dely + ((delx * dely) * weights)
           
           tmp1 = q1 - 0.5 * (delx * itm.dq0[0] + dely * itm.dq1[0])
-          tmp2 = q1 - 0.5 * (delx * pgp[conn].dq0[0] + dely * pgp[conn].dq1[0])
+          tmp2 = q1 - 0.5 * (delx * pn[conn].dq0[0] + dely * pn[conn].dq1[0])
 
           sum_delx_delq1 += weights * delx * (tmp2 - tmp1)
           sum_dely_delq1 += weights * dely * (tmp2 - tmp1)
 
           tmp1 = q2 - 0.5 * (delx * itm.dq0[1] + dely * itm.dq1[1])
-          tmp2 = q2 - 0.5 * (delx * pgp[conn].dq0[1] + dely * pgp[conn].dq1[1])
+          tmp2 = q2 - 0.5 * (delx * pn[conn].dq0[1] + dely * pn[conn].dq1[1])
 
           sum_delx_delq2 += weights * delx * (tmp2 - tmp1)
           sum_dely_delq2 += weights * dely * (tmp2 - tmp1)
 
           tmp1 = q3 - 0.5 * (delx * itm.dq0[2] + dely * itm.dq1[2])
-          tmp2 = q3 - 0.5 * (delx * pgp[conn].dq0[2] + dely * pgp[conn].dq1[2])
+          tmp2 = q3 - 0.5 * (delx * pn[conn].dq0[2] + dely * pn[conn].dq1[2])
 
           sum_delx_delq3 += weights * delx * (tmp2 - tmp1)
           sum_dely_delq3 += weights * dely * (tmp2 - tmp1)
 
           tmp1 = q4 - 0.5 * (delx * itm.dq0[3] + dely * itm.dq1[3])
-          tmp2 = q4 - 0.5 * (delx * pgp[conn].dq0[3] + dely * pgp[conn].dq1[3])
+          tmp2 = q4 - 0.5 * (delx * pn[conn].dq0[3] + dely * pn[conn].dq1[3])
 
           sum_delx_delq4 += weights * delx * (tmp2 - tmp1)
           sum_dely_delq4 += weights * dely * (tmp2 - tmp1)
@@ -361,11 +354,11 @@ do
   end
 end
 
-task updateqinner(ppr : region(ispace(int1d), Point))
+task updateqinner(pe : region(ispace(int1d), Point))
 where
-  reads(ppr.{inner0, inner1}), writes(ppr.{dq0, dq1})
+  reads(pe.{inner0, inner1}), writes(pe.{dq0, dq1})
 do
-  for point in ppr do
+  for point in pe do
     point.dq0 = point.inner0
     point.dq1 = point.inner1
   end  

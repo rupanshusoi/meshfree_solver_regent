@@ -3,6 +3,8 @@ require "config"
 require "point"
 require "core"
 
+local MAPPER = terralib.includec("/home/rupanshusoi/meshfree_solver_regent/meshfree_mapper.h")
+
 local C = regentlib.c
 local sqrt = regentlib.sqrt(double)
 local log10 = regentlib.log10(double)
@@ -102,6 +104,8 @@ task main()
   var points_ghost = points_out - points_equal
   var points_allnbhs = points_equal | points_ghost
 
+  for point in points_equal[1] do C.printf("localID = %d\n", point.localID) end
+
   var idx : int
   var curr : double[2]
   var leftpt : double[2]
@@ -141,8 +145,6 @@ task main()
 
   C.printf("Starting FPI solver\n")
   
-  -- refactoring to make FPI solver run from here
-
   for i = 1, iter + 1 do  
     __demand(__index_launch)
     for color in points_equal.colors do
@@ -160,7 +162,6 @@ task main()
       end
 
       for j = 0, config.inner_iter do
-        C.printf("inner\n")
         __demand(__index_launch)
         for color in points_equal.colors do
           setqinner(points_equal[color], points_allnbhs[color], config)
@@ -171,7 +172,6 @@ task main()
           updateqinner(points_equal[color])
         end
       end
-
 
       __demand(__index_launch)
       for color in points_equal.colors do
@@ -185,17 +185,16 @@ task main()
         sum_res_sqr += state_update(points_equal[color], i, rk, eu, res_old)
       end
 
-      var res_new : double = sqrt(sum_res_sqr)/config.size
+      var res_new : double = sqrt(sum_res_sqr) / config.size
       var residue : double
       if i <= 2 then
         res_old = res_new
         residue = 0
-      else
-        residue = log10(res_new / res_old)
-      end
-      C.printf("Iteration Number %d, %d ends.\n", i, rk)
-      C.printf("Residue %0.13lf\n", residue)
+      else residue = log10(res_new / res_old) end
+
+      C.printf("Residue = %0.13lf for iteration %d, %d\n", residue, i, rk)
     end
   end
 end
-regentlib.start(main)
+regentlib.saveobj(main, "meshfree_solver.o", "object", MAPPER.register_mappers)
+--regentlib.start(main)

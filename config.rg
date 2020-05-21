@@ -22,7 +22,7 @@ struct Config
 terra Config : initConfig(size : int)
   self.size = size
   self.totalnbhs = 393993
-  self.partitions = 8
+  self.partitions = 2
   self.cfl = 0.01
   self.mach = 0.85
   self.aoa = 1
