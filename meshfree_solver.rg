@@ -3,7 +3,52 @@ require "config"
 require "point"
 require "core"
 
-local MAPPER = terralib.includec("/home/rupanshusoi/meshfree_solver_regent/meshfree_mapper.h")
+local MAPPER
+do
+  local root_dir = arg[0]:match(".*/") or "./"
+
+  local include_path = ""
+  local include_dirs = terralib.newlist()
+  include_dirs:insert("-I")
+  include_dirs:insert(root_dir)
+  for path in string.gmatch(os.getenv("INCLUDE_PATH"), "[^;]+") do
+    include_path = include_path .. " -I " .. path
+    include_dirs:insert("-I")
+    include_dirs:insert(path)
+  end
+
+  local mapper_cc = root_dir .. "meshfree_mapper.cc"
+  local mapper_so
+  if os.getenv('OBJNAME') then
+    local out_dir = os.getenv('OBJNAME'):match('.*/') or './'
+    mapper_so = out_dir .. "meshfree_mapper.so"
+  elseif os.getenv('SAVEOBJ') == '1' then
+    mapper_so = root_dir .. "meshfree_mapper.so"
+  else
+    mapper_so = os.tmpname() .. ".so" -- root_dir .. "circuit_mapper.so"
+  end
+  local cxx = os.getenv('CXX') or 'c++'
+
+  local cxx_flags = os.getenv('CC_FLAGS') or ''
+  cxx_flags = cxx_flags .. " -O2 -Wall -Werror"
+  if os.execute('test "$(uname)" = Darwin') == 0 then
+    cxx_flags =
+      (cxx_flags ..
+         " -dynamiclib -single_module -undefined dynamic_lookup -fPIC")
+  else
+    cxx_flags = cxx_flags .. " -shared -fPIC"
+  end
+
+  cxx_flags = cxx_flags .. " " .. "-std=c++11"
+  local cmd = (cxx .. " " .. cxx_flags .. " " .. include_path .. " " ..
+                 mapper_cc .. " -o " .. mapper_so)
+  if os.execute(cmd) ~= 0 then
+    print("Error: failed to compile " .. mapper_cc)
+    assert(false)
+  end
+  terralib.linklibrary(mapper_so)
+  MAPPER = terralib.includec("meshfree_mapper.h", include_dirs)
+end
 
 local C = regentlib.c
 local sqrt = regentlib.sqrt(double)
@@ -24,7 +69,7 @@ do
 end
 
 task main()
-  var file = C.fopen("grids/partGrid40K", "r")
+  var file = C.fopen("grids/partGrid2.5M", "r")
 
   var size : int
   C.fscanf(file, "%d", &size)
@@ -104,8 +149,6 @@ task main()
   var points_ghost = points_out - points_equal
   var points_allnbhs = points_equal | points_ghost
 
-  for point in points_equal[1] do C.printf("localID = %d\n", point.localID) end
-
   var idx : int
   var curr : double[2]
   var leftpt : double[2]
@@ -143,6 +186,7 @@ task main()
   var rks : int = config.rks
   var iter : int = config.iter
 
+  var itime = C.legion_get_current_time_in_micros()
   C.printf("Starting FPI solver\n")
   
   for i = 1, iter + 1 do  
@@ -192,9 +236,13 @@ task main()
         residue = 0
       else residue = log10(res_new / res_old) end
 
-      C.printf("Residue = %0.13lf for iteration %d, %d\n", residue, i, rk)
+      if i % 50 == 0 then
+        C.printf("Residue = %0.13lf for iteration %d, %d\n", residue, i, rk)
+      end
+
     end
   end
+  var ftime = C.legion_get_current_time_in_micros()
+  regentlib.c.printf("***Time = %lld***\n", ftime - itime)
 end
-regentlib.saveobj(main, "meshfree_solver.o", "object", MAPPER.register_mappers)
---regentlib.start(main)
+regentlib.start(main) --, MAPPER.register_mappers)

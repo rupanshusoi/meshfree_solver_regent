@@ -257,20 +257,20 @@ do
 
 end
 
+__demand(__cuda)
 task setqinner(pe : region(ispace(int1d), Point), 
      pn : region(ispace(int1d), Point),
      config : Config)
-  
 where
-  reads(pe.{localID, x, y, q, dq0, dq1, conn}, pn.{x, y, q, dq0, dq1}), 
+  reads(pe.{localID, conn}, pn.{x, y, q, dq0, dq1}), 
   writes(pe.{inner0, inner1})
 do
   var power = config.power
 
   for itm in pe do
     if itm.localID > 0 then
-      var x_i = itm.x
-      var y_i = itm.y
+      var x_i = pn[itm].x
+      var y_i = pn[itm].y
       
       var sum_delx_sqr : double = 0.0
       var sum_dely_sqr : double = 0.0
@@ -289,16 +289,17 @@ do
       var sum_dely_delq3 : double = 0.0
       var sum_dely_delq4 : double = 0.0
 
-      var q1 : double = itm.q[0]
-      var q2 : double = itm.q[1]
-      var q3 : double = itm.q[2]
-      var q4 : double = itm.q[3]
+      var q = pn[itm].q
+      var q1 : double = q[0]
+      var q2 : double = q[1]
+      var q3 : double = q[2]
+      var q4 : double = q[3]
 
       for i = 0, 20 do
-        if itm.conn[i] == 0 then
-          break
+        if itm.conn[i] == 0 then break
         else
           var conn = itm.conn[i]
+
           var x_k = pn[conn].x
           var y_k = pn[conn].y
 
@@ -312,25 +313,28 @@ do
           sum_dely_sqr = sum_dely_sqr + ((dely * dely) * weights)
           sum_delx_dely = sum_delx_dely + ((delx * dely) * weights)
           
-          tmp1 = q1 - 0.5 * (delx * itm.dq0[0] + dely * itm.dq1[0])
+          var dq0 = pn[itm].dq0
+          var dq1 = pn[itm].dq1
+
+          tmp1 = q1 - 0.5 * (delx * dq0[0] + dely * dq1[0])
           tmp2 = q1 - 0.5 * (delx * pn[conn].dq0[0] + dely * pn[conn].dq1[0])
 
           sum_delx_delq1 += weights * delx * (tmp2 - tmp1)
           sum_dely_delq1 += weights * dely * (tmp2 - tmp1)
 
-          tmp1 = q2 - 0.5 * (delx * itm.dq0[1] + dely * itm.dq1[1])
+          tmp1 = q2 - 0.5 * (delx * dq0[1] + dely * dq1[1])
           tmp2 = q2 - 0.5 * (delx * pn[conn].dq0[1] + dely * pn[conn].dq1[1])
 
           sum_delx_delq2 += weights * delx * (tmp2 - tmp1)
           sum_dely_delq2 += weights * dely * (tmp2 - tmp1)
 
-          tmp1 = q3 - 0.5 * (delx * itm.dq0[2] + dely * itm.dq1[2])
+          tmp1 = q3 - 0.5 * (delx * dq0[2] + dely * dq1[2])
           tmp2 = q3 - 0.5 * (delx * pn[conn].dq0[2] + dely * pn[conn].dq1[2])
 
           sum_delx_delq3 += weights * delx * (tmp2 - tmp1)
           sum_dely_delq3 += weights * dely * (tmp2 - tmp1)
 
-          tmp1 = q4 - 0.5 * (delx * itm.dq0[3] + dely * itm.dq1[3])
+          tmp1 = q4 - 0.5 * (delx * dq0[3] + dely * dq1[3])
           tmp2 = q4 - 0.5 * (delx * pn[conn].dq0[3] + dely * pn[conn].dq1[3])
 
           sum_delx_delq4 += weights * delx * (tmp2 - tmp1)
