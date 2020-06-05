@@ -2,53 +2,7 @@ import "regent"
 require "config"
 require "point"
 require "core"
-
-local MAPPER
-do
-  local root_dir = arg[0]:match(".*/") or "./"
-
-  local include_path = ""
-  local include_dirs = terralib.newlist()
-  include_dirs:insert("-I")
-  include_dirs:insert(root_dir)
-  for path in string.gmatch(os.getenv("INCLUDE_PATH"), "[^;]+") do
-    include_path = include_path .. " -I " .. path
-    include_dirs:insert("-I")
-    include_dirs:insert(path)
-  end
-
-  local mapper_cc = root_dir .. "meshfree_mapper.cc"
-  local mapper_so
-  if os.getenv('OBJNAME') then
-    local out_dir = os.getenv('OBJNAME'):match('.*/') or './'
-    mapper_so = out_dir .. "meshfree_mapper.so"
-  elseif os.getenv('SAVEOBJ') == '1' then
-    mapper_so = root_dir .. "meshfree_mapper.so"
-  else
-    mapper_so = os.tmpname() .. ".so" -- root_dir .. "circuit_mapper.so"
-  end
-  local cxx = os.getenv('CXX') or 'c++'
-
-  local cxx_flags = os.getenv('CC_FLAGS') or ''
-  cxx_flags = cxx_flags .. " -O2 -Wall -Werror"
-  if os.execute('test "$(uname)" = Darwin') == 0 then
-    cxx_flags =
-      (cxx_flags ..
-         " -dynamiclib -single_module -undefined dynamic_lookup -fPIC")
-  else
-    cxx_flags = cxx_flags .. " -shared -fPIC"
-  end
-
-  cxx_flags = cxx_flags .. " " .. "-std=c++11"
-  local cmd = (cxx .. " " .. cxx_flags .. " " .. include_path .. " " ..
-                 mapper_cc .. " -o " .. mapper_so)
-  if os.execute(cmd) ~= 0 then
-    print("Error: failed to compile " .. mapper_cc)
-    assert(false)
-  end
-  terralib.linklibrary(mapper_so)
-  MAPPER = terralib.includec("meshfree_mapper.h", include_dirs)
-end
+require "ghost"
 
 local C = regentlib.c
 local sqrt = regentlib.sqrt(double)
@@ -69,7 +23,7 @@ do
 end
 
 task main()
-  var file = C.fopen("grids/partGrid2.5M", "r")
+  var file = C.fopen("partGrid40K", "r")
 
   var size : int
   C.fscanf(file, "%d", &size)
@@ -149,6 +103,9 @@ task main()
   var points_ghost = points_out - points_equal
   var points_allnbhs = points_equal | points_ghost
 
+  var compact0 = region(ispace(int1d, points_allnbhs[0].ispace.volume), Point)
+  var compact1 = region(ispace(int1d, points_allnbhs[1].ispace.volume), Point)
+
   var idx : int
   var curr : double[2]
   var leftpt : double[2]
@@ -201,8 +158,7 @@ task main()
 
       __demand(__index_launch)
       for color in points_equal.colors do
-        setdq(points_equal[color], points_allnbhs[color],
-              config)
+        setdq(points_equal[color], points_allnbhs[color], config)
       end
 
       for j = 0, config.inner_iter do
@@ -217,10 +173,15 @@ task main()
         end
       end
 
-      __demand(__index_launch)
-      for color in points_equal.colors do
-        cal_flux_residual(points_equal[color], points_allnbhs[color], config)
-      end
+      var pmap0 = update_compact_instance(points_equal[0], points_ghost[0], compact0)
+      var pmap1 = update_compact_instance(points_equal[1], points_ghost[1], compact1)
+
+      C.printf("%d", pmap0[0])
+      cal_flux_residual(compact0, pmap0, config)
+      cal_flux_residual(compact1, pmap1, config)
+
+      update_sparse_instance(points_equal[0], points_ghost[0], compact0, pmap0)
+      update_sparse_instance(points_equal[1], points_ghost[1], compact1, pmap1)
 
       var sum_res_sqr : double = 0.0
 
@@ -236,13 +197,11 @@ task main()
         residue = 0
       else residue = log10(res_new / res_old) end
 
-      if i % 50 == 0 then
-        C.printf("Residue = %0.13lf for iteration %d, %d\n", residue, i, rk)
-      end
+      C.printf("Residue = %0.13lf for iteration %d, %d\n", residue, i, rk)
 
     end
   end
   var ftime = C.legion_get_current_time_in_micros()
   regentlib.c.printf("***Time = %lld***\n", ftime - itime)
 end
-regentlib.start(main) --, MAPPER.register_mappers)
+regentlib.start(main)

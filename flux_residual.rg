@@ -12,34 +12,31 @@ terra pprint(a : double[4])
 end
 
 __demand(__cuda)
-task cal_flux_residual(pe : region(ispace(int1d), Point),
-           pn : region(ispace(int1d), Point), config : Config)
+task cal_flux_residual(compact : region(ispace(int1d), Point), pmap : region(ispace(int1d), int), config : Config)
 where 
-  reads(pe.{flag_1, localID}, 
-        pn.{x, y, nx, ny, q, dq0, dq1, xpos_conn, xneg_conn, ypos_conn, 
-        yneg_conn, min_dist, minq, maxq}),
-  writes(pe.flux_res)
+  reads(compact.{localID, flag_1, x, y, nx, ny, q, dq0, dq1, xpos_conn, xneg_conn,                      ypos_conn, yneg_conn, min_dist, minq, maxq}, pmap),
+  writes(compact.flux_res)
 do
-  for point in pe do
+  for point in compact do
     if point.flag_1 == 0 then
-      var Gxp = wall_dGx_pos(pn, point.localID, config)
-      var Gxn = wall_dGx_neg(pn, point.localID, config)
-      var Gyn = wall_dGy_neg(pn, point.localID, config)
+      var Gxp = wall_dGx_pos(compact, point.localID, pmap, config)
+      var Gxn = wall_dGx_neg(compact, point.localID, pmap, config)
+      var Gyn = wall_dGy_neg(compact, point.localID, pmap, config)
       var GTemp = array(2.0, 2.0, 2.0, 2.0) * (Gxp + Gxn + Gyn)
       point.flux_res = GTemp
     end
     if point.flag_1 == 1 then
-      var Gxp = interior_dGx_pos(pn, point.localID, config)
-      var Gxn = interior_dGx_neg(pn, point.localID, config)
-      var Gyp = interior_dGy_pos(pn, point.localID, config)
-      var Gyn = interior_dGy_neg(pn, point.localID, config)
+      var Gxp = interior_dGx_pos(compact, point.localID, pmap, config)
+      var Gxn = interior_dGx_neg(compact, point.localID, pmap, config)
+      var Gyp = interior_dGy_pos(compact, point.localID, pmap, config)
+      var Gyn = interior_dGy_neg(compact, point.localID, pmap, config)
       var GTemp = Gxp + Gxn + Gyp + Gyn
       point.flux_res = GTemp
     end
     if point.flag_1 == 2 then
-      var Gxp = outer_dGx_pos(pn, point.localID, config)
-      var Gxn = outer_dGx_neg(pn, point.localID, config)
-      var Gyp = outer_dGy_pos(pn, point.localID, config)
+      var Gxp = outer_dGx_pos(compact, point.localID, pmap, config)
+      var Gxn = outer_dGx_neg(compact, point.localID, pmap, config)
+      var Gyp = outer_dGy_pos(compact, point.localID, pmap, config)
       var GTemp = Gxp + Gxn + Gyp  
       point.flux_res = GTemp
     end

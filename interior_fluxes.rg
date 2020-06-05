@@ -8,9 +8,9 @@ local sqrt = regentlib.sqrt(double)
 local pow = regentlib.pow(double)
 
 __demand(__inline, __cuda)
-task interior_dGx_pos(pgp : region(ispace(int1d), Point), idx : int, config : Config)
+task interior_dGx_pos(compact : region(ispace(int1d), Point), idx : int, pmap : region(ispace(int1d), int), config : Config)
 where 
-  reads(pgp.{x, y, nx, ny, xpos_conn, q, dq0, dq1, min_dist, minq, maxq})
+  reads(compact.{x, y, nx, ny, xpos_conn, q, dq0, dq1, min_dist, minq, maxq}, pmap)
 do
   var power : int = 0
   var limiter_flag : int = 1
@@ -27,23 +27,23 @@ do
     sum_dely_delf[i] = 0
   end
 
-  var x_i = pgp[idx].x
-  var y_i = pgp[idx].y
+  var x_i = compact[idx].x
+  var y_i = compact[idx].y
 
-  var nx = pgp[idx].nx
-  var ny = pgp[idx].ny
+  var nx = compact[idx].nx
+  var ny = compact[idx].ny
 
   var tx = ny
   var ty = -nx
 
   var itm : int
   for i = 0, 20 do
-    itm = pgp[idx].xpos_conn[i]
+    itm = pmap[compact[idx].xpos_conn[i]]
     if itm == 0 then
       break
     else
-      var x_k = pgp[itm].x
-            var y_k = pgp[itm].y
+      var x_k = compact[itm].x
+            var y_k = compact[itm].y
 
             var delx = x_k - x_i
             var dely = y_k - y_i
@@ -64,16 +64,16 @@ do
       var qtilde_i : double[4]
       var qtilde_k : double[4]
       for i = 0, 4 do
-        qtilde_i[i] = pgp[idx].q[i] - 0.5 * (delx * pgp[idx].dq0[i] + dely * pgp[idx].dq1[i])
-        qtilde_k[i] = pgp[itm].q[i] - 0.5 * (delx * pgp[itm].dq0[i] + dely * pgp[itm].dq1[i])
+        qtilde_i[i] = compact[idx].q[i] - 0.5 * (delx * compact[idx].dq0[i] + dely * compact[idx].dq1[i])
+        qtilde_k[i] = compact[itm].q[i] - 0.5 * (delx * compact[itm].dq0[i] + dely * compact[itm].dq1[i])
       end
             
-      var phi_i = venkat_limiter(qtilde_i, pgp, idx, config)
-      var phi_k = venkat_limiter(qtilde_k, pgp, itm, config)
+      var phi_i = venkat_limiter(qtilde_i, compact, idx, config)
+      var phi_k = venkat_limiter(qtilde_k, compact, itm, config)
       
       for i = 0, 4 do
-        qtilde_i[i] = pgp[idx].q[i] - 0.5 * phi_i[i] * (delx * pgp[idx].dq0[i] + dely * pgp[idx].dq1[i])
-        qtilde_k[i] = pgp[itm].q[i] - 0.5 * phi_k[i] * (delx * pgp[itm].dq0[i] + dely * pgp[itm].dq1[i])
+        qtilde_i[i] = compact[idx].q[i] - 0.5 * phi_i[i] * (delx * compact[idx].dq0[i] + dely * compact[idx].dq1[i])
+        qtilde_k[i] = compact[itm].q[i] - 0.5 * phi_k[i] * (delx * compact[itm].dq0[i] + dely * compact[itm].dq1[i])
       end
       
       var result : double[4] = qtilde_to_primitive(qtilde_i)
@@ -97,9 +97,9 @@ do
 end
 
 __demand(__inline, __cuda)
-task interior_dGx_neg(pgp : region(ispace(int1d), Point), idx : int, config : Config)
+task interior_dGx_neg(compact : region(ispace(int1d), Point), idx : int, pmap : region(ispace(int1d), int), config : Config)
 where 
-  reads(pgp.{x, y, nx, ny, xneg_conn, q, dq0, dq1, min_dist, minq, maxq})
+  reads(compact.{x, y, nx, ny, xneg_conn, q, dq0, dq1, min_dist, minq, maxq}, pmap)
 do
   var power : int = 0
   var limiter_flag : int = 1
@@ -116,23 +116,23 @@ do
     sum_dely_delf[i] = 0
   end
 
-  var x_i = pgp[idx].x
-  var y_i = pgp[idx].y
+  var x_i = compact[idx].x
+  var y_i = compact[idx].y
 
-  var nx = pgp[idx].nx
-  var ny = pgp[idx].ny
+  var nx = compact[idx].nx
+  var ny = compact[idx].ny
 
   var tx = ny
   var ty = -nx
 
   var itm : int
   for i = 0, 20 do
-    itm = pgp[idx].xneg_conn[i]
+    itm = pmap[compact[idx].xneg_conn[i]]
     if itm == 0 then
       break
     else
-      var x_k = pgp[itm].x
-            var y_k = pgp[itm].y
+      var x_k = compact[itm].x
+            var y_k = compact[itm].y
 
             var delx = x_k - x_i
             var dely = y_k - y_i
@@ -153,16 +153,16 @@ do
       var qtilde_i : double[4]
       var qtilde_k : double[4]
       for i = 0, 4 do
-        qtilde_i[i] = pgp[idx].q[i] - 0.5 * (delx * pgp[idx].dq0[i] + dely * pgp[idx].dq1[i])
-        qtilde_k[i] = pgp[itm].q[i] - 0.5 * (delx * pgp[itm].dq0[i] + dely * pgp[itm].dq1[i])
+        qtilde_i[i] = compact[idx].q[i] - 0.5 * (delx * compact[idx].dq0[i] + dely * compact[idx].dq1[i])
+        qtilde_k[i] = compact[itm].q[i] - 0.5 * (delx * compact[itm].dq0[i] + dely * compact[itm].dq1[i])
       end
             
-      var phi_i = venkat_limiter(qtilde_i, pgp, idx, config)
-      var phi_k = venkat_limiter(qtilde_k, pgp, itm, config)
+      var phi_i = venkat_limiter(qtilde_i, compact, idx, config)
+      var phi_k = venkat_limiter(qtilde_k, compact, itm, config)
       
       for i = 0, 4 do
-        qtilde_i[i] = pgp[idx].q[i] - 0.5 * phi_i[i] * (delx * pgp[idx].dq0[i] + dely * pgp[idx].dq1[i])
-        qtilde_k[i] = pgp[itm].q[i] - 0.5 * phi_k[i] * (delx * pgp[itm].dq0[i] + dely * pgp[itm].dq1[i])
+        qtilde_i[i] = compact[idx].q[i] - 0.5 * phi_i[i] * (delx * compact[idx].dq0[i] + dely * compact[idx].dq1[i])
+        qtilde_k[i] = compact[itm].q[i] - 0.5 * phi_k[i] * (delx * compact[itm].dq0[i] + dely * compact[itm].dq1[i])
       end
       
       var result : double[4] = qtilde_to_primitive(qtilde_i)
@@ -186,9 +186,9 @@ do
 end
 
 __demand(__inline, __cuda)
-task interior_dGy_pos(pgp : region(ispace(int1d), Point), idx : int, config : Config)
+task interior_dGy_pos(compact : region(ispace(int1d), Point), idx : int, pmap : region(ispace(int1d), int), config : Config)
 where 
-  reads(pgp.{x, y, nx, ny, ypos_conn, q, dq0, dq1, min_dist, minq, maxq})
+  reads(compact.{x, y, nx, ny, ypos_conn, q, dq0, dq1, min_dist, minq, maxq}, pmap)
 do
   var power : int = 0
   var limiter_flag : int = 1
@@ -205,23 +205,23 @@ do
     sum_dely_delf[i] = 0
   end
 
-  var x_i = pgp[idx].x
-  var y_i = pgp[idx].y
+  var x_i = compact[idx].x
+  var y_i = compact[idx].y
 
-  var nx = pgp[idx].nx
-  var ny = pgp[idx].ny
+  var nx = compact[idx].nx
+  var ny = compact[idx].ny
 
   var tx = ny
   var ty = -nx
 
   var itm : int
   for i = 0, 20 do
-    itm = pgp[idx].ypos_conn[i]
+    itm = pmap[compact[idx].ypos_conn[i]]
     if itm == 0 then
       break
     else
-      var x_k = pgp[itm].x
-            var y_k = pgp[itm].y
+      var x_k = compact[itm].x
+            var y_k = compact[itm].y
 
             var delx = x_k - x_i
             var dely = y_k - y_i
@@ -242,16 +242,16 @@ do
       var qtilde_i : double[4]
       var qtilde_k : double[4]
       for i = 0, 4 do
-        qtilde_i[i] = pgp[idx].q[i] - 0.5 * (delx * pgp[idx].dq0[i] + dely * pgp[idx].dq1[i])
-        qtilde_k[i] = pgp[itm].q[i] - 0.5 * (delx * pgp[itm].dq0[i] + dely * pgp[itm].dq1[i])
+        qtilde_i[i] = compact[idx].q[i] - 0.5 * (delx * compact[idx].dq0[i] + dely * compact[idx].dq1[i])
+        qtilde_k[i] = compact[itm].q[i] - 0.5 * (delx * compact[itm].dq0[i] + dely * compact[itm].dq1[i])
       end
             
-      var phi_i = venkat_limiter(qtilde_i, pgp, idx, config)
-      var phi_k = venkat_limiter(qtilde_k, pgp, itm, config)
+      var phi_i = venkat_limiter(qtilde_i, compact, idx, config)
+      var phi_k = venkat_limiter(qtilde_k, compact, itm, config)
       
       for i = 0, 4 do
-        qtilde_i[i] = pgp[idx].q[i] - 0.5 * phi_i[i] * (delx * pgp[idx].dq0[i] + dely * pgp[idx].dq1[i])
-        qtilde_k[i] = pgp[itm].q[i] - 0.5 * phi_k[i] * (delx * pgp[itm].dq0[i] + dely * pgp[itm].dq1[i])
+        qtilde_i[i] = compact[idx].q[i] - 0.5 * phi_i[i] * (delx * compact[idx].dq0[i] + dely * compact[idx].dq1[i])
+        qtilde_k[i] = compact[itm].q[i] - 0.5 * phi_k[i] * (delx * compact[itm].dq0[i] + dely * compact[itm].dq1[i])
       end
       
       var result : double[4] = qtilde_to_primitive(qtilde_i)
@@ -275,9 +275,9 @@ do
 end
 
 __demand(__inline, __cuda)
-task interior_dGy_neg(pgp : region(ispace(int1d), Point), idx : int, config : Config)
+task interior_dGy_neg(compact : region(ispace(int1d), Point), idx : int, pmap : region(ispace(int1d), int), config : Config)
 where 
-  reads(pgp.{x, y, nx, ny, yneg_conn, q, dq0, dq1, min_dist, minq, maxq})
+  reads(compact.{x, y, nx, ny, yneg_conn, q, dq0, dq1, min_dist, minq, maxq}, pmap)
 do
   var power : int = 0
   var limiter_flag : int = 1
@@ -294,23 +294,23 @@ do
     sum_dely_delf[i] = 0
   end
 
-  var x_i = pgp[idx].x
-  var y_i = pgp[idx].y
+  var x_i = compact[idx].x
+  var y_i = compact[idx].y
 
-  var nx = pgp[idx].nx
-  var ny = pgp[idx].ny
+  var nx = compact[idx].nx
+  var ny = compact[idx].ny
 
   var tx = ny
   var ty = -nx
 
   var itm : int
   for i = 0, 20 do
-    itm = pgp[idx].yneg_conn[i]
+    itm = pmap[compact[idx].yneg_conn[i]]
     if itm == 0 then
       break
     else
-      var x_k = pgp[itm].x
-            var y_k = pgp[itm].y
+      var x_k = compact[itm].x
+            var y_k = compact[itm].y
 
             var delx = x_k - x_i
             var dely = y_k - y_i
@@ -331,16 +331,16 @@ do
       var qtilde_i : double[4]
       var qtilde_k : double[4]
       for i = 0, 4 do
-        qtilde_i[i] = pgp[idx].q[i] - 0.5 * (delx * pgp[idx].dq0[i] + dely * pgp[idx].dq1[i])
-        qtilde_k[i] = pgp[itm].q[i] - 0.5 * (delx * pgp[itm].dq0[i] + dely * pgp[itm].dq1[i])
+        qtilde_i[i] = compact[idx].q[i] - 0.5 * (delx * compact[idx].dq0[i] + dely * compact[idx].dq1[i])
+        qtilde_k[i] = compact[itm].q[i] - 0.5 * (delx * compact[itm].dq0[i] + dely * compact[itm].dq1[i])
       end
             
-      var phi_i = venkat_limiter(qtilde_i, pgp, idx, config)
-      var phi_k = venkat_limiter(qtilde_k, pgp, itm, config)
+      var phi_i = venkat_limiter(qtilde_i, compact, idx, config)
+      var phi_k = venkat_limiter(qtilde_k, compact, itm, config)
       
       for i = 0, 4 do
-        qtilde_i[i] = pgp[idx].q[i] - 0.5 * phi_i[i] * (delx * pgp[idx].dq0[i] + dely * pgp[idx].dq1[i])
-        qtilde_k[i] = pgp[itm].q[i] - 0.5 * phi_k[i] * (delx * pgp[itm].dq0[i] + dely * pgp[itm].dq1[i])
+        qtilde_i[i] = compact[idx].q[i] - 0.5 * phi_i[i] * (delx * compact[idx].dq0[i] + dely * compact[idx].dq1[i])
+        qtilde_k[i] = compact[itm].q[i] - 0.5 * phi_k[i] * (delx * compact[itm].dq0[i] + dely * compact[itm].dq1[i])
       end
       
       var result : double[4] = qtilde_to_primitive(qtilde_i)
