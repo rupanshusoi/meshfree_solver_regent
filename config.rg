@@ -32,7 +32,7 @@ terra Config : initConfig(size : int)
   self.pr_inf = 0.7142857142857143
   self.gamma = 1.4
   self.rks = 5
-  self.iter = 1
+  self.iter = 3
   self.inner_iter = 0
   self.isMETIS = false
 end

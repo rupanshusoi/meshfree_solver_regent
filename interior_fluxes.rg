@@ -37,11 +37,13 @@ do
   var ty = -nx
 
   var itm : int
+  C.printf("*** idx = %d ***\n", idx)
   for i = 0, 20 do
     itm = pmap[compact[idx].xpos_conn[i]]
     if itm == 0 then
       break
     else
+      C.printf("%d\n", itm)
       var x_k = compact[itm].x
             var y_k = compact[itm].y
 

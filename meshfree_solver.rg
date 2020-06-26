@@ -23,7 +23,7 @@ do
 end
 
 task main()
-  var file = C.fopen("partGrid40K", "r")
+  var file = C.fopen("grids/partGrid40K", "r")
 
   var size : int
   C.fscanf(file, "%d", &size)
@@ -103,8 +103,8 @@ task main()
   var points_ghost = points_out - points_equal
   var points_allnbhs = points_equal | points_ghost
 
-  var compact0 = region(ispace(int1d, points_allnbhs[0].ispace.volume), Point)
-  var compact1 = region(ispace(int1d, points_allnbhs[1].ispace.volume), Point)
+  var compact0 = region(ispace(int1d, points_allnbhs[0].ispace.volume + 1), Point)
+  var compact1 = region(ispace(int1d, points_allnbhs[1].ispace.volume + 1), Point)
 
   var idx : int
   var curr : double[2]
@@ -173,11 +173,10 @@ task main()
         end
       end
 
-      var pmap0 = update_compact_instance(points_equal[0], points_ghost[0], compact0)
-      var pmap1 = update_compact_instance(points_equal[1], points_ghost[1], compact1)
+      var pmap0 = update_compact_instance(points_equal[0], points_ghost[0], compact0, config)
+      var pmap1 = update_compact_instance(points_equal[1], points_ghost[1], compact1, config)
 
-      C.printf("%d", pmap0[0])
-      cal_flux_residual(compact0, pmap0, config)
+      --cal_flux_residual(compact0, pmap0, config)
       cal_flux_residual(compact1, pmap1, config)
 
       update_sparse_instance(points_equal[0], points_ghost[0], compact0, pmap0)
