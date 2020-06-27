@@ -36,6 +36,7 @@ where reads(pn.{x, y, nx, ny, xpos_conn, q, dq0, dq1, min_dist, minq, maxq}) do
   var ty = -nx
 
   var itm : int
+  __demand(__index_launch)
   for i = 0, 20 do
     itm = pn[idx].xpos_conn[i]
     if itm == 0 then
@@ -126,6 +127,7 @@ where reads(pn.{x, y, nx, ny, xneg_conn, q, dq0, dq1, min_dist, minq, maxq}) do
   var ty = -nx
 
   var itm : int
+  __demand(__index_launch)
   for i = 0, 20 do
     itm = pn[idx].xneg_conn[i]
     if itm == 0 then
@@ -212,6 +214,7 @@ where reads(pn.{x, y, nx, ny, yneg_conn, q, dq0, dq1, min_dist, minq, maxq}) do
   var ty = -nx
 
   var itm : int
+  __demand(__index_launch)
   for i = 0, 20 do
     itm = pn[idx].yneg_conn[i]
     if itm == 0 then

@@ -37,6 +37,7 @@ do
   var ty = -nx
 
   var itm : int
+  __demand(__index_launch)
   for i = 0, 20 do
     itm = pgp[idx].xpos_conn[i]
     if itm == 0 then
@@ -126,6 +127,7 @@ do
   var ty = -nx
 
   var itm : int
+  __demand(__index_launch)
   for i = 0, 20 do
     itm = pgp[idx].xneg_conn[i]
     if itm == 0 then
@@ -215,6 +217,7 @@ do
   var ty = -nx
 
   var itm : int
+  __demand(__index_launch)
   for i = 0, 20 do
     itm = pgp[idx].ypos_conn[i]
     if itm == 0 then
@@ -304,6 +307,7 @@ do
   var ty = -nx
 
   var itm : int
+  __demand(__index_launch)
   for i = 0, 20 do
     itm = pgp[idx].yneg_conn[i]
     if itm == 0 then

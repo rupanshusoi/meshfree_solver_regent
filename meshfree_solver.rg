@@ -3,6 +3,7 @@ require "config"
 require "point"
 require "core"
 
+--[[
 local MAPPER
 do
   local root_dir = arg[0]:match(".*/") or "./"
@@ -49,6 +50,7 @@ do
   terralib.linklibrary(mapper_so)
   MAPPER = terralib.includec("meshfree_mapper.h", include_dirs)
 end
+--]]
 
 local C = regentlib.c
 local sqrt = regentlib.sqrt(double)
@@ -69,7 +71,7 @@ do
 end
 
 task main()
-  var file = C.fopen("grids/partGrid2.5M", "r")
+  var file = C.fopen("grids/partGrid40K", "r")
 
   var size : int
   C.fscanf(file, "%d", &size)
@@ -189,8 +191,9 @@ task main()
   var itime = C.legion_get_current_time_in_micros()
   C.printf("Starting FPI solver\n")
   
+  __demand(__trace)
   for i = 1, iter + 1 do  
-    __demand(__index_launch)
+    __demand(__index_launch, __trace)
     for color in points_equal.colors do
       func_delta(points_equal[color], points_allnbhs[color],
            config)
@@ -199,32 +202,32 @@ task main()
 
       run_setq(globaldata, points_equal)
 
-      __demand(__index_launch)
+      __demand(__index_launch, __trace)
       for color in points_equal.colors do
         setdq(points_equal[color], points_allnbhs[color],
               config)
       end
 
       for j = 0, config.inner_iter do
-        __demand(__index_launch)
+        __demand(__index_launch, __trace)
         for color in points_equal.colors do
           setqinner(points_equal[color], points_allnbhs[color], config)
         end
 
-        __demand(__index_launch)
+        __demand(__index_launch, __trace)
         for color in points_equal.colors do
           updateqinner(points_equal[color])
         end
       end
 
-      __demand(__index_launch)
+      __demand(__index_launch, __trace)
       for color in points_equal.colors do
         cal_flux_residual(points_equal[color], points_allnbhs[color], config)
       end
 
       var sum_res_sqr : double = 0.0
 
-      __demand(__index_launch)
+      __demand(__index_launch, __trace)
       for color in points_equal.colors do
         sum_res_sqr += state_update(points_equal[color], i, rk, eu, res_old)
       end
@@ -236,7 +239,7 @@ task main()
         residue = 0
       else residue = log10(res_new / res_old) end
 
-      if i % 50 == 0 then
+      if i % 100 == 0 then
         C.printf("Residue = %0.13lf for iteration %d, %d\n", residue, i, rk)
       end
 
@@ -245,4 +248,4 @@ task main()
   var ftime = C.legion_get_current_time_in_micros()
   regentlib.c.printf("***Time = %lld***\n", ftime - itime)
 end
-regentlib.start(main) --, MAPPER.register_mappers)
+regentlib.start(main)

@@ -13,6 +13,7 @@ do
   var VL_CONST = config.vl_const
   var phi : double[4]
   var count : int = 0
+
   for i = 0, 4 do
     var q = pgp[idx].q[i]
     var del_neg = qtilde[i] - q
