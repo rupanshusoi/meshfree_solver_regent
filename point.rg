@@ -10,7 +10,7 @@ fspace Edge
 
 struct Point
 {
-        part_number : int1d;
+  part_number : int1d;
   localID : int;
   x : double;
   y : double;
