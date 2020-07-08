@@ -8,7 +8,19 @@
 using namespace Legion;
 using namespace Legion::Mapping;
 
-void default_policy_select_target_processors(
+class MeshfreeMapper : public DefaultMapper
+{
+public:
+  MeshfreeMapper(MapperRuntime *rt, Machine machine, Processor local);
+  virtual void default_policy_select_target_processors(MapperContext ctx, const Task &task, std::vector<Processor> &target_procs);
+};
+
+MeshfreeMapper::MeshfreeMapper(MapperRuntime *rt, Machine machine, Processor local)
+  : DefaultMapper(rt, machine, local)
+{
+}
+
+void MeshfreeMapper::default_policy_select_target_processors(
                                     MapperContext ctx,
                                     const Task &task,
                                     std::vector<Processor> &target_procs)
@@ -20,7 +32,7 @@ static void create_mappers(Machine machine,
                            Runtime* rt,
                            const std::set<Processor>& local_procs) {
   for (Processor proc : local_procs) {
-    rt->replace_default_mapper(new DefaultMapper(rt->get_mapper_runtime(), machine, proc), proc);
+    rt->replace_default_mapper(new MeshfreeMapper(rt->get_mapper_runtime(), machine, proc), proc);
   }
 }
 
