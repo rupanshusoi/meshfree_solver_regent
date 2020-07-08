@@ -1,4 +1,6 @@
 partGrid*
+no_metis_*
+metis_*
 legion*
 r.rg
 s.rg
