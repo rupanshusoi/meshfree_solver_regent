@@ -20,7 +20,6 @@ where
         yneg_conn, min_dist, minq, maxq}),
   writes(pe.flux_res)
 do
-  __demand(__trace)
   for point in pe do
     if point.flag_1 == 0 then
       var Gxp = wall_dGx_pos(pn, point.localID, config)

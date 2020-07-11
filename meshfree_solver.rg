@@ -2,6 +2,7 @@ import "regent"
 require "config"
 require "point"
 require "core"
+require "solver"
 
 --[[
 local MAPPER
@@ -53,8 +54,6 @@ end
 --]]
 
 local C = regentlib.c
-local sqrt = regentlib.sqrt(double)
-local log10 = regentlib.log10(double)
 
 terra pprint(a : double[4])
   C.printf("[\x1b[33m %0.15lf, %0.15lf, %0.15lf, %0.15lf]\n \x1b[0m", a[0], a[1], a[2], a[3])
@@ -70,18 +69,8 @@ do
   end
 end
 
-task main()
-  var file = C.fopen("grids/partGrid40K", "r")
-
-  var size : int
-  C.fscanf(file, "%d", &size)
-  
-  var config : Config
-  config : initConfig(size)
-
-  var globaldata = region(ispace(int1d, size + 1), Point)  
-  var edges = region(ispace(int1d, config.totalnbhs + 1), Edge)
-  
+task read_grid(globaldata : region(ispace(int1d), Point), edges : region(ispace(int1d), Edge), config : Config)
+where writes(globaldata, edges) do
   var defprimal = getInitialPrimitive()
   
   var localID : int
@@ -104,13 +93,16 @@ task main()
   var outerpts = 0
   var interiorpts = 0
   
-  C.printf("Populating globaldata\n")  
+  var file = C.fopen([rawstring](config.filename), "r")
+  var tmp : int
+  C.fscanf(file, "%d", &tmp)
 
+  --C.printf("Populating globaldata\n")  
   globaldata[0].localID = 0
   globaldata[0].part_number = 0
 
   var edgecount = 0
-  for count = 0, size do
+  for count = 0, config.size do
     if not config.isMETIS then
       C.fscanf(file, "%lf %lf %d %d %d %d %lf %lf %d %lf %d", &x, &y, &left, &right, &flag1, &flag2, &nx, &ny, &qt_depth, &min_dist, &nbhs)
     else
@@ -142,22 +134,24 @@ task main()
   end
   
   C.fclose(file)
+end
+
+__demand(__replicable)
+task main()
+  var config = initConfig()
+
+  var globaldata = region(ispace(int1d, config.size + 1), Point)  
+  var edges = region(ispace(int1d, config.totalnbhs + 1), Edge)
   
-  -- making partitions
-
-  var points_equal = partition(equal, globaldata, ispace(int1d, config.partitions))
-  var edges_out = preimage(edges, points_equal, edges.in_ptr)
-  var points_out = image(globaldata, edges_out, edges.out_ptr)
-  var points_ghost = points_out - points_equal
-  var points_allnbhs = points_equal | points_ghost
-
+  read_grid(globaldata, edges, config)
+  
   var idx : int
   var curr : double[2]
   var leftpt : double[2]
   var rightpt : double[2]
   var normals : double[2]
 
-  C.printf("Setting normals\n")
+  --C.printf("Setting normals\n")
   for point in globaldata do
     if point.flag_1 == 0 or point.flag_1 == 2 then
       var curr : double[2]
@@ -175,77 +169,20 @@ task main()
     end
   end
 
-  C.printf("Calculating connectivity\n")
+  --C.printf("Calculating connectivity\n")
   var connectivity : int[80]
-  for count = 0, size do
+  for count = 0, config.size do
     idx = count + 1
     connectivity = calculateConnectivity(globaldata, idx)
     setConnectivity(globaldata, idx, connectivity)
   end
 
-  var res_old : double = 0.0
-  var eu : int = 1
-  var rks : int = config.rks
-  var iter : int = config.iter
+  --var itime = C.legion_get_current_time_in_micros()
 
-  var itime = C.legion_get_current_time_in_micros()
-  C.printf("Starting FPI solver\n")
-  
-  __demand(__trace)
-  for i = 1, iter + 1 do  
-    __demand(__index_launch, __trace)
-    for color in points_equal.colors do
-      func_delta(points_equal[color], points_allnbhs[color],
-           config)
-    end
-    for rk = 1, rks do
+  solver(globaldata, edges, config)
 
-      run_setq(globaldata, points_equal)
-
-      __demand(__index_launch, __trace)
-      for color in points_equal.colors do
-        setdq(points_equal[color], points_allnbhs[color],
-              config)
-      end
-
-      for j = 0, config.inner_iter do
-        __demand(__index_launch, __trace)
-        for color in points_equal.colors do
-          setqinner(points_equal[color], points_allnbhs[color], config)
-        end
-
-        __demand(__index_launch, __trace)
-        for color in points_equal.colors do
-          updateqinner(points_equal[color])
-        end
-      end
-
-      __demand(__index_launch, __trace)
-      for color in points_equal.colors do
-        cal_flux_residual(points_equal[color], points_allnbhs[color], config)
-      end
-
-      var sum_res_sqr : double = 0.0
-
-      __demand(__index_launch, __trace)
-      for color in points_equal.colors do
-        sum_res_sqr += state_update(points_equal[color], i, rk, eu, res_old)
-      end
-
-      var res_new : double = sqrt(sum_res_sqr) / config.size
-      var residue : double
-      if i <= 2 then
-        res_old = res_new
-        residue = 0
-      else residue = log10(res_new / res_old) end
-
-      if i % 100 == 0 then
-        C.printf("Residue = %0.13lf for iteration %d, %d\n", residue, i, rk)
-      end
-
-    end
-  end
-  var ftime = C.legion_get_current_time_in_micros()
-  regentlib.c.printf("***Time = %lld***\n", ftime - itime)
+  --var ftime = C.legion_get_current_time_in_micros()
+  --regentlib.c.printf("***Time = %lld***\n", ftime - itime)
+--]]
 end
 regentlib.start(main)

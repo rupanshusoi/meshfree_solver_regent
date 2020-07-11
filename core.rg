@@ -129,6 +129,7 @@ do
   return bigarr
 end
 
+__demand(__leaf)
 task setq(pe: region(ispace(int1d), Point))
 where
   reads(pe.{localID, prim}), writes(pe.q)
@@ -155,6 +156,7 @@ do
   end
 end
 
+__demand(__leaf)
 task setdq(pe : region(ispace(int1d), Point), 
      pn : region(ispace(int1d), Point), config : Config)
 where
