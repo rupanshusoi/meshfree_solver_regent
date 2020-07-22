@@ -1,29 +1,30 @@
 import argparse
 from functools import cmp_to_key
 
-# This takes a Regent-METIS format file and sorts it by bitmask
+# This takes a Regent-METIS format file and sorts it by i) partition, ii) bitmask
 
 def compare(a, b):
-  a_bits = a[0].count(1)
-  b_bits = b[0].count(1)
-  
-  if a_bits > b_bits:
+  a_part = int(a[1].split()[0])
+  b_part = int(b[1].split()[0])
+
+  if a_part > b_part:
     return 1
-  elif a_bits < b_bits:
+  elif a_part < b_part:
     return -1
   else:
-    a_ = int(''.join(map(str, a[0])), 2)    
-    b_ = int(''.join(map(str, b[0])), 2)    
-    if a_ > b_:
+    a_bits = a[0].count(1)
+    b_bits = b[0].count(1)
+  
+    if a_bits > b_bits:
       return 1
-    elif a_ < b_:
+    elif a_bits < b_bits:
       return -1
     else:
-      a_part = int(a[1].split()[0])
-      b_part = int(b[1].split()[0])
-      if a_part > b_part:
+      a_bitmask_value = int(''.join(map(str, a[0])), 2)    
+      b_bitmask_value = int(''.join(map(str, b[0])), 2)    
+      if a_bitmask_value > b_bitmask_value:
         return 1
-      elif a_part < b_part:
+      elif a_bitmask_value < b_bitmask_value:
         return -1
       else:
         return 0
@@ -57,7 +58,7 @@ def main():
 
       fin = [i[1].split() for i in arr]    
      
-      with open(grid_file_path + "_sb", "w+") as fin_file_path:
+      with open(grid_file_path + "_b", "w+") as fin_file_path:
         fin_file_path.write(str(size) + "\n")
         for idx, line in enumerate(fin):
           line[1] = str(idx + 1)
