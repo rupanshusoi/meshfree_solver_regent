@@ -177,12 +177,6 @@ task main()
     setConnectivity(globaldata, idx, connectivity)
   end
 
-  --var itime = C.legion_get_current_time_in_micros()
-
   solver(globaldata, edges, config)
-
-  --var ftime = C.legion_get_current_time_in_micros()
-  --regentlib.c.printf("***Time = %lld***\n", ftime - itime)
---]]
 end
-regentlib.start(main)
+regentlib.start(main) -- , MAPPER.register_mappers)

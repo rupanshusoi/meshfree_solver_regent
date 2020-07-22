@@ -12,7 +12,7 @@ task print_residue(residue : double, i : int, rk : int)
         C.printf("Residue = %0.13lf for iteration %d, %d\n", residue, i, rk)
 end
 
-task print_RDP(itime : int64, ftime : int64)
+task print_time(itime : int64, ftime : int64)
   C.printf("*** Time = %lld ***\n", ftime - itime)
 end
 
@@ -34,14 +34,13 @@ where reads writes(globaldata, edges) do
 
   var itime = C.legion_get_current_time_in_micros()
 
-  for i = 1, iter + 1 do  
+  for i = 1, iter + 1 do
     __demand(__index_launch)
     for color in points_equal.colors do
       func_delta(points_equal[color], points_allnbhs[color],
            config)
     end
     for rk = 1, rks do
-
       __demand(__index_launch)
       for color in points_equal.colors do
         setq(points_equal[color])
@@ -84,12 +83,12 @@ where reads writes(globaldata, edges) do
         residue = 0
       else residue = log10(res_new / res_old) end
 
-      if i % 10 == 0 then
+      if i % 2 == 0 then
         print_residue(residue, i, rk)
       end
     end
   end
 
   var ftime = C.legion_get_current_time_in_micros()
-  print_RDP(itime, ftime)
+  print_time(itime, ftime)
 end

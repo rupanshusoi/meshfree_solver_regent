@@ -129,11 +129,11 @@ do
   return bigarr
 end
 
-__demand(__leaf)
 task setq(pe: region(ispace(int1d), Point))
 where
   reads(pe.{localID, prim}), writes(pe.q)
 do
+  __demand(__openmp)
   for itm in pe do
     if itm.localID > 0 then
       var rho = itm.prim[0]
@@ -156,12 +156,12 @@ do
   end
 end
 
-__demand(__leaf)
 task setdq(pe : region(ispace(int1d), Point), 
      pn : region(ispace(int1d), Point), config : Config)
 where
   reads(pe.{localID, conn}, pn.{x, y, q}), writes(pe.{dq0, dq1, minq, maxq})
 do
+  __demand(__openmp)
   for point in pe do
     if point.localID > 0 then
       var sum_delx_sqr : double = 0
@@ -269,6 +269,7 @@ where
 do
   var power = config.power
 
+  __demand(__openmp)
   for itm in pe do
     if itm.localID > 0 then
       var x_i = pn[itm].x
@@ -364,6 +365,7 @@ task updateqinner(pe : region(ispace(int1d), Point))
 where
   reads(pe.{inner0, inner1}), writes(pe.{dq0, dq1})
 do
+  __demand(__openmp)
   for point in pe do
     point.dq0 = point.inner0
     point.dq1 = point.inner1

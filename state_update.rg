@@ -19,6 +19,7 @@ task func_delta(pe : region(ispace(int1d), Point),
 where
   reads(pn.{x, y, prim, conn}), writes(pe.{delta, prim_old})
 do
+  __demand(__openmp)
   for point in pe do 
     point.prim_old = pn[point].prim
 
@@ -146,6 +147,7 @@ do
   
   var itm : int
 
+  --__demand(__openmp)
   for point in pe do
     if point.localID > 0 then
       if point.flag_1 == 0 then
