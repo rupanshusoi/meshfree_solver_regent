@@ -1,5 +1,6 @@
 # An Implicitly Parallel Meshfree Solver in Regent
 
+## Overview
 This project implements a meshfree solver for inviscid, compressible fluid flows using q-LSKUM in the implicitly parallel, high-level programming language Regent. This is a first step towards our aim of developing a hybrid, production-level CFD code that is able to utilize the full power of today's heterogeneous supercomputers by simultaneously executing on both CPUs and GPGPUs.
 
 ## Dependencies
