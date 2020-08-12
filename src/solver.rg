@@ -1,7 +1,6 @@
 import "regent"
 require "point"
 require "core"
-
 require "config"
 
 local C = regentlib.c
@@ -9,12 +8,11 @@ local sqrt = regentlib.sqrt(double)
 local log10 = regentlib.log10(double)
 
 task print_residue(residue : double, i : int, rk : int)
-        C.printf("Residue = %0.13lf for iteration %d, %d\n", residue, i, rk)
+  C.printf("Residue = %0.13lf for iteration %d, %d\n", residue, i, rk)
 end
 
 task print_details(itime : int64, ftime : int64, config : Config)
   C.printf("*** Time = %lld ***\n", ftime - itime)
-  C.printf("*** RDP = %.4e ***\n", (double)(ftime - itime) / (1e6 * config.iter * config.size))
   C.printf("*** Filename = %s, Partitions = %d, Grid size = %lld points, Total Neighbours = %lld ***\n", [rawstring](config.filename), config.partitions, config.size, config.totalnbhs)
 end
 
