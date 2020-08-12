@@ -129,6 +129,7 @@ do
   return bigarr
 end
 
+__demand(__cuda)
 task setq(pe: region(ispace(int1d), Point))
 where
   reads(pe.{localID, prim}), writes(pe.q)
@@ -156,6 +157,7 @@ do
   end
 end
 
+__demand(__cuda)
 task setdq(pe : region(ispace(int1d), Point), 
      pn : region(ispace(int1d), Point), config : Config)
 where
@@ -361,6 +363,7 @@ do
   end
 end
 
+__demand(__cuda)
 task updateqinner(pe : region(ispace(int1d), Point))
 where
   reads(pe.{inner0, inner1}), writes(pe.{dq0, dq1})

@@ -14,6 +14,7 @@ terra pprint(a : double[4])
   C.printf("[\x1b[33m %0.15lf, %0.15lf, %0.15lf, %0.15lf]\n \x1b[0m", a[0], a[1], a[2], a[3])        
 end
 
+__demand(__cuda)
 task func_delta(pe : region(ispace(int1d), Point), 
     pn : region(ispace(int1d), Point), config : Config)
 where
@@ -134,12 +135,12 @@ task conserved_vector_Ubar(nx : double, ny : double, prim : double[4])
   return Ubar
 end
 
+__demand(__cuda)
 task state_update(pe : region(ispace(int1d), Point), iter : int, rk : int, 
       eu : int, res_old : double)
 where
   reads(pe.{localID, flag_1, nx, ny, prim, prim_old, delta, flux_res}), writes(pe.prim)
 do
-  var max_res : double = 0.0
   var sum_res_sqr : double = 0.0
 
   var obt : double = 1.0 / 3.0
@@ -147,7 +148,7 @@ do
   
   var itm : int
 
-  --__demand(__openmp)
+  __demand(__openmp)
   for point in pe do
     if point.localID > 0 then
       if point.flag_1 == 0 then
@@ -176,7 +177,7 @@ do
         U[2] = U3_rot * ny - U2_rot * nx
         
         var res_sqr = (U[0] - temp) * (U[0] - temp)
-        sum_res_sqr = sum_res_sqr + res_sqr
+        sum_res_sqr += res_sqr
         
         var tempU : double[4]
         tempU[0] = U[0]
@@ -211,8 +212,6 @@ do
         U[2] = U3_rot * ny - U2_rot * nx
 
         var res_sqr = (U[0] - temp) * (U[0] - temp)
-
-        if res_sqr > max_res then max_res = res_sqr end
 
         sum_res_sqr += res_sqr
         
