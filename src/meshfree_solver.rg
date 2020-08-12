@@ -54,20 +54,11 @@ end
 --]]
 
 local C = regentlib.c
+local Cstring = terralib.includec("string.h")
 
 terra pprint(a : double[4])
   C.printf("[\x1b[33m %0.15lf, %0.15lf, %0.15lf, %0.15lf]\n \x1b[0m", a[0], a[1], a[2], a[3])
 end  
-
-task run_setq(p : region(ispace(int1d), Point), part : partition(disjoint, p, ispace(int1d)))
-where
-  reads(p.{localID, prim}), writes(p.q)
-do
-  __demand(__index_launch)
-  for color in part.colors do
-    setq(part[color])
-  end
-end
 
 task read_grid(globaldata : region(ispace(int1d), Point), edges : region(ispace(int1d), Edge), config : Config)
 where writes(globaldata, edges) do
@@ -137,8 +128,7 @@ where writes(globaldata, edges) do
 end
 
 __demand(__replicable)
-task main()
-  var config = initConfig()
+task main(config : Config)
 
   var globaldata = region(ispace(int1d, config.size + 1), Point)  
   var edges = region(ispace(int1d, config.totalnbhs + 1), Edge)
@@ -179,4 +169,23 @@ task main()
 
   solver(globaldata, edges, config)
 end
-regentlib.start(main) -- , MAPPER.register_mappers)
+
+task toplevel()
+  var args = C.legion_runtime_get_input_args()
+  
+  var iter, inner_iter = 200, 3
+
+  var i = 1
+  while i < args.argc do
+    if Cstring.strcmp(args.argv[i], "--iter") == 0 then
+      iter = C.atoi(args.argv[i+1])
+    elseif Cstring.strcmp(args.argv[i], "--inner-iter") == 0 then
+      inner_iter = C.atoi(args.argv[i+1])
+    end
+    i += 1
+  end
+
+  var config = initConfig(iter, inner_iter)
+  main(config)
+end
+regentlib.start(toplevel) -- , MAPPER.register_mappers)

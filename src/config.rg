@@ -20,20 +20,35 @@ fspace Config
   isMETIS : bool
 }
 
---[[
-800 K : 804824, 6460047
-2.5 M : 2642264, 21172800
-10 M  : 9992000, 79997009
-25 M  : 25330172, 202730842
-40 M  : 39381464, 315166328
---]]
+task initConfig(iter : int, inner_iter : int)
+  var grid_size = 0.04
+  var size : int, totalnbhs : int
 
-task initConfig()
+  if grid_size == 0.04 then
+    size = 48738
+    totalnbhs = 393993
+  elseif grid_size == 0.8 then
+    size = 804824
+    totalnbhs = 6460047
+  elseif grid_size == 2.5 then
+    size = 2642264
+    totalnbhs = 21172800
+  elseif grid_size == 10 then
+    size = 9992000
+    totalnbhs = 79997009
+  elseif grid_size == 25 then
+    size = 25330172
+    totalnbhs = 202730842
+  elseif grid_size == 40 then
+    size = 39381464
+    totalnbhs = 315166328
+  end
+
   var c = Config {
-    filename = "grids/partGrid2.5M",
-    size = 2642264,
-    totalnbhs = 21172800,
-    partitions = 16,
+    filename = "../grids/partGrid40K_8",
+    size = size,
+    totalnbhs = totalnbhs,
+    partitions = 8,
     cfl = 0.01,
     mach = 0.85,
     aoa = 1,
@@ -43,9 +58,9 @@ task initConfig()
     pr_inf = 0.7142857142857143,
     gamma = 1.4,
     rks = 5,
-    iter = 10,
-    inner_iter = 0,
-    isMETIS = false
+    iter = iter,
+    inner_iter = inner_iter,
+    isMETIS = true
   }
   return c
 end

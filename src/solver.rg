@@ -12,8 +12,10 @@ task print_residue(residue : double, i : int, rk : int)
         C.printf("Residue = %0.13lf for iteration %d, %d\n", residue, i, rk)
 end
 
-task print_time(itime : int64, ftime : int64)
+task print_details(itime : int64, ftime : int64, config : Config)
   C.printf("*** Time = %lld ***\n", ftime - itime)
+  C.printf("*** RDP = %.4e ***\n", (double)(ftime - itime) / (1e6 * config.iter * config.size))
+  C.printf("*** Filename = %s, Partitions = %d, Grid size = %lld points, Total Neighbours = %lld ***\n", [rawstring](config.filename), config.partitions, config.size, config.totalnbhs)
 end
 
 __demand(__inline, __openmp)
@@ -29,18 +31,16 @@ where reads writes(globaldata, edges) do
 
   var res_old : double = 0.0
   var eu : int = 1
-  var rks : int = config.rks
-  var iter : int = config.iter
 
   var itime = C.legion_get_current_time_in_micros()
 
-  for i = 1, iter + 1 do
+  for i = 1, config.iter + 1 do
     __demand(__index_launch)
     for color in points_equal.colors do
       func_delta(points_equal[color], points_allnbhs[color],
            config)
     end
-    for rk = 1, rks do
+    for rk = 1, config.rks do
       __demand(__index_launch)
       for color in points_equal.colors do
         setq(points_equal[color])
@@ -83,12 +83,12 @@ where reads writes(globaldata, edges) do
         residue = 0
       else residue = log10(res_new / res_old) end
 
-      if i % 2 == 0 then
+      if true then
         print_residue(residue, i, rk)
       end
     end
   end
 
   var ftime = C.legion_get_current_time_in_micros()
-  print_time(itime, ftime)
+  print_details(itime, ftime, config)
 end
