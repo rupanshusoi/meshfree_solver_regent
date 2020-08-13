@@ -21,7 +21,7 @@ fspace Config
 }
 
 task initConfig(iter : int, inner_iter : int)
-  var grid_size = 0.04
+  var grid_size = 2.5
   var size : int, totalnbhs : int
 
   if grid_size == 0.04 then
@@ -45,10 +45,10 @@ task initConfig(iter : int, inner_iter : int)
   end
 
   var c = Config {
-    filename = "../grids/partGrid40K_8",
+    filename = "../grids/partGrid2.5M_4_b",
     size = size,
     totalnbhs = totalnbhs,
-    partitions = 8,
+    partitions = 4,
     cfl = 0.01,
     mach = 0.85,
     aoa = 1,
