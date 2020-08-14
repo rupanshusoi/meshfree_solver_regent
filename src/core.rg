@@ -17,7 +17,7 @@ terra pprint(a : double[4])
 end
 
 __demand(__inline)
-task getInitialPrimitive()
+task get_initial_primitive()
   var rho_inf : double = 1.0
   var mach : double = 0.85
   var machcos = mach * cos(PI/180) -- removed call to calculateTheta
@@ -32,7 +32,7 @@ task getInitialPrimitive()
 end
 
 __demand(__cuda)
-task calculateNormals(left : double[2], right : double[2], mx : double, my : double)
+task cal_normals(left : double[2], right : double[2], mx : double, my : double)
   var lx = left[0]
   var ly = left[1]
 
@@ -61,11 +61,11 @@ task calculateNormals(left : double[2], right : double[2], mx : double, my : dou
 end
 
 __demand(__inline)
-task calculateConnectivity(globaldata : region(ispace(int1d), Point), idx : int)
+task cal_connectivity(pt_distr : region(ispace(int1d), Point), idx : int)
 where
-  reads writes(globaldata)
+  reads writes(pt_distr)
 do
-  var curr = globaldata[idx]
+  var curr = pt_distr[idx]
   var currx = curr.x
   var curry = curr.y
   var nx = curr.nx
@@ -90,8 +90,8 @@ do
       break
     else
       var itm = curr.conn[i]
-      var itmx = globaldata[itm].x
-      var itmy = globaldata[itm].y
+      var itmx = pt_distr[itm].x
+      var itmy = pt_distr[itm].y
       
       var delx = itmx - currx
       var dely = itmy - curry
@@ -130,7 +130,7 @@ do
 end
 
 __demand(__cuda)
-task setq(pe: region(ispace(int1d), Point))
+task set_q(pe: region(ispace(int1d), Point))
 where
   reads(pe.{localID, prim}), writes(pe.q)
 do
@@ -158,7 +158,7 @@ do
 end
 
 __demand(__cuda)
-task setdq(pe : region(ispace(int1d), Point), 
+task set_dq(pe : region(ispace(int1d), Point), 
      pn : region(ispace(int1d), Point), config : Config)
 where
   reads(pe.{localID, conn}, pn.{x, y, q}), writes(pe.{dq0, dq1, minq, maxq})
@@ -262,7 +262,7 @@ do
 end
 
 __demand(__cuda)
-task setqinner(pe : region(ispace(int1d), Point), 
+task set_q_inner(pe : region(ispace(int1d), Point), 
      pn : region(ispace(int1d), Point),
      config : Config)
 where
@@ -364,7 +364,7 @@ do
 end
 
 __demand(__cuda)
-task updateqinner(pe : region(ispace(int1d), Point))
+task update_q_inner(pe : region(ispace(int1d), Point))
 where
   reads(pe.{inner0, inner1}), writes(pe.{dq0, dq1})
 do

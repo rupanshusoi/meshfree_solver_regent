@@ -45,19 +45,19 @@ struct Point
   maxq : double[4];
 }
 
-task setNormals(globaldata : region(ispace(int1d), Point), 
+task set_normals(pt_distr : region(ispace(int1d), Point), 
       idx : int, arr : double[2])
 where 
-  writes(globaldata.{nx, ny})
+  writes(pt_distr.{nx, ny})
 do
-  globaldata[idx].nx = arr[0]
-  globaldata[idx].ny = arr[1]
+  pt_distr[idx].nx = arr[0]
+  pt_distr[idx].ny = arr[1]
 end
 
 __demand(__inline)
-task setConnectivity(globaldata : region(ispace(int1d), Point), idx : int, bigarr : int[80])
+task set_connectivity(pt_distr : region(ispace(int1d), Point), idx : int, bigarr : int[80])
 where
-  writes(globaldata.{xpos_conn, xneg_conn, ypos_conn, yneg_conn, 
+  writes(pt_distr.{xpos_conn, xneg_conn, ypos_conn, yneg_conn, 
          xpos_nbhs, xneg_nbhs, ypos_nbhs, yneg_nbhs})
 do
 
@@ -110,14 +110,14 @@ do
     end
   end
 
-  globaldata[idx].xpos_conn = xpos
-  globaldata[idx].xneg_conn = xneg
-  globaldata[idx].ypos_conn = ypos
-  globaldata[idx].yneg_conn = yneg
+  pt_distr[idx].xpos_conn = xpos
+  pt_distr[idx].xneg_conn = xneg
+  pt_distr[idx].ypos_conn = ypos
+  pt_distr[idx].yneg_conn = yneg
 
-  globaldata[idx].xpos_nbhs = xpos_count
-  globaldata[idx].xneg_nbhs = xneg_count
-  globaldata[idx].ypos_nbhs = ypos_count
-  globaldata[idx].yneg_nbhs = yneg_count
+  pt_distr[idx].xpos_nbhs = xpos_count
+  pt_distr[idx].xneg_nbhs = xneg_count
+  pt_distr[idx].ypos_nbhs = ypos_count
+  pt_distr[idx].yneg_nbhs = yneg_count
 
 end

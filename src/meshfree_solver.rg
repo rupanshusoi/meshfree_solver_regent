@@ -2,7 +2,7 @@ import "regent"
 require "config"
 require "point"
 require "core"
-require "solver"
+require "fpi_solver"
 
 --[[
 local MAPPER
@@ -60,9 +60,9 @@ terra pprint(a : double[4])
   C.printf("[\x1b[33m %0.15lf, %0.15lf, %0.15lf, %0.15lf]\n \x1b[0m", a[0], a[1], a[2], a[3])
 end  
 
-task read_grid(globaldata : region(ispace(int1d), Point), edges : region(ispace(int1d), Edge), config : Config)
-where writes(globaldata, edges) do
-  var defprimal = getInitialPrimitive()
+task read_grid(pt_distr : region(ispace(int1d), Point), edges : region(ispace(int1d), Edge), config : Config)
+where writes(pt_distr, edges) do
+  var defprimal = get_initial_primitive()
   
   var localID : int
   var part_number : int
@@ -88,9 +88,9 @@ where writes(globaldata, edges) do
   var tmp : int
   C.fscanf(file, "%d", &tmp)
 
-  --C.printf("Populating globaldata\n")  
-  globaldata[0].localID = 0
-  globaldata[0].part_number = 0
+  --C.printf("Populating pt_distr\n")  
+  pt_distr[0].localID = 0
+  pt_distr[0].part_number = 0
 
   var edgecount = 0
   for count = 0, config.size do
@@ -121,7 +121,7 @@ where writes(globaldata, edges) do
       p = Point {part_number, localID, x, y, left, right, flag1, flag2, nbhs, nbhs_arr, nx, ny, defprimal, dummy_double, dummy_double, dummy_double, dummy_double, dummy_double, dummy_double, dummy_double, 0, 0, 0, 0, 0, dummy_int, dummy_int, dummy_int, dummy_int, 0, min_dist, dummy_double, dummy_double}
     end
 
-    globaldata[count + 1] = p
+    pt_distr[count + 1] = p
   end
   
   C.fclose(file)
@@ -130,10 +130,10 @@ end
 __demand(__replicable)
 task main(config : Config)
 
-  var globaldata = region(ispace(int1d, config.size + 1), Point)  
+  var pt_distr = region(ispace(int1d, config.size + 1), Point)  
   var edges = region(ispace(int1d, config.totalnbhs + 1), Edge)
   
-  read_grid(globaldata, edges, config)
+  read_grid(pt_distr, edges, config)
   
   var idx : int
   var curr : double[2]
@@ -142,18 +142,18 @@ task main(config : Config)
   var normals : double[2]
 
   --C.printf("Setting normals\n")
-  for point in globaldata do
+  for point in pt_distr do
     if point.flag_1 == 0 or point.flag_1 == 2 then
       var curr : double[2]
       curr[0] = point.x
       curr[1] = point.y
       var leftpt : double[2]
       var rightpt : double[2]
-      leftpt[0] = globaldata[point.left].x
-      leftpt[1] = globaldata[point.left].y
-      rightpt[0] = globaldata[point.right].x
-      rightpt[1] = globaldata[point.right].y
-      normals = calculateNormals(leftpt, rightpt, curr[0], curr[1])
+      leftpt[0] = pt_distr[point.left].x
+      leftpt[1] = pt_distr[point.left].y
+      rightpt[0] = pt_distr[point.right].x
+      rightpt[1] = pt_distr[point.right].y
+      normals = cal_normals(leftpt, rightpt, curr[0], curr[1])
       point.nx = normals[0]
       point.ny = normals[1]
     end
@@ -163,11 +163,11 @@ task main(config : Config)
   var connectivity : int[80]
   for count = 0, config.size do
     idx = count + 1
-    connectivity = calculateConnectivity(globaldata, idx)
-    setConnectivity(globaldata, idx, connectivity)
+    connectivity = cal_connectivity(pt_distr, idx)
+    set_connectivity(pt_distr, idx, connectivity)
   end
 
-  solver(globaldata, edges, config)
+  fpi_solver(pt_distr, edges, config)
 end
 
 task toplevel()

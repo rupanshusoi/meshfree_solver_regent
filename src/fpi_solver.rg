@@ -17,13 +17,13 @@ task print_details(itime : int64, ftime : int64, config : Config)
 end
 
 __demand(__inline, __openmp)
-task solver(globaldata : region(ispace(int1d), Point), edges : region(ispace(int1d), Edge), config : Config)
-where reads writes(globaldata, edges) do
+task fpi_solver(pt_distr : region(ispace(int1d), Point), edges : region(ispace(int1d), Edge), config : Config)
+where reads writes(pt_distr, edges) do
 
-  --var points_equal = partition(equal, globaldata, ispace(int1d, config.partitions))
-  var points_equal = partition(complete, globaldata.part_number, ispace(int1d, config.partitions))
+  --var points_equal = partition(equal, pt_distr, ispace(int1d, config.partitions))
+  var points_equal = partition(complete, pt_distr.part_number, ispace(int1d, config.partitions))
   var edges_out = preimage(edges, points_equal, edges.in_ptr)
-  var points_out = image(globaldata, edges_out, edges.out_ptr)
+  var points_out = image(pt_distr, edges_out, edges.out_ptr)
   var points_ghost = points_out - points_equal
   var points_allnbhs = points_equal | points_ghost
 
@@ -41,24 +41,24 @@ where reads writes(globaldata, edges) do
     for rk = 1, config.rks do
       __demand(__index_launch)
       for color in points_equal.colors do
-        setq(points_equal[color])
+        set_q(points_equal[color])
       end
 
       __demand(__index_launch)
       for color in points_equal.colors do
-        setdq(points_equal[color], points_allnbhs[color],
+        set_dq(points_equal[color], points_allnbhs[color],
               config)
       end
 
       for j = 0, config.inner_iter do
         __demand(__index_launch)
         for color in points_equal.colors do
-          setqinner(points_equal[color], points_allnbhs[color], config)
+          set_q_inner(points_equal[color], points_allnbhs[color], config)
         end
 
         __demand(__index_launch)
         for color in points_equal.colors do
-          updateqinner(points_equal[color])
+          update_q_inner(points_equal[color])
         end
       end
 
