@@ -4,7 +4,6 @@ require "point"
 require "core"
 require "fpi_solver"
 
---[[
 local MAPPER
 do
   local root_dir = arg[0]:match(".*/") or "./"
@@ -51,7 +50,6 @@ do
   terralib.linklibrary(mapper_so)
   MAPPER = terralib.includec("meshfree_mapper.h", include_dirs)
 end
---]]
 
 local C = regentlib.c
 local Cstring = terralib.includec("string.h")
@@ -127,8 +125,28 @@ where writes(pt_distr, edges) do
   C.fclose(file)
 end
 
+task get_args()
+  var args = C.legion_runtime_get_input_args()
+  
+  var iter, inner_iter = 200, 3
+
+  var i = 1
+  while i < args.argc do
+    if Cstring.strcmp(args.argv[i], "--iter") == 0 then
+      iter = C.atoi(args.argv[i+1])
+    elseif Cstring.strcmp(args.argv[i], "--inner-iter") == 0 then
+      inner_iter = C.atoi(args.argv[i+1])
+    end
+    i += 1
+  end
+
+  var config = initConfig(iter, inner_iter)
+  return config
+end
+
 __demand(__replicable)
-task main(config : Config)
+task main()
+  var config = get_args()
 
   var pt_distr = region(ispace(int1d, config.size + 1), Point)  
   var edges = region(ispace(int1d, config.totalnbhs + 1), Edge)
@@ -169,23 +187,4 @@ task main(config : Config)
 
   fpi_solver(pt_distr, edges, config)
 end
-
-task toplevel()
-  var args = C.legion_runtime_get_input_args()
-  
-  var iter, inner_iter = 200, 3
-
-  var i = 1
-  while i < args.argc do
-    if Cstring.strcmp(args.argv[i], "--iter") == 0 then
-      iter = C.atoi(args.argv[i+1])
-    elseif Cstring.strcmp(args.argv[i], "--inner-iter") == 0 then
-      inner_iter = C.atoi(args.argv[i+1])
-    end
-    i += 1
-  end
-
-  var config = initConfig(iter, inner_iter)
-  main(config)
-end
-regentlib.start(toplevel) -- , MAPPER.register_mappers)
+regentlib.start(main, MAPPER.register_mappers)
