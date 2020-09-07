@@ -98,6 +98,9 @@ where writes(pt_distr, edges) do
       C.fscanf(file, "%d %d %lf %lf %d %d %d %d %lf %lf %d %lf %d", &part_number, &localID, &x, &y, &left, &right, &flag1, &flag2, &nx, &ny, &qt_depth, &min_dist, &nbhs)
     end
     
+    -- Runge-Kutta point
+    if count == 0 then flag1 = 1 end
+
     var nbhs_arr : int[20]
     for i = 0, 20 do
       nbhs_arr[i] = 0
