@@ -75,18 +75,18 @@ task primitive_to_conserved(nx : double, ny : double, prim : double[4])
 end
 
 __demand(__inline)
-task conserved_vector_Ubar(nx : double, ny : double, prim : double[4])
-  var Mach : double = 0.85
-  var gamma : double = 1.4
-  var pr_inf : double = 0.7142857142857143
-  var rho_inf : double = 1.0
+task conserved_vector_Ubar(nx : double, ny : double, prim : double[4], config : Config)
+  var mach = config.mach
+  var gamma = config.gamma
+  var pr_inf = config.pr_inf
+  var rho_inf = config.rho_inf
 
   var Ubar : double[4]
 
-  var theta = PI / 180
+  var theta = config.aoa * PI / 180.0
 
-  var u1_inf = Mach * cos(theta)
-  var u2_inf = Mach * sin(theta)
+  var u1_inf = mach * cos(theta)
+  var u2_inf = mach * sin(theta)
 
   var tx = ny
   var ty = -nx
@@ -137,7 +137,7 @@ end
 
 __demand(__cuda)
 task state_update(pe : region(ispace(int1d), Point), iter : int, rk : int, 
-      eu : int, res_old : double)
+      eu : int, res_old : double, config: Config)
 where
   reads(pe.{localID, flag_1, nx, ny, prim, prim_old, delta, flux_res}), writes(pe.prim)
 do
@@ -227,8 +227,8 @@ do
         var nx = point.nx
         var ny = point.ny
 
-        var U : double[4] = conserved_vector_Ubar(nx, ny, point.prim)
-        var U_old : double[4] = conserved_vector_Ubar(nx, ny, point.prim_old)
+        var U : double[4] = conserved_vector_Ubar(nx, ny, point.prim, config)
+        var U_old : double[4] = conserved_vector_Ubar(nx, ny, point.prim_old, config)
         var temp = U[0]
 
         if rk ~= 3 then

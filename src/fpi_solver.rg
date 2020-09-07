@@ -71,7 +71,7 @@ where reads writes(pt_distr, edges) do
 
       __demand(__index_launch)
       for color in points_equal.colors do
-        sum_res_sqr += state_update(points_equal[color], i, rk, eu, res_old)
+        sum_res_sqr += state_update(points_equal[color], i, rk, eu, res_old, config)
       end
 
       var res_new : double = sqrt(sum_res_sqr) / config.size
