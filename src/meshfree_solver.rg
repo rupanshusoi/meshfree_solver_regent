@@ -60,7 +60,7 @@ end
 
 task read_grid(pt_distr : region(ispace(int1d), Point), edges : region(ispace(int1d), Edge), config : Config)
 where writes(pt_distr, edges) do
-  var defprimal = get_initial_primitive()
+  var defprimal = get_initial_primitive(config)
   
   var localID : int
   var part_number : int

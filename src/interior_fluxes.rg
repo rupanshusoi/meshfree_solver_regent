@@ -77,9 +77,9 @@ do
         qtilde_k[i] = pgp[itm].q[i] - 0.5 * phi_k[i] * (delx * pgp[itm].dq0[i] + dely * pgp[itm].dq1[i])
       end
       
-      var result : double[4] = qtilde_to_primitive(qtilde_i)
+      var result : double[4] = qtilde_to_primitive(qtilde_i, config.gamma)
       var G_i : double[4] = flux_Gxp(nx, ny, result[0], result[1], result[2], result[3])
-      result = qtilde_to_primitive(qtilde_k)
+      result = qtilde_to_primitive(qtilde_k, config.gamma)
       var G_k : double[4] = flux_Gxp(nx, ny, result[0], result[1], result[2], result[3])
       for i = 0, 4 do
         sum_delx_delf[i] = sum_delx_delf[i] + (G_k[i] - G_i[i]) * dels_weights
@@ -167,9 +167,9 @@ do
         qtilde_k[i] = pgp[itm].q[i] - 0.5 * phi_k[i] * (delx * pgp[itm].dq0[i] + dely * pgp[itm].dq1[i])
       end
       
-      var result : double[4] = qtilde_to_primitive(qtilde_i)
+      var result : double[4] = qtilde_to_primitive(qtilde_i, config.gamma)
       var G_i : double[4] = flux_Gxn(nx, ny, result[0], result[1], result[2], result[3])
-      result = qtilde_to_primitive(qtilde_k)
+      result = qtilde_to_primitive(qtilde_k, config.gamma)
       var G_k : double[4] = flux_Gxn(nx, ny, result[0], result[1], result[2], result[3])
       for i = 0, 4 do
         sum_delx_delf[i] = sum_delx_delf[i] + (G_k[i] - G_i[i]) * dels_weights
@@ -257,9 +257,9 @@ do
         qtilde_k[i] = pgp[itm].q[i] - 0.5 * phi_k[i] * (delx * pgp[itm].dq0[i] + dely * pgp[itm].dq1[i])
       end
       
-      var result : double[4] = qtilde_to_primitive(qtilde_i)
+      var result : double[4] = qtilde_to_primitive(qtilde_i, config.gamma)
       var G_i : double[4] = flux_Gyp(nx, ny, result[0], result[1], result[2], result[3])
-      result = qtilde_to_primitive(qtilde_k)
+      result = qtilde_to_primitive(qtilde_k, config.gamma)
       var G_k : double[4] = flux_Gyp(nx, ny, result[0], result[1], result[2], result[3])
       for i = 0, 4 do
         sum_delx_delf[i] = sum_delx_delf[i] + (G_k[i] - G_i[i]) * dels_weights
@@ -347,9 +347,9 @@ do
         qtilde_k[i] = pgp[itm].q[i] - 0.5 * phi_k[i] * (delx * pgp[itm].dq0[i] + dely * pgp[itm].dq1[i])
       end
       
-      var result : double[4] = qtilde_to_primitive(qtilde_i)
+      var result : double[4] = qtilde_to_primitive(qtilde_i, config.gamma)
       var G_i : double[4] = flux_Gyn(nx, ny, result[0], result[1], result[2], result[3])
-      result = qtilde_to_primitive(qtilde_k)
+      result = qtilde_to_primitive(qtilde_k, config.gamma)
       var G_k : double[4] = flux_Gyn(nx, ny, result[0], result[1], result[2], result[3])
       for i = 0, 4 do
         sum_delx_delf[i] = sum_delx_delf[i] + (G_k[i] - G_i[i]) * dels_weights

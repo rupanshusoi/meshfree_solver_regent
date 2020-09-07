@@ -17,12 +17,12 @@ terra pprint(a : double[4])
 end
 
 __demand(__inline)
-task get_initial_primitive()
-  var rho_inf : double = 1.0
-  var mach : double = 0.85
+task get_initial_primitive(config : Config)
+  var rho_inf = config.rho_inf
+  var mach = config.mach
   var machcos = mach * cos(PI/180) -- removed call to calculateTheta
   var machsin = mach * sin(PI/180) -- removed call to calculateTheta
-  var pr_inf = 0.7142857142857143
+  var pr_inf = config.pr_inf
   var primal : double[4]
   primal[0] = rho_inf
   primal[1] = machcos

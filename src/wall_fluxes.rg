@@ -78,9 +78,9 @@ where reads(pn.{x, y, nx, ny, xpos_conn, q, dq0, dq1, min_dist, minq, maxq}) do
         qtilde_k[i] = pn[itm].q[i] - 0.5 * phi_k[i] * (delx * pn[itm].dq0[i] + dely * pn[itm].dq1[i])
       end
       
-      var result : double[4] = qtilde_to_primitive(qtilde_i)
+      var result : double[4] = qtilde_to_primitive(qtilde_i, config.gamma)
       var G_i : double[4] = flux_quad_GxII(nx, ny, result[0], result[1], result[2], result[3])
-      result = qtilde_to_primitive(qtilde_k)
+      result = qtilde_to_primitive(qtilde_k, config.gamma)
       var G_k : double[4] = flux_quad_GxII(nx, ny, result[0], result[1], result[2], result[3])
 
       for i = 0, 4 do
@@ -167,9 +167,9 @@ where reads(pn.{x, y, nx, ny, xneg_conn, q, dq0, dq1, min_dist, minq, maxq}) do
         qtilde_k[i] = pn[itm].q[i] - 0.5 * phi_k[i] * (delx * pn[itm].dq0[i] + dely * pn[itm].dq1[i])
       end
       
-      var result : double[4] = qtilde_to_primitive(qtilde_i)
+      var result : double[4] = qtilde_to_primitive(qtilde_i, config.gamma)
       var G_i : double[4] = flux_quad_GxI(nx, ny, result[0], result[1], result[2], result[3])
-      result = qtilde_to_primitive(qtilde_k)
+      result = qtilde_to_primitive(qtilde_k, config.gamma)
       var G_k : double[4] = flux_quad_GxI(nx, ny, result[0], result[1], result[2], result[3])
       for i = 0, 4 do
         sum_delx_delf[i] = sum_delx_delf[i] + (G_k[i] - G_i[i]) * dels_weights
@@ -254,9 +254,9 @@ where reads(pn.{x, y, nx, ny, yneg_conn, q, dq0, dq1, min_dist, minq, maxq}) do
         qtilde_k[i] = pn[itm].q[i] - 0.5 * phi_k[i] * (delx * pn[itm].dq0[i] + dely * pn[itm].dq1[i])
       end
       
-      var result : double[4] = qtilde_to_primitive(qtilde_i)
+      var result : double[4] = qtilde_to_primitive(qtilde_i, config.gamma)
       var G_i : double[4] = flux_Gyn(nx, ny, result[0], result[1], result[2], result[3])
-      result = qtilde_to_primitive(qtilde_k)
+      result = qtilde_to_primitive(qtilde_k, config.gamma)
       var G_k : double[4] = flux_Gyn(nx, ny, result[0], result[1], result[2], result[3])
       for i = 0, 4 do
         sum_delx_delf[i] = sum_delx_delf[i] + (G_k[i] - G_i[i]) * dels_weights
