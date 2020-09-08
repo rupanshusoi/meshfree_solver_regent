@@ -161,11 +161,11 @@ do
 
         if rk ~= 3 then
           for j = 0, 4 do
-            U[j] = U[j] - (0.5 * eu * point.delta * point.flux_res[j])
+            U[j] = U[j] - (0.5 * eu * point.flux_res[j])
           end
         else
           for j = 0, 4 do
-            U[j] = (tbt * U_old[j]) + obt * (U[j] - (0.5 * point.delta * point.flux_res[j]))
+            U[j] = (tbt * U_old[j]) + obt * (U[j] - (0.5 * point.flux_res[j]))
           end  
         end
 
@@ -198,11 +198,11 @@ do
 
         if rk ~= 3 then
           for j = 0, 4 do
-            U[j] = U[j] - (0.5 * eu * point.delta * point.flux_res[j])
+            U[j] = U[j] - (0.5 * eu * point.flux_res[j])
           end
         else
           for j = 0, 4 do
-            U[j] = (tbt * U_old[j]) + obt * (U[j] - (0.5 * point.delta * point.flux_res[j]))
+            U[j] = (tbt * U_old[j]) + obt * (U[j] - (0.5 * point.flux_res[j]))
           end  
         end
         
@@ -233,11 +233,11 @@ do
 
         if rk ~= 3 then
           for j = 0, 4 do
-            U[j] = U[j] - (0.5 * eu * point.delta * point.flux_res[j])
+            U[j] = U[j] - (0.5 * eu * point.flux_res[j])
           end
         else
           for j = 0, 4 do
-            U[j] = (tbt * U_old[j]) + obt * (U[j] - (0.5 * point.delta * point.flux_res[j]))
+            U[j] = (tbt * U_old[j]) + obt * (U[j] - (0.5 * point.flux_res[j]))
           end  
         end
         

@@ -20,8 +20,8 @@ __demand(__inline, __openmp)
 task fpi_solver(pt_distr : region(ispace(int1d), Point), edges : region(ispace(int1d), Edge), config : Config)
 where reads writes(pt_distr, edges) do
 
-  --var points_equal = partition(equal, pt_distr, ispace(int1d, config.partitions))
-  var points_equal = partition(complete, pt_distr.part_number, ispace(int1d, config.partitions))
+  var points_equal = partition(equal, pt_distr, ispace(int1d, config.partitions))
+  --var points_equal = partition(complete, pt_distr.part_number, ispace(int1d, config.partitions))
   var edges_out = preimage(edges, points_equal, edges.in_ptr)
   var points_out = image(pt_distr, edges_out, edges.out_ptr)
   var points_ghost = points_out - points_equal
@@ -81,7 +81,7 @@ where reads writes(pt_distr, edges) do
         residue = 0
       else residue = log10(res_new / res_old) end
 
-      if true then
+      if i % 100 == 0 then
         print_residue(residue, i, rk)
       end
     end

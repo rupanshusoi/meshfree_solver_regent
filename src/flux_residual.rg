@@ -15,7 +15,7 @@ __demand(__cuda)
 task cal_flux_residual(pe : region(ispace(int1d), Point),
            pn : region(ispace(int1d), Point), config : Config)
 where 
-  reads(pe.{flag_1, localID}, 
+  reads(pe.{flag_1, localID, delta}, 
         pn.{x, y, nx, ny, q, dq0, dq1, xpos_conn, xneg_conn, ypos_conn, 
         yneg_conn, min_dist, minq, maxq}),
   writes(pe.flux_res)
@@ -26,7 +26,7 @@ do
       var Gxp = wall_dGx_pos(pn, point.localID, config)
       var Gxn = wall_dGx_neg(pn, point.localID, config)
       var Gyn = wall_dGy_neg(pn, point.localID, config)
-      var GTemp = array(2.0, 2.0, 2.0, 2.0) * (Gxp + Gxn + Gyn)
+      var GTemp = array(2.0 * point.delta, 2.0 * point.delta, 2.0 * point.delta, 2.0 * point.delta) * (Gxp + Gxn + Gyn)
       point.flux_res = GTemp
     end
     if point.flag_1 == 1 then
@@ -34,14 +34,14 @@ do
       var Gxn = interior_dGx_neg(pn, point.localID, config)
       var Gyp = interior_dGy_pos(pn, point.localID, config)
       var Gyn = interior_dGy_neg(pn, point.localID, config)
-      var GTemp = Gxp + Gxn + Gyp + Gyn
+      var GTemp = array(point.delta, point.delta, point.delta, point.delta) * (Gxp + Gxn + Gyp + Gyn)
       point.flux_res = GTemp
     end
     if point.flag_1 == 2 then
       var Gxp = outer_dGx_pos(pn, point.localID, config)
       var Gxn = outer_dGx_neg(pn, point.localID, config)
       var Gyp = outer_dGy_pos(pn, point.localID, config)
-      var GTemp = Gxp + Gxn + Gyp  
+      var GTemp = array(point.delta, point.delta, point.delta, point.delta) * (Gxp + Gxn + Gyp)
       point.flux_res = GTemp
     end
   end

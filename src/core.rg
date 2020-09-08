@@ -19,9 +19,9 @@ end
 __demand(__inline)
 task get_initial_primitive(config : Config)
   var rho_inf = config.rho_inf
-  var mach = config.mach
-  var machcos = mach * cos(PI/180) -- removed call to calculateTheta
-  var machsin = mach * sin(PI/180) -- removed call to calculateTheta
+  var theta = config.aoa * PI / 180.0
+  var machcos = config.mach * cos(theta)
+  var machsin = config.mach * sin(theta)
   var pr_inf = config.pr_inf
   var primal : double[4]
   primal[0] = rho_inf
@@ -179,8 +179,8 @@ do
       for i = 0, 4 do
         sum_delx_delq[i] = 0
         sum_dely_delq[i] = 0
-        minq[i] = 0
-        maxq[i] = 0
+        minq[i] = point.q[i]
+        maxq[i] = point.q[i]
       end
 
       var connectivity = point.conn
@@ -218,42 +218,19 @@ do
       end
 
       var det : double = (sum_delx_sqr * sum_dely_sqr) - (sum_delx_dely * sum_delx_dely)
-      var tempdq0 : double[4]
-      var tempdq1 : double[4]
 
-      var sum_delx_delq1 : double[4]
-      var sum_dely_delq1 : double[4]
+      var one_by_det = 1 / det
 
-      for i = 0, 4 do
-        sum_delx_delq1[i] = sum_delx_delq[i] * sum_dely_sqr
-        sum_dely_delq1[i] = sum_dely_delq[i] * sum_delx_dely
-      end
+      point.dq0[0] = ((sum_delx_delq[0] * sum_dely_sqr) - (sum_dely_delq[0] * sum_delx_dely)) * one_by_det
+      point.dq0[1] = ((sum_delx_delq[1] * sum_dely_sqr) - (sum_dely_delq[1] * sum_delx_dely)) * one_by_det
+      point.dq0[2] = ((sum_delx_delq[2] * sum_dely_sqr) - (sum_dely_delq[2] * sum_delx_dely)) * one_by_det
+      point.dq0[3] = ((sum_delx_delq[3] * sum_dely_sqr) - (sum_dely_delq[3] * sum_delx_dely)) * one_by_det
 
-      var tempsumx : double[4] 
-      for i = 0, 4 do
-        tempsumx[i] = (1 / det) * (sum_delx_delq1[i] - sum_dely_delq1[i])
-      end
+      point.dq1[0] = ((sum_dely_delq[0] * sum_delx_sqr) - (sum_delx_delq[0] * sum_delx_dely)) * one_by_det
+      point.dq1[1] = ((sum_dely_delq[1] * sum_delx_sqr) - (sum_delx_delq[1] * sum_delx_dely)) * one_by_det
+      point.dq1[2] = ((sum_dely_delq[2] * sum_delx_sqr) - (sum_delx_delq[2] * sum_delx_dely)) * one_by_det
+      point.dq1[3] = ((sum_dely_delq[3] * sum_delx_sqr) - (sum_delx_delq[3] * sum_delx_dely)) * one_by_det
 
-      var sum_dely_delq2 : double[4]
-      for i = 0, 4 do
-        sum_dely_delq2[i] = sum_dely_delq[i] * sum_delx_sqr
-      end
-    
-      var sum_delx_delq2 : double[4]
-      for i = 0, 4 do
-        sum_delx_delq2[i] = sum_delx_delq[i] * sum_delx_dely
-      end
-
-      var tempsumy : double[4]
-      for i = 0, 4 do
-        tempsumy[i] = (1 / det) * (sum_dely_delq2[i] - sum_delx_delq2[i])
-      end
-
-      tempdq0 = tempsumx
-      tempdq1 = tempsumy
-
-      point.dq0 = tempdq0
-      point.dq1 = tempdq1
       point.minq = minq
       point.maxq = maxq        
     end

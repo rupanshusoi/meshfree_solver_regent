@@ -99,7 +99,7 @@ where writes(pt_distr, edges) do
     end
     
     -- Runge-Kutta point
-    if count == 0 then flag1 = 1 end
+    -- if count == 0 then flag1 = 1 end
 
     var nbhs_arr : int[20]
     for i = 0, 20 do
@@ -190,4 +190,4 @@ task main()
 
   fpi_solver(pt_distr, edges, config)
 end
-regentlib.start(main, MAPPER.register_mappers)
+regentlib.start(main) -- , MAPPER.register_mappers)
