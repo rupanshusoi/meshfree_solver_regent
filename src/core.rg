@@ -179,8 +179,8 @@ do
       for i = 0, 4 do
         sum_delx_delq[i] = 0
         sum_dely_delq[i] = 0
-        minq[i] = point.q[i]
-        maxq[i] = point.q[i]
+        minq[i] = pn[point].q[i]
+        maxq[i] = pn[point].q[i]
       end
 
       var connectivity = point.conn
