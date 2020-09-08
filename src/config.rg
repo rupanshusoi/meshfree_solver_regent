@@ -45,22 +45,22 @@ task initConfig(iter : int, inner_iter : int)
   end
 
   var c = Config {
-    filename = "../grids/partGrid40K_8",
+    filename = "../grids/partGrid40K",
     size = size,
     totalnbhs = totalnbhs,
-    partitions = 8,
-    cfl = 0.01,
-    mach = 0.85,
+    partitions = 1,
+    cfl = 0.2,
+    mach = 0.63,
     aoa = 2.0,
     power = 0,
-    vl_const = 20,
+    vl_const = 50,
     rho_inf = 1,
     pr_inf = 0.7142857142857143,
     gamma = 1.4,
     rks = 5,
     iter = iter,
     inner_iter = inner_iter,
-    isMETIS = true
+    isMETIS = false
   }
   return c
 end
