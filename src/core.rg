@@ -219,17 +219,10 @@ do
 
       var det : double = (sum_delx_sqr * sum_dely_sqr) - (sum_delx_dely * sum_delx_dely)
 
-      var one_by_det = 1 / det
-
-      point.dq0[0] = ((sum_delx_delq[0] * sum_dely_sqr) - (sum_dely_delq[0] * sum_delx_dely)) * one_by_det
-      point.dq0[1] = ((sum_delx_delq[1] * sum_dely_sqr) - (sum_dely_delq[1] * sum_delx_dely)) * one_by_det
-      point.dq0[2] = ((sum_delx_delq[2] * sum_dely_sqr) - (sum_dely_delq[2] * sum_delx_dely)) * one_by_det
-      point.dq0[3] = ((sum_delx_delq[3] * sum_dely_sqr) - (sum_dely_delq[3] * sum_delx_dely)) * one_by_det
-
-      point.dq1[0] = ((sum_dely_delq[0] * sum_delx_sqr) - (sum_delx_delq[0] * sum_delx_dely)) * one_by_det
-      point.dq1[1] = ((sum_dely_delq[1] * sum_delx_sqr) - (sum_delx_delq[1] * sum_delx_dely)) * one_by_det
-      point.dq1[2] = ((sum_dely_delq[2] * sum_delx_sqr) - (sum_delx_delq[2] * sum_delx_dely)) * one_by_det
-      point.dq1[3] = ((sum_dely_delq[3] * sum_delx_sqr) - (sum_delx_delq[3] * sum_delx_dely)) * one_by_det
+      for i = 0, 4 do
+        point.dq0[i] = ((sum_delx_delq[i] * sum_dely_sqr) - (sum_dely_delq[i] * sum_delx_dely)) * 1 / det
+        point.dq1[i] = ((sum_dely_delq[i] * sum_delx_sqr) - (sum_delx_delq[i] * sum_delx_dely)) * 1 / det
+      end
 
       point.minq = minq
       point.maxq = maxq        
