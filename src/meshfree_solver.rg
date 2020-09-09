@@ -147,6 +147,18 @@ task get_args()
   return config
 end
 
+task output_file(pt_distr : region(ispace(int1d), Point), config : Config)
+where reads(pt_distr) do
+
+  var file = C.fopen("output.dat", "w")
+  C.fprintf(file, "Size = %d Iter = %d Inner iter = %d\n", config.size, config.iter, config.inner_iter)
+  for pt in pt_distr do
+    C.fprintf(file, "%0.13lf %0.13lf %0.13lf %0.13lf %0.13lf %0.13lf\n", pt.x, pt.y, pt.prim[0], pt.prim[1], pt.prim[2], pt.prim[3])
+    --C.fprintf(file, "%0.13lf %0.13lf %0.13lf %0.13lf %0.13lf %0.13lf\n", pt.x, pt.y, pt.flux_res[0], pt.flux_res[1], pt.flux_res[2], pt.flux_res[3])
+  end
+
+end
+
 __demand(__replicable)
 task main()
   var config = get_args()
@@ -189,5 +201,6 @@ task main()
   end
 
   fpi_solver(pt_distr, edges, config)
+  --output_file(pt_distr, config)
 end
 regentlib.start(main) -- , MAPPER.register_mappers)
