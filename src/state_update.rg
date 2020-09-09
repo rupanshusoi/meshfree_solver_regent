@@ -8,7 +8,7 @@ local exp = regentlib.exp(double)
 local erf = regentlib.erf(double)
 local sin = regentlib.sin(double)
 local cos = regentlib.cos(double)
-local PI = 3.1415926535898
+local PI = 3.1415926535897932
 
 terra pprint(a : double[4])
   C.printf("[\x1b[33m %0.15lf, %0.15lf, %0.15lf, %0.15lf]\n \x1b[0m", a[0], a[1], a[2], a[3])        

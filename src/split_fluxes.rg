@@ -4,7 +4,7 @@ local C = regentlib.c
 local sqrt = regentlib.sqrt(double)
 local exp = regentlib.exp(double)
 local erf = regentlib.erf(double)
-local PI = 3.1415926535898
+local PI = 3.1415926535897932
 
 __demand(__inline)
 task flux_Gxp(nx : double, ny : double, u1 : double, u2 : double, rho : double, pr : double)

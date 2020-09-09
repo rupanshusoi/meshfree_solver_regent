@@ -4,7 +4,7 @@ local C = regentlib.c
 local sqrt = regentlib.sqrt(double)
 local exp = regentlib.exp(double)
 local erf = regentlib.erf(double)
-local PI = 3.1415926535898
+local PI = 3.1415926535897932
 
 terra printArr(a : double[4])
         C.printf("[%0.15lf, %0.15lf, %0.15lf, %0.15lf]\n", a[0], a[1], a[2], a[3])

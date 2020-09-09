@@ -10,7 +10,7 @@ local sin = regentlib.sin(double)
 local sqrt = regentlib.sqrt(double)
 local log = regentlib.log(double)
 local pow = regentlib.pow(double)
-local PI = 3.1415926535898
+local PI = 3.1415926535897932
 
 terra pprint(a : double[4])
   C.printf("[\x1b[33m %0.15lf, %0.15lf, %0.15lf, %0.15lf]\n \x1b[0m", a[0], a[1], a[2], a[3])
@@ -228,7 +228,6 @@ do
       point.maxq = maxq        
     end
   end  
-
 end
 
 __demand(__cuda)
