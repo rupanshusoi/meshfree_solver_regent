@@ -16,8 +16,8 @@ do
   var limiter_flag : int = 1
 
   var sum_delx_sqr : double = 0.0
-      var sum_dely_sqr : double = 0.0
-      var sum_delx_dely : double = 0.0
+  var sum_dely_sqr : double = 0.0
+  var sum_delx_dely : double = 0.0
 
   var sum_delx_delf : double[4]
   var sum_dely_delf : double[4]
@@ -44,21 +44,21 @@ do
       break
     else
       var x_k = pgp[itm].x
-            var y_k = pgp[itm].y
+      var y_k = pgp[itm].y
 
-            var delx = x_k - x_i
-            var dely = y_k - y_i
-            var dels = delx*tx + dely*ty
-            var deln = delx*nx + dely*ny
+      var delx = x_k - x_i
+      var dely = y_k - y_i
+      var dels = delx*tx + dely*ty
+      var deln = delx*nx + dely*ny
 
       var dist = sqrt(dels*dels + deln*deln)
-            var weights = pow(dist, power)
+      var weights = pow(dist, power)
     
       var dels_weights = dels*weights
-            var deln_weights = deln*weights
+      var deln_weights = deln*weights
 
       sum_delx_sqr = sum_delx_sqr + dels*dels_weights
-            sum_dely_sqr = sum_dely_sqr + deln*deln_weights
+      sum_dely_sqr = sum_dely_sqr + deln*deln_weights
 
       sum_delx_dely = sum_delx_dely + dels*deln_weights
       
@@ -106,8 +106,8 @@ do
   var limiter_flag : int = 1
 
   var sum_delx_sqr : double = 0.0
-      var sum_dely_sqr : double = 0.0
-      var sum_delx_dely : double = 0.0
+  var sum_dely_sqr : double = 0.0
+  var sum_delx_dely : double = 0.0
 
   var sum_delx_delf : double[4]
   var sum_dely_delf : double[4]
@@ -134,21 +134,21 @@ do
       break
     else
       var x_k = pgp[itm].x
-            var y_k = pgp[itm].y
+      var y_k = pgp[itm].y
 
-            var delx = x_k - x_i
-            var dely = y_k - y_i
-            var dels = delx*tx + dely*ty
-            var deln = delx*nx + dely*ny
+      var delx = x_k - x_i
+      var dely = y_k - y_i
+      var dels = delx*tx + dely*ty
+      var deln = delx*nx + dely*ny
 
       var dist = sqrt(dels*dels + deln*deln)
-            var weights = pow(dist, power)
+      var weights = pow(dist, power)
     
       var dels_weights = dels*weights
-            var deln_weights = deln*weights
+      var deln_weights = deln*weights
 
       sum_delx_sqr = sum_delx_sqr + dels*dels_weights
-            sum_dely_sqr = sum_dely_sqr + deln*deln_weights
+      sum_dely_sqr = sum_dely_sqr + deln*deln_weights
 
       sum_delx_dely = sum_delx_dely + dels*deln_weights
       
@@ -196,8 +196,8 @@ do
   var limiter_flag : int = 1
 
   var sum_delx_sqr : double = 0.0
-      var sum_dely_sqr : double = 0.0
-      var sum_delx_dely : double = 0.0
+  var sum_dely_sqr : double = 0.0
+  var sum_delx_dely : double = 0.0
 
   var sum_delx_delf : double[4]
   var sum_dely_delf : double[4]
@@ -224,21 +224,21 @@ do
       break
     else
       var x_k = pgp[itm].x
-            var y_k = pgp[itm].y
+      var y_k = pgp[itm].y
 
-            var delx = x_k - x_i
-            var dely = y_k - y_i
-            var dels = delx*tx + dely*ty
-            var deln = delx*nx + dely*ny
+      var delx = x_k - x_i
+      var dely = y_k - y_i
+      var dels = delx*tx + dely*ty
+      var deln = delx*nx + dely*ny
 
       var dist = sqrt(dels*dels + deln*deln)
-            var weights = pow(dist, power)
+      var weights = pow(dist, power)
     
       var dels_weights = dels*weights
-            var deln_weights = deln*weights
+      var deln_weights = deln*weights
 
       sum_delx_sqr = sum_delx_sqr + dels*dels_weights
-            sum_dely_sqr = sum_dely_sqr + deln*deln_weights
+      sum_dely_sqr = sum_dely_sqr + deln*deln_weights
 
       sum_delx_dely = sum_delx_dely + dels*deln_weights
       
@@ -286,8 +286,8 @@ do
   var limiter_flag : int = 1
 
   var sum_delx_sqr : double = 0.0
-      var sum_dely_sqr : double = 0.0
-      var sum_delx_dely : double = 0.0
+  var sum_dely_sqr : double = 0.0
+  var sum_delx_dely : double = 0.0
 
   var sum_delx_delf : double[4]
   var sum_dely_delf : double[4]
@@ -314,21 +314,21 @@ do
       break
     else
       var x_k = pgp[itm].x
-            var y_k = pgp[itm].y
+      var y_k = pgp[itm].y
 
-            var delx = x_k - x_i
-            var dely = y_k - y_i
-            var dels = delx*tx + dely*ty
-            var deln = delx*nx + dely*ny
+      var delx = x_k - x_i
+      var dely = y_k - y_i
+      var dels = delx*tx + dely*ty
+      var deln = delx*nx + dely*ny
 
       var dist = sqrt(dels*dels + deln*deln)
-            var weights = pow(dist, power)
+      var weights = pow(dist, power)
     
       var dels_weights = dels*weights
-            var deln_weights = deln*weights
+      var deln_weights = deln*weights
 
       sum_delx_sqr = sum_delx_sqr + dels*dels_weights
-            sum_dely_sqr = sum_dely_sqr + deln*deln_weights
+      sum_dely_sqr = sum_dely_sqr + deln*deln_weights
 
       sum_delx_dely = sum_delx_dely + dels*deln_weights
       
