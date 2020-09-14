@@ -203,4 +203,4 @@ task main()
   fpi_solver(pt_distr, edges, config)
   --output_file(pt_distr, config)
 end
-regentlib.start(main) -- , MAPPER.register_mappers)
+regentlib.start(main, MAPPER.register_mappers)
