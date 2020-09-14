@@ -45,7 +45,7 @@ task initConfig(iter : int, inner_iter : int)
   end
 
   var c = Config {
-    filename = "../grids/partGrid40M",
+    filename = "../grids/partGrid40M_16_b",
     size = size,
     totalnbhs = totalnbhs,
     partitions = 16,
