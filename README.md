@@ -14,7 +14,22 @@ Python 3.x
 All tests were done with the `Control Replication` branch of Legion at `0baf4f44b2e744af26565e2b36dba7fea386d857` installed with OpenMP support.
 
 ## Usage
-Most parameters, including number of partitions, input file path, physical constants etc, can be configured inside `src/config.rg`. To run, do ```python3 ../legion/language/regent.py src/meshfree_solver.rg``` followed by the required flags. We document some useful flags below. It is generally recommended to launch a single Regent (Legion) process per node.
+
+### Input File Generation
+Most input files can't be provided here due to GitHub's file size contraints. The `scripts` directory contains various pre-processing scripts to transform files output from the [partitioner](https://github.com/Nischay-Pro/mfpre) to the correct format, but the entire process is somewhat clunky:
+
+- Run `part.py` on the partitioner output to generate a grid file
+- Run `bitmask-regent.py` on the partitioner output to generate a bitmask file
+- Run `bitmask-sort.py` on the output of the above two steps to sort the grid according to the bitmask (this is done to compact memory instances). This generates the final input file.
+
+### Sample Input File
+The finest grid file (40 M points) `partGrid40M_16_b` can be downloaded [here](https://drive.google.com/drive/folders/1iqPZOxj0UBDS3u6mv-CAHdOgbhXKAIYN). It has been partitioned into 16 subgrids by METIS. The code has already been configured for this particular file, so you just need to put it inside the `grids` sub-directory.
+
+### Code Setup
+Most parameters, including number of partitions, input file path, physical constants etc, can be configured inside `src/config.rg`. Please ensure that the correct file path and number of partitions is specified.
+
+### Execution
+To run, do ```python3 ../legion/language/regent.py src/meshfree_solver.rg``` followed by the required flags. We document some useful flags below. It is generally recommended to launch a single Regent (Legion) process per node.
 
 | SNo. | Flag               | Effect                                       |
 |------|--------------------|----------------------------------------------|
@@ -30,10 +45,12 @@ Further, the number of iterations and inner iterations can be set by appending `
 
 For CPU runs (without OpenMP), the number of partitions should be equal to the number of CPU cores for optimal performance.
 
-For Regent + OpenMP, we generally do `-ll:ocpu 1 -ll:onuma 1 -ll:othr 30` which gives us 30 OpenMP cores per socket. Additionally, we have noticed optimal performance with number of partitions equal to the number of sockets (generally two per node).
+For Regent + OpenMP, we generally do `-ll:ocpu 1 -ll:onuma 1 -ll:othr 30` which gives us 30 OpenMP cores per socket. You should experiment with this depending on the configuration available to you. Additionally, we have noticed optimal performance with number of partitions equal to the number of sockets (generally two per node).
+
+Note that Legion requires a few CPU cores for runtime dependence analysis, so never assign all cores using `-ll:cpu` etc. 
 
 ## Support
-Please contact the author for any help in running the code or obtaining larger input files. Due to GitHub's file size contraints, only small input files can be provided here.
+Please contact the author for any help in running the code or obtaining other input files.
 
 ## Author
 Rupanshu Soi, Department of Computer Science, Birla Institute of Technology and Science, Pilani at Hyderabad, India.
