@@ -3,6 +3,9 @@
 ## Overview
 This project implements a meshfree solver for inviscid, compressible fluid flows using q-LSKUM in the implicitly parallel, high-level programming language Regent. This is a first step towards our aim of developing a hybrid, production-level CFD code that is able to utilize the full power of today's heterogeneous supercomputers by simultaneously executing on both CPUs and GPGPUs.
 
+## Publication
+[R. Soi, N. R. Mamidi, E. Slaughter, K. Prasun, A. Nemili and S. M. Deshpande, "An Implicitly Parallel Meshfree Solver in Regent," 2020 IEEE/ACM 3rd Annual Parallel Applications Workshop: Alternatives To MPI+X (PAW-ATM), Atlanta, GA, USA, 2020](https://ieeexplore.ieee.org/document/9307002)
+
 ## Dependencies
 Python 3.x  
 [Legion](https://github.com/StanfordLegion/legion)
